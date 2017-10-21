@@ -1,0 +1,8 @@
+/vendor
+/storage
+composer.json
+composer.lock
+/bootstrap
+/uploads
+.env
+/db

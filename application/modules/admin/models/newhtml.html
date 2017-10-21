@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <table style="margin:0px; border:1px solid #660033;background:#fff;font-size:13px;" cellpadding="0" cellspacing="0" width="800" align="center">
+<tbody>
+   <tr>
+   	<td>
+   		<table width="100%">
+	      	<td align="center" style="padding:20px;font-size:13px;">
+	            <img src="http://dev4.webico.vn/hospi/uploads/global/logo.png">
+	        </td>
+    	</table>
+    </td>
+   </tr>
+<tr>
+<td>
+<table>
+   <tr>
+   	<td align="center" style="padding:10px 50px;font-size:13px;">
+   		Cảm ơn Quý khách đã sử dụng dịch vụ của Hospi. Nhân viên của Hospi sẽ liên hệ với Quý khách trong vòng 30 phút để xác nhận tình trạng phòng và thời gian thanh toán<br><br>
+   		<span style="font-style: italic;">Quý khách chỉ thanh toán sau khi được xác nhận từ nhân viên Hospi</span>
+   	</td>
+   </tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table style="margin:0px; border-top:1px solid #660033;border-bottom:1px solid #660033;background:#fff;border-spacing: 0;" width="100%" border-spacing="0">
+   <tr>
+   	<td style="background-color:#660033;color:#fff;padding: 4px 10px;font-size:13px;" width="15%">
+   		Mã đặt phòng
+   	</td>
+   	<td style="padding: 4px 10px;font-size:13px;" width="35%">
+{invoice_code}
+   	</td>
+   	<td style="background-color:#660033;color:#fff;padding: 4px 10px;font-size:13px;" width="25%">
+Tình trạng thanh toán
+   	</td>
+   	<td style="padding: 4px 10px; color:red;font-size:13px;">
+Chưa thanh toán
+   	</td>
+
+   </tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+<table>
+   <tr>
+   	<td style="padding:10px 50px;font-size:13px;" width="20%">
+   		<img src="{thumbnail}" width="150">
+   	</td>
+   	<td style="padding:10px 50px;border-right: 1px solid #333;font-size:13px;" width="60%">
+   		<b>{title}</b><br>
+   		{address}<br>
+   		<span style="font-style: italic;">Ngày đặt phòng: {...}<br>
+   		<span style="font-style: italic;">Tổng số tiền:	<span style="color:#660033;"><b>{total_amount}</b></span>
+   	</td>
+   	<td style="padding:10px 50px;font-size:13px;">
+   		<span style="margin-bottom: 10px;background: #660033;background: -webkit-linear-gradient(top, #660033 0%, #751947 100%);background: linear-gradient(to bottom, #660033 0%, #751947 100%);
+    color: #fff;float: right;ont-size: 16px;margin-left: 10px;
+    font-weight: 600;padding: 5px;"><a href="{invoice_link}">Xem chi tiết</a></span>
+   	</td>
+   	
+   </tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr>
+<td>
+<table style="border-top:1px solid #ddd;padding:0 20px;">
+   <tr>
+      <td style="padding:10px 50px;font-size:13px;" width="20%">
+         <span style="color:#660033;"><b>Phương thức thanh toán</b></span><br>
+         Quý khách đã lựa chọn hình thức thanh toán {paymentmethod}<br>
+         Thông tin thanh toán:<br>
+         {paymentInfo}<br>
+         <span style="color:#660033;"><b>Lưu ý:</b> Khi thanh toán chuyển khoản vui lòng ghi rõ nội dung: thanh toán mã đặt phòng {invoice_code}</span>
+      </td>
+      
+      
+   </tr>
+</table>
+</td>
+</tr>
+<tr>
+<td >
+<table style="margin:0px; border-top:1px solid #660033;border-bottom:1px solid #660033;background:#fff;border-spacing: 0;" width="100%" border-spacing="0">
+   <tr>
+      <td style="text-align:center;font-size:13px;border-right:1px solid #ddd;" width="25%">
+         Khách sạn
+      </td>
+      <td style="text-align:center;font-size:13px;border-right:1px solid #ddd;" width="25%">
+         Tour du lịch
+      </td>
+      <td style="text-align:center;font-size:13px;border-right:1px solid #ddd;" width="25%">
+         Honeymoon
+      </td>
+      <td style="text-align:center;font-size:13px;" width="25%">
+         Tôi yêu du lịch
+      </td>
+   </tr>
+</table>
+</td>
+</tr>
+<tr>
+<td style="height:30px">
+<table style="margin:0px; border-bottom:1px solid #660033;background:#fff;" width="100%" border-spacing="0">
+   <tr><td colspan="3"><b>Hỗ trợ khách hàng</b></td></tr>
+   <tr>
+      <td style="text-align:left;font-size:13px;" width="30%">
+         
+         <span style="color:#660033;"><b>(08) 3826 8797</b></span><span style="color:#666;font-size=10px;"> (8:00AM - 21:00PM)</span><br>
+         <span style="color:#660033;"><b>09 6868 0106</b></span><span style="color:#666;font-size=10px;"> (Hotline 24/7)</span><br>
+      </td>
+      <td style="text-align:left;font-size:13px;" width="25%">
+         <span style="color:#660033;"><b>hospi.vn</b></span><br>
+         <span style="color:#660033;"><b>booking@hospi.vn</b></span>
+      </td>
+      <td style="text-align:left;font-size:13px;">
+         <span style="color:#666;"><b>Công ty TNHH Du lịch Hospi</b></span><br>
+         Lầu 1, Số 124 Khánh Hội, P.6, Quận 4, Tp. Hồ Chí Minh<br>
+         <span style="color:#660033;"><a href="https://www.google.com/maps/place/124+Kh%C3%A1nh+H%E1%BB%99i,+ph%C6%B0%E1%BB%9Dng+6,+Qu%E1%BA%ADn+4,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam/@10.7572978,106.6982959,17z/data=!3m1!4b1!4m5!3m4!1s0x31752f6d4faf461f:0xcf0c2485be1d0fdc!8m2!3d10.7572925!4d106.7004846">Bản đồ đến văn phòng Hospi</a></span>
+      </td>
+   </tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td style="text-align:center;font-size:13px;height:30px">
+Hospi - Đặt phòng khách sạn và tour du lịch
+</td>
+</tr>
+</tbody>
+</table>
+    </body>
+</html>

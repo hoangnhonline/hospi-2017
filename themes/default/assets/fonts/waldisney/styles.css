@@ -1,0 +1,8 @@
+
+@font-face {
+  font-family: 'Waltograph';
+  src: url('Waltograph.eot?#iefix') format('embedded-opentype'),  url('Waltograph.otf')  format('opentype'),
+	     url('Waltograph.woff') format('woff'), url('Waltograph.ttf')  format('truetype'), url('Waltograph.svg#Waltograph') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

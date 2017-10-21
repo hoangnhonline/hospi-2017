@@ -1,0 +1,29 @@
+
+ ____  _   _ ____ _____ ____      ___     _______ _     ____  
+|  _ \| | | |  _ \_   _|  _ \    / \ \   / / ____| |   / ___| 
+| |_) | |_| | |_) || | | |_) |  / _ \ \ / /|  _| | |   \___ \ 
+|  __/|  _  |  __/ | | |  _ <  / ___ \ V / | |___| |___ ___) |
+|_|   |_| |_|_|    |_| |_| \_\/_/   \_\_/  |_____|_____|____/ v5.3
+
+======================================================================================                                                          
+
+To upgrade from v5.2 to v5.3 please read below instructions. 
+
+Video toturial URL : https://youtu.be/_m5tK0jUKUE
+
+make sure you are running v5.2 installed all updates from admin panel.
+otherwise this update will not work for you. 
+
+please be advised this is v5.3 version and you may use it for production or Test Purpose.  
+ 
+TO UPGRADE PLEASE FOLLOW BELOW STEPS.  
+
+01. Create new folder on your desktop and extract all files
+02. Delete folder ( Uploads ) and file ( database.php ) 
+03. Now upload all files to your website and replace them on your exisiting files
+
+you are done. happy booking business :)
+
+FOR FRESH INSTALLATION VISIT : http://phptravels.com/documentation/#installation
+
+TEAM PHPTRAVELS  
