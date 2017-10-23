@@ -53,22 +53,22 @@
           $no = 1;
           ?>
         <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
-          <?php foreach ($items as $key => $value) { ?>
           <ul class="row">
+            <?php foreach ($items as $key => $value) { ?>
             <li <?php if ($no == 1) echo 'class="active"'; ?>>
               <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
               <?php echo pt_LocationsInfo($key)->city; ?>
               </a>
             </li>
+            <?php $no++;
+            } ?>
             <li><a href="#" title="View More"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
           </ul>
-          <?php $no++;
-            } ?>
         </div>
         <div class="right-featured">
           <?php $nu = 1;
             foreach ($items as $key => $value) { ?>
-          <div id="hover<?php echo $key; ?>" class="col-md-9 col-sm-6 col-xs-12 sub-featured <?php if ($nu == 1) echo 'displayed'; ?>">
+          <div id="hover<?php echo $key; ?>" class="col-md-5 col-sm-6 col-xs-12 sub-featured <?php if ($nu == 1) echo 'displayed'; ?>">
             <div class="mega-menu">
               <div class="mega-content">
                 <ul class="div-sub-menu mh-menu">

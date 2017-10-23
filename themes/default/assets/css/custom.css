@@ -4638,7 +4638,7 @@ a:hover.xnext img {
 }
 
 .featuredCampaigns .nav-featured a {
-    border-bottom: 1px solid #666;
+    /*border-bottom: 1px solid #666;*/
     display: block;
     margin-right: 18px;
     padding: 7px 10px;
@@ -4650,7 +4650,7 @@ a:hover.xnext img {
     display: table;
     overflow: hidden;
     width: 100%;
-        margin: 20px auto;
+    /*margin: 20px auto;*/
 
 }
 
@@ -5313,8 +5313,8 @@ font-family: "FontAwesome";
     .Campaigns .nav-featured {
         /*float: left;
         width: 48.2882882883%;*/
-        border-bottom: none;
-        border-right: 1px solid #666;
+        /*border-bottom: none;
+        border-right: 1px solid #666;*/
     }
     .Campaigns .sub-featured {
         text-align:left;
