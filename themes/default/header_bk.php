@@ -11,14 +11,10 @@
     <meta property="fb:app_id" content="159189514584032" />
     <title><?php if(empty($ishome)){ echo $app_settings[0]->home_title; }else{ echo $CI->theme->_data['page_title']; } ?></title>
     <link rel="shortcut icon" href="<?php echo PT_GLOBAL_IMAGES_FOLDER.'favicon.png';?>">
-    <link href="<?php echo $theme_url; ?>assets/css/bootstrap-modal.css" rel="stylesheet" media="screen">
+    <!--<link href="<?php echo $theme_url; ?>assets/css/bootstrap-modal.css" rel="stylesheet" media="screen">-->
     <link href="<?php echo $theme_url; ?>assets/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="<?php echo $theme_url; ?>assets/css/bootstrap-slider.css" rel="stylesheet" media="screen">
     <link href="<?php echo $theme_url; ?>assets/css/custom.css" rel="stylesheet" media="screen">
-
-    <!-- Duc add css file -->
-    <link href="<?php echo $theme_url; ?>assets/css/style.css" rel="stylesheet" media="screen">
-
     <!-- facebook --------> 
     <meta property="og:title" content="<?php if(empty($ishome)){ echo $app_settings[0]->home_title; }else{ echo $CI->theme->_data['page_title']; } ?>"/>
     <meta property="og:site_name" content="<?php echo $app_settings[0]->site_title;?>"/>
@@ -40,7 +36,6 @@
     <![endif]-->
     <link rel="stylesheet" href="<?php echo $theme_url; ?>assets/css/jquery-ui.css" />
   </head>
-
   <body id="top">
     <div id="wait">
       <div class="lds-css ng-scope">
@@ -54,7 +49,6 @@
         </div>
       </div>
     </div>
-
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -66,35 +60,7 @@
     </script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type='text/javascript'>window._sbzq||function(e){e._sbzq=[];var t=e._sbzq;t.push(["_setAccount",59360]);var n=e.location.protocol=="https:"?"https:":"http:";var r=document.createElement("script");r.type="text/javascript";r.async=true;r.src=n+"//static.subiz.com/public/js/loader.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)}(window);</script>
-
     <?php $currenturl = base_url(uri_string());?>
-    <!-- Duc add html header-top -->
-    <header class="block-header">
-      <div class="header-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="row">
-                <p class="col-sm-6 text-right">
-                  <a href="#" title="Đặt phòng đoàn">Đặt phòng đoàn <i class="fa fa-question-circle"></i></a>
-                </p>
-                <p class="col-sm-6 text-center">
-                  <a href="#" title="Đặt phòng nhanh">Đặt phòng nhanh <i class="fa fa-question-circle"></i></a>
-                </p>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="row">
-                <p class="col-sm-4"><i class="fa fa-phone-square"></i> (028) 3826 8797</p>
-                <p class="col-sm-4">Hotline: 09 6868 0106</p>
-                <p class="col-sm-4">Zalo: 090 345 5152</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <div class="navbar navbar-static-top navbar-default <?php echo @$hidden; ?>">
       <div class="container">
         <div class="navbar">
@@ -117,7 +83,7 @@
                 <?php } ?>
               </div>
             </div>
-            <?php if (strpos($currenturl, 'blog') !== false) { echo '<div class="col-md-9">'; } else { echo '<div class="col-md-8">'; }?>
+            <?php if (strpos($currenturl, 'blog') !== false) { echo '<div class="col-md-9">'; } else { echo '<div class="col-md-6">'; }?>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav navbar-right go-left top-menu">
                 <?php if (strpos($currenturl, 'blog') !== false) { ?>
@@ -593,28 +559,46 @@
             </div>
           </div>
           <?php if (strpos($currenturl, 'blog') == false) { ?>
-          <div class="block-user">
-            <div class="block-content">
-              <span class="user-img">
-                <img alt="" src="assets/img/user.jpg">
-              </span>
-              <div class="user-menu">
-                <?php  if(!empty($customerloggedin)){ ?>
-                <?php echo trans('0579');?><?php echo $firstname; ?> |
-                <p>
-                  <a href="<?php echo base_url()?>account/">  <?php echo trans('02');?></a>
-                </p>
-                <p>
-                  <a href="<?php echo base_url()?>account/logout/">  <?php echo trans('03');?></a>
-                </p>
-                <?php }else{ if (strpos($currenturl,'book') !== false) { }else{ if($allowreg == "1"){ ?>
-                <p>
-                  <a href="<?php echo base_url(); ?>login"><?php echo trans('04');?></a>
-                </p>
-                <p>
-                  <a href="<?php echo base_url(); ?>register">  <?php echo trans('0115');?></a>
-                </p>
-                <?php } } } ?>
+          <div class="quick-menu">
+            <div id="checkbooking" class="dropdown">
+              <a class="go-right dropdown-toggle" data-toggle="dropdown" href="#" ><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+              <div class="check-booking dropdown-menu">
+                <ul class="sub-quick-menu">
+                  <li><i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <a href="#checkbookingform" data-toggle="modal" data-content="<?php echo trans('0800'); ?>" rel="popover" data-placement="top" data-original-title="<?php echo $item->title; ?>" data-trigger="hover">Check booking</a>
+                  </li>
+                  <?php  if(!empty($customerloggedin)){ ?>
+                  <?php echo trans('0579');?><?php echo $firstname; ?> |
+                  <li>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i><a href="<?php echo base_url()?>account/">  <?php echo trans('02');?></a>
+                  </li>
+                  <li>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i><a href="<?php echo base_url()?>account/logout/">  <?php echo trans('03');?></a>
+                  </li>
+                  <?php }else{ if (strpos($currenturl,'book') !== false) { }else{ if($allowreg == "1"){ ?>
+                  <li>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <a href="<?php echo base_url(); ?>login"><?php echo trans('04');?></a>
+                  </li>
+                  <li>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    <a href="<?php echo base_url(); ?>register">  <?php echo trans('0115');?></a>
+                  </li>
+                  <?php } } } ?>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="phone-menu">
+            <div class="phone-cell">
+              <i class="fa fa-phone" aria-hidden="true"></i> <?php echo $phone; ?>
+            </div>
+          </div>
+          <div class="col-md-2 dat-ks-tour">
+            <div class="hotline-cell">
+              <div class="phone-item">
+                <!--<span class="icon-phone-top"><i class="fa fa-phone" aria-hidden="true"></i></span>-->
+                Hotline: 09 6868 0106<br>Zalo: 090 345 5152
               </div>
             </div>
           </div>
@@ -622,11 +606,9 @@
         </div>
       </div>
     </div>
-
     <div class="visible-xs">
       <div style="margin-top:60px"></div>
     </div>
-
     <div id="checkbookingform" class="modal fade checkbooking-modal" tabindex="-1" data-focus-on="input:first" style="display: none;">
       <div class="modal-dialog click-2email">
         <div class="modal-content">

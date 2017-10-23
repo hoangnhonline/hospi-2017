@@ -541,11 +541,11 @@ a:hover.green2 {
 .ftitle,
 .ftitle a {
     Font-size: 15px;
-    color: #999;
+    color: #fff;
 }
 h2.ftitle {
     Font-size: 16px;
-    color: #666;
+    color: #fff;
 }
 #contact img.logo {
     margin-bottom: 20px;
@@ -1910,7 +1910,7 @@ ul.footerlist li {
         list-style-type: none;
 }
 ul.footerlist li a, .gray-txt {
-    color: #999;
+    color: #fff;
     font-size: 15px;
 }
 ul.footerlistblack {
@@ -7080,16 +7080,16 @@ div.tmpSlideCopy a.xem-ngay {
     line-height: 17px;
 }
 .footer-link, .top-link {
-    background: #cd201f;
-    color: #e2e2e2;
+    /*background: #cd201f;
+    color: #e2e2e2;*/
     text-align: center;
     position: relative;
     z-index: 99999;
-    min-height: 42px;
+    /*min-height: 42px;*/
 }
 .footer-link.not-blog {
-    background: #660033;
-    min-height: 2px;
+    /*background: #660033;
+    min-height: 2px;*/
 }
 .youtube,.facebook,.google {
     padding: 10px 0;
@@ -9275,4 +9275,121 @@ ul.nav .honeymoon .img_list img {
     #checkbooking.dropdown {
         height: 90px;
     }
+}
+
+
+/* New CSS update 22/10/2017 */
+/* Header
+ ========================================================================== */
+.header-top {
+  background: #660033;
+}
+.header-top p {
+  margin: 0;
+  line-height: 40px;
+  color: #fff;
+  font-size: 13px;
+}
+.header-top p i {
+  font-size: 14px;
+}
+.header-top p a {
+  color: #fff;
+  font-size: 13px;
+}
+.header-top p a i {
+  color: #cccccc;
+  font-size: 17px;
+  margin-left: 10px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #660033;
+  font-size: 13px;
+  text-transform: none;
+}
+
+.block-user {
+  display: table-row;
+  float: right;
+}
+.block-user .block-content {
+  display: inline-flex;
+  align-items: center;
+  height: 90px;
+  float: right;
+}
+.block-user .user-img {
+  margin-right: 11px;
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 35px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+  cursor: pointer;
+}
+.block-user .user-menu {
+  display: table-row;
+  float: right;
+}
+.block-user .user-menu p {
+  margin-bottom: 5px;
+  line-height: 1;
+  transition: all .2s ease-in-out;
+}
+.block-user .user-menu p:hover {
+  transform: scale(1.1);
+}
+.block-user .user-menu p:hover a {
+  color: #660033;
+}
+.block-user .user-menu p:last-child {
+  margin-bottom: 0;
+}
+.block-user .user-menu p a {
+  color: #999999;
+  font-size: 13px;
+}
+
+.footerbg {
+  background: url(../../../../uploads/global/bg-footer2.png) no-repeat;
+  background-size: 100%;
+  padding: 117px 0 65px;
+  line-height: 1.6;
+}
+.footerbg3 {
+  display: none;
+}
+#email_footer, .phone_footer {
+  color: #fff;
+}
+ul.footerlist li:before {
+  color: #fff;
+}
+.scont {
+  color: #fff;
+}
+.phone_footer {
+  font-size: 21px;
+  margin-bottom: 5px;
+}
+
+.link-ft-bt a {
+  color: #fff;
+}
+
+.social-wg li {
+  color: #fff;
+  font-size: 11px;
+}
+.social-wg li a {
+  width: 38px;
+  height: 38px;
+  display: block;
 }
