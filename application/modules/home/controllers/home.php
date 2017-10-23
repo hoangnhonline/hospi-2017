@@ -204,7 +204,7 @@ class Home extends MX_Controller {
                         $this->data['langurl'] = base_url()."{langid}";
 						$this->data['page_title'] = $this->data['app_settings'][0]->home_title;
 						$this->theme->view('home/index', $this->data);
-						$this->output->cache(20) ;
+						//$this->output->cache(20) ;//hoangnhonline
 				}
 				elseif ($check) {
 
