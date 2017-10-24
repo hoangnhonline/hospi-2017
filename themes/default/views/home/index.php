@@ -98,7 +98,7 @@
                         ?>
                         <?php foreach ($specialoffers as $offer) {
                           $totalOffr = 0; 
-                          if ($offer->cityid == $key && $countOff < 11) {
+                          if ($offer->cityid == $key && $countOff < 13) {
                             $totalOffr++;
                               ?>
                         <li>
@@ -109,15 +109,16 @@
                       }
                           }
                           ?>
-                          <?php 
-                          if($items[$key] > 12){
-                          ?>
-                          <li>
-                          <a class="sub-menu-link opensans" href="" target="_blank">Xem them</a>
-                        </li>
-                          <?php } ?>
+                          
 
                       </ul>
+                      <?php 
+                        if($items[$key] > 12){
+                        ?>
+                        <p>
+                        <a class="sub-menu-link opensans" href="" target="_blank">Xem them</a>
+                      </p>
+                        <?php } ?>
                     </div>
                   </div>
                   <div class="mega-menu">
