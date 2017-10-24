@@ -55,7 +55,7 @@
               $no = 1;
               ?>
             <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
-              <ul>
+              <ul class="nav-featured">
                 <?php foreach ($items as $key => $value) { ?>
                 <li <?php if ($no == 1) echo 'class="active"'; ?>>
                   <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
