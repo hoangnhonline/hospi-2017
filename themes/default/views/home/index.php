@@ -105,9 +105,9 @@
                       <?php 
                         if($items[$key] > 12){
                         ?>
-                        <p>
-                        <a class="sub-menu-link opensans" href="<?php echo base_url();?>offers?location=<?php echo $offer->cityid; ?>">Xem them</a>
-                      </p>
+                        <p class="text-center">
+                          <a class="sub-menu-link opensans" href="<?php echo base_url();?>offers?location=<?php echo $offer->cityid; ?>"><i class="fa fa-angle-double-right"></i> Xem them</a>
+                        </p>
                         <?php } ?>
                     </div>
                   </div>
