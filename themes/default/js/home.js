@@ -22,9 +22,9 @@ hospi.Home = {
           $('.featuredCampaigns ul.nav-featured li a.active').removeClass('active');
           $(".featuredCampaigns .nav-featured li a").css({ 'border-bottom-color': '#999' });
           _this.addClass('active');
-          _this.css({ 'border-bottom-color': '#660033' });
+          _this.css({ 'border-bottom-color': '#660033', 'border-top-color': '#660033' });
           if ($(this).prev()) {
-            $("a", $(this).prev()).css({ 'border-bottom-color': '#fff' });
+            $("a", $(this).prev()).css({ 'border-bottom-color': '#660033' });
           };
           $(this).addClass('active');
         }

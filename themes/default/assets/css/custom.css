@@ -1822,7 +1822,7 @@ button:hover.next2 img {
 
 .footerbg {
     width: 100%;
-    margin-top: 60px;
+    margin-top: 40px;
     overflow: hidden;
     /*background: url('../../images/footer.jpg') #f4f4f4 scroll center -50px no-repeat;*/
     
@@ -4658,13 +4658,14 @@ a:hover.xnext img {
     overflow: hidden;
     margin-top: 0px;
 }
-.featuredCampaigns .Campaigns .right-featured {
-    padding-right: 80px;
+.featuredCampaigns .Campaigns .right-featured {    
     border-bottom: 1px solid #660033;
+    padding: 0px;
 }
 .featuredCampaigns .Campaigns .block-content {
     background: url('../../images/offers.jpg') scroll center no-repeat;
     min-height: 100%;
+    padding: 0px 10px;
 }
 ul.div-sub-menu li {
     border-top: 1px solid #e2e2e2;
@@ -6900,7 +6901,7 @@ a.xem-ngay {
         font-weight: bold;
     }
     .navbar-nav.top-menu > li {
-        width: 122px;
+        width: 127px;
         float: none;
         height: 90px;
     }
@@ -8125,7 +8126,7 @@ span.txt-label-issale {
 .now-coupon,
 a#nhanh,
 a#doan {
-    color: #ddd;
+    color: #fff;
     line-height: 30px;
 }
 .div-coupon {
@@ -8174,7 +8175,8 @@ label.hospi-label {
 }
 #autocomlete-container {
     display: block;
-    position: relative
+    position: relative;
+    margin-top: -10px;
 }
 .ui-autocomplete {
     position: absolute;
@@ -9093,13 +9095,13 @@ ul.nav .honeymoon .img_list img {
     font-size: 13px;
 }
 .header-top p a i {
-    color: #cccccc;
+    color: #fff;
     font-size: 17px;
     margin-left: 10px;
 }
 .navbar-default .navbar-nav > li > a {
     color: #660033;
-    font-size: 13px;
+    font-size: 15px;
     text-transform: none;
 }
 .block-user {
@@ -9170,12 +9172,14 @@ ul.footerlist li:before {
     color: #fff;
 }
 .phone_footer {
-    font-size: 21px;
+    font-size: 20px;
     margin-bottom: 5px;
 }
 .link-ft-bt {
     padding-top: 9px;
     padding-bottom: 9px;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 .link-ft-bt a {
     color: #fff;
@@ -9206,7 +9210,7 @@ ul.footerlist li:before {
 }
 
 .block-newsletter_footer {
-    margin-top: 65px;
+    margin-top: 40px;
 }
 .block-newsletter_footer .btncustom {
     width: 130px;
@@ -9229,7 +9233,7 @@ ul.footerlist li:before {
 }
 
 .block-search-hotel {
-    margin-bottom: 220px;
+    margin-bottom: 175px;
     position: relative;
 }
 .block-search-hotel .container {
@@ -9242,7 +9246,7 @@ ul.footerlist li:before {
 .block-search-hotel .block-content {
     width: 975px;
     margin: 0 auto;
-    padding: 20px 30px 30px;
+    padding: 20px 30px 10px;
     position: relative;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fdfdfd+0,e8e8e8+71 */
     background: #fdfdfd; /* Old browsers */
@@ -9253,7 +9257,7 @@ ul.footerlist li:before {
 }
 .block-search-hotel .block-search-hotel-hd h3 {
     margin-top: 0;
-    font-size: 14px;
+    font-size: 16px;
     color: #660033;
     font-family: 'AndesRoundedBold';
 }
@@ -9282,7 +9286,7 @@ ul.footerlist li:before {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 15px 30px;
+    padding: 13px 30px;
     background: url(../../assets/img/backgound-pos.png);
     background-repeat: repeat-x;
 }
@@ -9335,7 +9339,7 @@ ul.footerlist li:before {
 }
 .block-search-hotel .form-control {
     font-family: 'AndesRoundedLight';
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     height: 47px;
 }
 .block-search-hotel .form-control-cus {
@@ -9396,4 +9400,11 @@ p.view-pos {
 p.view-pos a {
     font-weight: bold;
     color: #670233;
+}
+.datepicker.dropdown-menu{
+    top:82% !important;
+}
+#email_footer{
+    margin-bottom: 5px;
+    background: #fff;color: #521231;padding: 0 5px;display: inline-block;margin-bottom: 0 5px;
 }

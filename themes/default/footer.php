@@ -126,16 +126,31 @@
           <div class="hidden-xs phone_footer go-right"><i class="fa fa-phone-square"></i> <?php echo $phone; ?></div>
           <?php } ?>
           <!-- <div class="working-time">(8:00AM - 21:00PM)</div> -->
-          <a class="go-right ftitle hidden-xs" href="mailto:<?php echo $contactemail; ?>" id="email_footer" style="background: #fff;color: #521231;padding: 0 5px;display: inline-block;margin-bottom: 0 5px;"><i style="font-size:18px" class="icon-email"></i> <span ><?php echo $contactemail; ?></span></a>
+          <a class="go-right ftitle hidden-xs" href="mailto:<?php echo $contactemail; ?>" id="email_footer"><i style="font-size:18px" class="icon-email"></i> <span ><?php echo $contactemail; ?></span></a>
           <?php get_footer_menu_items(19,"ho-tro","ftitle go-text-right","footerlist go-right go-text-right" );?>
         </div>
-        <div class="col-xs-12 col-md-4 go-right">
+        <div class="col-xs-12 col-md-4 go-right" style="padding-left:35px">
           <h2 class="ftitle go-text-right"><strong><?php echo trans('0572');?></strong></h2>
           <?php get_footer_menu_items(3,"about-us","ftitle go-text-right","footerlist go-right go-text-right" );?>
         </div>
         <div class="col-xs-12 col-md-4 go-right">
-          <h2 class="ftitle go-text-right"><strong><?php echo trans('0572');?></strong></h2>
-          <?php get_footer_menu_items(3,"about-us","ftitle go-text-right","footerlist go-right go-text-right" );?>
+          
+          <h2 class="ftitle go-text-right"><strong>Liên kết nhanh</strong></h2>
+            <div class="about-us">
+    <!--<h2 class="ftitle go-text-right"><strong>About Us</strong></h2>-->
+              <ul class="footerlist go-right go-text-right">
+                      <li><a href="<?php echo base_url()?>offers/sales"  title="Khuyến mãi">Khuyến mãi</a></li>
+                      <li><a href="<?php echo base_url()?>offers" title="Deals - Giảm giá">Deals - Giảm giá</a></li>
+                      <li><a href="<?php echo base_url()?>offers/bestchoice" title="Voucher">Voucher</a></li>
+                      <li><a href="<?php echo base_url()?>hotels/honeymoon" title="Honeymoon">Honeymoon</a></li>
+                      <li><a href="<?php echo base_url()?>tours" title="Tours">Tours</a></li>
+                      <li><a href="<?php echo base_url()?>blog" title="Tôi yêu du lịch">Tôi yêu du lịch</a></li>
+                      <li>
+                        <a href="#checkbookingform" data-toggle="modal" data-content="Kiểm tra booking" rel="popover" data-placement="top" data-original-title="Kiểm tra booking" data-trigger="hover">Kiểm tra booking</a>
+                      </li>
+                    </ul>
+              
+            </div>
         </div>
       </div>
       <?php } ?>
