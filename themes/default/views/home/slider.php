@@ -84,33 +84,44 @@
                     <input type="text" placeholder=" <?php echo trans('09');?> " name="checkout" class="form-control mySelectCalendar dpd2 go-text-left" value="<?php echo $checkout; ?>" required > 
                   </div>
                 </div>
-                <div class="col-sm-2 col-xs-6 go-right">
+                <div class="col-sm-2 col-xs-6 go-right num-night">
                   <div class="form-group">
                     <div class="clearfix"></div>
-                    <span><i class="fa fa-clock-o"></i></span>
-                    <span>00 đêm</span>
+                    <div class="content">
+                      <span><i class="fa fa-clock-o"></i></span>
+                      <span>00 đêm</span>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="home col-sm-2 col-xs-6 go-right">
-                  <select class="form-control selectx" name="adults">
-                    <option selected><?php echo trans('010');?></option>
-                    <?php for($i=1;$i<=20;$i++) {
-                      echo '<option value="'.$i.'">';
-                      echo $i .'</option>';}?>
-                  </select>
+                  <div class="form-group">
+                    <select class="form-control selectx" name="adults">
+                      <option selected><?php echo trans('010');?></option>
+                      <?php for($i=1;$i<=20;$i++) {
+                        echo '<option value="'.$i.'">';
+                        echo $i .'</option>';}?>
+                    </select>
+                  </div>
                 </div>
                 <div class="home col-sm-2 col-xs-6 go-right">
-                  <select class="form-control selectx" name="child">
-                    <option selected><?php echo trans('011');?></option>
-                    <?php for($j=0;$j<=10;$j++) {
-                      echo '<option value="'.$j.'">';
-                      echo $j.'</option>';}?>
-                  </select>
+                  <div class="form-group">
+                    <select class="form-control selectx" name="child">
+                      <option selected><?php echo trans('011');?></option>
+                      <?php for($j=0;$j<=10;$j++) {
+                        echo '<option value="'.$j.'">';
+                        echo $j.'</option>';}?>
+                    </select>
+                  </div>
                 </div>
                 <div class="row col-md-3">
-                  <input type="text" class="form-control inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>">
+                  <div class="form-group">
+                    <div class="coupon">
+                      <input type="text" class="form-control inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
+                      <i class="fa fa-question-circle"></i> 
+                    </div>
+                  </div>
                 </div>
                 <div class="home col-sm-3 col-xs-12 go-right">
                   <div class="form-group">
