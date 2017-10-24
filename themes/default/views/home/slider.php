@@ -151,7 +151,7 @@
         <?php foreach ($randomoffer as $offer) { ?>
           <a class="sub-menu-link" href="<?php echo $offer->slug; ?>" target="_blank"><?php echo $offer->title; ?></a>
         <?php } ?>
-        <span class="pull-right hospi-color"><a href="<?php echo base_url()?>offers/"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo trans('0564'); ?></a></span>
+        <!-- <span class="pull-right hospi-color"><a href="<?php echo base_url()?>offers/"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo trans('0564'); ?></a></span> -->
         <div class="clearfix"></div>
     </div><!-- destination -->
   </div>
