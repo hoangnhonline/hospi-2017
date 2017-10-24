@@ -79,7 +79,7 @@ class Home extends MX_Controller {
                         		$checkout = date($this->data['app_settings'][0]->date_f, strtotime('+'.CHECKOUT_SPAN.' day', time()));
 
 					        //	$this->data['latest_hotels'] = $this->hotels_model->latest_hotels_front();
-								// $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList(); // hoangnhonline
+								$this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList(); // hoangnhonline
                                 $this->data['featuredHotels'] = $this->hotels_lib->getFeaturedHotels();
                                 $this->data['salesoffHotels'] = $this->hotels_lib->getSalesoffHotels();
                                 $this->data['popularHotels'] = $this->hotels_lib->getTopRatedHotels();

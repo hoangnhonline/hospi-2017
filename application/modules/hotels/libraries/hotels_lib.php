@@ -938,13 +938,15 @@ class Hotels_lib {
                                 $this->db->select('hotel_id');
                                 $this->db->where('hotel_city',$locInfo->id);
                                 $hotels = $this->db->get('pt_hotels')->result();
-                                foreach($hotels as $hotel) {
+                                //hoangnhonline cmt
+                                /*foreach($hotels as $hotel) {
                                     $bestprice = $this->bestPrice($hotel->hotel_id,$checkin,$checkout,'yes');
                                     $price[] = $bestprice;
                                 }
                                     $bestprices_full = min(array_filter($price));
 																		$bestprices = $curr->convertPrice($bestprices_full);
                                     if($bestprices=="") $bestprices = "...";
+                                    */
 
 				if(!empty($locInfo->city)){
 
