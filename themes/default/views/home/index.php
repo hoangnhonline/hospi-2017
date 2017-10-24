@@ -292,17 +292,24 @@
           <h2 class="main-title go-right andes-bold"><?php echo trans('0704'); ?></h2>
         </div>
         <div class="row">
-          <?php $locationlistings = getLocations('Vietnam');
+          <?php $locationlistings = getLocations('Vietnam');?>
+          <div class="col-md-2 col-sm-6 col-xs-12 loc-items">
+          <?php
+          $cI = 0;
             foreach($locationlistings as $list){
+              $cI++;
                 $city_slug = create_slug($list->location);
                 $country_slug = create_slug($list->country);
-                if($list->feature=="Yes") $feature="purple"; else $feature="";
-                echo '<div class="col-md-2 col-sm-6 col-xs-12 loc-items '.$feature.'">';
-                echo "<a href='".base_url()."hotels/search/".$country_slug."/".$city_slug."/".$list->id."?txtSearch=".$list->location."&searching=".$list->id."&modType=location&checkin=&checkout=&adults=&child='>";
+                if($list->feature=="Yes") $feature="purple"; else $feature="";               
+                echo "<p><a href='".base_url()."hotels/search/".$country_slug."/".$city_slug."/".$list->id."?txtSearch=".$list->location."&searching=".$list->id."&modType=location&checkin=&checkout=&adults=&child='>";
                 echo $list->location;
-                echo '</a></div>';
+                echo '</a></p>';
+                if($cI%9==0)
+                  echo '</div><div class="col-md-2 col-sm-6 col-xs-12 loc-items '.$feature.'">';
+
                 //http://dev4.webico.vn/hospi/hotels/search/vietnam/phu-quoc/37?txtSearch=Ph%C3%BA%20Qu%E1%BB%91c&searching=37&modType=location&checkin=&checkout=&adults=&child=
             } ?>
+            </div>
         </div>
       </div>
     </div>

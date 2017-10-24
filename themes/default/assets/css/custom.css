@@ -9408,3 +9408,6 @@ p.view-pos a {
     margin-bottom: 5px;
     background: #fff;color: #521231;padding: 0 5px;display: inline-block;margin-bottom: 0 5px;
 }
+.loc-items p{
+    margin-bottom: 5px;
+}
