@@ -111,9 +111,9 @@
                 <span class="icon-bar"></span>
                 </button>
                 <?php if (strpos($currenturl, 'blog') !== false) { ?>
-                <a href="<?php echo base_url(); ?>blog" class="navbar-brand"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->footer_logo_img;?>" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
+                <a href="<?php echo base_url(); ?>blog" class="navbar-brand"><img src="assets/img/logo.png" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
                 <?php } else { ?>
-                <a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->header_logo_img;?>" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
+                <a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="assets/img/logo.png" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
                 <?php } ?>
               </div>
             </div>

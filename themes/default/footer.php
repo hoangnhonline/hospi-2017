@@ -28,7 +28,7 @@
   </div>
   <?php } ?>
   <div class="container">
-    <a href="<?php echo base_url(); ?>" style="display: block;margin-bottom: 5px;"><img src="../../uploads/global/logo-ft.png" class="img-responsive logo"/></a>
+    <a href="<?php echo base_url(); ?>" style="display: block;margin-bottom: 5px;"><img src="assets/img/logo-ft.png" class="img-responsive logo"/></a>
     <div class="row">
       <!-- Blog -->
       <?php if (strpos($currenturl, 'blog') !== false) { ?>
