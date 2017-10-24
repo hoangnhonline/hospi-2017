@@ -76,7 +76,7 @@
                   14 - aaaa
                   </a>
                 </li>                
-                <li><a href="#" title="View More"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
+                <li><a href="<?php echo base_url();?>offers" title="Xem thêm"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
                 
               </ul>
             </div>
@@ -111,7 +111,7 @@
                         if($items[$key] > 12){
                         ?>
                         <p>
-                        <a class="sub-menu-link opensans" href="" target="_blank">Xem them</a>
+                        <a class="sub-menu-link opensans" href="<?php echo base_url();?>offers?location=<?php echo $offer->cityid; ?>">Xem them</a>
                       </p>
                         <?php } ?>
                     </div>
