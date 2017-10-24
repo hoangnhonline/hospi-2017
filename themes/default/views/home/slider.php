@@ -53,7 +53,7 @@
   </div>
 </div>
 
-<div class="block-search-hotel">
+<div class="block-search-hotel clearfix">
   <div class="container">
     <div class="block-content">
       <div class="block-search-hotel-hd">
@@ -88,48 +88,44 @@
                   <div class="form-group">
                     <div class="clearfix"></div>
                     <div class="content">
-                      <span><i class="fa fa-clock-o"></i></span>
-                      <span>00 đêm</span>
+                      <strong><i class="fa fa-clock-o"></i></strong>
+                      <strong>00 đêm</strong>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="home col-sm-2 col-xs-6 go-right">
-                  <div class="form-group">
-                    <select class="form-control selectx" name="adults">
-                      <option selected><?php echo trans('010');?></option>
-                      <?php for($i=1;$i<=20;$i++) {
-                        echo '<option value="'.$i.'">';
-                        echo $i .'</option>';}?>
-                    </select>
-                  </div>
+                  <select class="form-control-cus selectx" name="adults">
+                    <option selected><?php echo trans('010');?></option>
+                    <?php for($i=1;$i<=20;$i++) {
+                      echo '<option value="'.$i.'">';
+                      echo $i .'</option>';}?>
+                  </select>
                 </div>
                 <div class="home col-sm-2 col-xs-6 go-right">
-                  <div class="form-group">
-                    <select class="form-control selectx" name="child">
-                      <option selected><?php echo trans('011');?></option>
-                      <?php for($j=0;$j<=10;$j++) {
-                        echo '<option value="'.$j.'">';
-                        echo $j.'</option>';}?>
-                    </select>
-                  </div>
+                  <select class="form-control-cus selectx" name="child">
+                    <option selected><?php echo trans('011');?></option>
+                    <?php for($j=0;$j<=10;$j++) {
+                      echo '<option value="'.$j.'">';
+                      echo $j.'</option>';}?>
+                  </select>
                 </div>
                 <div class="row col-md-3">
-                  <div class="form-group">
-                    <div class="coupon">
-                      <input type="text" class="form-control inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
-                      <i class="fa fa-question-circle"></i> 
-                    </div>
+                  <div class="coupon">
+                    <input type="text" class="form-control-cus inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
+                    <i class="fa fa-question-circle"></i> 
                   </div>
                 </div>
-                <div class="home col-sm-3 col-xs-12 go-right">
-                  <div class="form-group">
-                    <div class="clearfix"></div>
-                    <div class="clearfix"></div>
-                    <input id="searching" type="hidden" name="searching" value="{{searching}}"> <input id="modType" type="hidden" name="modType" value="{{modType}}"> <button type="submit"  class="btn-action btn btn-lg btn-block"><i class="icon_set_1_icon-78"></i> <?php echo trans('012');?></button> 
-                  </div>
+                <div class="col-sm-3 col-xs-12 go-right">
+                  <input id="searching" type="hidden" name="searching" value="{{searching}}"> <input id="modType" type="hidden" name="modType" value="{{modType}}"> <button type="submit"  class="btn-action btn btn-lg btn-block"><?php echo trans('012');?></button> 
                 </div>
+              </div>
+              <div class="block-check-sale">
+                <label>
+                  <input type="checkbox" name="" value="" checked="checked"><span></span>
+                  Đang khuyễn mãi
+                </label>
               </div>
             </form>
             <?php } ?>
@@ -139,10 +135,10 @@
         </div>
       </div><!-- go-right RTL_Bar -->
       <ul class="list-inline list-enj">
-          <li><a href="#" title="">Có thể bạn quan tâm ?</a></li>
-          <li><a href="#" title="">Deals - Giảm giá</a></li>
-          <li><a href="#" title="">Khuyễn mãi</a></li>
-          <li><a href="#" title="">Combo</a></li>
+          <li><a href="#" title="">Có thể bạn quan tâm ? <span><i class="fa fa-angle-right"></i></span></a></li>
+          <li class=""><a href="#" title="" class="another-color">Deals - Giảm giá</a></li>
+          <li><a href="#" title="" class="another-color">Khuyễn mãi</a></li>
+          <li><a href="#" title="" class="another-color">Combo</a></li>
       </ul><!-- list-inline list-enj -->
     </div>
     <div class="destination">
@@ -155,7 +151,7 @@
         <?php foreach ($randomoffer as $offer) { ?>
           <a class="sub-menu-link" href="<?php echo $offer->slug; ?>" target="_blank"><?php echo $offer->title; ?></a>
         <?php } ?>
-        <span class="pull-right hospi-color"><a href="<?php echo base_url()?>offers/"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo trans('0564'); ?></a></span>
+        <!-- <span class="pull-right hospi-color"><a href="<?php echo base_url()?>offers/"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo trans('0564'); ?></a></span> -->
         <div class="clearfix"></div>
     </div><!-- destination -->
   </div>

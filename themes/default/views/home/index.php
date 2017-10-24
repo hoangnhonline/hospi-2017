@@ -58,7 +58,7 @@
               <ul class="nav-featured">
                 <?php foreach ($items as $key => $value) { ?>
                 <?php if($no < 15 ){ ?>
-                <li <?php if ($no == 1) echo 'class="active"'; ?>>
+                <li class="<?php if ($no == 1) echo "active"; ?> load-child">
                   <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
                   <?php echo $no; ?> - <?php echo pt_LocationsInfo($key)->city; ?>
                   </a>
@@ -110,9 +110,9 @@
                       <?php 
                         if($items[$key] > 12){
                         ?>
-                        <p>
-                        <a class="sub-menu-link opensans" href="<?php echo base_url();?>offers?location=<?php echo $offer->cityid; ?>">Xem them</a>
-                      </p>
+                        <p class="text-center">
+                          <a class="sub-menu-link opensans" href="<?php echo base_url();?>offers?location=<?php echo $offer->cityid; ?>"><i class="fa fa-angle-double-right"></i> Xem them</a>
+                        </p>
                         <?php } ?>
                     </div>
                   </div>

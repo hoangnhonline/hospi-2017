@@ -38,7 +38,7 @@ hospi.Home = {
         e.preventDefault();
 //$('.featuredCampaigns ul.nav-featured li a').removeClass('active');
       }
-    }, ".featuredCampaigns ul.nav-featured li"); //pass the element as an argument to .on
+    }, ".featuredCampaigns ul.nav-featured li.load-child"); //pass the element as an argument to .on
 
   },
 
