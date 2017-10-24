@@ -135,9 +135,9 @@
         </div>
       </div><!-- go-right RTL_Bar -->
       <ul class="list-inline list-enj">
-          <li><a href="#" title="">Có thể bạn quan tâm ? <span><i class="fa fa-angle-right"></i></span></a></li>
+          <li>Có thể bạn quan tâm ? <span><i class="fa fa-angle-right"></i></span></li>
           <li class=""><a href="#" title="" class="another-color">Deals - Giảm giá</a></li>
-          <li><a href="#" title="" class="another-color">Khuyễn mãi</a></li>
+          <li><a href="#" title="" class="another-color">Khuyến mãi</a></li>
           <li><a href="#" title="" class="another-color">Combo</a></li>
       </ul><!-- list-inline list-enj -->
     </div>

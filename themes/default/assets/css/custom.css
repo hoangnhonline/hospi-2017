@@ -4671,6 +4671,8 @@ ul.div-sub-menu li {
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 10px;
+    height: 35px;
+    overflow: hidden;
 }
 ul.div-sub-menu >:first-child {
     border-top: none;
@@ -4678,7 +4680,8 @@ ul.div-sub-menu >:first-child {
 .featuredCampaigns .Campaigns .sub-featured .mega-content li a {
     color: #555;
     font-size: 14px;
-    font-weight: 500
+    font-weight: 500;
+    line-height: 35px;
 }
 ul.div-sub-menu li a:hover {
     background-color: #e2e2e2;
@@ -4699,12 +4702,14 @@ ul.div-sub-menu li a:hover {
 }
 .featuredCampaigns .nav-featured li a {
     /*font-family: "AndesRoundedBold";*/
-    
-    font-size: 16px;
+    font-size: 15px;
     text-align: left;
     color: #555;
     position: relative;
     padding-left: 20px;
+}
+.featuredCampaigns .nav-featured li:last-child a {
+    border-bottom: none;
 }
 .featuredCampaigns .nav-featured li a:before {
     background-color: #999;
@@ -9285,7 +9290,7 @@ ul.footerlist li:before {
     padding-right: 15px;
     padding-left: 15px;
 }
-.list-enj li a {
+.list-enj li {
     font-size: 16px;
     color: #333;
     line-height: 1
@@ -9293,7 +9298,7 @@ ul.footerlist li:before {
 .list-enj li a.another-color {
     color: #660033;
 }
-.list-enj li a span {
+.list-enj li span {
     width: 18px;
     height: 18px;
     background: #660033;
@@ -9354,7 +9359,6 @@ ul.footerlist li:before {
 .block-search-hotel .btn-action {
     margin-bottom: 0;
     padding: 12px 16px;
-    text-transform: lowercase;
 }
 .block-check-sale {
     position: relative;
@@ -9375,7 +9379,21 @@ ul.footerlist li:before {
     background: url(../img/check.png) no-repeat center left;
     padding-left: 18px;
     margin-left: -12px;
+    padding-top: 1px;
 }
 .block-check-sale input[type='checkbox']:checked + span{
     background: url(../img/checked.png) no-repeat center left;
+}
+
+p.view-pos {
+    margin-bottom: 5px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+}
+p.view-pos a {
+    font-weight: bold;
+    color: #670233;
 }

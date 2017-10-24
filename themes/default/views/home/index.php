@@ -60,19 +60,18 @@
                 <?php if($no < 13 ){ ?>
                 <li class="<?php if ($no == 1) echo "active"; ?> load-child">
                   <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
-                  <?php echo $no; ?> - <?php echo pt_LocationsInfo($key)->city; ?>
+                  <?php echo pt_LocationsInfo($key)->city; ?>
                   </a>
                 </li>
                 <?php $no++;
                 } } ?>
                 
-                <li>
+                <!-- <li>
                   <a href="javascript:void(0);" data-href="#hover66" class="li-link">
                  13 - aaaa
                   </a>
-                </li>                              
+                </li>        -->                                       
                 <li><a href="<?php echo base_url();?>offers" title="Xem thêm"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
-                
               </ul>
             </div>
             <div class="right-featured col-md-9 col-sm-6 col-xs-12 ">
@@ -88,7 +87,7 @@
                         ?>
                         <?php foreach ($specialoffers as $offer) {
                           $totalOffr = 0; 
-                          if ($offer->cityid == $key && $countOff < 12) {
+                          if ($offer->cityid == $key && $countOff < 13) {
                             $totalOffr++;
                               ?>
                         <li>
@@ -103,10 +102,10 @@
 
                       </ul>
                       <?php 
-                        if($items[$key] > 12){
+                        if($items[$key] > 13){
                         ?>
-                        <p class="text-center">
-                          <a class="sub-menu-link opensans" href="<?php echo base_url();?>offers?location=<?php echo $offer->cityid; ?>"><i class="fa fa-angle-double-right"></i> Xem them</a>
+                        <p class="view-pos">
+                          <a class="sub-menu-link opensans" href="<?php echo base_url();?>offers?location=<?php echo $offer->cityid; ?>"><i class="fa fa-angle-double-right"></i> Xem thêm</a>
                         </p>
                         <?php } ?>
                     </div>
