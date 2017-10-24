@@ -851,6 +851,6 @@ $L1["0828"]  = "Có thể bạn quan tâm";
 $L1["0829"]  = "Blog tôi yêu du lịch tổng hợp những thông tin du lịch, chia sẻ kinh nghiệm, điểm đến, khuyến mãi... nhằm mang đến những thông tin bổ ích cho bạn đọc";
 $L1["0830"]  = "Like để cập nhật cẩm nang du lịch";
 $L1["0831"]  = "Hỗ trợ bạn đọc, khách hàng";
-$L1["0832"]  = "Đăng ký email để nhận chương trình khuyến mãi, ưu đãi<br>GIẢM TỚI 75%";
+$L1["0832"]  = "Đăng ký nhận tin  ưu đãi để không bỏ lỡ những ưu đãi lên tới 79% từ HOSPI";
 $L1["0833"]  = "Bản quyền của © Hospi Travel Co.,Ltd";
 
