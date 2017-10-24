@@ -123,8 +123,8 @@
               </div>
               <div class="block-check-sale">
                 <label>
-                  <input type="checkbox" name="" value="" checked="checked"><span></span>
-                  Đang khuyễn mãi
+                  <input type="checkbox" name="issale" id="issale" value="yes"><span></span>
+                  <?php echo trans('0744');?>
                 </label>
               </div>
             </form>

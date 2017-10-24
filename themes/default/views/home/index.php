@@ -57,7 +57,7 @@
             <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
               <ul class="nav-featured">
                 <?php foreach ($items as $key => $value) { ?>
-                <?php if($no < 15 ){ ?>
+                <?php if($no < 13 ){ ?>
                 <li class="<?php if ($no == 1) echo "active"; ?> load-child">
                   <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
                   <?php echo $no; ?> - <?php echo pt_LocationsInfo($key)->city; ?>
@@ -70,12 +70,7 @@
                   <a href="javascript:void(0);" data-href="#hover66" class="li-link">
                  13 - aaaa
                   </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0);" data-href="#hover66" class="li-link">
-                  14 - aaaa
-                  </a>
-                </li>                
+                </li>                              
                 <li><a href="<?php echo base_url();?>offers" title="Xem thêm"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
                 
               </ul>
