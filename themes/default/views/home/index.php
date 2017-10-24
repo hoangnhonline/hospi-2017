@@ -50,11 +50,9 @@
               $array = array();
               foreach ($specialoffers as $offer) {
                   array_push($array, $offer->cityid);
-              }             
-              //var_dump("<pre>", $specialoffers);die;
+              }                           
               $items = array_count_values($array);
-              $no = 1;
-             // var_dump($items);die;
+              $no = 1;             
               ?>
             <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
               <ul class="nav-featured">
@@ -95,15 +93,30 @@
                   <div class="mega-menu">
                     <div class="mega-content">
                       <ul class="div-sub-menu mh-menu">
+                        <?php 
+                        $countOff = 1;
+                        ?>
                         <?php foreach ($specialoffers as $offer) {
-                          if ($offer->cityid == $key) {
+                          $totalOffr = 0; 
+                          if ($offer->cityid == $key && $countOff < 11) {
+                            $totalOffr++;
                               ?>
                         <li>
                           <a class="sub-menu-link opensans" href="<?php echo $offer->slug; ?>" target="_blank"><?php echo $offer->title; ?></a>
                         </li>
-                        <?php }
+                        <?php 
+                        $countOff++;
+                      }
                           }
                           ?>
+                          <?php 
+                          if($items[$key] > 12){
+                          ?>
+                          <li>
+                          <a class="sub-menu-link opensans" href="" target="_blank">Xem them</a>
+                        </li>
+                          <?php } ?>
+
                       </ul>
                     </div>
                   </div>
