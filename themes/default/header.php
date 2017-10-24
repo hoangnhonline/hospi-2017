@@ -76,10 +76,10 @@
             <div class="col-sm-6">
               <div class="row">
                 <p class="col-sm-6 text-right">
-                  <a href="#" title="Đặt phòng đoàn">Đặt phòng đoàn <i class="fa fa-question-circle"></i></a>
+                  <a id="doan" href="#datphongdoan" data-toggle="modal" data-content="Đặt phòng đoàn" rel="popover" data-placement="top" data-original-title="Đặt phòng đoàn" data-trigger="hover">Đặt phòng đoàn <i class="fa fa-question-circle"></i></a>
                 </p>
                 <p class="col-sm-6 text-center">
-                  <a href="#" title="Đặt phòng nhanh">Đặt phòng nhanh <i class="fa fa-question-circle"></i></a>
+                  <a id="nhanh" href="#datphongnhanh" data-toggle="modal" data-content="Đặt phòng nhanh ?" rel="popover" data-placement="top" data-original-title="Đặt phòng nhanh ?" data-trigger="hover">Đặt phòng nhanh <i class="fa fa-question-circle"></i></a>
                 </p>
               </div>
             </div>

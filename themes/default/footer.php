@@ -145,7 +145,7 @@
   </div>
   <div class="container">
     <div class="clearfix">
-      <a href="#" title="Về Trang Chủ" style="  display: block;margin-top: 30px;margin-bottom: 30px;color: #fff;">
+      <a href="<?php echo base_url()?>" title="Về Trang Chủ" style="  display: block;margin-top: 30px;margin-bottom: 30px;color: #fff;">
         <i class="fa fa-angle-double-right"></i> Về Trang Chủ
       </a>
     </div><!-- clearfix -->
@@ -153,16 +153,16 @@
       <div class="col-sm-7 col-xs-12">
         <div class="row link-ft-bt">
           <div class="col-sm-3 col-xs-6">
-            <a href="#" title="Khách Sạn">Khách Sạn</a>
+            <a href="<?php echo base_url()?>hotels" title="Khách Sạn">Khách Sạn</a>
           </div>
           <div class="col-sm-3 col-xs-6">
-            <a href="#" title="Tours">Tours</a>
+            <a href="<?php echo base_url()?>tours" title="Tours">Tours</a>
           </div>
           <div class="col-sm-3 col-xs-6">
-            <a href="#" title="HoneyMoon">HoneyMoon</a>
+            <a href="<?php echo base_url()?>hotels/honeymoon" title="HoneyMoon">HoneyMoon</a>
           </div>
           <div class="col-sm-3 col-xs-6">
-            <a href="#" title="Tôi Yêu Du Lịch">Tôi Yêu Du Lịch</a>
+            <a href="<?php echo base_url()?>blog" title="Tôi Yêu Du Lịch">Tôi Yêu Du Lịch</a>
           </div>
         </div>
       </div><!-- col-sm-6 -->
