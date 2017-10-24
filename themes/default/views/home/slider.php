@@ -55,92 +55,68 @@
 
 <div class="block-search-hotel">
   <div class="container">
-    <div class="row">
-      <div class="col-md-12 col-xs-12 go-right block-search-hotel-hd">
-        <ul class="list-inline">
-          <li>Tìm khách sạn/resort</li>
-          <li><a href="#" title="">Có thể bạn quan tâm ?</a></li>
-          <li><a href="#" title="">Deals - Giảm giá</a></li>
-          <li><a href="#" title="">Khuyễn mãi</a></li>
-          <li><a href="#" title="">Combo</a></li>
-        </ul>
-      </div>
-      <div class="col-md-12 col-xs-12 go-right RTL_Bar">
-        <div class="tab-content row" ng-controller="autoSuggest">
+    <div class="block-content">
+      <div class="block-search-hotel-hd">
+        <h3>Tìm khách sạn/resort</h3>
+      </div><!-- block-search-hotel-hd -->
+      <div class="go-right RTL_Bar">
+        <div class="tab-content" ng-controller="autoSuggest">
           <!-- Hotels  -->
           <div role="tabpanel" class="tab-pane fade active in <?php pt_searchbox('hotels'); ?>" id="HOTELS" aria-labelledby="home-tab">
             <?php if(pt_main_module_available('hotels')){ ?> 
             <form action="<?php echo base_url();?>hotels/search" method="GET" role="search">
-              <div class="col-xs-12 col-md-3 col-lg-4 col-sm-12 go-right">
-                <div class="form-group">
+              <div class="row">
+                <div class="col-sm-4 col-xs-12 go-right">
                   <div class="form-group">
-                    <!--<div angucomplete-alt id="hotelsSearch" input-name="txtSearch" placeholder="<?php echo trans('026');?>" pause="500" selected-object="selectedItem" remote-url="<?php echo base_url();?>home/suggestions/hotels" remote-url-request-formatter="remoteUrlRequestFn" remote-url-data-field="items" title-field="name" description-field="" minlength="2" input-class="form-control form-control-small wow fadeIn" match-class="highlight"></div>-->
                     <input id="search" name="txtSearch" class="form-control form-control-small" placeholder="<?php echo trans('026');?>"/>
                     <div id="autocomlete-container"></div>
                   </div>
                 </div>
-              </div>
-              <div class="home row col-md-2 col-sm-6 col-xs-6 go-right">
-                <div class="form-group">
-                  <div class="clearfix"></div>
-                  <input type="text" placeholder=" <?php echo trans('07');?> " name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo $checkin; ?>" required > 
+                <div class="row col-sm-3 col-xs-6 go-right">
+                  <div class="form-group">
+                    <div class="clearfix"></div>
+                    <input type="text" placeholder=" <?php echo trans('07');?> " name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo $checkin; ?>" required > 
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-6 go-right">
+                  <div class="form-group">
+                    <div class="clearfix"></div>
+                    <input type="text" placeholder=" <?php echo trans('09');?> " name="checkout" class="form-control mySelectCalendar dpd2 go-text-left" value="<?php echo $checkout; ?>" required > 
+                  </div>
+                </div>
+                <div class="col-sm-2 col-xs-6 go-right">
+                  <div class="form-group">
+                    <div class="clearfix"></div>
+                    <span><i class="fa fa-clock-o"></i></span>
+                    <span>00 đêm</span>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-2 col-sm-6 col-xs-6 go-right">
-                <div class="form-group">
-                  <div class="clearfix"></div>
-                  <input type="text" placeholder=" <?php echo trans('09');?> " name="checkout" class="form-control mySelectCalendar dpd2 go-text-left" value="<?php echo $checkout; ?>" required > 
+              <div class="row">
+                <div class="home col-sm-2 col-xs-6 go-right">
+                  <select class="form-control selectx" name="adults">
+                    <option selected><?php echo trans('010');?></option>
+                    <?php for($i=1;$i<=20;$i++) {
+                      echo '<option value="'.$i.'">';
+                      echo $i .'</option>';}?>
+                  </select>
                 </div>
-              </div>
-              <div class="home row col-md-2 col-lg-1 col-sm-6 col-xs-6 go-right">
-                <select class="form-control selectx" name="adults">
-                  <option selected><?php echo trans('010');?></option>
-                  <?php for($i=1;$i<=20;$i++) {
-                    echo '<option value="'.$i.'">';
-                    echo $i .'</option>';}?>
-                </select>
-              </div>
-              <div class="hidden-md col-lg-1 col-sm-6 col-xs-6 go-right">
-                <select class="form-control selectx" name="child">
-                  <option selected><?php echo trans('011');?></option>
-                  <?php for($j=0;$j<=10;$j++) {
-                    echo '<option value="'.$j.'">';
-                    echo $j.'</option>';}?>
-                </select>
-              </div>
-              <div class="home row hidden-md col-lg-1 col-sm-6 col-xs-6 go-right plus panel-heading" data-toggle="collapse" data-target="#collapseOne">
-                <a class="go-right" href="#" ><i class="fa fa-plus" aria-hidden="true"></i></a>
-              </div>
-              <div class="home row col-md-3 col-lg-2 col-xs-12 col-sm-12 go-right">
-                <div class="form-group">
-                  <div class="clearfix"></div>
-                  <div class="clearfix"></div>
-                  <input id="searching" type="hidden" name="searching" value="{{searching}}"> <input id="modType" type="hidden" name="modType" value="{{modType}}"> <button type="submit"  class="btn-action btn btn-lg btn-block"><i class="icon_set_1_icon-78"></i> <?php echo trans('012');?></button> 
+                <div class="home col-sm-2 col-xs-6 go-right">
+                  <select class="form-control selectx" name="child">
+                    <option selected><?php echo trans('011');?></option>
+                    <?php for($j=0;$j<=10;$j++) {
+                      echo '<option value="'.$j.'">';
+                      echo $j.'</option>';}?>
+                  </select>
                 </div>
-              </div>
-              <div class="container">
-                <div class="col-md-12 col-xs-12 go-right" style="padding-right:0px;padding-left:0px;">
-                  <div id="collapseOne" class="collapse">
-                    <div class="space-content">&nbsp;</div>
-                    <div class="white-line"></div>
-                    <div class="col-md-3 ask-group">
-                      <div class="ask-item">
-                        <i class="fa fa-users" aria-hidden="true"></i> <a id="doan" href="#datphongdoan" data-toggle="modal" data-content="<?php echo trans('0742');?>" rel="popover" data-placement="top" data-original-title="<?php echo trans('0742');?>" data-trigger="hover"><?php echo trans('0742');?></a>
-                      </div>
-                      <div class="ask-item">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i> <a id="nhanh" href="#datphongnhanh" data-toggle="modal" data-content="<?php echo trans('0743');?>" rel="popover" data-placement="top" data-original-title="<?php echo trans('0743');?>" data-trigger="hover"><?php echo trans('0743');?></a>
-                      </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3 div-coupon">
-                      <div class="ask-coupon"><?php echo trans('0516');?></div>
-                      <input type="text" class="form-control inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>">
-                      <div class="now-coupon"><?php echo trans('0746');?>&nbsp;<a href="#" class="lblue"><?php echo trans('0747');?></a></div>
-                    </div>
-                    <div class="col-md-3 div-issale">
-                      <span class="txt-label-issale"><?php echo trans('0744');?></span><input type="checkbox" id="issale" name="issale" class="hospi-checkbox" value="yes">  <label for="issale" class="hospi-label">&nbsp;</label>
-                    </div>
-                    <div class="clearfix" style="margin-bottom:10px;"></div>
+                <div class="row col-md-3">
+                  <input type="text" class="form-control inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>">
+                </div>
+                <div class="home col-sm-3 col-xs-12 go-right">
+                  <div class="form-group">
+                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                    <input id="searching" type="hidden" name="searching" value="{{searching}}"> <input id="modType" type="hidden" name="modType" value="{{modType}}"> <button type="submit"  class="btn-action btn btn-lg btn-block"><i class="icon_set_1_icon-78"></i> <?php echo trans('012');?></button> 
                   </div>
                 </div>
               </div>
@@ -150,24 +126,27 @@
           </div>
           <!-- Hotels  -->
         </div>
-      </div>
+      </div><!-- go-right RTL_Bar -->
+      <ul class="list-inline list-enj">
+          <li><a href="#" title="">Có thể bạn quan tâm ?</a></li>
+          <li><a href="#" title="">Deals - Giảm giá</a></li>
+          <li><a href="#" title="">Khuyễn mãi</a></li>
+          <li><a href="#" title="">Combo</a></li>
+      </ul><!-- list-inline list-enj -->
     </div>
-  </div>
-</div>
-
-<div class="destination">
-  <div class="container">
-    <!-- <div class="form-group col-md-4">
-      <h2 class="main-title go-right andes-bold">&nbsp;<?php //echo trans('0550'); ?></h2>
-      <div class="clearfix"></div>
-    </div> -->
-      <span class="rounded-icon"><i class="fa fa-gift" aria-hidden="true"></i></span>&nbsp;
-      <span style="color:#660033;"><?php echo trans('0580'); ?>: </span>
-      <?php foreach ($randomoffer as $offer) { ?>
-        <a class="sub-menu-link" href="<?php echo $offer->slug; ?>" target="_blank"><?php echo $offer->title; ?></a>
-      <?php } ?>
-      <span class="pull-right hospi-color"><a href="<?php echo base_url()?>offers/"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo trans('0564'); ?></a></span>
-    <div class="clearfix"></div>
+    <div class="destination">
+      <!-- <div class="form-group col-md-4">
+        <h2 class="main-title go-right andes-bold">&nbsp;<?php //echo trans('0550'); ?></h2>
+        <div class="clearfix"></div>
+      </div> -->
+        <span class="rounded-icon"><i class="fa fa-gift" aria-hidden="true"></i></span>&nbsp;
+        <span style="color:#660033;"><?php echo trans('0580'); ?>: </span>
+        <?php foreach ($randomoffer as $offer) { ?>
+          <a class="sub-menu-link" href="<?php echo $offer->slug; ?>" target="_blank"><?php echo $offer->title; ?></a>
+        <?php } ?>
+        <span class="pull-right hospi-color"><a href="<?php echo base_url()?>offers/"><i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo trans('0564'); ?></a></span>
+        <div class="clearfix"></div>
+    </div><!-- destination -->
   </div>
 </div>
 

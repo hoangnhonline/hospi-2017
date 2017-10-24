@@ -7,7 +7,23 @@
 </div>
 
 <?php } ?>
-<div id="footer" class="<?php echo @$hidden; ?> footerbg" >
+
+<div class="block-newsletter_footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 text-center newsletter_footer"> <?php echo trans('0832');?></div>
+      <div class="col-md-5">
+        <div class="relative input">
+            <input type="email" name="email" class="form-control fccustom2 sub_email" id="exampleInputEmail1" placeholder="<?php echo trans('0403');?>" required>
+            <div style="color:white" class="subscriberesponse"></div>
+            <button type="submit" class="btn btn-default btncustom sub_newsletter">Đăng Ký</button>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="clearfix <?php echo @$hidden; ?> footerbg" >
   <?php if (strpos($currenturl, 'blog') !== false) { ?>
   <div class="footer-link">
     <div class="container"></div>
