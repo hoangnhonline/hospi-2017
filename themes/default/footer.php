@@ -154,11 +154,11 @@
         <div class="social-wg">
           <ul class="list-inline">
             <li>KẾT NỐI VỚI CHÚNG TÔI:</li>
-            <li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#" title="google"><i class="fa fa-google-plus"></i></a></li>
-            <li><a href="#" title="youtube"><i class="fa-youtube-play"></i></a></li>
-            <li><a href="#" title="instagram"><i class="fa fa-instagram"></i></a></li>
-            <li><a href="#" title="twitter"><i class="fa fa-twitter"></i></a></li>
+            <li class="icon"><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+            <li class="icon"><a href="#" title="google"><i class="fa fa-google-plus"></i></a></li>
+            <li class="icon"><a href="#" title="youtube"><i class="fa fa-youtube"></i></a></li>
+            <li class="icon"><a href="#" title="instagram"><i class="fa fa-instagram"></i></a></li>
+            <li class="icon"><a href="#" title="twitter"><i class="fa fa-twitter"></i></a></li>
           </ul>
         </div>
       </div><!-- col-sm-6 -->

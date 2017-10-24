@@ -41,56 +41,89 @@
 </div>
 
 <div class="container">
-  <div class="lastminute4 featured-fampaigns">
+  <div class="lastminute4 featured-fampaigns clearfix">
     <div class="featuredCampaigns">
-      <div class="Campaigns">
-        <?php
-          $array = array();
-          foreach ($specialoffers as $offer) {
-              array_push($array, $offer->cityid);
-          }
-          $items = array_count_values($array);
-          $no = 1;
-          ?>
-        <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
-          <ul class="row">
-            <?php foreach ($items as $key => $value) { ?>
-            <li <?php if ($no == 1) echo 'class="active"'; ?>>
-              <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
-              <?php echo pt_LocationsInfo($key)->city; ?>
-              </a>
-            </li>
-            <?php $no++;
-            } ?>
-            <li><a href="#" title="View More"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
-          </ul>
-        </div>
-        <div class="right-featured">
-          <?php $nu = 1;
-            foreach ($items as $key => $value) { ?>
-          <div id="hover<?php echo $key; ?>" class="col-md-5 col-sm-6 col-xs-12 sub-featured <?php if ($nu == 1) echo 'displayed'; ?>">
-            <div class="mega-menu">
-              <div class="mega-content">
-                <ul class="div-sub-menu mh-menu">
-                  <?php foreach ($specialoffers as $offer) {
-                    if ($offer->cityid == $key) {
+      <div class="Campaigns col-sm-8">
+        <div class="row row-eq-height">
+          <?php
+            $array = array();
+            foreach ($specialoffers as $offer) {
+                array_push($array, $offer->cityid);
+            }
+            $items = array_count_values($array);
+            $no = 1;
+            ?>
+          <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
+            <ul>
+              <?php foreach ($items as $key => $value) { ?>
+              <li <?php if ($no == 1) echo 'class="active"'; ?>>
+                <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
+                <?php echo pt_LocationsInfo($key)->city; ?>
+                </a>
+              </li>
+              <?php $no++;
+              } ?>
+              <li><a href="#" title="View More"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
+            </ul>
+          </div>
+          <div class="right-featured col-md-9 col-sm-6 col-xs-12 ">
+            <div class="block-content">
+              <?php $nu = 1;
+                foreach ($items as $key => $value) { ?>
+              <div id="hover<?php echo $key; ?>" class="sub-featured <?php if ($nu == 1) echo 'displayed'; ?>">
+                <div class="mega-menu">
+                  <div class="mega-content">
+                    <ul class="div-sub-menu mh-menu">
+                      <?php foreach ($specialoffers as $offer) {
+                        if ($offer->cityid == $key) {
+                            ?>
+                      <li>
+                        <a class="sub-menu-link opensans" href="<?php echo $offer->slug; ?>" target="_blank"><?php echo $offer->title; ?></a>
+                      </li>
+                      <?php }
+                        }
                         ?>
-                  <li>
-                    <a class="col-md-7 col-sm-12 col-xs-12 sub-menu-link opensans" href="<?php echo $offer->slug; ?>" target="_blank"><?php echo $offer->title; ?></a>
-                    <img class="col-md-5 col-sm-12 col-xs-12 offers-hover img-responsive" src="<?php echo $offer->thumbnail; ?>" alt="<?php echo character_limiter($offer->title, 15); ?>"/>
-                  </li>
-                  <?php }
-                    }
-                    ?>
-                </ul>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mega-menu">
+                </div>
               </div>
-            </div>
-            <div class="mega-menu">
+              <?php $nu++;
+              } ?>
             </div>
           </div>
-          <?php $nu++;
-            } ?>
         </div>
+      </div>
+
+      <div class="block-slide col-sm-4">
+        <div id="carousel-banner-rt" class="carousel slide" data-ride="carousel">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div class="item">
+              <a href="#">
+                <img src="../../assets/img/slide-right1.jpg" alt="">
+              </a>
+            </div>
+            <div class="item">
+              <a href="#">
+                <img src="../../assets/img/slide-right2.jpg" alt="">
+              </a>
+            </div>
+            <div class="item">
+              <a href="#">
+                <img src="../../assets/img/slide-right3.jpg" alt="">
+              </a>
+            </div>
+          </div>
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-banner-rt" data-slide-to="0" class=""></li>
+            <li data-target="#carousel-banner-rt" data-slide-to="1" class=""></li>
+            <li data-target="#carousel-banner-rt" data-slide-to="2" class=""></li>
+          </ol>
+        </div>
+        <!-- Carousel -->
       </div>
     </div>
   </div>

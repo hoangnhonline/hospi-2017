@@ -1595,13 +1595,11 @@ img.dealthumb {
     overflow: hidden;
     border-bottom: 0px solid #ccc;
 }
-.lastminute4, .lastminute4_1 {
+.lastminute4_1 {
     width: 100%;
     overflow: hidden;
     background: url('../../images/offers.jpg') #f4f4f4 scroll center -50px no-repeat;
     margin-top: 0px;
-
-
     font-weight: 300;
     overflow: hidden;
 }
@@ -4638,34 +4636,39 @@ a:hover.xnext img {
 }
 
 .featuredCampaigns .nav-featured a {
-    /*border-bottom: 1px solid #666;*/
+    border-bottom: 1px solid #666;
+    border-right: 1px solid #660033;
     display: block;
-    margin-right: 18px;
-    padding: 7px 10px;
+    /*margin-right: 18px;*/
+    padding: 0 10px;
     height: 100%
 }
 
 .featuredCampaigns .Campaigns {
-    /*border: 1px solid #86b817;*/
+    border: 1px solid #660033;
     display: table;
+    background: rgba(204, 204, 204, 0.5);
     overflow: hidden;
-    width: 100%;
-    /*margin: 20px auto;*/
-
+    margin-top: 0px;
 }
 
-.featuredCampaigns .Campaigns .sub-featured .mega-content li {
-    list-style: none;
-    margin-left: 24px;
+.featuredCampaigns .Campaigns .right-featured {
+  padding-right: 80px;
 }
 
-ul.div-sub-menu li a {
+.featuredCampaigns .Campaigns .block-content {
+  background: url('../../images/offers.jpg') scroll center  no-repeat;
+  min-height: 100%;
+}
+
+ul.div-sub-menu li {
     border-top:1px solid #e2e2e2;
     padding-top: 8px;
     padding-bottom: 8px;
+    padding-left: 10px;
 }
 
-ul.div-sub-menu > :first-child a {
+ul.div-sub-menu > :first-child {
     border-top:none;
 }
 
@@ -4685,37 +4688,40 @@ ul.div-sub-menu li a:hover {
 .featuredCampaigns .nav-featured li.active a,
 .featuredCampaigns .nav-featured li:hover {
     color: #660033;
-    text-decoration: none
+    text-decoration: none;
+    font-weight: bold;
+    border-color: #660033;
+    border-right: none;
 }
 
 .featuredCampaigns .nav-featured li a {
-    font-family: "AndesRoundedBold";
+    /*font-family: "AndesRoundedBold";*/
     font-size: 16px;
         text-align: left;
         color: #555;
         position: relative;
-        padding-left: 40px;
+        padding-left: 20px;
 }
 .featuredCampaigns .nav-featured li a:before {
- background-color: #666;
+    background-color: #999;
     font-family: "FontAwesome";
-    content: "\f054";
+    content: "\f105";
     margin-right: 10px;
-    padding: 16px 10px 17px;
-    color:#666;
+    padding: 7px 10px 7px;
+    color:#999;
     position: absolute;
-    left: 0;
+    left: -15px;
     top:-1px;
 }
 .featuredCampaigns .nav-featured li:hover a:before, .featuredCampaigns .nav-featured li.active a:before {
 font-family: "FontAwesome";
-    content: "\f054";
+    content: "\f105";
     color:#fff;
     background-color: #660033;
 }
-.featuredCampaigns .nav-featured li a .fa {
+/*.featuredCampaigns .nav-featured li a .fa {
     float: right
-}
+}*/
 
 
 .featuredCampaigns .nav-featured li a>span {
@@ -5306,9 +5312,9 @@ font-family: "FontAwesome";
 .Campaigns .nav-featured {
     margin-bottom: 0;
 }
-.featuredCampaigns .nav-featured > :first-child li a {
+/*.featuredCampaigns .nav-featured > :first-child li a {
 	border-top: 1px solid #666;
-}
+}*/
 @media only screen and (min-width:768px) {
     .Campaigns .nav-featured {
         /*float: left;
@@ -5321,6 +5327,13 @@ font-family: "FontAwesome";
         /*float: left;
         width: 51.7117117117%*/
 }
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 
@@ -9380,6 +9393,10 @@ ul.footerlist li:before {
   margin-bottom: 5px;
 }
 
+.link-ft-bt {
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
 .link-ft-bt a {
   color: #fff;
 }
@@ -9388,8 +9405,16 @@ ul.footerlist li:before {
   color: #fff;
   font-size: 11px;
 }
-.social-wg li a {
+.social-wg li.icon {
   width: 38px;
   height: 38px;
-  display: block;
+  background: #3fa1da;
+  border-radius: 50%;
+  text-align: center;
+  margin: 0 6px;
+}
+.social-wg li a {
+  line-height: 38px;
+  font-size: 20px;
+  color: #fff;
 }
