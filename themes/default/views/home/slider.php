@@ -88,8 +88,8 @@
                   <div class="form-group">
                     <div class="clearfix"></div>
                     <div class="content">
-                      <span><i class="fa fa-clock-o"></i></span>
-                      <span>00 đêm</span>
+                      <strong><i class="fa fa-clock-o"></i></strong>
+                      <strong>00 đêm</strong>
                     </div>
                   </div>
                 </div>

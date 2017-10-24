@@ -2147,7 +2147,7 @@ a.social4b {
 }
 .mySelectCalendar {
     background: url('../../images/calendar.png') #fff no-repeat right;
-    background-position: 98% 1px;
+    background-position: 98% center;
 }
 .mySelectCalendar2 {
     background: url('../../images/calendar2.png') #fff no-repeat right;
@@ -9314,7 +9314,7 @@ ul.footerlist li:before {
     background: #fff;
 }
 .num-night .content {
-    margin-top: 10px
+    margin-top: 15px
 }
 .coupon {
     position: relative;
