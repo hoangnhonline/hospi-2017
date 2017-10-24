@@ -176,7 +176,7 @@ class Home extends MX_Controller {
 						$this->data['offersenabled'] = $this->is_module_enabled('offers');
 						if ($this->data['offersenabled']) {
 								$this->load->library('offers_lib');
-								$sOffers = $this->offers_lib->getHomePageOffers(); //hoangnhonline update null to 15
+								$sOffers = $this->offers_lib->getHomePageOffers();
                                                                 $sOffer = $this->offers_lib->getHomePageOffers(1);
 								$this->data['specialoffers'] = $sOffers['offers'];
                                                                 $this->data['randomoffer'] = $sOffer['offers'];

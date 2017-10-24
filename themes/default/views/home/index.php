@@ -50,21 +50,41 @@
               $array = array();
               foreach ($specialoffers as $offer) {
                   array_push($array, $offer->cityid);
-              }
+              }             
+              //var_dump("<pre>", $specialoffers);die;
               $items = array_count_values($array);
               $no = 1;
+             // var_dump($items);die;
               ?>
             <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
               <ul class="nav-featured">
                 <?php foreach ($items as $key => $value) { ?>
+                <?php if($no < 16 ){ ?>
                 <li <?php if ($no == 1) echo 'class="active"'; ?>>
                   <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
-                  <?php echo pt_LocationsInfo($key)->city; ?>
+                  <?php echo $no; ?> - <?php echo pt_LocationsInfo($key)->city; ?>
                   </a>
                 </li>
                 <?php $no++;
-                } ?>
+                } } ?>
+                
+                <li>
+                  <a href="javascript:void(0);" data-href="#hover66" class="li-link">
+                 13 - aaaa
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" data-href="#hover66" class="li-link">
+                  14 - aaaa
+                  </a>
+                </li>
+                <li>
+                  <a href="javascript:void(0);" data-href="#hover66" class="li-link">
+                 15 - aaaa
+                  </a>
+                </li>
                 <li><a href="#" title="View More"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
+                
               </ul>
             </div>
             <div class="right-featured col-md-9 col-sm-6 col-xs-12 ">
