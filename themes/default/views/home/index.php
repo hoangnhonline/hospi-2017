@@ -57,7 +57,7 @@
             <div class="col-md-3 col-sm-6 col-xs-12 nav-featured">
               <ul class="nav-featured">
                 <?php foreach ($items as $key => $value) { ?>
-                <?php if($no < 16 ){ ?>
+                <?php if($no < 15 ){ ?>
                 <li <?php if ($no == 1) echo 'class="active"'; ?>>
                   <a href="javascript:void(0);" data-href="#hover<?php echo $key; ?>" class="li-link <?php if ($no == 1) echo 'active'; ?>">
                   <?php echo $no; ?> - <?php echo pt_LocationsInfo($key)->city; ?>
@@ -75,12 +75,7 @@
                   <a href="javascript:void(0);" data-href="#hover66" class="li-link">
                   14 - aaaa
                   </a>
-                </li>
-                <li>
-                  <a href="javascript:void(0);" data-href="#hover66" class="li-link">
-                 15 - aaaa
-                  </a>
-                </li>
+                </li>                
                 <li><a href="#" title="View More"><i class="fa fa-angle-double-right"></i> Xem thêm</a></li>
                 
               </ul>
@@ -98,7 +93,7 @@
                         ?>
                         <?php foreach ($specialoffers as $offer) {
                           $totalOffr = 0; 
-                          if ($offer->cityid == $key && $countOff < 13) {
+                          if ($offer->cityid == $key && $countOff < 12) {
                             $totalOffr++;
                               ?>
                         <li>
@@ -142,12 +137,12 @@
                 </div>
                 <div class="item">
                   <a href="#">
-                    <img src="assets/img/slide-right2.jpg" alt="">
+                    <img src="assets/img/slide-right1.jpg" alt="">
                   </a>
                 </div>
                 <div class="item">
                   <a href="#">
-                    <img src="assets/img/slide-right3.jpg" alt="">
+                    <img src="assets/img/slide-right1.jpg" alt="">
                   </a>
                 </div>
               </div>
