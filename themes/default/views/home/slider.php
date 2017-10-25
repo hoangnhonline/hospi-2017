@@ -72,7 +72,7 @@
                     <div id="autocomlete-container"></div>
                   </div>
                 </div>
-                <div class="row col-sm-3 col-xs-6 go-right">
+                <div class="col-sm-3 col-xs-6 go-right">
                   <div class="form-group">
                     <div class="clearfix"></div>
                     <input type="text" placeholder=" <?php echo trans('07');?> " name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo $checkin; ?>" required > 
@@ -96,29 +96,38 @@
               </div>
               <div class="row">
                 <div class="home col-sm-2 col-xs-6 go-right">
-                  <select class="form-control-cus selectx" name="adults">
-                    <option selected><?php echo trans('010');?></option>
-                    <?php for($i=1;$i<=20;$i++) {
-                      echo '<option value="'.$i.'">';
-                      echo $i .'</option>';}?>
-                  </select>
+                  <div class="form-group">
+                    <select class="form-control-cus selectx" name="adults">
+                      <option selected><?php echo trans('010');?></option>
+                      <?php for($i=1;$i<=20;$i++) {
+                        echo '<option value="'.$i.'">';
+                        echo $i .'</option>';}?>
+                    </select>
+                  </div>
                 </div>
                 <div class="home col-sm-2 col-xs-6 go-right">
-                  <select class="form-control-cus selectx" name="child">
-                    <option selected><?php echo trans('011');?></option>
-                    <?php for($j=0;$j<=10;$j++) {
-                      echo '<option value="'.$j.'">';
-                      echo $j.'</option>';}?>
-                  </select>
-                </div>
-                <div class="row col-md-3">
-                  <div class="coupon">
-                    <input type="text" class="form-control-cus inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
-                    <i class="fa fa-question-circle"></i> 
+                  <div class="form-group">
+                    <select class="form-control-cus selectx" name="child">
+                      <option selected><?php echo trans('011');?></option>
+                      <?php for($j=0;$j<=10;$j++) {
+                        echo '<option value="'.$j.'">';
+                        echo $j.'</option>';}?>
+                    </select>
                   </div>
                 </div>
                 <div class="col-sm-3 col-xs-12 go-right">
-                  <input id="searching" type="hidden" name="searching" value="{{searching}}"> <input id="modType" type="hidden" name="modType" value="{{modType}}"> <button type="submit"  class="btn-action btn btn-lg btn-block"><?php echo trans('012');?></button> 
+                  <div class="form-group">
+                    <div class="coupon">
+                      <input type="text" class="form-control-cus inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
+                      <i class="fa fa-question-circle"></i> 
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-3 col-xs-12 go-right">
+                  <div class="form-group">
+                    <input id="searching" type="hidden" name="searching" value="{{searching}}"> <input id="modType" type="hidden" name="modType" value="{{modType}}">
+                    <button type="submit"  class="btn-action btn btn-lg btn-block"><?php echo trans('012');?></button>
+                  </div>
                 </div>
               </div>
               <div class="block-check-sale">

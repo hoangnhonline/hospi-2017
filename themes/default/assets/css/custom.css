@@ -540,11 +540,11 @@ a:hover.green2 {
 }
 .ftitle,
 .ftitle a {
-    Font-size: 15px;
+    font-size: 14px;
     color: #fff;
 }
 h2.ftitle {
-    Font-size: 16px;
+    font-size: 16px;
     color: #fff;
 }
 #contact img.logo {
@@ -558,7 +558,7 @@ h2.ftitle {
 }*/
 
 .ftitleblack {
-    Font-size: 16px;
+    font-size: 16px;
     color: #464E4E;
     font-weight: 700;
 }
@@ -1825,8 +1825,7 @@ button:hover.next2 img {
     margin-top: 40px;
     overflow: hidden;
     /*background: url('../../images/footer.jpg') #f4f4f4 scroll center -50px no-repeat;*/
-    
-    background: #f0f0f0;
+    /*background: #f0f0f0;*/
 }
 .footerbg2 {
     width: 100%;
@@ -4611,6 +4610,7 @@ a:hover.xnext img {
 }
 .footer-brand {
     margin-bottom: 15px;
+    font-family: 'Open Sans', sans-serif;
 }
 .features {
     background: #F4F4F4;
@@ -9152,11 +9152,24 @@ ul.nav .honeymoon .img_list img {
     font-size: 13px;
 }
 .footerbg {
-    background: url(../img/bg-footer2.png) no-repeat;
-    background-size: 100%;
-    padding: 117px 0 65px;
-    line-height: 1.6;
-    min-height: 100%;
+  background: #521231;
+  background-repeat: no-repeat;
+  padding: 0 0 65px;
+  margin-top: 130px;
+  line-height: 1.6;
+  background-size: 100%;
+  position: relative;
+  overflow: visible;
+}
+.footerbg .back-ft-po {
+  background: url(../../assets/img/bg-footer2.png) no-repeat;
+  background-size: 100%;
+  width: 100%;
+  height: 107px;
+  position: absolute;
+  top: -105px;
+  right: 0;
+  left: 0;
 }
 .footerbg3 {
     display: none;
@@ -9202,8 +9215,8 @@ ul.footerlist li:before {
     color: #fff;
 }
 .block-slide {
-    width: cacl(100% - 772xp);
-    float: 0;
+    width: calc(100% - 772px);
+    float: left;
 }
 .block-slide .banner-khuyenmai {
     display: block;
@@ -9239,7 +9252,7 @@ ul.footerlist li:before {
 .block-search-hotel .container {
     position: absolute;
     top: -95px;
-    z-index: 99999;
+    z-index: 999;
     right: 0;
     left: 0;
 }
@@ -9405,9 +9418,138 @@ p.view-pos a {
     top:82% !important;
 }
 #email_footer{
-    margin-bottom: 5px;
-    background: #fff;color: #521231;padding: 0 5px;display: inline-block;margin-bottom: 0 5px;
+  margin-bottom: 5px;
+  background: #fff;color: #521231;padding: 0 5px;display: inline-block;margin-bottom: 0 5px;
 }
 .loc-items p{
+  margin: 0;
+  padding: 5px 0 5px 10px;
+  background: rgba(240, 240, 240, 0.4);
+}
+
+.blog-items .post-item a.link {
+  display: block;
+  height: 20px;
+  overflow: hidden;
+}
+.navbar-brand:hover:hover {
+  background: transparent;
+}
+.menu-link-ft {
+  padding-left: 60px;
+}
+
+@media (min-width: 1200px) {
+  .navbar .col-md-8 {
+    position: unset;
+  }
+  ul.navbar-nav.top-menu {
+    position: unset;
+  }
+  .nav > li {
+    position: unset;
+  }
+  ul.navbar-nav.top-menu > li span {
+    left: 0;
+    right: 0;
+  }
+  ul.navbar-nav.top-menu > li span.offers {
+    margin-left: 0;
+  }
+  ul.navbar-nav.top-menu > li span.hotels {
+    margin-left: 0;
+  }
+  ul.navbar-nav.top-menu > li span.tours {
+    margin-left: 0;
+  }
+  ul.navbar-nav.top-menu > li span.honeymoon {
+    margin-left: 0;
+  }
+  ul.navbar-nav.top-menu > li span.blog {
+    margin-left: 0;
+  }
+  ul.navbar-nav.top-menu > li span {
+    width: 100%;
+  }
+}
+@media (max-width: 992px) {
+  .block-search-hotel .block-content {
+    width: auto;
+  }
+  .block-search-hotel .destination {
+    width: auto;
+  }
+  .menu-link-ft {
+    padding-left: 15px;
+  }
+  .scont span {
+    display: block;
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+  .wg-bt {
+    width: 100%;
+  }
+  .wg-bt:last-child {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 991px) {
+  .list-enj {
+    padding: 13px 5px;
+  }
+  .list-enj li {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .link-ft-bt>* {
+    width: 100%;
     margin-bottom: 5px;
+  }
+   .link-ft-bt * a:before {
+    font-family: "FontAwesome";
+    content: "\f054";
+    font-size: 9px;
+    vertical-align: 2px;
+    margin-right: 5px;
+    color: #fff;
+  }
+}
+
+@media (max-width: 767px) {
+  .block-search-hotel .container {
+    position: relative;
+    top: 0;
+  }
+  .block-search-hotel {
+    margin-bottom: 20px; 
+  }
+  .header-top p {
+    text-align: center;
+  }
+  .featuredCampaigns .row-eq-height {
+    display: block;
+  }
+  .featuredCampaigns .Campaigns {
+    width: 100%;
+  }
+  .block-slide {
+    width: 100%;
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 20px;
+  }
+  .featuredCampaigns .Campaigns .block-content {
+    padding-bottom: 35px;
+  }
+  .list-enj {
+    position: relative;
+    background: none;
+    margin-top: 5px;
+  }
+  .list-enj li {
+    padding-right: 15px;
+  }
 }

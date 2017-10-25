@@ -173,7 +173,7 @@
               echo "<div class='post-item'><div class='row col-md-3 col-sm-6 col-xs-12'><span class='datepost'>" . $datepost . "</span>";
               echo "<span class='monthpost'>" . $monthpost . "</span>";
               echo "<span class='yearpost'>" . $yearpost . "</span></div>";
-              echo "<div class='col-md-9 col-sm-6 col-xs-12'><a href='/blog/" . $post->post_slug . "'>" . $post->post_title . "</a></div>";
+              echo "<div class='col-md-9 col-sm-6 col-xs-12'><a class='link' href='/blog/" . $post->post_slug . "'>" . $post->post_title . "</a></div>";
               echo "<span class='readmore link-color'><a href='/blog/" . $post->post_slug . "'><i class='fa fa-angle-double-right' aria-hidden='true'></i>" . trans('0564') . "</a></span><div style='clear:both;'></div></div>";
           }
           ?>

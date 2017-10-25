@@ -24,6 +24,7 @@
 </div>
 
 <div id="footer" class="clearfix <?php echo @$hidden; ?> footerbg" >
+  <div class="back-ft-po"></div>
   <?php if (strpos($currenturl, 'blog') !== false) { ?>
   <div class="footer-link">
     <div class="container"></div>
@@ -118,7 +119,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <div class="row col-md-8">
+      <div class="row col-md-8 col-xs-12">
         <!-- End of column 1-->
         <div class="col-xs-12 col-md-4 go-right">
           <h2 class="ftitle go-text-right"><strong><?php echo trans('0571');?></strong></h2>
@@ -129,11 +130,11 @@
           <a class="go-right ftitle hidden-xs" href="mailto:<?php echo $contactemail; ?>" id="email_footer"><i style="font-size:18px" class="icon-email"></i> <span ><?php echo $contactemail; ?></span></a>
           <?php get_footer_menu_items(19,"ho-tro","ftitle go-text-right","footerlist go-right go-text-right" );?>
         </div>
-        <div class="col-xs-12 col-md-4 go-right" style="padding-left:35px">
+        <div class="col-xs-12 col-md-4 go-right menu-link-ft">
           <h2 class="ftitle go-text-right"><strong><?php echo trans('0572');?></strong></h2>
           <?php get_footer_menu_items(3,"about-us","ftitle go-text-right","footerlist go-right go-text-right" );?>
         </div>
-        <div class="col-xs-12 col-md-4 go-right">
+        <div class="col-xs-12 col-md-4 go-right menu-link-ft">
           
           <h2 class="ftitle go-text-right"><strong>Liên kết nhanh</strong></h2>
             <div class="about-us">
@@ -165,7 +166,7 @@
       </a>
     </div><!-- clearfix -->
     <div class="row">
-      <div class="col-sm-7 col-xs-12">
+      <div class="col-sm-7 col-xs-12 wg-bt">
         <div class="row link-ft-bt">
           <div class="col-sm-3 col-xs-6">
             <a href="<?php echo base_url()?>hotels" title="Khách Sạn">Khách Sạn</a>
@@ -181,7 +182,7 @@
           </div>
         </div>
       </div><!-- col-sm-6 -->
-      <div class="col-sm-5 col-xs-12">
+      <div class="col-sm-5 col-xs-12 wg-bt">
         <div class="social-wg">
           <ul class="list-inline">
             <li>KẾT NỐI VỚI CHÚNG TÔI:</li>

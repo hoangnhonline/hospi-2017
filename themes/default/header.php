@@ -73,17 +73,17 @@
       <div class="header-top">
         <div class="container">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-xs-12">
               <div class="row">
-                <p class="col-sm-6 text-right">
+                <p class="col-sm-6 text-right col-xs-6">
                   <a id="doan" href="#datphongdoan" data-toggle="modal" data-content="Đặt phòng đoàn" rel="popover" data-placement="top" data-original-title="Đặt phòng đoàn" data-trigger="hover">Đặt phòng đoàn <i class="fa fa-question-circle"></i></a>
                 </p>
-                <p class="col-sm-6 text-center">
+                <p class="col-sm-6 text-center col-xs-6">
                   <a id="nhanh" href="#datphongnhanh" data-toggle="modal" data-content="Đặt phòng nhanh ?" rel="popover" data-placement="top" data-original-title="Đặt phòng nhanh ?" data-trigger="hover">Đặt phòng nhanh <i class="fa fa-question-circle"></i></a>
                 </p>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 hidden-xs">
               <div class="row">
                 <p class="col-sm-4"><i class="fa fa-phone-square"></i> (028) 3826 8797</p>
                 <p class="col-sm-4">Hotline: 09 6868 0106</p>
