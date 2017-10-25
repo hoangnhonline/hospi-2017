@@ -2547,7 +2547,7 @@ a:hover.backbtn {
     float: right;
     height: 100%;
     padding: 8px 10px;
-    border: 1px solid #e8e8e8;
+    border-left: 1px solid #ccc;
     background: white;
 }
 .labelleft {
@@ -2648,31 +2648,37 @@ a:hover.backbtn {
 .collapsebtn {
     width: 100%;
     height: 32px;
-    border: 0px solid black;
+    border-top: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    border-left: 1px solid #f0f0f0;
+    border-bottom: none;
     text-align: left;
     padding-left: 20px;
     padding-right: 20px;
-    color: #525252;
-    font-size: 18px;
-    font-weight: 700;
-    background-color: #ECECEC;
+    color: #660033;
+    font-size: 16px;
+    font-weight: normal;
+    background: url('../../assets/img/backgound-pos2.jpg');
+}
+.collapsebtn:focus {
+    outline: none;
 }
 .collapsebtn.last {} .collapsebtn span.collapsearrow {
     width: 9px;
-    height: 8px;
+    height: 9px;
     float: right;
-    margin-top: 4px;
-    background: url('../../images/collapsearrow.png') scroll 0 -8px no-repeat;
+    margin-top: 8px;
+    background: url('../../assets/img/collapsearrow-down.png') scroll 0 0 no-repeat;
     -webkit-transition: .3s;
     -moz-transition: .3s;
     transition: .3s;
 }
 .collapsebtn.collapsed span.collapsearrow {
     width: 9px;
-    height: 8px;
+    height: 9px;
     float: right;
-    margin-top: 10px;
-    background: url('../../images/collapsearrow.png') scroll 0 0px no-repeat;
+    margin-top: 8px;
+    background: url('../../assets/img/collapsearrow.png') scroll 0 0px no-repeat;
     -webkit-transition: .3s;
     -moz-transition: .3s;
     transition: .3s;
@@ -2733,12 +2739,12 @@ a:hover.backbtn {
 }
 /*PREFERENCE LIST*/
 
-ul.hotelpreferences {
+/*ul.hotelpreferences {
     position: absolute;
     bottom: 35px;
     padding: 0px;
     list-style: none;
-}
+}*/
 ul.pre-honeymoon.hotelpreferences {
     bottom: 0px;
 }
@@ -7406,7 +7412,7 @@ span.offer-location {
     color: #660033;
     font-family: "AndesRoundedBold";
 }
-.collapse.in {
+.collapse-br .block-content {
     border: 1px solid #f0f0f0;
     background: #fff;
 }
@@ -7706,9 +7712,10 @@ p.room-title {
 }
 .panel.panel-default .collapsebtn {
     font-size: 16px;
-    background-color: #f8f8f8;
+    background: #f0f0f0;
     height: 50px;
-    border-bottom: 1px solid #ddd;
+    border: none;
+    color: #666666;
 }
 .panel.panel-default .collapse.in {
     border: none;
@@ -9601,4 +9608,111 @@ p.view-pos a {
 }
 .blog-items .post-item .readmore {
     margin-top: -7px;
+}
+
+.searching-item {
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+}
+
+.itemlabel-info {
+    margin-top: 5px;
+}
+.itemlabel-info li {
+    display: inline-block;
+    position: relative;
+    padding-left: 6px;
+    margin-right: 20px;
+    margin-left: 7px;
+}
+.itemlabel-info li:before {
+    content: "\f111";
+    font-family: "FontAwesome";
+    color: #660033;
+    font-size: 10px;
+    position: absolute;
+    left: -7px;
+    top: -1px;
+}
+.itemlabel-info li a {
+    color: #660033;
+    position: relative;
+}
+.itemlabel-info li a:after {
+    content: "";
+    height: 1px;
+    background: #660033;
+    margin: 0 auto;
+    display: block;
+}
+.description .des {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.itemlabel3-cus .labelright {
+    float: none;
+    position: absolute;
+    right: 0;
+}
+
+.bg-form-arrangement {
+  background: url(../../assets/img/backgound-pos2.jpg);
+  height: 32px;
+  width: 100%;
+}
+
+.block-module {
+    margin-bottom: 20px;
+}
+.block-module:last-child {
+    margin-bottom: 0;
+}
+
+.block-module .block-md-item {
+    margin-bottom: 20px;
+}
+.block-module .block-md-item:last-child {
+    margin-bottom: 0;
+}
+
+.block-breadcrumb {
+    background: #f0f0f0;
+}
+.block-breadcrumb .breadcrumb {
+    padding: 15px 0;
+    background: #f0f0f0;
+    margin-bottom: 0;
+}
+.breadcrumb > li + li:before {
+  padding: 0 8px;
+  color: #690537;
+  content: url(../../assets/img/collapsearrow.png);
+}
+.breadcrumb > li a {
+    color: #999999;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*.block-pagination {
+    padding-bottom: 0;
+    background: #c4c4c4;
+    min-width: 550px;
+    margin: 0 auto;
+}*/
+.block-pagination .pagination {
+
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #6a0739;
+  border-color: #6b0839;
 }
