@@ -217,7 +217,7 @@ class Hotels extends MX_Controller {
 		        $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+'.CHECKOUT_SPAN.' day', time()));
 		        //$this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin,$checkout);
 				$this->theme->view('hotelslisting', $this->data);
-				$this->output->cache(20) ;
+				//$this->output->cache(20) ; //hoangnhonline tat cache
 		}
 
                 function honeymoon($offset = null){
