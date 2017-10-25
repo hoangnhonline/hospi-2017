@@ -291,10 +291,10 @@
         <div class="form-group">
           <h2 class="main-title go-right andes-bold"><?php echo trans('0704'); ?></h2>
         </div>
-        <div class="row">
+        <div class="row row-eq-height">
           <?php $locationlistings = getLocations('Vietnam');?>
           <div class="col-md-2 col-sm-6 col-xs-12">
-            <div class="loc-items">
+            <div class="loc-item">
           <?php
           $cI = 0;
             foreach($locationlistings as $list){
@@ -306,7 +306,7 @@
                 echo $list->location;
                 echo '</a></p>';
                 if($cI%9==0)
-                  echo '</div></div><div class="col-md-2 col-sm-6 col-xs-12 '.$feature.'"><div class="loc-items">';
+                  echo '</div></div><div class="col-md-2 col-sm-6 col-xs-12 '.$feature.'"><div class="loc-item">';
 
                 //http://dev4.webico.vn/hospi/hotels/search/vietnam/phu-quoc/37?txtSearch=Ph%C3%BA%20Qu%E1%BB%91c&searching=37&modType=location&checkin=&checkout=&adults=&child=
             } ?>
