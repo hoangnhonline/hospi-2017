@@ -293,7 +293,7 @@
         </div>
         <div class="row">
           <?php $locationlistings = getLocations('Vietnam');?>
-          <div class="col-md-2 col-sm-6 col-xs-12 loc-items">
+          <div class="col-md-2 col-sm-6 col-xs-12 loc-items col">
           <?php
           $cI = 0;
             foreach($locationlistings as $list){
@@ -305,7 +305,7 @@
                 echo $list->location;
                 echo '</a></p>';
                 if($cI%9==0)
-                  echo '</div><div class="col-md-2 col-sm-6 col-xs-12 loc-items '.$feature.'">';
+                  echo '</div><div class="col-md-2 col-sm-6 col-xs-12 col loc-items '.$feature.'">';
 
                 //http://dev4.webico.vn/hospi/hotels/search/vietnam/phu-quoc/37?txtSearch=Ph%C3%BA%20Qu%E1%BB%91c&searching=37&modType=location&checkin=&checkout=&adults=&child=
             } ?>
