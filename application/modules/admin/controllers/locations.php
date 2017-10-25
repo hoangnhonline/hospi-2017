@@ -145,6 +145,7 @@ class Locations extends MX_Controller {
         $this->data['feature'] = $this->locations_model->getLocationDetails($id);
         $this->data['best'] = $this->locations_model->getLocationDetails($id);
         $this->data['image'] = $this->locations_model->getLocationDetails($id);
+        $this->data['best_price'] = $this->locations_model->getLocationDetails($id);
         $this->data['hotelimage'] = $this->locations_model->getLocationDetails($id);
 		
 		if(empty($id) || !$this->data['location']->isValid){

@@ -78,6 +78,7 @@ class Locations_model extends CI_Model {
 			$response->status = $result[0]->status;
             $response->feature = $result[0]->feature;
             $response->best = $result[0]->best;
+            $response->best_price = $result[0]->best_price;
             $response->description = $result[0]->description;
             $response->image = $result[0]->image;
             $response->hotelimage = $result[0]->hotelimage;
@@ -104,6 +105,7 @@ class Locations_model extends CI_Model {
 					'status' => $this->input->post('status'),
                     'feature' => $this->input->post('feature'),
                     'best' => $this->input->post('best'),
+                    'best_price' => $this->input->post('best_price'),
                     'description' => $this->input->post('description'),
                     'image' => $picture,
                     'hotelimage' => $hotelimage
@@ -125,6 +127,7 @@ class Locations_model extends CI_Model {
 					'status' => $this->input->post('status'),
                     'feature' => $this->input->post('feature'),
                     'best' => $this->input->post('best'),
+                    'best_price' => $this->input->post('best_price'),
                     'description' => $this->input->post('description'),
                     'image' => $picture,
                     'hotelimage' => $hotelimage

@@ -121,7 +121,13 @@
           </div>
           <?php } } ?>
 
-
+          <div class="row form-group">
+            <label class="col-md-2 control-label text-left">Best price</label>
+            <div class="col-md-4">
+              <input type="text" name="best_price" class="form-control" id="best_price" placeholder="" value="<?php echo @$location->best_price;?>" />
+            </div>
+            
+          </div>
         </div>
       </div>
     </div>
