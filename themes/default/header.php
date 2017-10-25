@@ -446,15 +446,15 @@
                         <div class="place-row">
                           <div class="place-cell">
                             <h3 class="main-title go-right andes-bold">
-                            <?php echo trans('0589'); ?></h2>
+                            <?php echo trans('0589'); ?></h3>
                           </div>
                           <div class="place-cell">
                             <h3 class="main-title go-right andes-bold">
-                            <?php echo trans('0590'); ?></h2>
+                            <?php echo trans('0590'); ?></h3>
                           </div>
                           <div class="place-cell">
                             <h3 class="main-title go-right andes-bold">
-                            <?php echo trans('0591'); ?></h2>
+                            <?php echo trans('0591'); ?></h3>
                           </div>
                         </div>
                         <?php $i=0; foreach ($salesoffHotels as $topsale) { ?>
