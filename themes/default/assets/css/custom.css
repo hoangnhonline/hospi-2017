@@ -9162,7 +9162,7 @@ ul.nav .honeymoon .img_list img {
   overflow: visible;
 }
 .footerbg .back-ft-po {
-  background: url(../../assets/img/bg-footer2.png) no-repeat;
+  background: url(../../assets/img/bg-footer.png) no-repeat;
   background-size: 100%;
   width: 100%;
   height: 107px;
@@ -9380,7 +9380,6 @@ ul.footerlist li:before {
 .block-check-sale {
     position: relative;
     overflow: hidden;
-    margin-top: 15px;
 }
 .block-check-sale label {
     font-weight: normal;
@@ -9533,12 +9532,11 @@ p.view-pos a {
   }
   .featuredCampaigns .Campaigns {
     width: 100%;
+    border: 1px solid #660033;
   }
   .block-slide {
     width: 100%;
     float: left;
-    padding-left: 15px;
-    padding-right: 15px;
     margin-top: 20px;
   }
   .featuredCampaigns .Campaigns .block-content {
@@ -9552,4 +9550,17 @@ p.view-pos a {
   .list-enj li {
     padding-right: 15px;
   }
+  .navbar-collapse {
+    margin-top: 15px;
+  }
+  .featuredCampaigns .nav-featured a {
+    border-right: none;
+  }
+}
+
+@media (max-width: 414px) {
+    #footer .list-inline li:first-child {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
