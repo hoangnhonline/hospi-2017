@@ -6888,7 +6888,7 @@ a.xem-ngay {
         display: block;
     }
     .top-menu {
-        margin-right: 35px;
+        margin-right: 10px;
     }
     .top-menu a {
         text-transform: uppercase;
@@ -6901,7 +6901,7 @@ a.xem-ngay {
         font-weight: bold;
     }
     .navbar-nav.top-menu > li {
-        width: 127px;
+        width: 140px;
         float: none;
         height: 90px;
     }
@@ -9101,7 +9101,7 @@ ul.nav .honeymoon .img_list img {
 }
 .navbar-default .navbar-nav > li > a {
     color: #660033;
-    font-size: 15px;
+    font-size: 17px;
     text-transform: none;
 }
 .block-user {
@@ -9185,7 +9185,7 @@ ul.footerlist li:before {
     color: #fff;
 }
 .phone_footer {
-    font-size: 20px;
+    font-size: 19px;
     margin-bottom: 5px;
 }
 .link-ft-bt {
@@ -9432,7 +9432,7 @@ p.view-pos a {
   height: 100%;
 }
 .loc-item p {
-  margin: 6px 0;
+  margin: 0;
 }
 
 .blog-items .post-item a.link {
