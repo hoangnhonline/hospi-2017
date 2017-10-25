@@ -316,6 +316,7 @@
     </div>
   </div>
 </div>
+</div>
 <!--<script src="js/min.js?1239" type="text/javascript"></script>-->
 <script type="text/javascript" src="js/home.js?r=3"></script>
 <!--<script type="text/javascript" src="js/slideshow.js"></script>-->
