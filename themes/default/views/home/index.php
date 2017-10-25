@@ -293,7 +293,7 @@
         </div>
         <div class="row row-eq-height">
           <?php $locationlistings = getLocations('Vietnam');?>
-          <div class="col-md-2 col-sm-6 col-xs-12">
+          <div class="col-md-2 col-sm-6 col-xs-12 clearfix">
             <div class="loc-item">
           <?php
           $cI = 0;
@@ -301,21 +301,23 @@
               $cI++;
                 $city_slug = create_slug($list->location);
                 $country_slug = create_slug($list->country);
-                if($list->feature=="Yes") $feature="purple"; else $feature="";               
-                echo "<p class=".$feature."><a href='".base_url()."hotels/search/".$country_slug."/".$city_slug."/".$list->id."?txtSearch=".$list->location."&searching=".$list->id."&modType=location&checkin=&checkout=&adults=&child='>";
+                if($list->feature=="Yes") $feature='class="purple"'; else $feature="";               
+                echo "<p ".$feature."><a href='".base_url()."hotels/search/".$country_slug."/".$city_slug."/".$list->id."?txtSearch=".$list->location."&searching=".$list->id."&modType=location&checkin=&checkout=&adults=&child='>";
                 echo $list->location;
                 echo '</a></p>';
-                if($cI%9==0)
-                  echo '</div></div><div class="col-md-2 col-sm-6 col-xs-12 '.$feature.'"><div class="loc-item">';
+                if($cI%9==0){
+                  echo '</div><!--loc-item--></div><!--col-md-2 col-sm-6 col-xs-12--><div class="col-md-2 col-sm-6 col-xs-12 "><div class="loc-item">';
+                }
 
                 //http://dev4.webico.vn/hospi/hotels/search/vietnam/phu-quoc/37?txtSearch=Ph%C3%BA%20Qu%E1%BB%91c&searching=37&modType=location&checkin=&checkout=&adults=&child=
             } ?>
             </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </div><!--row-eq-height-->
+      <div class="clearfix"></div>
+    </div><!--loc-items-->
+  </div><!--row-->
+</div><!--hotels-by-location-->
 <!--<script src="js/min.js?1239" type="text/javascript"></script>-->
 <script type="text/javascript" src="js/home.js?r=3"></script>
 <!--<script type="text/javascript" src="js/slideshow.js"></script>-->
