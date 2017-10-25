@@ -9376,6 +9376,8 @@ ul.footerlist li:before {
 .block-search-hotel .btn-action {
     margin-bottom: 0;
     padding: 12px 16px;
+    float: none;
+    margin-left: 0;
 }
 .block-check-sale {
     position: relative;
@@ -9587,6 +9589,14 @@ p.view-pos a {
     #footer .list-inline li:first-child {
       width: 100%;
       margin-bottom: 10px;
+    }
+    .list-enj {
+      padding: 0;
+    }
+    .list-enj li {
+      padding-right: 15px;
+      display: block;
+      margin-top: 5px;
     }
 }
 .blog-items .post-item .readmore {

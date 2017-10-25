@@ -145,7 +145,7 @@
       </div><!-- go-right RTL_Bar -->
       <ul class="list-inline list-enj">
           <li>Có thể bạn quan tâm ? <span><i class="fa fa-angle-right"></i></span></li>
-          <li class=""><a href="<?php echo base_url()?>offers" title="Deals - Giảm giá" class="another-color">Deals - Giảm giá</a></li>
+          <li><a href="<?php echo base_url()?>offers" title="Deals - Giảm giá" class="another-color">Deals - Giảm giá</a></li>
           <li><a href="<?php echo base_url()?>offers/sales" title="Khuyến mãi" class="another-color">Khuyến mãi</a></li>
           <li><a href="<?php echo base_url()?>offers/bestchoice" title="Combo" class="another-color">Combo</a></li>
       </ul><!-- list-inline list-enj -->
