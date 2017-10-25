@@ -312,6 +312,7 @@
                 //http://dev4.webico.vn/hospi/hotels/search/vietnam/phu-quoc/37?txtSearch=Ph%C3%BA%20Qu%E1%BB%91c&searching=37&modType=location&checkin=&checkout=&adults=&child=
             } ?>
             </div>
+          </div>
         </div>
       </div><!--row-eq-height-->
       <div class="clearfix"></div>
