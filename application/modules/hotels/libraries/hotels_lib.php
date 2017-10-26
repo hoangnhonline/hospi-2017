@@ -928,7 +928,7 @@ class Hotels_lib {
                         $this->db->order_by('total', 'desc');
                         $this->db->limit(8);
 			$locations = $this->db->get()->result();
-
+			
                         $this->ci->load->library('currconverter');
                         $curr = $this->ci->currconverter;
 
@@ -937,7 +937,7 @@ class Hotels_lib {
 				$locInfo = pt_LocationsInfo($loc->hotel_city, $this->lang);
                                 $this->db->select('hotel_id');
                                 $this->db->where('hotel_city',$locInfo->id);
-                                $hotels = $this->db->get('pt_hotels')->result();
+                                $hotels = $this->db->get('pt_hotels')->result();                                
                                 //hoangnhonline cmt
                                 /*foreach($hotels as $hotel) {
                                     $bestprice = $this->bestPrice($hotel->hotel_id,$checkin,$checkout,'yes');
@@ -950,11 +950,12 @@ class Hotels_lib {
 
 				if(!empty($locInfo->city)){
 
-				$resultLocations[] = (object)array('id' => $locInfo->id,'name' => $locInfo->city, 'total' => $loc->total, 'bestprices' => $bestprices, 'country' => $loc->country, 'currSymbol' => $curr->symbol);
+				$resultLocations[] = (object)array('id' => $locInfo->id,'name' => $locInfo->city, 'total' => $loc->total, 'bestprices' => $curr->convertPrice($locInfo->best_price), 'country' => $loc->country, 'currSymbol' => $curr->symbol);
 
 				}
 
 			}
+			//var_dump('<pre>', $resultLocations);die;
 			return $resultLocations;
 
 		}

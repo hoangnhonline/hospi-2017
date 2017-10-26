@@ -147,6 +147,32 @@
   }
 
   <?php } ?>
+function parseDate(str) {
+    var mdy = str.split('/')
+    return new Date(mdy[2],  mdy[1], mdy[0]-1);
+}
+
+function daydiff(first, second) {
+    return (second-first)/(1000*60*60*24);
+}
+function Padder(len, pad) {
+  if (len === undefined) {
+    len = 1;
+  } else if (pad === undefined) {
+    pad = '0';
+  }
+
+  var pads = '';
+  while (pads.length < len) {
+    pads += pad;
+  }
+
+  this.pad = function (what) {
+    var s = what.toString();
+    return pads.substring(0, pads.length - s.length) + s;
+  };
+}
+
 
 
    /* tooltip */
@@ -169,10 +195,15 @@
           if (ev.date.valueOf() > checkout.date.valueOf()) {
               var newDate = new Date(ev.date)
               newDate.setDate(newDate.getDate() + 1);
-              checkout.setValue(newDate);
+              checkout.setValue(newDate);              
           }
           checkin.hide();
           $('.dpd2')[0].focus();
+          if($('.dpd2').val() != '' && $('.dpd1').val() != '' ){
+            var number_night = parseInt(daydiff(parseDate($('.dpd1').val()), parseDate($('.dpd2').val())));
+            var zero2 = new Padder(2);            
+            $('#number_night').html(zero2.pad(number_night));
+          }
       }).data('datepicker');
       var checkout = $('.dpd2').datepicker({
           format: fmt,
@@ -181,6 +212,11 @@
           }
       }).on('changeDate', function(ev) {
           checkout.hide();
+          if($('.dpd2').val() != '' && $('.dpd1').val() != '' ){
+            var number_night = parseInt(daydiff(parseDate($('.dpd1').val()), parseDate($('.dpd2').val())));
+            var zero2 = new Padder(2);            
+            $('#number_night').html(zero2.pad(number_night));
+          }
 
       }).data('datepicker');
 

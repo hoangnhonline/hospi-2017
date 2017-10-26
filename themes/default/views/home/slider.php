@@ -89,7 +89,7 @@
                     <div class="clearfix"></div>
                     <div class="content">
                       <strong><i class="fa fa-clock-o"></i></strong>
-                      <strong>00 đêm</strong>
+                      <strong><span id="number_night">01</span> đêm</strong>
                     </div>
                   </div>
                 </div>
