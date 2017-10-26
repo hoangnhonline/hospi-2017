@@ -275,7 +275,7 @@ die('123');
 	      return ((float)$usec + (float)$sec);
 	  }
 		function search($country = null, $city = null, $citycode = null, $offset = null) {
-				//$start = $this->microtime_float(); //hoangnh
+				$start = $this->microtime_float(); //hoangnh
 				$surl = http_build_query($_GET);
                 $honeymoon = $this->input->get('honeymoon');
                	$this->data['sorturl'] = base_url() . 'hotels/search' . $surl . '&';
@@ -395,8 +395,8 @@ die('123');
                     $this->data['langurl'] = base_url()."hotels/honeymoon/{langid}";
                     $this->theme->view('honeylist', $this->data);
                 } else {
-                	//$end = $this->microtime_float() - $start; //hoangnh
-					//printf("%0.3f seconds\r\n", $end);//hoangnh
+                	$end = $this->microtime_float() - $start; //hoangnh
+					printf("%0.3f seconds\r\n", $end); //hoangnh
                     $this->data['langurl'] = base_url()."hotels/{langid}";
                     $this->theme->view('hotelslisting', $this->data);
                     //$this->output->cache(20) ; //hoangnhonline
