@@ -6,6 +6,7 @@ class Hotels extends MX_Controller {
 		private $data = array();
 		private $validlang;
 		function __construct() {
+			
 				parent :: __construct();
 
 				$chk = modules :: run('home/is_main_module_enabled', 'hotels');
@@ -23,7 +24,7 @@ class Hotels extends MX_Controller {
 				$this->data['usersession'] = $this->session->userdata('pt_logged_customer');
 				$this->data['appModule'] = "hotels";
 
-
+				
                 $languageid = $this->uri->segment(2);
                 $this->validlang = pt_isValid_language($languageid);
 
@@ -40,9 +41,10 @@ class Hotels extends MX_Controller {
 
 
                 $this->hotels_lib->set_lang($this->data['lang_set']);
-                //$this->data['locationsList']  = $this->hotels_lib->getLocationsList();
+                $this->data['locationsList']  = $this->hotels_lib->getLocationsList();
 
                 $this->data['modulelib'] = $this->hotels_lib;
+
 
 		}
 
@@ -145,7 +147,7 @@ class Hotels extends MX_Controller {
 
 
 					  $this->theme->view('details', $this->data);
-					  $this->output->cache(20) ;
+					  //$this->output->cache(20) ;
 				}
                 else {
                     if($this->validlang){
@@ -215,7 +217,7 @@ class Hotels extends MX_Controller {
                 $this->data['langurl'] = base_url()."hotels/{langid}";
                 $checkin = date($this->data['app_settings'][0]->date_f,strtotime('+'.CHECKIN_SPAN.' day', time()));
 		        $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+'.CHECKOUT_SPAN.' day', time()));
-		        //$this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin,$checkout);
+		        $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin,$checkout);
 				$this->theme->view('hotelslisting', $this->data);
 				//$this->output->cache(20) ; //hoangnhonline tat cache
 		}
