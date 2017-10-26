@@ -230,25 +230,28 @@
                             <div class="hpadding20">
                                 <br>
                                 <?php $star = '<i class="star text-warning fa fa-star voted"></i>'; ?>
-                                <?php $stars = '<i class="fa fa-star-o"></i>'; ?>
+                                <?php $stars = '<i class="fa fa-star-o"></i>'; 
+
+                                $arrStar =@$_GET['stars'];                                
+                                ?>
                                 <div  class="rating" style="font-size: 14px;">
-                                    <div class="go-right"><input id="1" type="radio" name="stars" class="go-right radio" value="1" <?php if (@$_GET['stars'] == "1") {
+                                    <div class="go-right"><input id="1" type="checkbox" name="stars[]" class="go-right radio" value="1" <?php if (in_array(1, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="1"><?php echo $star; ?><?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="2" type="radio" name="stars" class="radio go-right" value="2" <?php if (@$_GET['stars'] == "2") {
+                                    <div class="go-right"><input id="2" type="checkbox" name="stars[]" class="radio go-right" value="2" <?php if (in_array(2, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="2"><?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="3" type="radio" name="stars" class="radio" value="3" <?php if (@$_GET['stars'] == "3") {
+                                    <div class="go-right"><input id="3" type="checkbox" name="stars[]" class="radio" value="3" <?php if (in_array(3, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="3"><?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="4" type="radio" name="stars" class="radio" value="4" <?php if (@$_GET['stars'] == "4") {
+                                    <div class="go-right"><input id="4" type="checkbox" name="stars[]" class="radio" value="4" <?php if (in_array(4, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="4"><?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 1; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="5" type="radio" name="stars" class="radio" value="5" <?php if (@$_GET['stars'] == "5") {
+                                    <div class="go-right"><input id="5" type="checkbox" name="stars[]" class="radio" value="5" <?php if (in_array(5, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="5"><?php for ($i = 1; $i <= 5; $i++) { ?> <?php echo $star; ?> <?php } ?></label></div>
                                     <!--<div class="clearfix"></div>
