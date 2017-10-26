@@ -10,9 +10,9 @@
 <div class="block-breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Trang chủ</a></li>
-            <li class="active">Phú Quốc</li>
+            <li><a href="<?php echo base_url(); ?>">Trang chủ</a></li>
+            <li><a href="<?php echo base_url(); ?>hotels">Khách sạn</a></li>
+            <li class="active"><?php echo $_GET['txtSearch']; ?></li>
         </ol>
     </div>
 </div>
@@ -235,23 +235,23 @@
                                 $arrStar =@$_GET['stars'];                                
                                 ?>
                                 <div  class="rating" style="font-size: 14px;">
-                                    <div class="go-right"><input id="1" type="checkbox" name="stars[]" class="go-right radio" value="1" <?php if (in_array(1, $arrStar)) {
+                                    <div class="go-right"><input id="1" type="checkbox" name="stars[]" class="go-right radio filter" value="1" <?php if (in_array(1, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="1"><?php echo $star; ?><?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="2" type="checkbox" name="stars[]" class="radio go-right" value="2" <?php if (in_array(2, $arrStar)) {
+                                    <div class="go-right"><input id="2" type="checkbox" name="stars[]" class="radio go-right filter" value="2" <?php if (in_array(2, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="2"><?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="3" type="checkbox" name="stars[]" class="radio" value="3" <?php if (in_array(3, $arrStar)) {
+                                    <div class="go-right "><input id="3" type="checkbox" name="stars[]" class="radio filter" value="3" <?php if (in_array(3, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="3"><?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="4" type="checkbox" name="stars[]" class="radio" value="4" <?php if (in_array(4, $arrStar)) {
+                                    <div class="go-right"><input id="4" type="checkbox" name="stars[]" class="radio filter" value="4" <?php if (in_array(4, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="4"><?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 1; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="5" type="checkbox" name="stars[]" class="radio" value="5" <?php if (in_array(5, $arrStar)) {
+                                    <div class="go-right"><input id="5" type="checkbox" name="stars[]" class="radio filter" value="5" <?php if (in_array(5, $arrStar)) {
                                         echo "checked";
                                         } ?>>&nbsp;&nbsp;<label class="go-left" for="5"><?php for ($i = 1; $i <= 5; $i++) { ?> <?php echo $star; ?> <?php } ?></label></div>
                                     <!--<div class="clearfix"></div>
@@ -277,27 +277,27 @@
                                 <br>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Dưới 500.000" class="go-right radio" />
+                                    <input type="radio" value=""  name="price" id="Dưới 500.000" class="go-right radio filter" />
                                     <label for="Dưới 500.000" class="css-label go-left">&nbsp;&nbsp;Dưới 500.000</label>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio" />
+                                    <input type="radio" value=""  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio filter" />
                                     <label for="Từ 500.000 - 1,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 500.000 - 1,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio" />
+                                    <input type="radio" value=""  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio filter" />
                                     <label for="Từ 1,000.000 - 2,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 1,000.000 - 2,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio" />
+                                <div class="go-right filter">
+                                    <input type="radio" value=""  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio filter" />
                                     <label for="Từ 2,000.000 - 4,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 2,000.000 - 4,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Trên  4,000.000" class="go-right radio" />
+                                    <input type="radio" value=""  name="price" id="Trên  4,000.000" class="go-right radio filter" />
                                     <label for="Trên  4,000.000" class="css-label go-left">&nbsp;&nbsp;Trên  4,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
@@ -338,19 +338,19 @@
                                     ?>
                                 <div class="go-right"> <input type="checkbox" value="yes" <?php if ($varsaleoff == "yes") {
                                     echo "checked";
-                                    } ?> name="issale" id="issale" class="checkbox" /> <label for="issale" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0709'); ?></label></div>
+                                    } ?> name="issale" id="issale" class="checkbox  filter" /> <label for="issale" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0709'); ?></label></div>
                                 <div class="clearfix"></div>
                                 <div class="go-right"> <input type="checkbox" value="yes" <?php if ($uudai == "yes") {
                                     echo "checked";
-                                    } ?> name="uudai" id="uudai" class="checkbox" /> <label for="uudai" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0710'); ?></label></div>
+                                    } ?> name="uudai" id="uudai" class="checkbox  filter" /> <label for="uudai" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0710'); ?></label></div>
                                 <div class="clearfix"></div>
                                 <div class="go-right"> <input type="checkbox" value="yes" <?php if ($honeymoon == "yes") {
                                     echo "checked";
-                                    } ?> name="honeymoon" id="honeymoon" class="checkbox" /> <label for="honeymoon" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0567'); ?></label></div>
+                                    } ?> name="honeymoon" id="honeymoon" class="checkbox  filter" /> <label for="honeymoon" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0567'); ?></label></div>
                                 <div class="clearfix"></div>
                                 <div class="go-right"> <input type="checkbox" value="yes" <?php if ($varpickup == "yes") {
                                     echo "checked";
-                                    } ?> name="pickup" id="pickup" class="checkbox" /> <label for="pickup" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0711'); ?></label></div>
+                                    } ?> name="pickup" id="pickup" class="checkbox  filter" /> <label for="pickup" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0711'); ?></label></div>
                                 <div class="clearfix"></div>
                                 <br>
                             </div>
@@ -387,10 +387,10 @@
                                                 ?>
                                 <div class="go-right"> <input type="checkbox" value="<?php echo $mtype->id; ?>" <?php if (in_array($mtype->id, $vartype)) {
                                     echo "checked";
-                                    } ?> name="type[]" id="<?php echo $mtype->name; ?>" class="checkbox" /> <label for="<?php echo $mtype->name; ?>" class="css-label go-left">&nbsp;&nbsp;<?php echo $mtype->name; ?></label></div>
+                                    } ?> name="type[]" id="<?php echo $mtype->name; ?>" class="checkbox  filter" /> <label for="<?php echo $mtype->name; ?>" class="css-label go-left">&nbsp;&nbsp;<?php echo $mtype->name; ?></label></div>
                                 <div class="clearfix"></div>
                                 <?php } else if ($appModule == "tours" || $appModule == "cars") { ?>
-                                <div class="go-right"><input class="radio" type="radio" value="<?php echo $mtype->id; ?>" name="type" id="<?php echo $mtype->name; ?>" class="checkbox go-right" <?php if ($mtype->id == $vartype) {
+                                <div class="go-right"><input class="radio" type="radio" value="<?php echo $mtype->id; ?>" name="type" id="<?php echo $mtype->name; ?>" class="checkbox go-right  filter" <?php if ($mtype->id == $vartype) {
                                     echo "checked";
                                     } ?> /><label for="<?php echo $mtype->name; ?>" class="css-label go-left"> &nbsp;&nbsp; <?php echo $mtype->name; ?> &nbsp;&nbsp;</label></div>
                                 <div class="clearfix"></div>
@@ -426,7 +426,7 @@
                                             ?>
                                 <div class="go-right"><input type="radio" value="<?php echo trim($item); ?>" <?php if (trim($item) == str_replace("+", ' ', $varNear)) {
                                     echo "checked";
-                                    } ?> name="near" id="<?php echo trim($item); ?>" class="checkbox" /><label for="<?php echo trim($item); ?>" class="css-label go-left">&nbsp;<?php echo trim($item); ?></label></div>
+                                    } ?> name="near" id="<?php echo trim($item); ?>" class="checkbox  filter" /><label for="<?php echo trim($item); ?>" class="css-label go-left">&nbsp;<?php echo trim($item); ?></label></div>
                                 <?php }
                                     } ?>
                                 <br>
@@ -456,7 +456,7 @@
                                         ?>
                                 <div class="go-right"><input type="checkbox" value="<?php echo $hamt->id; ?>" <?php if (in_array($hamt->id, $varAmt)) {
                                     echo "checked";
-                                    } ?> name="amenities[]" id="<?php echo $hamt->name; ?>" class="checkbox" /><label for="<?php echo $hamt->name; ?>" class="css-label go-left"> <img class="go-right" style="height: 22px;margin-right:5px;margin-left:5px" src="<?php echo $hamt->icon; ?>">  <?php echo $hamt->name; ?></label></div>
+                                    } ?> name="amenities[]" id="<?php echo $hamt->name; ?>" class="checkbox  filter" /><label for="<?php echo $hamt->name; ?>" class="css-label go-left"> <img class="go-right" style="height: 22px;margin-right:5px;margin-left:5px" src="<?php echo $hamt->icon; ?>">  <?php echo $hamt->name; ?></label></div>
                                 <div class="clearfix"></div>
                                 <?php } ?>
                                 <br>
@@ -539,7 +539,7 @@
     <!-- END OF FILTERS -->
     <div class="visible-xs"><br><br></div>
     <!-- LIST CONTENT-->
-    <div class="rightcontent col-md-9 offset-0">
+    <div class="rightcontent col-md-9 offset-0" id="right-content">
         <div class="itemscontainer offset-1 hotels">
             <div class="offset-2">
                 <div class="bg-form-arrangement">
@@ -1075,8 +1075,22 @@
                 $('#modType').val(ui.item.modType);
                     return false;
             }
+    });    
+    $('input.filter').on('ifChanged', function (event) {         
+        //$(this).parents('form').submit(); 
+        var form = $(this).parents('form');
+        $.ajax({
+            url : "<?php echo $ajaxurl; ?>",
+            type : "GET",
+            beforeSend : function(){
+                $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+            },
+            data : form.serialize(),
+            success : function(data){
+                $('#right-content').html(data);
+            }
+        });
     });
-    
     });//]]>
     
 </script>
