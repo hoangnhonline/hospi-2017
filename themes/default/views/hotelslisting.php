@@ -132,13 +132,11 @@
                     <button type="button" class="collapsebtn go-text-right" data-toggle="collapse" data-target="#txtsearch">
                     <?php echo trans('0693'); ?> <span class="collapsearrow"></span>
                     </button>
-                    <div id="txtsearch" class="collapse collapse-br">
+                    <div id="txtsearch" class="collapse in collapse-br">
                         <div class="block-content">
                             <br>
-                            <div class="col-md-12 col-lg-12 col-sm-12 go-right" ng-controller="autoSuggest">
+                            <div class="col-md-12 col-sm-12 go-right" ng-controller="autoSuggest">
                                 <div class="form-group">
-                                    <div class="clearfix"></div>
-                                    <label class="control-label go-right"><i class="icon-location-6"></i> <?php echo trans('0254'); ?></label>
                                     <div class="clearfix"></div>
                                     <input id="search" name="txtSearch" class="form-control form-control-small" placeholder="<?php echo trans('026');?>"/>
                                     <div id="autocomlete-container"></div>
@@ -147,30 +145,23 @@
                             </div>
                             <!-- start hotels checkin checkout fields -->
                             <?php if ($appModule == "hotels") { ?>
-                            <div class="col-md-12 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
-                                    <label class="control-label go-right size13"><i class="icon-calendar-7"></i> <?php echo trans('07'); ?></label>
                                     <input type="text" placeholder="<?php echo trans('07'); ?> " name="checkin" class="form-control mySelectCalendar dpd1" value="<?php echo @$checkin; ?>" required >
                                 </div>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
-                                    <label class="control-label go-right size13"><i class="icon-calendar-7"></i> <?php echo trans('09'); ?></label>
                                     <input type="text" placeholder="<?php echo trans('09'); ?> " name="checkout" class="form-control mySelectCalendar dpd2" value="<?php echo @$checkout; ?>" required >
                                 </div>
                             </div>
                             <?php } ?>
                             <!-- end hotels checkin checkout fields -->
-                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
-                                    <label class="control-label go-right size13" style="white-space:nowrap;"><i class="icon-user-7"></i> <?php if ($appModule == "hotels") {
-                                        echo trans('010');
-                                        } else if ($appModule == "tours") {
-                                        echo trans('0446');
-                                        } ?></label>
                                     <select  required class="form-control" placeholder=" <?php echo trans(''); ?> " name="adults" id="adults">
                                         <?php for ($Selectadults = 1; $Selectadults < 11; $Selectadults++) { ?>
                                         <option value="<?php echo $Selectadults; ?>" <?php if ($Selectadults == $modulelib->adults) {
@@ -182,10 +173,9 @@
                             </div>
                             <!-- start hotels child field -->
                             <?php if ($appModule == "hotels") { ?>
-                            <div class="hidden-md col-lg-12 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
-                                    <label class="control-label go-right size13"><i class="icon-user-7"></i> <?php echo trans('011'); ?></label>
                                     <select  class="form-control" placeholder=" <?php echo trans('011'); ?> " name="child" id="child">
                                         <?php for ($Selectchild = 0; $Selectchild < 6; $Selectchild++) { ?>
                                         <option value="<?php echo $Selectchild; ?>" <?php if ($Selectchild == @$modulelib->children) {
@@ -206,7 +196,7 @@
                             <div class="visible-sm visible-xs">
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12 go-right">
+                            <div class="go-right" style="width: 190px; margin: 0 auto;">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
                                     <button style="font-size: 14px;margin-top: 6px;" type="submit" class="btn btn-block btn-action"><?php echo trans('012'); ?></button>
@@ -678,6 +668,7 @@
                                         </a>
                                     </div>
                                     <div class="clearfix"></div>
+                                    <hr>
                                     <?php } ?>
                                     <?php } ?>
                                     <?php if ($appModule == "ean") {

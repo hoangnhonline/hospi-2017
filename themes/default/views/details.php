@@ -26,13 +26,9 @@
     <?php } ?>
 </div>
 <!-- map -->
-<div class="breadcrumb">
+<div class="block-breadcrumb">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <?php echo $breadcrumb;?>
-            </div>
-        </div>
+        <?php echo $breadcrumb;?>
     </div>
 </div>
 <div id="OVERVIEW" class="container">
