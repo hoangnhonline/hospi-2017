@@ -11,7 +11,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#">Khách sạn</a></li>
             <li class="active">Phú Quốc</li>
         </ol>
     </div>

@@ -1,56 +1,54 @@
 <section id="ROOMS" style="background-color:#FFFFFF" style="position: relative;">
     <div style="background-color:#fff">
-    <div class="rooms-update">
+    <div class="rooms-update rooms-update-bg">
         <form action="" method="GET">
-            <div class="col-md-2 col-sm-2 go-right">
-                <div class="form-group">
-                    <label class="size12 RTL go-right" style="white-space: nowrap;"><i class="icon-calendar-7"></i> <?php echo trans('07'); ?></label>
-                    <input type="text" placeholder="<?php echo trans('07'); ?>" name="checkin" class="form-control dpd1" value="<?php echo $modulelib->checkin; ?>" required>
+            <div class="row">
+                <div class="col-md-3 col-sm-3 go-right">
+                    <!-- <label class="size12 RTL go-right" style="white-space: nowrap;"><i class="icon-calendar-7"></i> <?php echo trans('07'); ?></label> -->
+                    <input type="text" placeholder="<?php echo trans('07'); ?>" name="checkin" class="form-control mySelectCalendar dpd1" value="<?php echo $modulelib->checkin; ?>" required>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-2 go-right">
-                <div class="form-group">
-                    <label class="size12 RTL go-right"><i class="icon-calendar-7"></i> <?php echo trans('09'); ?></label>
-                    <input type="text" placeholder="<?php echo trans('09'); ?>" name="checkout" class="form-control dpd2" value="<?php echo $modulelib->checkout; ?>" required>
+                <div class="col-md-3 col-sm-3 go-right">
+                    <!-- <label class="size12 RTL go-right"><i class="icon-calendar-7"></i> <?php echo trans('09'); ?></label> -->
+                    <input type="text" placeholder="<?php echo trans('09'); ?>" name="checkout" class="form-control mySelectCalendar dpd2" value="<?php echo $modulelib->checkout; ?>" required>
                 </div>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-1 go-right">
-                <div class="form-group">
-                    <label class="size12 RTL go-right"><i class="icon-user-7"></i> <?php echo trans('010'); ?></label>
-                    <select class="mySelectBoxClass form-control" name="adults" id="adults" value="<?php echo $modulelib->adults; ?>">
-                        <?php for ($Selectadults = 1; $Selectadults < 11; $Selectadults++) { ?>
-                        <option value="<?php echo $Selectadults; ?>" <?php if ($Selectadults == $modulelib->adults) {
-                            echo "selected";
-                            } ?> > <?php echo $Selectadults; ?> </option>
-                        <?php } ?>
-                    </select>
+                <!-- <div class="col-lg-2 col-md-2 col-sm-1 go-right">
+                    <div class="form-group">
+                        <label class="size12 RTL go-right"><i class="icon-user-7"></i> <?php echo trans('010'); ?></label>
+                        <select class="mySelectBoxClass form-control" name="adults" id="adults" value="<?php echo $modulelib->adults; ?>">
+                            <?php for ($Selectadults = 1; $Selectadults < 11; $Selectadults++) { ?>
+                            <option value="<?php echo $Selectadults; ?>" <?php if ($Selectadults == $modulelib->adults) {
+                                echo "selected";
+                                } ?> > <?php echo $Selectadults; ?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-1 go-right">
-                <div class="form-group">
-                    <label class="size12 RTL go-right"><i class="icon-user-7"></i> <?php echo trans('011'); ?></label>
-                    <select class="mySelectBoxClass form-control" name="child" id="child" value="<?php echo $modulelib->children; ?>">
-                        <?php for ($Selectchild = 0; $Selectchild < 6; $Selectchild++) { ?>
-                        <option value="<?php echo $Selectchild; ?>" <?php if ($Selectchild == $modulelib->children) {
-                            echo "selected";
-                            } ?> > <?php echo $Selectchild; ?> </option>
-                        <?php } ?>
-                    </select>
+                <div class="col-lg-2 col-md-2 col-sm-1 go-right">
+                    <div class="form-group">
+                        <label class="size12 RTL go-right"><i class="icon-user-7"></i> <?php echo trans('011'); ?></label>
+                        <select class="mySelectBoxClass form-control" name="child" id="child" value="<?php echo $modulelib->children; ?>">
+                            <?php for ($Selectchild = 0; $Selectchild < 6; $Selectchild++) { ?>
+                            <option value="<?php echo $Selectchild; ?>" <?php if ($Selectchild == $modulelib->children) {
+                                echo "selected";
+                                } ?> > <?php echo $Selectchild; ?> </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="col-md-3 col-sm-3">
+                    <?php if (!empty($rooms)) { ?>
+                    <h5 class="text-left size16"><strong><i class="icon_set_1_icon-83"></i> <?php echo $modulelib->stay; ?> <?php echo trans('0122'); ?></strong> </h5>
+                    <?php } ?>
                 </div>
-            </div>
-            <div class="col-md-2 col-lg-2 col-sm-2 go-right">
-                <label>&nbsp;</label>
-                <button class="btn btn-block btn-success textupper"><?php echo trans('0106'); ?></button>
-                <input type="hidden" id="loggedin" value="<?php echo $usersession; ?>" />
-                <input type="hidden" id="itemid" value="<?php echo $module->id; ?>" />
-                <input type="hidden" id="module" value="<?php echo $appModule; ?>" />
-                <input type="hidden" id="addtxt" value="<?php echo trans('029'); ?>" />
-                <input type="hidden" id="removetxt" value="<?php echo trans('028'); ?>" />
-            </div>
-            <div class="col-md-2 col-lg-2 col-sm-2 row">
-                <?php if (!empty($rooms)) { ?>
-                <h5 style="margin-top: 34px;" class="text-center size16 row"><strong><i class="icon_set_1_icon-83"></i> <?php echo $modulelib->stay; ?> <?php echo trans('0122'); ?></strong> </h5>
-                <?php } ?>
+                <div class="col-md-3 col-sm-3 go-right">
+                    <!-- <label>&nbsp;</label> -->
+                    <button class="btn btn-block btn-success textupper"><?php echo trans('0106'); ?></button>
+                    <input type="hidden" id="loggedin" value="<?php echo $usersession; ?>" />
+                    <input type="hidden" id="itemid" value="<?php echo $module->id; ?>" />
+                    <input type="hidden" id="module" value="<?php echo $appModule; ?>" />
+                    <input type="hidden" id="addtxt" value="<?php echo trans('029'); ?>" />
+                    <input type="hidden" id="removetxt" value="<?php echo trans('028'); ?>" />
+                </div>
             </div>
         </form>
         <div class="clearfix"></div>
@@ -70,14 +68,14 @@
             if (($r->honeymoon == "Yes") && honeymoonAvailable($r->id)) {
                 
                 ?>
-        <div class="display-table-header">
+        <div class="rooms-rela-item">
             <!-- Honeymoon -->
-            <div class="rooms-update" style="margin-top:0px;margin-bottom:0px">
+            <div class="rooms-update romm-package" style="margin-top:0px;margin-bottom:0px">
                 <div class="labelleft2 rtl_title_home go-text-right RTL">
                     <h4 class="mtb0 RTL go-text-right">
-                        <span class="purple andes-bold"><b><?php echo trans("0567"); ?></b></span>
-                        <span class="opensans smalltext">Áp dụng từ ngày <strong><?php echo date('d/m/Y', $r->hfrom); ?></strong> đến hết ngày <strong><?php echo date('d/m/Y', $r->hto); ?></strong></span>
-                        <a style="float:right;" data-toggle="modal" href="#details<?php echo $r->id; ?>"><?php echo trans("0640"); ?></a>
+                        <span class="purple andes-bold name-package"><b><?php echo trans("0567"); ?></b></span>
+                        <span class="des-package">Áp dụng từ ngày <strong><?php echo date('d/m/Y', $r->hfrom); ?></strong> đến hết ngày <strong><?php echo date('d/m/Y', $r->hto); ?></strong></span>
+                        <a class="view-more-package" data-toggle="modal" href="#details<?php echo $r->id; ?>"><?php echo trans("0640"); ?></a>
                     </h4>
                     <!--<div class="col-md-6 visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
                         <div class="row">

@@ -6983,9 +6983,9 @@ ul.navbar-nav.top-menu > li span.honeymoon,
         top: 90px;
         display: none;
         width: 1170px;
-        background: #ffffff;
+        background: #f5f5f5;
         color: #fff;
-        border-bottom: 30px solid #f0f0f0;
+        border-bottom: 30px solid #f5f5f5;
     }
     ul.navbar-nav.top-menu > li span.honeymoon {
         padding: 50px 25px 10px 25px;
@@ -8183,7 +8183,7 @@ label.hospi-label {
 #autocomlete-container {
     display: block;
     position: relative;
-    margin-top: -10px;
+    /*margin-top: -10px;*/
 }
 .ui-autocomplete {
     position: absolute;
@@ -8603,7 +8603,7 @@ span.desc-link a {
     border: 1px solid #ddd;
 }
 .single-search .collapsebtn {
-    padding-top: 5px;
+    padding-top: 10px;
 }
 #breadcrumb {
     /*margin-bottom: 10px;*/
@@ -8713,9 +8713,9 @@ a.purple-link {
     .blog .row.col-md-3.col-sm-6.col-xs-12 {
         display: none;
     }
-    .ctup {
+/*    .ctup {
         margin-bottom: -280px;
-    }
+    }*/
     .destination {
         margin-top: -20px;
         margin-bottom: 20px;
@@ -9158,6 +9158,16 @@ ul.nav .honeymoon .img_list img {
     color: #999999;
     font-size: 13px;
 }
+.navbar-default .navbar-nav > li.menu-mb {
+  display: none;
+}
+.navbar-default .navbar-nav > li.block-user.menu-mb {
+  display: table-cell;
+}
+.navbar-default .navbar-nav > li.block-user.menu-mb .menu-item-mb {
+  display: none;
+}
+
 .footerbg {
   background: #521231;
   background-repeat: no-repeat;
@@ -9341,9 +9351,6 @@ ul.footerlist li:before {
     transition: all 0.3s ease-out;
     cursor: pointer;
     background: #fff;
-}
-.num-night .content {
-    margin-top: 15px
 }
 .coupon {
     position: relative;
@@ -9579,6 +9586,29 @@ p.view-pos a {
   .loc-items .row-eq-height {
     display: block;
   }
+  .navbar-default .navbar-collapse {
+    border-color: #cccccc;
+    background: #f1f1f1;
+  }
+  .navbar-default .navbar-nav > li.menu-mb {
+    display: block;
+  }
+  .ctup {
+    margin-top: 0;
+    display: none;
+  }
+  .navbar-custom .navbar-header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #cccccc;
+  }
+  .navbar-custom .navbar-brand {
+    height: auto;
+    padding: 18px 0 0;
+  }
+  .block-search-hotel .block-content {
+    padding: 0;
+    background: transparent;
+  }
 }
 
 @media (max-width: 568px) {
@@ -9711,6 +9741,10 @@ p.view-pos a {
     font-weight: normal;
     font-family: 'Open Sans', sans-serif;
 }
+.block-breadcrumb #breadcrumb span {
+    color: #660033;
+    text-transform: none;
+}
 
 /*.block-pagination {
     padding-bottom: 0;
@@ -9767,9 +9801,41 @@ p.view-pos a {
   background-color: #6a0739;
   border-color: #6a0739;
 }
-// .pagination > .active > a i:after,
+/*// .pagination > .active > a i:after,
 // .pagination > .active > span i:after {
 //   content: "";
 //   height: 1px;
 //   background: #fff;
-// }
+// }*/
+
+.rooms-update.rooms-update-bg {
+    background: url(../../assets/img/Untitled-3.png);
+    padding: 7px;
+}
+
+.rooms-update.romm-package {
+    padding: 7px;
+    position: relative;
+    overflow: hidden;
+}
+.rooms-update.romm-package h4:before {
+    content: url(../../assets/img/triangle_right.png);
+    position: absolute;
+    left: 0;
+    top: 45%;
+    transform: translate(0, -45%);
+    -ms-transform: translate(0, -45%);
+    -webkit-transform: translate(0, -45%);
+    -o-transform: translate(0, -45%);
+}
+.romm-package .des-package {
+    color: #666;
+    font-size: 14.5px!important;
+    margin-left: 9px;
+}
+.view-more-package {
+    float: right;
+    font-size: 13px;
+    color: #666666;
+    text-decoration: underline;
+}

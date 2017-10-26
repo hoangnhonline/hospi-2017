@@ -133,7 +133,7 @@
             <?php echo trans('0642');?><?php echo trans('0641'); ?><?php echo $module->title; ?><span class="collapsearrow"></span>
             </button>
             <!--<div class="panel-heading go-text-right"><?php echo trans('046');?><?php echo trans('0641'); ?><?php echo $module->title; ?></div>-->
-            <div id="collapse1" class="collapse in" aria-expanded="true">
+            <div id="collapse1" class="collapse" aria-expanded="true">
                 <div class="panel-body wrapper-class border-bottom">
                     <div class="col-md-2 align-center andes"><?php echo trans('046');?></div>
                     <div class="col-md-10  border-left"><?php echo $module->desc; ?></div>
@@ -149,7 +149,7 @@
             <button type="button" class="collapsebtn last go-text-right" data-toggle="collapse" data-target="#collapse2" aria-expanded="true">
             <?php echo trans('0148');?><?php echo trans('0696');?><?php echo $module->title; ?><span class="collapsearrow"></span>
             </button>
-            <div id="collapse2" class="collapse in" aria-expanded="true">
+            <div id="collapse2" class="collapse" aria-expanded="true">
                 <div class="panel-body">
                     <span class="RTL">
                         <p><?php echo nl2br($module->policy); ?></p>
@@ -220,7 +220,7 @@
             <button type="button" class="collapsebtn last go-text-right" data-toggle="collapse" data-target="#collapse3" aria-expanded="true">
             <?php echo trans('0758');?><span class="collapsearrow"></span>
             </button>
-            <div id="collapse3" class="collapse in" aria-expanded="true">
+            <div id="collapse3" class="collapse" aria-expanded="true">
                 <div class="panel-body">
                     <p class="RTL">
                         <i class="fa fa-clock-o text-success"></i> <strong> <?php echo trans('0697');?> </strong> :   <?php echo $module->defcheckin;?>
@@ -608,8 +608,6 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 go-right" ng-controller="autoSuggest">
                     <div class="form-group">
                         <div class="clearfix"></div>
-                        <label class="control-label go-right"><i class="icon-location-6"></i> <?php echo trans('0254');?></label>
-                        <div class="clearfix"></div>
                         <div angucomplete-alt id="<?php $appModule; ?>Search" input-name="txtSearch" initial-value="txtSearch" placeholder="<?php echo trans('0526');?>" pause="500" selected-object="selectedItem" remote-url="<?php echo base_url();?>home/suggestions/<?php echo $appModule; ?>" remote-url-request-formatter="remoteUrlRequestFn" remote-url-data-field="items" title-field="name" description-field="" minlength="2" input-class="form-control form-control-small" match-class="highlight">
                         </div>
                         <input type="hidden" name="searching" value="{{searching}}"> <input type="hidden" name="modType" value="{{modType}}"> 
@@ -619,15 +617,13 @@
                 <?php if($appModule == "hotels"){ ?>
                 <div class="col-md-12 col-sm-12 col-xs-12 go-right">
                     <div class="form-group">
-                        <div class="clearfix"></div>
-                        <label class="control-label go-right size13"><i class="icon-calendar-7"></i> <?php echo trans('07');?></label>
+                        <div class="clearfix"></div>                       
                         <input type="text" placeholder="<?php echo trans('07');?> " name="checkin" class="form-control mySelectCalendar dpd3" value="<?php echo @$checkin; ?>" required >
                     </div>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 go-right">
                     <div class="form-group">
                         <div class="clearfix"></div>
-                        <label class="control-label go-right size13"><i class="icon-calendar-7"></i> <?php echo trans('09');?></label>
                         <input type="text" placeholder="<?php echo trans('09');?> " name="checkout" class="form-control mySelectCalendar dpd4" value="<?php echo @$checkout; ?>" required >
                     </div>
                 </div>
@@ -636,7 +632,6 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 go-right">
                     <div class="form-group">
                         <div class="clearfix"></div>
-                        <label class="control-label go-right size13" style="white-space:nowrap;"><i class="icon-user-7"></i> <?php if($appModule == "hotels"){ echo trans('010'); }else if($appModule == "tours"){ echo trans('0446'); } ?></label>
                         <select  required class="form-control" placeholder=" <?php echo trans('');?> " name="adults" id="adults">
                             <option value="">0</option>
                             <?php for($Selectadults = 1; $Selectadults < 11;$Selectadults++){ ?>
@@ -650,7 +645,6 @@
                 <div class="hidden-md col-lg-12 col-sm-12 col-xs-12 go-right">
                     <div class="form-group">
                         <div class="clearfix"></div>
-                        <label class="control-label go-right size13"><i class="icon-user-7"></i> <?php echo trans('011');?></label>
                         <select  class="form-control" placeholder=" <?php echo trans('011');?> " name="child" id="child">
                             <?php for($Selectchild = 0; $Selectchild < 6;$Selectchild++){ ?>
                             <option value="<?php echo $Selectchild;?>" <?php if($Selectchild == @$modulelib->children){ echo "selected"; } ?> > <?php echo $Selectchild;?> </option>

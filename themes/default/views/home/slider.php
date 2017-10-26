@@ -119,7 +119,7 @@
                   <div class="form-group">
                     <div class="coupon">
                       <input type="text" class="form-control-cus inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
-                      <i class="fa fa-question-circle"></i> 
+                      <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Bạn có mã giảm giá ưu đãi từ HOSPI vui lòng nhập mã ưu đãi vào đây, số tiền tương ứng sẽ được trừ vào đơn phòng"></i> 
                     </div>
                   </div>
                 </div>

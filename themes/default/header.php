@@ -76,10 +76,11 @@
             <div class="col-sm-6 col-xs-12">
               <div class="row">
                 <p class="col-sm-6 text-right col-xs-6">
-                  <a id="doan" href="#datphongdoan" data-toggle="modal" data-content="Đặt phòng đoàn" rel="popover" data-placement="top" data-original-title="Đặt phòng đoàn" data-trigger="hover">Đặt phòng đoàn <i class="fa fa-question-circle"></i></a>
+                  <a id="doan" href="#datphongdoan" data-toggle="modal" data-content="Đặt phòng đoàn" rel="popover" data-placement="top" data-original-title="Đặt phòng đoàn" data-trigger="hover">
+                    Đặt phòng đoàn <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Giá trên hệ thống HOSPI là giá dành cho khách lẻ để lấy giá đoàn rẻ nhất(Áp dụng từ 10 phòng trở lên) vui lòng gửi yêu cầu cho chúng tôi"></i></a>
                 </p>
                 <p class="col-sm-6 text-center col-xs-6">
-                  <a id="nhanh" href="#datphongnhanh" data-toggle="modal" data-content="Đặt phòng nhanh ?" rel="popover" data-placement="top" data-original-title="Đặt phòng nhanh ?" data-trigger="hover">Đặt phòng nhanh <i class="fa fa-question-circle"></i></a>
+                  <a id="nhanh" href="#datphongnhanh" data-toggle="modal" data-content="Đặt phòng nhanh ?" rel="popover" data-placement="top" data-original-title="Đặt phòng nhanh ?" data-trigger="hover">Đặt phòng nhanh <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Bạn không muốn thời gian để tìm kiếm khách sạn với giá tốt nhất hãy gửi yêu cầu để được báo giá nhanh trong vòng 30 phút"></i></a>
                 </p>
               </div>
             </div>
@@ -95,7 +96,7 @@
       </div>
     </header>
 
-    <div class="navbar navbar-static-top navbar-default <?php echo @$hidden; ?>">
+    <div class="navbar navbar-static-top navbar-default navbar-custom <?php echo @$hidden; ?>">
       <div class="container">
         <div class="navbar">
           <!-- Navigation-->
@@ -589,42 +590,49 @@
                 </li>
                 <?php } ?>
                 <?php  } ?>
+                <li class="block-user menu-mb">
+                  <a href="#" title="Đăng nhập" class="menu-item-mb">Đăng nhập</a>
+                  <div class="block-content">
+                    <p class="user-img">
+                      <img alt="" src="assets/img/user.jpg">
+                    </p>
+                    <div class="user-menu">
+                      <?php  if(!empty($customerloggedin)){ ?>
+                      <?php echo trans('0579');?><?php echo $firstname; ?> |
+                      <p>
+                        <a href="<?php echo base_url()?>account/">  <?php echo trans('02');?></a>
+                      </p>
+                      <p>
+                        <a href="<?php echo base_url()?>account/logout/">  <?php echo trans('03');?></a>
+                      </p>
+                      <?php }else{ if (strpos($currenturl,'book') !== false) { }else{ if($allowreg == "1"){ ?>
+                      <p>
+                        <a href="<?php echo base_url(); ?>login"><?php echo trans('04');?></a>
+                      </p>
+                      <p>
+                        <a href="<?php echo base_url(); ?>register">  <?php echo trans('0115');?></a>
+                      </p>
+                      <?php } } } ?>
+                    </div>
+                  </div>
+                </li>
+                <!-- <li class="menu-mb">
+                  <a href="#" title="Giao dien đầy đử" class="menu-item-mb">Giao dien đầy đử</a>
+                </li> -->
               </ul>
             </div>
           </div>
           <?php if (strpos($currenturl, 'blog') == false) { ?>
-          <div class="block-user">
-            <div class="block-content">
-              <span class="user-img">
-                <img alt="" src="assets/img/user.jpg">
-              </span>
-              <div class="user-menu">
-                <?php  if(!empty($customerloggedin)){ ?>
-                <?php echo trans('0579');?><?php echo $firstname; ?> |
-                <p>
-                  <a href="<?php echo base_url()?>account/">  <?php echo trans('02');?></a>
-                </p>
-                <p>
-                  <a href="<?php echo base_url()?>account/logout/">  <?php echo trans('03');?></a>
-                </p>
-                <?php }else{ if (strpos($currenturl,'book') !== false) { }else{ if($allowreg == "1"){ ?>
-                <p>
-                  <a href="<?php echo base_url(); ?>login"><?php echo trans('04');?></a>
-                </p>
-                <p>
-                  <a href="<?php echo base_url(); ?>register">  <?php echo trans('0115');?></a>
-                </p>
-                <?php } } } ?>
-              </div>
-            </div>
-          </div>
+          
           <?php } ?>
         </div>
       </div>
     </div>
 
-    <div class="visible-xs">
-      <div style="margin-top:60px"></div>
+    <div class="container visible-xs">
+      <div style="margin-top:0">
+        <p class="text-center" style="margin: 0; line-height: 40px; color: #6f1040; font-size: 15px;"><i class="fa fa-phone-square"></i> (028) 3826 8797</p>
+      </div>
     </div>
 
     <div id="checkbookingform" class="modal fade checkbooking-modal" tabindex="-1" data-focus-on="input:first" style="display: none;">
