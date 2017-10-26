@@ -35,7 +35,7 @@ class Bootpagination {
 
 				$config['num_links'] = 5;
 				$config['use_page_numbers'] = TRUE;
-				$config['full_tag_open'] = '<ul class="pagination right paddingbtm20">'; // I added class name 'page_test' to used later for jQuery
+				$config['full_tag_open'] = '<ul class="pagination">'; // I added class name 'page_test' to used later for jQuery
 				$config['full_tag_close'] = '</ul>';
 				$config['first_link'] = '&raquo'; // &raquo; &laquo; First
 				$config['first_tag_open'] = '<li>';
