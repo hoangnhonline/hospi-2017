@@ -999,7 +999,8 @@ $this->db->or_where('MATCH (pt_hotels.hotel_city) AGAINST ("'. $searchtxt .'")',
 				    $this->db->or_like('pt_hotels.hotel_city', $searchtxt);*/
 
 			 if (!empty ($stars)) {
-						$this->db->having('pt_hotels.hotel_stars', $stars);
+		 						
+						$this->db->where_in('pt_hotels.hotel_stars', $stars);
 				}
 				if ($orderby == "za") {
 						$this->db->order_by('pt_hotels.hotel_title', 'desc');

@@ -216,7 +216,10 @@ class Hotels extends MX_Controller {
                 $checkin = date($this->data['app_settings'][0]->date_f,strtotime('+'.CHECKIN_SPAN.' day', time()));
 		        $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+'.CHECKOUT_SPAN.' day', time()));
 		        $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin,$checkout);
+				
+die('123');
 				$this->theme->view('hotelslisting', $this->data);
+
 				//$this->output->cache(20) ; //hoangnhonline tat cache
 		}
 
@@ -266,25 +269,27 @@ class Hotels extends MX_Controller {
 				$this->theme->view('honeymoon', $this->data);
 				//$this->output->cache(20) ; //hoangnhonline
 		}
-
-		function search($country = null, $city = null, $citycode = null, $offset = null) {
-
+		function microtime_float()
+	  {
+	      list($usec, $sec) = explode(" ", microtime());
+	      return ((float)$usec + (float)$sec);
+	  }
+	  function searchajax($country = null, $city = null, $citycode = null, $offset = null) {
+				$start = $this->microtime_float(); //hoangnh
 				$surl = http_build_query($_GET);
-
-
-                                $honeymoon = $this->input->get('honeymoon');
-
-                                    $this->data['sorturl'] = base_url() . 'hotels/search' . $surl . '&';
+                $honeymoon = $this->input->get('honeymoon');
+               	$this->data['sorturl'] = base_url() . 'hotels/search' . $surl . '&';
 
 				$checkin = $this->input->get('checkin');
 				$checkout = $this->input->get('checkout');
 				$adult = $this->input->get('adults');
 				$child = $this->input->get('child');
-        $type = $this->input->get('type');
+        		$type = $this->input->get('type');
 				$cityid = $this->input->get('searching');
 				$modType = $this->input->get('modType');
-				if(empty($country)){
 
+				if(empty($country)){
+					die('123');
 					$surl = http_build_query($_GET);
 					$locationInfo = pt_LocationsInfo($cityid);
 					$country = url_title($locationInfo->country, 'dash', true);
@@ -292,7 +297,7 @@ class Hotels extends MX_Controller {
 					$cityid = $locationInfo->id;
 					if(!empty($cityid) && $modType == "location"){
 
-                                                    redirect('hotels/search/'.$country.'/'.$city.'/'.$cityid.'?'.$surl);
+                        redirect('hotels/search/'.$country.'/'.$city.'/'.$cityid.'?'.$surl);
 
 					}else if(!empty($cityid) && $modType == "hotel"){
 						$this->hotels_lib->set_id($cityid);
@@ -304,32 +309,28 @@ class Hotels extends MX_Controller {
 						}
 
 					}
-
-
+					
 				}else{
 					if($modType == "location"){
-					$cityid = $citycode;
+						$cityid = $citycode;
 					}else{
-					$cityid = "";
-					}
-
+						$cityid = "";
+					}					
 					if(is_numeric($country)){
 						$offset = $country;
 					}
-
-
 				}
-
-
 
    				if (array_filter($_GET)) {
 
 						if (!empty ($cityid) && $modType == "location") {
-                                                    if($honeymoon=="yes") {
-                                                        $allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset,'','', $honeymoon);
-                                                    } else {
-							$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);
-                                                    }
+                            if($honeymoon=="yes") {
+                                $allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset,'','', $honeymoon);
+                            } else {
+								$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);
+                        		//var_dump("<pre>", $allhotels);die;
+                            }
+                            
 						}
 						else {
                                                     if($honeymoon=="yes") {
@@ -342,6 +343,7 @@ class Hotels extends MX_Controller {
 			        	$this->data['info'] = $allhotels['paginationinfo'];
 
 						$this->data['plinks'] = $allhotels['plinks'];
+
 				}
 				else {
 						$this->data['module'] = array();
@@ -375,7 +377,7 @@ class Hotels extends MX_Controller {
 
                 $this->data['selectedLocation'] =  $cityid; //$this->hotels_lib->selectedLocation;
 				$settings = $this->settings_model->get_front_settings('hotels');
-                                $this->data['nears'] = $this->hotels_model->select_nearby($cityid);
+                $this->data['nears'] = $this->hotels_model->select_nearby($cityid);
 				$this->data['amenities'] = $this->hotels_lib->getHotelAmenities();
 				$this->data['moduleTypes'] = $this->hotels_lib->getHotelTypes();
 				$this->data['minprice'] = $this->hotels_lib->convertAmount($settings[0]->front_search_min_price);
@@ -393,8 +395,141 @@ class Hotels extends MX_Controller {
                     $this->data['langurl'] = base_url()."hotels/honeymoon/{langid}";
                     $this->theme->view('honeylist', $this->data);
                 } else {
+                	//$end = $this->microtime_float() - $start; //hoangnh
+					//printf("%0.3f seconds\r\n", $end); //hoangnh
                     $this->data['langurl'] = base_url()."hotels/{langid}";
+                    //$this->load->view('hotelslistingajax', $this->data);
+                    $this->theme->partial('hotelslistingajax', $this->data);
+                    //$this->output->cache(20) ; //hoangnhonline
+                }
+		}
+		function search($country = null, $city = null, $citycode = null, $offset = null) {
+				$start = $this->microtime_float(); //hoangnh
+				$surl = http_build_query($_GET);
+                $honeymoon = $this->input->get('honeymoon');
+               	$this->data['sorturl'] = base_url() . 'hotels/search' . $surl . '&';
+
+				$checkin = $this->input->get('checkin');
+				$checkout = $this->input->get('checkout');
+				$adult = $this->input->get('adults');
+				$child = $this->input->get('child');
+        		$type = $this->input->get('type');
+				$cityid = $this->input->get('searching');
+				$modType = $this->input->get('modType');
+
+				if(empty($country)){
+
+					$surl = http_build_query($_GET);
+					$locationInfo = pt_LocationsInfo($cityid);
+					$country = url_title($locationInfo->country, 'dash', true);
+					$city = url_title($locationInfo->city, 'dash', true);
+					$cityid = $locationInfo->id;
+					if(!empty($cityid) && $modType == "location"){
+
+                        redirect('hotels/search/'.$country.'/'.$city.'/'.$cityid.'?'.$surl);
+
+					}else if(!empty($cityid) && $modType == "hotel"){
+						$this->hotels_lib->set_id($cityid);
+						$this->hotels_lib->hotel_short_details();
+						$title = $this->hotels_lib->title;
+						$slug = $this->hotels_lib->slug;
+						if(!empty($title)){
+							redirect('hotels/'.$slug);
+						}
+
+					}
+					
+				}else{
+					if($modType == "location"){
+						$cityid = $citycode;
+					}else{
+						$cityid = "";
+					}					
+					if(is_numeric($country)){
+						$offset = $country;
+					}
+				}
+
+   				if (array_filter($_GET)) {
+
+						if (!empty ($cityid) && $modType == "location") {
+                            if($honeymoon=="yes") {
+                                $allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset,'','', $honeymoon);
+                            } else {
+								$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);
+                        		//var_dump("<pre>", $allhotels);die;
+                            }
+                            
+						}
+						else {
+                                                    if($honeymoon=="yes") {
+								$allhotels = $this->hotels_lib->search_hotels($offset, $honeymoon);
+                                                    } else {
+							$allhotels = $this->hotels_lib->search_hotels($offset);
+                                                    }
+						}
+                        $this->data['module'] = $allhotels['all'];
+			        	$this->data['info'] = $allhotels['paginationinfo'];
+
+						$this->data['plinks'] = $allhotels['plinks'];
+
+				}
+				else {
+						$this->data['module'] = array();
+
+				}
+                $this->data['checkin'] = @$_GET['checkin'];
+                $this->data['checkout'] = @$_GET['checkout'];
+                if(empty($checkin)){
+
+                  $this->data['checkin'] = $this->hotels_lib->checkin;
+                }
+
+                if(empty($checkout)){
+                  $this->data['checkout'] = $this->hotels_lib->checkout;
+                }
+
+
+                $chin = $this->hotels_lib->checkin;
+                $chout = $this->hotels_lib->checkout;
+                if(empty($chin) || empty($chout)){
+                $this->data['pricehead'] = trans('0396');
+				}else{
+                $this->data['pricehead'] = trans('0397')." ".$this->hotels_lib->stay." ".trans('0122');
+
+                }
+                $this->data['city'] = $cityid;
+
+                $this->lang->load("front", $this->data['lang_set']);
+
+
+
+                $this->data['selectedLocation'] =  $cityid; //$this->hotels_lib->selectedLocation;
+				$settings = $this->settings_model->get_front_settings('hotels');
+                $this->data['nears'] = $this->hotels_model->select_nearby($cityid);
+				$this->data['amenities'] = $this->hotels_lib->getHotelAmenities();
+				$this->data['moduleTypes'] = $this->hotels_lib->getHotelTypes();
+				$this->data['minprice'] = $this->hotels_lib->convertAmount($settings[0]->front_search_min_price);
+				$this->data['maxprice'] = $this->hotels_lib->convertAmount($settings[0]->front_search_max_price);
+				$this->data['currCode'] = $this->hotels_lib->currencycode;
+				$this->data['currSign'] = $this->hotels_lib->currencysign;
+				$this->data['page_title'] = 'Search Results';
+				$this->data['metakey'] = @$country." ".@$city;
+				$this->data['metadesc'] = @$country." ".@$city;
+				$checkin = date($this->data['app_settings'][0]->date_f,strtotime('+'.CHECKIN_SPAN.' day', time()));
+		        $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+'.CHECKOUT_SPAN.' day', time()));
+		        $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin,$checkout);
+
+                if($honeymoon=="yes") {
+                    $this->data['langurl'] = base_url()."hotels/honeymoon/{langid}";
+                    $this->theme->view('honeylist', $this->data);
+                } else {
+                	//$end = $this->microtime_float() - $start; //hoangnh
+					//printf("%0.3f seconds\r\n", $end); //hoangnh
+                    $this->data['langurl'] = base_url()."hotels/{langid}";
+                    $this->data['ajaxurl'] = base_url().str_replace('search', 'searchajax', $this->uri->uri_string());
                     $this->theme->view('hotelslisting', $this->data);
+                    //$this->output->cache(20) ; //hoangnhonline
                 }
 		}
 
