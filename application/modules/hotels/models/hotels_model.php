@@ -925,16 +925,14 @@ $this->db->join('pt_hotel_images','pt_hotels.hotel_id = pt_hotel_images.himg_hot
 						$this->db->where('pt_hotels.hotel_stars', $stars);
 				}
 				if (!empty ($sprice)) {
-						/*$sprice = str_replace(";", ",", $sprice);
-						$sprice = explode(",", $sprice);
-						$minp = $sprice[0];
-						$maxp = $sprice[1];
-						$this->db->where('pt_rooms.room_basic_price >=', $minp);
-						$this->db->where('pt_rooms.room_basic_price <=', $maxp);*/
+						$tmp = explode(";", $sprice);
+						var_dump($tmp);
+						$this->db->where('pt_rooms.room_basic_price >=', $tmp[0]);
+						$this->db->where('pt_rooms.room_basic_price <=', $tmp[1]);
 
 				}
-               // $this->db->where_in('pt_hotels.hotel_id', $hotelslist);
-                //$this->db->select_avg('pt_reviews.review_overall', 'overall');
+               $this->db->where_in('pt_hotels.hotel_id', $hotelslist);
+               $this->db->select_avg('pt_reviews.review_overall', 'overall');
 
 /*$this->db->where('MATCH (pt_hotels.hotel_title) AGAINST ("'. $searchtxt .'")', NULL, false);
 $this->db->or_where('MATCH (pt_hotels_translation.trans_title) AGAINST ("'. $searchtxt .'")', NULL, false);*/
@@ -1037,13 +1035,11 @@ $this->db->or_where('MATCH (pt_hotels.hotel_city) AGAINST ("'. $searchtxt .'")',
 				if (!empty ($types)) {
 						$this->db->where_in('pt_hotels.hotel_type', $types);
 				}
-				if (!empty ($sprice)) {
-						$sprice = str_replace(";", ",", $sprice);
-						$sprice = explode(",", $sprice);
-						$minp = $sprice[0];
-						$maxp = $sprice[1];
-						$this->db->where('pt_rooms.room_basic_price >=', $minp);
-						$this->db->where('pt_rooms.room_basic_price <=', $maxp);
+				if (!empty ($sprice)) {					
+						$tmp = explode(";", $sprice);
+						var_dump("1223",$tmp);
+						$this->db->where('pt_rooms.room_basic_price >=', $tmp[0]);
+						$this->db->where('pt_rooms.room_basic_price <=', $tmp[1]);
 				}
                                 if (!empty ($honeymoon)) {
 
