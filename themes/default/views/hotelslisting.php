@@ -283,27 +283,27 @@
                                 <br>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Dưới 500.000" class="go-right radio filter" />
+                                    <input type="checkbox" value="0;500000"  name="price" id="Dưới 500.000" class="go-right radio filter" />
                                     <label for="Dưới 500.000" class="css-label go-left">&nbsp;&nbsp;Dưới 500.000</label>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio filter" />
+                                    <input type="checkbox" value="500000;1000000"  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio filter" />
                                     <label for="Từ 500.000 - 1,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 500.000 - 1,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio filter" />
+                                    <input type="checkbox" value="1000000;2000000"  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio filter" />
                                     <label for="Từ 1,000.000 - 2,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 1,000.000 - 2,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right filter">
-                                    <input type="radio" value=""  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio filter" />
+                                <div class="go-right">
+                                    <input type="checkbox" value="2000000;4000000"  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio filter" />
                                     <label for="Từ 2,000.000 - 4,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 2,000.000 - 4,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="go-right">
-                                    <input type="radio" value=""  name="price" id="Trên  4,000.000" class="go-right radio filter" />
+                                    <input type="checkbox" value="4000000;100000000"  name="price" id="Trên  4,000.000" class="go-right radio filter" />
                                     <label for="Trên  4,000.000" class="css-label go-left">&nbsp;&nbsp;Trên  4,000.000</label>
                                 </div>
                                 <div class="clearfix"></div>
@@ -430,9 +430,9 @@
                                         $eachnear = explode(',', $near->near);
                                         foreach ($eachnear as $item) {
                                             ?>
-                                <div class="go-right"><input type="radio" value="<?php echo trim($item); ?>" <?php if (trim($item) == str_replace("+", ' ', $varNear)) {
+                                <div class="go-right"><input type="checkbox" value="<?php echo trim($item); ?>" <?php if (trim($item) == str_replace("+", ' ', $varNear)) {
                                     echo "checked";
-                                    } ?> name="near" id="<?php echo trim($item); ?>" class="checkbox  filter" /><label for="<?php echo trim($item); ?>" class="css-label go-left">&nbsp;<?php echo trim($item); ?></label></div>
+                                    } ?> name="near" id="<?php echo trim($item); ?>" class="checkbox filter" /><label for="<?php echo trim($item); ?>" class="css-label go-left">&nbsp;<?php echo trim($item); ?></label></div>
                                 <?php }
                                     } ?>
                                 <br>
@@ -1082,21 +1082,27 @@
                     return false;
             }
     });    
-    $('input.filter').on('ifChanged', function (event) {         
-        //$(this).parents('form').submit(); 
-        var form = $(this).parents('form');
-        $.ajax({
-            url : "<?php echo $ajaxurl; ?>",
-            type : "GET",
-            beforeSend : function(){
-                $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
-            },
-            data : form.serialize(),
-            success : function(data){
-                $('#right-content').html(data);
-            }
-        });
-    });
-    });//]]>
+    $('input.filter').on('ifChanged', function (event) { //hoangnh        
+        ajaxSearch($(this));
+    });  
     
+});//]]>
+function ajaxSearch(obj){ // hoangnh
+    var form = obj.parents('form');
+    $.ajax({
+        url : "<?php echo $ajaxurl; ?>",
+        type : "GET",       
+        beforeSend : function(){
+
+            $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+            $('html, body').animate({
+                scrollTop: $("#right-content").offset().top
+            }, 500);
+        },
+        data : form.serialize(),
+        success : function(data){
+            $('#right-content').html(data);           
+        }
+    });
+}    
 </script>

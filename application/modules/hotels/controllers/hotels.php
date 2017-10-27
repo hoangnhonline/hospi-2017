@@ -288,8 +288,7 @@ die('123');
 				$cityid = $this->input->get('searching');
 				$modType = $this->input->get('modType');
 
-				if(empty($country)){
-					die('123');
+				if(empty($country)){					
 					$surl = http_build_query($_GET);
 					$locationInfo = pt_LocationsInfo($cityid);
 					$country = url_title($locationInfo->country, 'dash', true);
@@ -391,17 +390,17 @@ die('123');
 		        $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+'.CHECKOUT_SPAN.' day', time()));
 		        $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin,$checkout);
 
-                if($honeymoon=="yes") {
-                    $this->data['langurl'] = base_url()."hotels/honeymoon/{langid}";
-                    $this->theme->view('honeylist', $this->data);
-                } else {
+                //if($honeymoon=="yes") { //hoangnh
+                    //$this->data['langurl'] = base_url()."hotels/honeymoon/{langid}";////hoangnh
+                    //$this->theme->view('honeylist', $this->data);////hoangnh
+                //} else { //hoangnh
                 	//$end = $this->microtime_float() - $start; //hoangnh
 					//printf("%0.3f seconds\r\n", $end); //hoangnh
                     $this->data['langurl'] = base_url()."hotels/{langid}";
                     //$this->load->view('hotelslistingajax', $this->data);
                     $this->theme->partial('hotelslistingajax', $this->data);
                     //$this->output->cache(20) ; //hoangnhonline
-                }
+                //} //hoangnh
 		}
 		function search($country = null, $city = null, $citycode = null, $offset = null) {
 				$start = $this->microtime_float(); //hoangnh
