@@ -1085,8 +1085,7 @@ function ajaxSearch(obj){ // hoangnh
     var form = obj.parents('form');
     $.ajax({
         url : "<?php echo $ajaxurl; ?>",
-        type : "GET",
-        async : false,
+        type : "GET",       
         beforeSend : function(){
             $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
         },
