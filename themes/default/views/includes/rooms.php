@@ -70,11 +70,16 @@
                 ?>
         <div class="rooms-rela-item">
             <!-- Honeymoon -->
-            <div class="rooms-update romm-package" style="margin-top:0px;margin-bottom:0px">
+            <div class="rooms-update romm-package">
                 <div class="labelleft2 rtl_title_home go-text-right RTL">
                     <h4 class="mtb0 RTL go-text-right">
                         <span class="purple andes-bold name-package"><b><?php echo trans("0567"); ?></b></span>
                         <span class="des-package">Áp dụng từ ngày <strong><?php echo date('d/m/Y', $r->hfrom); ?></strong> đến hết ngày <strong><?php echo date('d/m/Y', $r->hto); ?></strong></span>
+                        <span class="price-package">
+                            Giá:
+                            <strong class="purple andes-bold" style="font-size: 20px;margin-left: 10px;">14.990.000</strong>
+                            <strong class="purple andes-bold">vnd</strong>
+                        </span>
                         <a class="view-more-package" data-toggle="modal" href="#details<?php echo $r->id; ?>"><?php echo trans("0640"); ?></a>
                     </h4>
                     <!--<div class="col-md-6 visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
@@ -340,7 +345,7 @@
                     </div>
                 </div>
             </div>
-            <div class="clearfix" style="margin-bottom: 20px;"></div>
+            <!-- <div class="clearfix" style="margin-bottom: 20px;"></div> -->
             <div class="offset-2">
             </div>
             <!-- End Honeymoon -->
@@ -353,15 +358,15 @@
                 <input type="hidden" name="checkin" value="<?php echo $modulelib->checkin; ?>" />
                 <input type="hidden" name="checkout" value="<?php echo $modulelib->checkout; ?>" />
                 <input type="hidden" name="roomid" value="<?php echo $r->id; ?>" />
-                <div class="rooms-update" style="margin-top:0px;margin-bottom:0px;display: inline-block;width:100%">
-                    <div class="col-lg-3 col-md-3 col-sm-3 offset-0 go-right">
+                <div class="rooms-update">
+                    <div class="col-md-3 col-sm-3 offset-0 go-right">
                         <div class="zoom-gallery<?php echo $r->id; ?>">
                             <a href="<?php echo $r->fullimage; ?>" data-source="<?php echo $r->fullimage; ?>" title="<?php echo $r->title; ?>">
                             <img class="img-responsive" src="<?php echo $r->thumbnail; ?>">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9 offset-0">
+                    <div class="col-md-9 offset-0">
                         <div class="col-md-3 labelright go-left">
                             <?php if ($r->price > 0) { ?>
                             <button style="margin-bottom:5px" type="submit" class="btn btn-action btn-block chk"><?php echo trans('0142'); ?></button>
@@ -398,7 +403,7 @@
                                 <?php } ?>
                             </div>
                         </div>
-                        <div class="col-md-9 labelleft2 rtl_title_home go-text-right RTL">
+                        <div class="col-md-5 labelleft2 rtl_title_home go-text-right RTL">
                             <?php if($r->issale>0 && $r->onsale==true) { ?>
                             <div class="row col-md-6">
                                 <?php } else { ?>
@@ -415,7 +420,7 @@
                                                 <button data-toggle="collapse" data-parent="#accordion" href="#availability<?php echo $r->id; ?>" class="hidden-xs btn btn-info btn-sm"><?php echo trans('0251'); ?></button>-->
                                         </div>
                                     </div>
-                                    <br><br><br>
+                                    <!-- <br><br><br> -->
                                 </div>
                                 <?php if($r->issale>0 && $r->onsale==true) { ?>
                                 <div class="col-md-4">

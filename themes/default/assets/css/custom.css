@@ -6923,6 +6923,10 @@ a.xem-ngay {
     ul.navbar-nav.top-menu > li:hover {
         background: #F5F5F5;
     }
+    ul.navbar-nav.top-menu > li.block-user.active,
+    ul.navbar-nav.top-menu > li.block-user:hover {
+        background: transparent;
+    }
 }
 .navbar-default .navbar-nav.top-menu > .active > a,
 .navbar-default .navbar-nav.top-menu > .active > a:hover,
@@ -9086,77 +9090,79 @@ ul.nav .honeymoon .img_list img {
  ========================================================================== */
 
 .header-top {
-    background: #660033;
+  background: #660033;
 }
 .header-top p {
-    margin: 0;
-    line-height: 40px;
-    color: #fff;
-    font-size: 13px;
+  margin: 0;
+  line-height: 40px;
+  color: #fff;
+  font-size: 13px;
 }
 .header-top p i {
-    font-size: 14px;
+  font-size: 14px;
 }
 .header-top p a {
-    color: #fff;
-    font-size: 13px;
+  color: #fff;
+  font-size: 13px;
 }
 .header-top p a i {
-    color: #fff;
-    font-size: 17px;
-    margin-left: 10px;
+  color: #fff;
+  font-size: 17px;
+  margin-left: 10px;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #660033;
-    font-size: 17px;
-    text-transform: none;
+  color: #660033;
+  font-size: 17px;
+  text-transform: none;
 }
 .block-user {
-    display: table-row;
-    float: right;
+  display: table-row;
+  float: right;
 }
 .block-user .block-content {
-    display: inline-flex;
-    align-items: center;
-    height: 90px;
-    float: right;
+  display: inline-flex;
+  align-items: center;
+  height: 90px;
+  float: right;
 }
 .block-user .user-img {
-    margin-right: 11px;
-    display: inline-flex;
-    vertical-align: middle;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 35px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    overflow: hidden;
-    cursor: pointer;
+  margin-right: 11px;
+  margin-bottom: 0px;
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+  cursor: pointer;
 }
 .block-user .user-menu {
-    display: table-row;
-    float: right;
+  display: table-row;
+  float: right;
 }
 .block-user .user-menu p {
-    margin-bottom: 5px;
-    line-height: 1;
-    transition: all .2s ease-in-out;
+  margin-bottom: 5px;
+  line-height: 1;
+  transition: all .2s ease-in-out;
 }
 .block-user .user-menu p:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 .block-user .user-menu p:hover a {
-    color: #660033;
+  color: #660033;
 }
 .block-user .user-menu p:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 .block-user .user-menu p a {
-    color: #999999;
-    font-size: 13px;
+  color: #999999;
+  font-size: 13px;
+  text-transform: none;
 }
 .navbar-default .navbar-nav > li.menu-mb {
   display: none;
@@ -9612,78 +9618,78 @@ p.view-pos a {
 }
 
 @media (max-width: 568px) {
-    .fccustom2 {
-      width: 100%;
-      padding-right: 12px;
-    }
-    .block-newsletter_footer .btncustom {
-      position: relative;
-      margin-top: 10px;
-    }
+  .fccustom2 {
+    width: 100%;
+    padding-right: 12px;
+  }
+  .block-newsletter_footer .btncustom {
+    position: relative;
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 414px) {
-    #footer .list-inline li:first-child {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    .list-enj {
-      padding: 0;
-    }
-    .list-enj li {
-      padding-right: 15px;
-      display: block;
-      margin-top: 5px;
-    }
+  #footer .list-inline li:first-child {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .list-enj {
+    padding: 0;
+  }
+  .list-enj li {
+    padding-right: 15px;
+    display: block;
+    margin-top: 5px;
+  }
 }
 .blog-items .post-item .readmore {
-    margin-top: -7px;
+  margin-top: -7px;
 }
 
 .searching-item {
-    border: 1px solid #cccccc;
-    margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  margin-bottom: 20px;
 }
 
 .itemlabel-info {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 .itemlabel-info li {
-    display: inline-block;
-    position: relative;
-    padding-left: 6px;
-    margin-right: 20px;
-    margin-left: 7px;
+  display: inline-block;
+  position: relative;
+  padding-left: 6px;
+  margin-right: 20px;
+  margin-left: 7px;
 }
 .itemlabel-info li:before {
-    content: "\f111";
-    font-family: "FontAwesome";
-    color: #660033;
-    font-size: 10px;
-    position: absolute;
-    left: -7px;
-    top: -1px;
+  content: "\f111";
+  font-family: "FontAwesome";
+  color: #660033;
+  font-size: 10px;
+  position: absolute;
+  left: -7px;
+  top: -1px;
 }
 .itemlabel-info li a {
-    color: #660033;
-    position: relative;
+  color: #660033;
+  position: relative;
 }
 .itemlabel-info li a:after {
-    content: "";
-    height: 1px;
-    background: #660033;
-    margin: 0 auto;
-    display: block;
+  content: "";
+  height: 1px;
+  background: #660033;
+  margin: 0 auto;
+  display: block;
 }
 .description .des {
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .itemlabel3-cus .labelright {
-    float: none;
-    position: absolute;
-    right: 0;
+  float: none;
+  position: absolute;
+  right: 0;
 }
 
 .bg-form-arrangement {
@@ -9710,47 +9716,47 @@ p.view-pos a {
 }
 
 .block-module {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .block-module:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .block-module .block-md-item {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .block-module .block-md-item:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .block-breadcrumb {
-    background: #f0f0f0;
+  background: #f0f0f0;
 }
 .block-breadcrumb .breadcrumb {
-    padding: 15px 0;
-    background: #f0f0f0;
-    margin-bottom: 0;
+  padding: 15px 0;
+  background: #f0f0f0;
+  margin-bottom: 0;
 }
 .breadcrumb > li + li:before {
-  padding: 0 8px;
-  color: #690537;
-  content: url(../../assets/img/collapsearrow.png);
+padding: 0 8px;
+color: #690537;
+content: url(../../assets/img/collapsearrow.png);
 }
 .breadcrumb > li a {
-    color: #999999;
-    font-weight: normal;
-    font-family: 'Open Sans', sans-serif;
+  color: #999999;
+  font-weight: normal;
+  font-family: 'Open Sans', sans-serif;
 }
 .block-breadcrumb #breadcrumb span {
-    color: #660033;
-    text-transform: none;
+  color: #660033;
+  text-transform: none;
 }
 
 /*.block-pagination {
-    padding-bottom: 0;
-    background: #c4c4c4;
-    min-width: 550px;
-    margin: 0 auto;
+  padding-bottom: 0;
+  background: #c4c4c4;
+  min-width: 550px;
+  margin: 0 auto;
 }*/
 .block-pagination {
   line-height: 0;
@@ -9808,34 +9814,41 @@ p.view-pos a {
 //   background: #fff;
 // }*/
 
+.rooms-update {
+  width: 100%;
+  float: left;
+  margin-bottom: 0 !important;
+}
 .rooms-update.rooms-update-bg {
-    background: url(../../assets/img/Untitled-3.png);
-    padding: 7px;
+  background: url(../../assets/img/Untitled-3.png);
+  padding: 7px;
+  margin-top: 0;
 }
 
+.romm-package h4 {
+  font-size: 14px;
+}
 .rooms-update.romm-package {
-    padding: 7px;
-    position: relative;
-    overflow: hidden;
+  padding: 7px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+  margin-top: 10px;
 }
 .rooms-update.romm-package h4:before {
-    content: url(../../assets/img/triangle_right.png);
-    position: absolute;
-    left: 0;
-    top: 45%;
-    transform: translate(0, -45%);
-    -ms-transform: translate(0, -45%);
-    -webkit-transform: translate(0, -45%);
-    -o-transform: translate(0, -45%);
+  content: url(../../assets/img/triangle_right.png);
+  position: absolute;
+  left: 0;
+  top: 45%;
+  transform: translate(0, -45%);
+  -ms-transform: translate(0, -45%);
+  -webkit-transform: translate(0, -45%);
+  -o-transform: translate(0, -45%);
 }
-.romm-package .des-package {
-    color: #666;
-    font-size: 14.5px!important;
-    margin-left: 9px;
-}
+.romm-package .des-package {}
 .view-more-package {
-    float: right;
-    font-size: 13px;
-    color: #666666;
-    text-decoration: underline;
+  font-size: 13px;
+  color: #666666;
+  text-decoration: underline;
 }
+.romm-package .price-package {}
