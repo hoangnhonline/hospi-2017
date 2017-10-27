@@ -367,43 +367,7 @@
                         </div>
                     </div>
                     <div class="col-md-9 offset-0">
-                        <div class="col-md-3 labelright go-left">
-                            <?php if ($r->price > 0) { ?>
-                            <button style="margin-bottom:5px" type="submit" class="btn btn-action btn-block chk"><?php echo trans('0142'); ?></button>
-                            <?php } ?>
-                            <div class="clearfix"></div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 class="size12"><?php echo trans('0374'); ?></h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <select class="form-control mySelectBoxClass input-sm" name="roomscount" >
-                                            <?php for ($q = 1; $q <= $r->maxQuantity; $q++) { ?>
-                                            <option value="<?php echo $q; ?>"><?php echo $q; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <?php if ($r->extraBeds > 0) { ?>
-                                <div class="col-md-6" style="white-space: nowrap;">
-                                    <h5 class="size12"><?php echo trans('0428'); ?></h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <select name="extrabeds" class="form-control mySelectBoxClass input-sm" id="">
-                                            <option value="0">0</option>
-                                            <?php for ($i = 1; $i <= $r->extraBeds; $i++) { ?>
-                                            <option value="<?php echo $i; ?>"> <?php echo $i; ?> <?php echo $r->currCode . " " . $r->currSymbol . $i * $r->extrabedCharges; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <?php } ?>
-                            </div>
-                        </div>
-                        <div class="col-md-5 labelleft2 rtl_title_home go-text-right RTL">
+                        <div class="col-md-5 rtl_title_home go-text-right RTL">
                             <?php if($r->issale>0 && $r->onsale==true) { ?>
                             <div class="row col-md-6">
                                 <?php } else { ?>
@@ -531,6 +495,42 @@
                             </div>
                             <?php } ?>
                             <!-- basic price -->
+                        </div>
+                        <div class="col-md-3 go-left">
+                            <?php if ($r->price > 0) { ?>
+                            <button style="margin-bottom:5px" type="submit" class="btn btn-action btn-block chk"><?php echo trans('0142'); ?></button>
+                            <?php } ?>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="size12"><?php echo trans('0374'); ?></h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <select class="form-control mySelectBoxClass input-sm" name="roomscount" >
+                                            <?php for ($q = 1; $q <= $r->maxQuantity; $q++) { ?>
+                                            <option value="<?php echo $q; ?>"><?php echo $q; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <?php if ($r->extraBeds > 0) { ?>
+                                <div class="col-md-6" style="white-space: nowrap;">
+                                    <h5 class="size12"><?php echo trans('0428'); ?></h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="">
+                                        <select name="extrabeds" class="form-control mySelectBoxClass input-sm" id="">
+                                            <option value="0">0</option>
+                                            <?php for ($i = 1; $i <= $r->extraBeds; $i++) { ?>
+                                            <option value="<?php echo $i; ?>"> <?php echo $i; ?> <?php echo $r->currCode . " " . $r->currSymbol . $i * $r->extrabedCharges; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
