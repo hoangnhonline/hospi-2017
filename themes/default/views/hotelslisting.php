@@ -10,15 +10,9 @@
 <div class="block-breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
-<<<<<<< HEAD
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Khách sạn</a></li>
-            <li class="active">Phú Quốc</li>
-=======
             <li><a href="<?php echo base_url(); ?>">Trang chủ</a></li>
             <li><a href="<?php echo base_url(); ?>hotels">Khách sạn</a></li>
             <li class="active"><?php echo $_GET['txtSearch']; ?></li>
->>>>>>> b1fc92dbfe2ba1efcf276ec019965829f8fb231d
         </ol>
     </div>
 </div>
