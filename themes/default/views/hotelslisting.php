@@ -1087,11 +1087,15 @@ function ajaxSearch(obj){ // hoangnh
         url : "<?php echo $ajaxurl; ?>",
         type : "GET",       
         beforeSend : function(){
+
             $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+            $('html, body').animate({
+                scrollTop: $("#right-content").offset().top
+            }, 500);
         },
         data : form.serialize(),
         success : function(data){
-            $('#right-content').html(data);
+            $('#right-content').html(data);           
         }
     });
 }    

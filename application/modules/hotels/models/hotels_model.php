@@ -926,7 +926,7 @@ $this->db->join('pt_hotel_images','pt_hotels.hotel_id = pt_hotel_images.himg_hot
 				}
 				if (!empty ($sprice)) {
 						$tmp = explode(";", $sprice);
-						var_dump($tmp);
+						
 						$this->db->where('pt_rooms.room_basic_price >=', $tmp[0]);
 						$this->db->where('pt_rooms.room_basic_price <=', $tmp[1]);
 
@@ -1037,7 +1037,7 @@ $this->db->or_where('MATCH (pt_hotels.hotel_city) AGAINST ("'. $searchtxt .'")',
 				}
 				if (!empty ($sprice)) {					
 						$tmp = explode(";", $sprice);
-						var_dump("1223",$tmp);
+						
 						$this->db->where('pt_rooms.room_basic_price >=', $tmp[0]);
 						$this->db->where('pt_rooms.room_basic_price <=', $tmp[1]);
 				}
