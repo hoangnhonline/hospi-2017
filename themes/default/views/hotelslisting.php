@@ -575,29 +575,11 @@
                     <input type="hidden" name="searching" value="<?php echo $selectedLocation; ?>">
                     <input name="sortby" type="hidden" id="sortbyajax" class="sortby" value="<?php if (!empty($_GET['sortby'])) {
                         echo $_GET['sortby'];
-                        } ?>">
-                    <button style="border-radius:0px" type="submit" class="btn btn-action btn-lg btn-block" id="searchform"><?php echo trans('0694'); ?></button>
+                        } ?>">                   
                 </div><!-- block-md-item -->
             </form>
-        </div>
-        <br>
-        <div class="list-group">
-            <div class="panel panel-default">
-                <div class="panel-heading go-text-right"><?php echo trans('0565');?></div>
-                <div class="hotel-zippack">
-                    <?php foreach($hotelslocationsList as $loc){
-                        $city_slug = create_slug($loc->name);
-                        $country_slug = create_slug($loc->country);
-                        echo '<div class="col-md-12 col-sm-12 col-xs-12">';
-                        echo '<p class="where-location"><span class="hotel-location link-color"><a href="'.base_url().'hotels/search/'.$country_slug.'/'.$city_slug.'/'.$loc->id.'?txtSearch='.$loc->name.'&searching='.$loc->id.'&modType=location&checkin=&checkout=&adults=&child=">'.$loc->name.'</a></span>';
-                        echo '<span class="pricetxt-location">'.trans('0566').' VND</span>';
-                        echo '</p><p><span class="count-location">'.$loc->total.' ';echo trans('Hotels').'</span>';
-                        echo '<span class="price-location link-color">'.$loc->bestprices.'</span>';
-                        echo '</p></div>';
-                        } ?>
-                </div>
-            </div>
-        </div>
+        </div>        
+        
     </div>
     <!-- END OF FILTERS -->
     <div class="visible-xs"><br><br></div>
