@@ -64,7 +64,7 @@
             <div class="offset-2">
                 <h1 class="h1-offers"><?php echo trans('0580'); ?></h1>
                 <hr style="margin-top: 10px; margin-bottom: 10px;">
-                <div class="gray-txt opensans"><?php echo trans('0592'); ?></div>
+                <div style="color: #666666; font-size: 15px;"><?php echo trans('0592'); ?></div>
                 <div style="margin-top:30px"></div>
                 <span class="loc-title"><?php echo trans('0593'); ?></span>
                 <form name="itemlist" id="itemlist" action="" method="post">

@@ -49,12 +49,12 @@
     <!-- Carousel -->
     <?php } ?>
     <div class="clearfix"></div>
-    <div class="offer-banner-bottom">
+    <!-- <div class="offer-banner-bottom">
         <div class="col-xs-12 col-sm-3 col-lg-3"></div>
         <div class="col-xs-12 col-sm-3 col-lg-3"><span class="bestchoice"><a class="active" class="" href=""><?php echo trans('0559'); ?></a></span></div>
         <div class="col-xs-12 col-sm-3 col-lg-3"><span class="khuyen-mai"><a href="<?php echo base_url();?>offers/sales"><?php echo trans('0558'); ?></a></span></div>
         <div class="col-xs-12 col-sm-3 col-lg-3"><span class="deals"><a href="<?php echo base_url();?>offers"><?php echo trans('0580'); ?></span></a></div>
-    </div>
+    </div> -->
     <ul class="offer-banner-bottom">
         <li><a href="<?php echo base_url();?>offers"><?php echo trans('0580'); ?></a></li>
         <li><a href=""><?php echo trans('0558'); ?></a></li>
@@ -73,7 +73,7 @@
             <div class="offset-2">
                 <h1 class="h1-offers"><?php echo trans('0594'); ?></h1>
                 <hr style="margin-top: 10px; margin-bottom: 10px;">
-                <div class="gray-txt opensans"><?php echo trans('0595'); ?></div>
+                <div style="color: #666666; font-size: 15px;"><?php echo trans('0595'); ?></div>
                 <div style="margin-top:30px"></div>
                 <?php echo trans('0596'); ?>
                 <form name="itemlist" id="itemlist" action="" method="post">
