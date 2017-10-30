@@ -192,6 +192,15 @@
                                     echo '<input type="hidden" name="near" value="' . $ok . '">';
                                 }
                                 ?>
+                            <!-- start coupon child field -->
+                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
+                                <div class="form-group">
+                                    <div class="coupon">
+                                      <input type="text" class="form-control form-control-small inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
+                                      <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Bạn có mã giảm giá ưu đãi từ HOSPI vui lòng nhập mã ưu đãi vào đây, số tiền tương ứng sẽ được trừ vào đơn phòng"></i> 
+                                    </div>
+                                </div>
+                            </div>
                             <!-- end hotels child field -->
                             <div class="visible-sm visible-xs">
                                 <div class="clearfix"></div>
