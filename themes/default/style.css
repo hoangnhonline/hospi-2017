@@ -190,6 +190,7 @@ body {  font-family: "AndesRounded", sans-serif; }
  label{cursor:pointer}
  a{color:#666}
  a:hover{text-decoration:none}
+ a:focus {outline: none;outline-offset: 0;}
  thead td{background: white; padding: 2% 5% 1% 5%;}
 .table-bordered { width: 78%; margin-top:-20px}
 .marker_info{width:280px;height:320px;border-radius:3px;text-align:center;background:#FFF;background:rgba(255,255,255,.9);position:relative;z-index:9999999;font-family:"Montserrat",Arial,sans-serif;transition:all 0.5s ease-in-out;-moz-transition:all 0.5s ease-in-out;-webkit-transition:all 0.5s ease-in-out;-o-transition:all 0.5s ease-in-out}
