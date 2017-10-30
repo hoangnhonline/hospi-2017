@@ -154,7 +154,7 @@
                             </div>
                         </div>
                         <div class="labelleft2 rtl_title_home description">
-                            <h4 class="mtb0 RTL go-text-right">
+                            <h4 class="mtb0 RTL go-text-right hotel-name">
                                 <a href="<?php echo $item->slug; ?>"><b><?php echo $item->title; ?></b></a>
                                 <!-- Cars airport pickup -->  <?php if ($appModule == "cars") {
                                     if ($item->airportPickup == "yes") { ?> <button class="btn btn-success btn-xs"><i class="icon-paper-plane-2"></i> <?php echo trans('0207'); ?></button> <?php }

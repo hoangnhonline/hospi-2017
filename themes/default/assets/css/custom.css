@@ -9906,3 +9906,6 @@ select:focus {
   font-family: 'AndesRoundedLight';
   font-size: 18px;
 }
+h4.hotel-name{
+    font-size: 16px;
+}
