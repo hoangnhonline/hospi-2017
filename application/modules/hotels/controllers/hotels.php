@@ -218,7 +218,7 @@ class Hotels extends MX_Controller {
                 $checkin = date($this->data['app_settings'][0]->date_f,strtotime('+'.CHECKIN_SPAN.' day', time()));
 		        $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+'.CHECKOUT_SPAN.' day', time()));
 		        $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin,$checkout);
-
+		        $this->data['ajaxurl'] = base_url().$this->uri->uri_string()."/searchajax";	
 				$this->theme->view('hotelslisting', $this->data);
 
 				//$this->output->cache(20) ; //hoangnhonline tat cache
@@ -333,19 +333,23 @@ class Hotels extends MX_Controller {
                             
 						}
 						else {
-                                                    if($honeymoon=="yes") {
+
+                            if($honeymoon=="yes") {
 								$allhotels = $this->hotels_lib->search_hotels($offset, $honeymoon);
                                                     } else {
 							$allhotels = $this->hotels_lib->search_hotels($offset);
+							//var_dump("<pre>", $allhotels, "</pre>");
                                                     }
 						}
 						//
 						$tmpArr = [];
+
 						if(!empty($allhotels['all'])){
 							foreach($allhotels['all'] as $htl){
 								$tmpArr[$htl->id] = $htl;
 							}
-						}						
+						}	
+						//var_dump("<pre>kkkk", $allhotels['resultSort'], "</pre>");					
                         $this->data['module'] = $tmpArr;
                         $this->data['resultSort'] = $allhotels['resultSort'];
 			        	$this->data['info'] = $allhotels['paginationinfo'];

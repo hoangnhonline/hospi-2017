@@ -319,8 +319,10 @@ class Hotels_lib
         
         $rh          = $this->ci->hotels_model->search_hotels_front('', '', '', '', '', '');
         $hotels      = $this->ci->hotels_model->search_hotels_front($perpage, $offset, $orderby);
-        $tmp = $this->getResultObject($hotels['all']);
+        $tmp = $this->getResultObject($hotels['all'], null, $orderby);        
         $data['all'] = $tmp['result'];
+       	$resultSort = $tmp['resultSort'];
+       	//var_dump("<pre>aaaa", $resultSort,"</pre>");        
         if ($honeymoon != null) {
             $data['all'] = $this->getHoneyObject($hotels['all']);
         }
@@ -338,6 +340,7 @@ class Hotels_lib
         
         $data['plinks'] = $this->ci->bootpagination->dopagination('hotels/search', $hotels['rows'], $perpage);
         //}
+        $data['resultSort'] = $resultSort;        
         return $data;
     }
     
@@ -360,10 +363,7 @@ class Hotels_lib
         $tmp = $this->getResultObject($hotels['all'], null, $orderby);
         $resultSort = $tmp['resultSort'];
         $data['all'] = $tmp['result'];
-        //$data['all'] = $hotels['all'];
-         foreach ($data['all'] as $tmp) {
-            $arrPrice[] = $tmp->price;
-        }
+        
         
         if ($honeymoon != null) {
             $data['all'] = $this->getHoneyObject($hotels['all']);
@@ -1080,8 +1080,7 @@ class Hotels_lib
                 
             }
             
-        }
-        //var_dump('<pre>', $resultLocations);die;
+        }        
         return $resultLocations;
         
     }
@@ -1695,12 +1694,14 @@ class Hotels_lib
             } //hoangnh            
             
         }
+        
         if($orderby == 'p_lh'){
         	asort($arrPriceSort); 
         } 
         if($orderby == 'p_hl'){
         	arsort($arrPriceSort); 	
         }      
+        
         $this->currencycode = $curr->code;
         $this->currencysign = $curr->symbol;        
         return ['result' => $result, 'resultSort' => $arrPriceSort];

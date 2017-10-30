@@ -85,8 +85,11 @@
         <?php
             if (!empty($module)) {
                 $i = 1;
-                foreach ($resultSort as $htl_id => $price) {
-                    $item = $module[$htl_id];
+                 $moduleForeach = isset($resultSort) ? $resultSort : $module;              
+                    foreach ($moduleForeach as $htl_id => $item) {
+                    if(isset($resultSort)){
+                        $item = $module[$htl_id];
+                    }
                     ?>
         <div class="offset-2">
             <div class="searching-item row-eq-height">

@@ -861,31 +861,34 @@ class Hotels_model extends CI_Model
     function search_hotels_front($perpage = null, $offset = null, $orderby = null, $cities = null, $lists = null)
     {
         $data         = array();
-        $searchtxt    = $this->input->get('txtSearch');
-        $checkin      = $this->input->get('checkin');
-        $checkout     = $this->input->get('checkout');
-        $adult        = $this->input->get('adults');
-        $child        = $this->input->get('child');
-        $types        = $this->input->get('type');
-        $amenities    = $this->input->get('amenities');
-        $groups       = $this->input->get('group');
-        $categories   = $this->input->get('category');
-        $stars        = $this->input->get('stars');
-        $sprice       = $this->input->get('price');
-        $near         = $this->input->get('near');
-        $honeymoon    = $this->input->get('honeymoon');
-        $issale       = $this->input->get('issale');
-        $pickup       = $this->input->get('pickup');
-        $days         = pt_count_days($checkin, $checkout);
-        $checkindate  = convert_to_unix($checkin);
-        $checkoutdate = convert_to_unix($checkout);
+       $stars     = $this->input->get('stars');
+        $sprice    = $this->input->get('price');
+        $types     = $this->input->get('type');
+        $near      = $this->input->get('near');
+        $issale    = $this->input->get('issale');
+        $pickup    = $this->input->get('pickup');
+        $honeymoon = $this->input->get('honeymoon');
         //$hotelslist = $lists['hotels'];
-        //$roomslist = $lists['rooms'];
         if ($offset != null) {
             $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
         }
+        $this->db->select('pt_hotels.*,pt_rooms.room_basic_price as price,pt_hotels_translation.trans_title');
+        $this->db->select_avg('pt_reviews.review_overall', 'overall');
+        //$this->db->where('pt_hotels.hotel_city', $searchtxt);
         
-        $this->db->select("pt_hotels.*,pt_rooms.room_basic_price as price");
+        /*$this->db->where('MATCH (pt_hotels.hotel_title) AGAINST ("'. $searchtxt .'")', NULL, false);
+        $this->db->or_where('MATCH (pt_hotels_translation.trans_title) AGAINST ("'. $searchtxt .'")', NULL, false);
+        $this->db->or_where('MATCH (pt_hotels.hotel_city) AGAINST ("'. $searchtxt .'")', NULL, false);
+        */
+        
+        /*$this->db->like('pt_hotels.hotel_title', $searchtxt);
+        $this->db->or_like('pt_hotels_translation.trans_title', $searchtxt);
+        $this->db->or_like('pt_hotels.hotel_city', $searchtxt);*/
+        
+        if (!empty($stars)) {
+            
+            $this->db->where_in('pt_hotels.hotel_stars', $stars);
+        }
         if ($orderby == "za") {
             $this->db->order_by('pt_hotels.hotel_title', 'desc');
         } elseif ($orderby == "az") {
@@ -897,11 +900,9 @@ class Hotels_model extends CI_Model
         } elseif ($orderby == "ol") {
             $this->db->order_by('pt_hotels.hotel_order', 'asc');
         } elseif ($orderby == "p_lh") {
-            $this->db->order_by('pt_rooms.room_basic_price', 'asc');
-            
+            $this->db->order_by('price', 'asc');
         } elseif ($orderby == "p_hl") {
-            $this->db->order_by('pt_rooms.room_basic_price', 'desc');
-            
+            $this->db->order_by('price', 'desc');
         } elseif ($orderby == "s_lh") {
             $this->db->order_by('pt_hotels.hotel_stars', 'asc');
         } elseif ($orderby == "s_hl") {
@@ -911,76 +912,52 @@ class Hotels_model extends CI_Model
             $this->db->order_by('pt_hotels.hotel_is_featured', 'asc');
             //$this->db->where($where1);
         }
-        /*    if (!empty ($adult)) {
-        $this->db->where('pt_hotels.hotel_adults <=', $adult);
-        }
-        if (!empty ($child)) {
-        $this->db->where('pt_hotels.hotel_children <=', $child);
-        }*/
         if (!empty($types)) {
             $this->db->where_in('pt_hotels.hotel_type', $types);
-        }
-        
-        if (!empty($issale)) {
-            $this->db->where('pt_hotels.hotel_is_sale', 'yes');
-            $where = "((pt_hotels.hotel_sale_from < " . time() . " AND pt_hotels.hotel_sale_to > " . time() . ") OR pt_hotels.hotel_sale_forever = 'forever')";
-            $this->db->where($where);
-            
-        }
-        
-        
-        
-        if (!empty($amenities)) {
-            foreach ($amenities as $am) {
-                
-                $this->db->or_like('pt_hotels.hotel_amenities', $am);
-            }
-        }
-        
-        
-        if (!empty($honeymoon)) {
-            $this->db->where('pt_rooms.honey_moon', 'Yes');
-            
-        }
-        
-        if (!empty($pickup)) {
-            $this->db->where('pt_hotels.hotel_pickup', 'Yes');
-            
-        }
-        
-        if (!empty($near)) {
-            $near = str_replace("+", ' ', $near);
-            $this->db->like('pt_hotels.near', $near);
-            
-        }
-        
-        if (!empty($stars)) {
-            $this->db->where('pt_hotels.hotel_stars', $stars);
         }
         if (!empty($sprice)) {
             $tmp = explode(";", $sprice);
             
             $this->db->where('pt_rooms.room_basic_price >=', $tmp[0]);
             $this->db->where('pt_rooms.room_basic_price <=', $tmp[1]);
+        }
+        if (!empty($honeymoon)) {
+            
+            $this->db->where('pt_rooms.honey_moon', 'Yes');
             
         }
-        $this->db->where_in('pt_hotels.hotel_id', $hotelslist);
-        $this->db->select_avg('pt_reviews.review_overall', 'overall');
+        if (!empty($issale)) {
+            $this->db->where('pt_hotels.hotel_is_sale', 'yes');
+            $where = "((pt_hotels.hotel_sale_from < " . time() . " AND pt_hotels.hotel_sale_to > " . time() . ") OR pt_hotels.hotel_sale_forever = 'forever')";
+            $this->db->where($where);
+            
+            
+        }
+        if (!empty($pickup)) {
+            $this->db->where('pt_hotels.hotel_pickup', 'Yes');
+            
+        }
+        if (!empty($near)) {
+            $near = str_replace("+", ' ', $near);
+            $this->db->like('pt_hotels.near', $near);
+            
+        }
         
-        /*$this->db->where('MATCH (pt_hotels.hotel_title) AGAINST ("'. $searchtxt .'")', NULL, false);
-        $this->db->or_where('MATCH (pt_hotels_translation.trans_title) AGAINST ("'. $searchtxt .'")', NULL, false);*/
         
-        $this->db->like('pt_hotels.hotel_title', $searchtxt);
-        $this->db->or_like('pt_hotels_translation.trans_title', $searchtxt);
-        
+        $this->db->join('pt_hotels_translation', 'pt_hotels.hotel_id = pt_hotels_translation.item_id', 'left');
         $this->db->group_by('pt_hotels.hotel_id');
         $this->db->join('pt_rooms', 'pt_hotels.hotel_id = pt_rooms.room_hotel', 'left');
-        $this->db->join('pt_hotels_translation', 'pt_hotels.hotel_id = pt_hotels_translation.item_id', 'left');
+        $this->db->join('pt_reviews', 'pt_hotels.hotel_id = pt_reviews.review_itemid', 'left');
         $this->db->having('pt_hotels.hotel_status', 'Yes');
+        
         if (!empty($perpage)) {
+            
             $query = $this->db->get('pt_hotels', $perpage, $offset);
+            
         } else {
+            
             $query = $this->db->get('pt_hotels');
+            
         }
         /*echo $this->db->_error_message();
         exit;*/

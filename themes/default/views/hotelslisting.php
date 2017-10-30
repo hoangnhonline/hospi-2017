@@ -689,8 +689,8 @@
             <?php
                 if (!empty($module)) {
                     $i = 1;
-                    $module = isset($resultSort) ? $resultSort : $module;
-                    foreach ($module as $htl_id => $item) {
+                    $moduleForeach = isset($resultSort) ? $resultSort : $module;
+                    foreach ($moduleForeach as $htl_id => $item) {
                     if(isset($resultSort)){
                         $item = $module[$htl_id];
                     }
