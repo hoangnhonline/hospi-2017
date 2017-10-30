@@ -47,6 +47,7 @@ class Hotels extends MX_Controller {
 		}
 
 		public function index() {
+
 				$this->load->library('hotels/hotels_calendar_lib');
 				$this->data['calendar'] = $this->hotels_calendar_lib;
 				$settings = $this->settings_model->get_front_settings('hotels');
@@ -116,26 +117,26 @@ class Hotels extends MX_Controller {
 					  $this->data['metadesc'] = $this->data['module']->metadesc;
 					  $this->data['langurl'] = base_url()."hotels/{langid}/".$this->data['module']->slug;
 
-                                            $recentlyViewed = $this->session->userdata('recentlyViewed');
-                                                if(!is_array($recentlyViewed)){
-                                                    $recentlyViewed = array();
-                                                }
-                                                //change this to 10
-                                                if(sizeof($recentlyViewed)>10){
-                                                    array_shift($recentlyViewed);
-                                                }
-                                                //here set your id or page or whatever
-                                                if(!in_array($this->data['module']->id,$recentlyViewed)){
-                                                    array_push($recentlyViewed,$this->data['module']->id);
-                                                }
-                                                $this->session->set_userdata('recentlyViewed', $recentlyViewed);
-                                                $recentlyViewed = array_reverse($recentlyViewed);
-                                                $recentlyViewed = array_diff($recentlyViewed, array($this->data['module']->id));
-                                                $recentlyViewed = array_filter($recentlyViewed);
-                                                //var_dump($recentlyViewed);
-                                                $this->data['recents'] = $recentlyViewed;
+	                    $recentlyViewed = $this->session->userdata('recentlyViewed');
+	                        if(!is_array($recentlyViewed)){
+	                            $recentlyViewed = array();
+	                        }
+	                        //change this to 10
+	                        if(sizeof($recentlyViewed)>10){
+	                            array_shift($recentlyViewed);
+	                        }
+	                        //here set your id or page or whatever
+	                        if(!in_array($this->data['module']->id,$recentlyViewed)){
+	                            array_push($recentlyViewed,$this->data['module']->id);
+	                        }
+	                        $this->session->set_userdata('recentlyViewed', $recentlyViewed);
+	                        $recentlyViewed = array_reverse($recentlyViewed);
+	                        $recentlyViewed = array_diff($recentlyViewed, array($this->data['module']->id));
+	                        $recentlyViewed = array_filter($recentlyViewed);
+	                        //var_dump($recentlyViewed);
+	                        $this->data['recents'] = $recentlyViewed;
 
-                                                                    /* Bread crum */
+	                                            /* Bread crum */
 
                               $this->breadcrumbcomponent->add('Trang chủ', base_url());
                               $this->breadcrumbcomponent->add('Khách sạn', base_url().'hotels');
@@ -177,6 +178,7 @@ class Hotels extends MX_Controller {
 
 				//$this->data['popular_hotels'] = $this->hotels_model->popular_hotels_front();
 				$allhotels = $this->hotels_lib->show_hotels($offset);
+				//var_dump("<pre>", $allhotels);die;
 				$honeymoon = @$_GET['honeymoon'];
 				if(!empty($honeymoon)) {
 					$allhotels = $this->hotels_lib->show_honeymoons($offset,1);
@@ -322,9 +324,9 @@ class Hotels extends MX_Controller {
    				if (array_filter($_GET)) {
 
 						if (!empty ($cityid) && $modType == "location") {
-                            if($honeymoon=="yes") {
+                            if($honeymoon=="yes") {                            	
                                 $allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset,'','', $honeymoon);
-                            } else {
+                            } else {                            	
 								$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);
                         		//var_dump("<pre>", $allhotels);die;
                             }
@@ -337,7 +339,15 @@ class Hotels extends MX_Controller {
 							$allhotels = $this->hotels_lib->search_hotels($offset);
                                                     }
 						}
-                        $this->data['module'] = $allhotels['all'];
+						//
+						$tmpArr = [];
+						if(!empty($allhotels['all'])){
+							foreach($allhotels['all'] as $htl){
+								$tmpArr[$htl->id] = $htl;
+							}
+						}						
+                        $this->data['module'] = $tmpArr;
+                        $this->data['resultSort'] = $allhotels['resultSort'];
 			        	$this->data['info'] = $allhotels['paginationinfo'];
 
 						$this->data['plinks'] = $allhotels['plinks'];
@@ -466,7 +476,15 @@ class Hotels extends MX_Controller {
 							$allhotels = $this->hotels_lib->search_hotels($offset);
                                                     }
 						}
-                        $this->data['module'] = $allhotels['all'];
+                        //
+						$tmpArr = [];
+						if(!empty($allhotels['all'])){
+							foreach($allhotels['all'] as $htl){
+								$tmpArr[$htl->id] = $htl;
+							}
+						}						
+                        $this->data['module'] = $tmpArr;
+                        $this->data['resultSort'] = $allhotels['resultSort'];
 			        	$this->data['info'] = $allhotels['paginationinfo'];
 
 						$this->data['plinks'] = $allhotels['plinks'];

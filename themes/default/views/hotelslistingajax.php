@@ -85,7 +85,8 @@
         <?php
             if (!empty($module)) {
                 $i = 1;
-                foreach ($module as $item) {
+                foreach ($resultSort as $htl_id => $price) {
+                    $item = $module[$htl_id];
                     ?>
         <div class="offset-2">
             <div class="searching-item row-eq-height">
@@ -118,7 +119,7 @@
                                         ?>
                                 <b>
                                     <?php echo $item->price; ?>
-                                    <div class="smalltext">(<?php echo $item->currSymbol; ?>)</div>
+                                    <div class="smalltext">(VNĐ)</div>
                                 </b>
                                 <div class="clearfix"></div>
                                 <hr>
@@ -289,6 +290,7 @@
             ?>
         <div class="clearfix"></div>
         <div class="col-md-12 go-right">
+
             <div class="block-pagination">
                 <?php echo createPagination($info); ?></div>
             </div>
@@ -323,3 +325,28 @@
         <!-- End EAN multiple locations found and load more hotels  -->
     </div>
     <!-- END OF LIST CONTENT-->
+<script type="text/javascript">
+    $('ul.pagination li a').attr('href', 'javascript:;');
+    $(document).on('click', 'ul.pagination li a', function(){
+        var page = parseInt($(this).html()); 
+        ajaxSearchPagination(page);
+    });
+    function ajaxSearchPagination(page){ // hoangnh
+    
+    $.ajax({
+        url : $('#ajaxurl').val() + '/' + page,
+        type : "GET",       
+        beforeSend : function(){
+
+            $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+            $('html, body').animate({
+                scrollTop: $("#right-content").offset().top
+            }, 500);
+        },
+        data : $('formSearchAjax').serialize(),
+        success : function(data){
+            $('#right-content').html(data);           
+        }
+    });
+}    
+</script>

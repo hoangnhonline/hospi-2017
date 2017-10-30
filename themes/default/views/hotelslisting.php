@@ -689,7 +689,11 @@
             <?php
                 if (!empty($module)) {
                     $i = 1;
-                    foreach ($module as $item) {
+                    $module = isset($resultSort) ? $resultSort : $module;
+                    foreach ($module as $htl_id => $item) {
+                    if(isset($resultSort)){
+                        $item = $module[$htl_id];
+                    }
                         ?>
             <div class="offset-2">
                 <div class="searching-item row-eq-height">
@@ -892,7 +896,7 @@
                 }
                 ?>
             <div class="clearfix"></div>
-            <div class="col-md-12 go-right">
+            <div class="col-md-12 go-right">            
                 <div class="block-pagination">
                     <?php echo createPagination($info); ?></div>
                 </div>
@@ -1067,6 +1071,7 @@
                 enableEventPropagation: true
         }); }; });
 </script>
+<input type="hidden" id="ajaxurl" value="<?php echo $ajaxurl; ?>">
 <script src="<?php echo $theme_url; ?>assets/js/infobox.js"></script>
 <script type="text/javascript">
     var cb, optionSet1;    
@@ -1154,13 +1159,18 @@
         }
         ajaxSearch($(this));
     });  
-
+    $('ul.pagination li a').attr('href', 'javascript:;');
+    $(document).on('click', 'ul.pagination li a', function(){
+        var page = parseInt($(this).html()); 
+        ajaxSearchPagination(page);
+        return false;
+    });
     
 });//]]>
 function ajaxSearch(obj){ // hoangnh
     var form = obj.parents('form');
     $.ajax({
-        url : "<?php echo $ajaxurl; ?>",
+        url : $('#ajaxurl').val(),
         type : "GET",       
         beforeSend : function(){
 
@@ -1170,6 +1180,24 @@ function ajaxSearch(obj){ // hoangnh
             }, 500);
         },
         data : form.serialize(),
+        success : function(data){
+            $('#right-content').html(data);           
+        }
+    });
+}  
+function ajaxSearchPagination(page){ // hoangnh
+    
+    $.ajax({
+        url : $('#ajaxurl').val() + '/' + page,
+        type : "GET",       
+        beforeSend : function(){
+
+            $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+            $('html, body').animate({
+                scrollTop: $("#right-content").offset().top
+            }, 500);
+        },
+        data : $('formSearchAjax').serialize(),
         success : function(data){
             $('#right-content').html(data);           
         }
