@@ -297,7 +297,7 @@
                                 <div class="clearfix"></div>
                                 <div class="block-check-sale-sb go-right">
                                     <label for="Dưới 500.000" class="css-label go-left">
-                                        <input type="checkbox" value="0;500000"  name="price" id="Dưới 500.000" class="go-right radio filter" />
+                                        <input type="checkbox" value="0;500000"  name="price" id="Dưới 500.000" class="go-right radio filter-price" />
                                         <span></span>
                                         Dưới 500.000
                                     </label>
@@ -305,7 +305,7 @@
                                 <div class="clearfix"></div>
                                 <div class="block-check-sale-sb go-right">
                                     <label for="Từ 500.000 - 1,000.000" class="css-label go-left">
-                                        <input type="checkbox" value="500000;1000000"  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio filter" />
+                                        <input type="checkbox" value="500000;1000000"  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio filter-price" />
                                         <span></span>
                                         Từ 500.000 - 1,000.000
                                     </label>
@@ -313,7 +313,7 @@
                                 <div class="clearfix"></div>
                                 <div class="block-check-sale-sb go-right">
                                     <label for="Từ 1,000.000 - 2,000.000" class="css-label go-left">
-                                        <input type="checkbox" value="1000000;2000000"  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio filter" />
+                                        <input type="checkbox" value="1000000;2000000"  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio filter-price" />
                                         <span></span>
                                         Từ 1,000.000 - 2,000.000
                                     </label>
@@ -321,7 +321,7 @@
                                 <div class="clearfix"></div>
                                 <div class="block-check-sale-sb go-right">
                                     <label for="Từ 2,000.000 - 4,000.000" class="css-label go-left">
-                                        <input type="checkbox" value="2000000;4000000"  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio filter" />
+                                        <input type="checkbox" value="2000000;4000000"  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio filter-price" />
                                         <span></span>
                                         Từ 2,000.000 - 4,000.000
                                     </label>
@@ -329,7 +329,7 @@
                                 <div class="clearfix"></div>
                                 <div class="block-check-sale-sb go-right">
                                     <label for="Trên  4,000.000" class="css-label go-left">
-                                        <input type="checkbox" value="4000000;100000000"  name="price" id="Trên  4,000.000" class="go-right radio filter" />
+                                        <input type="checkbox" value="4000000;100000000"  name="price" id="Trên  4,000.000" class="go-right radio filter-price" />
                                         <span></span>
                                         Trên  4,000.000
                                     </label>
@@ -484,9 +484,9 @@
                                             ?>
                                 <div class="block-check-sale-sb go-right">
                                     <label for="<?php echo trim($item); ?>" class="css-label go-left">
-                                        <input type="checkbox" value="<?php echo trim($item); ?>" <?php if (trim($item) == str_replace("+", ' ', $varNear)) {echo "checked";} ?> name="near" id="<?php echo trim($item); ?>" class="checkbox filter" />
+                                        <input type="checkbox" value="<?php echo trim($item); ?>" <?php if (trim($item) == str_replace("+", ' ', $varNear)) {echo "checked";} ?> name="near" id="<?php echo trim($item); ?>" class="checkbox filter-near" />
                                         <span></span>
-                                        <?php echo trim($item); ?>
+                                            <?php echo trim($item); ?>
                                     </label>
                                 </div>
                                 <?php }
@@ -556,10 +556,7 @@
                 </div><!-- block-md-item -->
                 <div class="block-md-item">
                     <div class="clearfix"></div>
-                    <br/>
-                    <input type="hidden" name="sortby" id="sortbyajax" value="<?php if (!empty($_GET['sortby'])) {
-                        echo $_GET['sortby'];
-                        } ?>">
+                    <br/>                   
                     <input type="hidden" name="txtSearch" value="<?php if (!empty($_GET['txtSearch'])) {
                         echo $_GET['txtSearch'];
                         } ?>">
@@ -576,7 +573,7 @@
                     <input type="hidden" name="childages" value="<?php echo $childAges; ?>">
                     <input type="hidden" name="adults" value="<?php echo $adults; ?>">
                     <input type="hidden" name="searching" value="<?php echo $selectedLocation; ?>">
-                    <input name="sortby" type="hidden" class="sortby" value="<?php if (!empty($_GET['sortby'])) {
+                    <input name="sortby" type="hidden" id="sortbyajax" class="sortby" value="<?php if (!empty($_GET['sortby'])) {
                         echo $_GET['sortby'];
                         } ?>">
                     <button style="border-radius:0px" type="submit" class="btn btn-action btn-lg btn-block" id="searchform"><?php echo trans('0694'); ?></button>
@@ -1076,8 +1073,7 @@
 </script>
 <script type="text/javascript">
             
-        $(document).on('ifChanged', 'input.sortajax', function(){
-            alert('123');
+        $(document).on('change', 'input.sortajax', function(){            
             $('#sortbyajax').val($(this).val());  
             var obj = $('#sortbyajax');
             ajaxSearch(obj);
@@ -1135,9 +1131,30 @@
                     return false;
             }
     });    
-    $('input.filter').on('ifChanged', function (event) { //hoangnh        
+    $('input.filter').on('change', function (event) { //hoangnh                
         ajaxSearch($(this));
     });  
+    $('input.filter-price').on('change', function (event) { //hoangnh
+        var obj = $(this);        
+        if( obj.prop('checked') == true ){
+            $('.filter-price').prop('checked', false);
+            obj.prop('checked', true);
+        }else{
+            $('.filter-price').prop('checked', false);
+        }
+        ajaxSearch($(this));
+    });  
+    $('input.filter-near').on('change', function (event) { //hoangnh
+        var obj = $(this);        
+        if( obj.prop('checked') == true ){
+            $('.filter-near').prop('checked', false);
+            obj.prop('checked', true);
+        }else{
+            $('.filter-near').prop('checked', false);
+        }
+        ajaxSearch($(this));
+    });  
+
     
 });//]]>
 function ajaxSearch(obj){ // hoangnh
