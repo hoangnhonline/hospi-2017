@@ -6424,7 +6424,6 @@ span.offers-featured-hotel-price i {
     color: #fff;
     padding: 6px 8px 6px 10px;
     box-shadow: 1px 1px 10px #888888;
-    float: right;
 }
 .mh-menu {
     position: relative;
@@ -7274,11 +7273,11 @@ ul.navbar-nav.top-menu > li span.honeymoon,
     }
     .sale-percent {
         color: red!important;
-        text-align: center;
+        // text-align: center;
         vertical-align: middle;
     }
     .sale-price {
-        color: #660033!important;
+        // color: #660033!important;
         vertical-align: middle;
     }
     .header-featured-hotel-address {
@@ -9837,3 +9836,46 @@ content: url(../../assets/img/collapsearrow.png);
   text-decoration: underline;
 }
 .romm-package .price-package {}
+
+#itemlist.itemlist-cus {
+  display: inline-block!important;
+  background: url(../../assets/img/backgound-pos2.jpg);
+  padding: 10px 10px 5px 20px;
+  border: 1px solid #cccccc;
+  margin-bottom: 15px;
+  line-height: 28px;
+  box-shadow: none;
+  position: relative;
+}
+#itemlist.itemlist-cus:before {
+  content: url(../../assets/img/collapsearrow-down.png);
+  padding: 0;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 10%;
+  height: 100%;
+  pointer-events: none;
+}
+#itemlist.itemlist-cus #location {
+  -webkit-appearance: none; /* for webkit browsers */
+  -moz-appearance: none; /* for firefox */
+  -appearance: none; /* for modern browsers */
+}
+
+form:focus,
+select:focus {
+  outline: none;
+}
+
+.sub-menu-link span {
+  color: #003366;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.price_pg-sale {
+  color: #660033;
+  font-family: 'AndesRoundedLight';
+  font-size: 18px;
+}

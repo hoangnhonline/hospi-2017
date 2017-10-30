@@ -68,19 +68,19 @@
                 <h1 class="h1-offers"><?php echo trans('0558'); ?></h1>
                 <div style="color: #666666; font-size: 15px;"><?php echo trans('0597'); ?></div>
                 <div style="margin-top:30px">
-                  <?php echo trans('0598'); ?>
-                  <form name="itemlist" id="itemlist" action="" method="post">
-                      <i class="fa fa-check" aria-hidden="true"></i>
-                      <select id="location" name="location" onchange="submitform();">
-                          <option value=""><?php echo trans('0690'); ?></option>
-                          <?php $location = getLocations();
-                              $selected = "";
-                              foreach($location as $loc){
-                                  if($_GET['location']==$loc->id) $selected = "selected"; else $selected = "";
-                                  echo "<option value='".$loc->id."' ".$selected.">".$loc->location."</option>";
-                              }?>
-                      </select>
-                  </form>
+                    <span style="color: #666666; font-size: 16px;"><?php echo trans('0598'); ?></span>
+                    <form name="itemlist" id="itemlist" class="itemlist-cus" action="" method="post">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <select id="location" name="location" onchange="submitform();">
+                            <option value=""><?php echo trans('0690'); ?></option>
+                            <?php $location = getLocations();
+                                $selected = "";
+                                foreach($location as $loc){
+                                if($_GET['location']==$loc->id) $selected = "selected"; else $selected = "";
+                                echo "<option value='".$loc->id."' ".$selected.">".$loc->location."</option>";
+                            }?>
+                        </select>
+                    </form>
                 </div>
                 <div style="margin-top:30px"></div>
             </div>
@@ -111,14 +111,14 @@
                 <div class="place-row childrow">
                     <div class="place-cell">
                         <a class="sub-menu-link" href="<?php echo $item->slug; ?>" target="_blank">
-                            <?php echo $item->title; ?><?php echo $item->stars; ?>
+                            <span><?php echo $item->title; ?><?php echo $item->stars; ?></span>
                             <div class="header-featured-hotel-address opensans"><?php echo $item->mapAddress; ?></div>
                         </a>
                     </div>
                     <div class="place-cell sale-percent">- <?php echo $item->salepercent; ?>%</div>
                     <div class="place-cell sale-price opensans"><?php echo date('d/m',$item->salefrom)." - ".date('d/m/Y',$item->saleto); ?></div>
-                    <div class="place-cell sale-price opensans"><?php echo $item->price; ?></div>
-                    <div class="place-cell sale-price"><a class="sub-menu-link" href="<?php echo $item->slug; ?>" target="_blank"><span class="offers-featured-hotel-price"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></a></div>
+                    <div class="place-cell sale-price"><span class="price_pg-sale"><?php echo $item->price; ?></span</div>
+                    <div class="place-cell sale-price text-center"><a class="sub-menu-link" href="<?php echo $item->slug; ?>" target="_blank"><span class="offers-featured-hotel-price"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></a></div>
                 </div>
                 <?php } ?>
             </div>

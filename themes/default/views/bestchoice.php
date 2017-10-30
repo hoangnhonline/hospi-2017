@@ -72,22 +72,22 @@
         <div class="itemscontainer offset-1">
             <div class="offset-2">
                 <h1 class="h1-offers"><?php echo trans('0594'); ?></h1>
-                <hr style="margin-top: 10px; margin-bottom: 10px;">
                 <div style="color: #666666; font-size: 15px;"><?php echo trans('0595'); ?></div>
-                <div style="margin-top:30px"></div>
-                <?php echo trans('0596'); ?>
-                <form name="itemlist" id="itemlist" action="" method="post">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                    <select id="location" name="location" onchange="submitform();">
-                        <option value=""><?php echo trans('0690'); ?></option>
-                        <?php $location = getLocations();
-                            $selected = "";
-                            foreach($location as $loc){
-                                if($_GET['location']==$loc->id) $selected = "selected"; else $selected = "";
-                                echo "<option value='".$loc->id."' ".$selected.">".$loc->location."</option>";
-                            }?>
-                    </select>
-                </form>
+                <div style="margin-top:30px">
+                    <span style="color: #666666; font-size: 16px;"><?php echo trans('0596'); ?></span>
+                    <form name="itemlist" id="itemlist" class="itemlist-cus" action="" method="post">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        <select id="location" name="location" onchange="submitform();">
+                            <option value=""><?php echo trans('0690'); ?></option>
+                            <?php $location = getLocations();
+                                $selected = "";
+                                foreach($location as $loc){
+                                    if($_GET['location']==$loc->id) $selected = "selected"; else $selected = "";
+                                    echo "<option value='".$loc->id."' ".$selected.">".$loc->location."</option>";
+                                }?>
+                        </select>
+                    </form>
+                </div>
                 <div style="margin-top:30px"></div>
             </div>
             <?php if(!empty($featuredfHotels)){ foreach($featuredfHotels as $item){ ?>
