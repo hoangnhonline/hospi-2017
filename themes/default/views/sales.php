@@ -70,7 +70,6 @@
                 <div style="margin-top:30px">
                     <span style="color: #666666; font-size: 16px;"><?php echo trans('0598'); ?></span>
                     <form name="itemlist" id="itemlist" class="itemlist-cus" action="" method="post">
-                        <i class="fa fa-check" aria-hidden="true"></i>
                         <select id="location" name="location" onchange="submitform();">
                             <option value=""><?php echo trans('0690'); ?></option>
                             <?php $location = getLocations();

@@ -76,7 +76,6 @@
                 <div style="margin-top:30px">
                     <span style="color: #666666; font-size: 16px;"><?php echo trans('0596'); ?></span>
                     <form name="itemlist" id="itemlist" class="itemlist-cus" action="" method="post">
-                        <i class="fa fa-check" aria-hidden="true"></i>
                         <select id="location" name="location" onchange="submitform();">
                             <option value=""><?php echo trans('0690'); ?></option>
                             <?php $location = getLocations();
@@ -102,7 +101,7 @@
                 </div>
                 <div class="wow fadeInUp col-md-9 offset-0">
                     <div class="itemlabel_hospi">
-                        <div class="col-lg-8 col-md-8 col-sm-8 rtl_title_home" style="border-right: 1px solid #e2e2e2;min-height: 128px;">
+                        <div class="col-lg-8 col-md-8 col-sm-8 rtl_title_home">
                             <h4 class="mtb0 RTL go-text-right">
                                 <a href="<?php echo $item->slug;?>"><b><?php echo $item->title;?></b></a>
                             </h4>
