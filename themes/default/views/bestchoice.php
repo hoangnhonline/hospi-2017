@@ -88,33 +88,37 @@
                     </form>
                 </div>
                 <div style="margin-top:30px"></div>
-            </div>
+            </div><!-- offset-2 -->
             <?php if(!empty($featuredfHotels)){ foreach($featuredfHotels as $item){ ?>
-            <div class="offset-2 featured-item">
-                <div class="wow fadeInUp col-lg-3 col-md-3 col-sm-3 offset-0 go-right">
+            <div class="featured-item col-sm-6">
+              <div class="featured-item-content">
+                <div class="row row-eq-height">
+                  <div class="col-sm-6 col-sm-push-6 col-xs-12 go-right">
                     <div class="hospi_img_list">
-                        <a href="<?php echo $item->slug;?>">
-                            <img src="<?php echo $item->thumbnail;?>" alt="<?php echo character_limiter($item->title,20);?>">
-                            <div class="short_info"></div>
-                        </a>
+                      <a href="<?php echo $item->slug;?>">
+                        <!-- <img src="<?php echo $item->thumbnail;?>" class="img-responsive" alt="<?php echo character_limiter($item->title,20);?>"> -->
+                        <img src="assets/img/Untitled-1.jpg" alt="">
+                        <div class="short_info"></div>
+                      </a>
                     </div>
-                </div>
-                <div class="wow fadeInUp col-md-9 offset-0">
+                    <span class="offer-location"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $item->city;?></span>
+                  </div>
+                  <div class="col-sm-6 col-sm-pull-6 col-xs-12">
                     <div class="itemlabel_hospi">
-                        <div class="col-lg-8 col-md-8 col-sm-8 rtl_title_home">
-                            <h4 class="mtb0 RTL go-text-right">
-                                <a href="<?php echo $item->slug;?>"><b><?php echo $item->title;?></b></a>
-                            </h4>
-                            <?php echo $item->stars; ?>
-                            <br/>
-                            <span class="opensans"><?php echo $item->mapAddress; ?></span>
-                            <br/><br/><br/>
-                            <div class="opensans"><?php echo trans('0566'); ?>: <span class="big-price"><?php echo $item->price; ?></span> <span class="med-price"><?php echo $item->currSymbol; ?></span></div>
+                      <div class="rtl_title_home">
+                        <h4><a href="<?php echo $item->slug;?>"><?php echo $item->title;?></a></h4>
+                        <p class="sub_rtl_title_home">chỉ với 7.999.000 bạn sẽ tận hưởng combo miễn phí......</p>
+                        <p class="view_more_db"><a href="<?php echo $item->slug;?>"><?php echo trans('0569');?></a></p>
+                        <div class="cb_price">
+                          <span><?php echo $item->price; ?></span>
+                          <span><?php echo $item->currSymbol; ?></span>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <div class="clearfix" style="padding-top: 20px;"></div>
+              </div>
+            </div><!-- featured-item col-sm-6 -->
             <?php } ?>    
             <div class="clearfix"></div>
             <div class="col-md-12 pull-right go-right"><?php echo createPagination($info);?></div>

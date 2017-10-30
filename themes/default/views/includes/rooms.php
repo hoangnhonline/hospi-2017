@@ -358,7 +358,7 @@
                 <input type="hidden" name="checkin" value="<?php echo $modulelib->checkin; ?>" />
                 <input type="hidden" name="checkout" value="<?php echo $modulelib->checkout; ?>" />
                 <input type="hidden" name="roomid" value="<?php echo $r->id; ?>" />
-                <div class="rooms-update" style="margin-top:0px;margin-bottom:0px;display: inline-block;width:100%">
+                <div class="rooms-update">
                     <div class="col-lg-3 col-md-3 col-sm-3 offset-0 go-right">
                         <div class="zoom-gallery<?php echo $r->id; ?>">
                             <a href="<?php echo $r->fullimage; ?>" data-source="<?php echo $r->fullimage; ?>" title="<?php echo $r->title; ?>">
@@ -369,69 +369,69 @@
                     <div class="col-lg-9 col-md-9 offset-0">
                         
                         <div class="col-md-9 rtl_title_home go-text-right RTL">
-                                <?php if($r->issale>0 && $r->onsale==true) { ?>
-                                <div class="col-md-6">
-                                <?php }else { ?>
-                                <div class="row col-md-10">
-                                <?php } ?>
-                                    <h4 class="mtb0 RTL go-text-right">
-                                        <b><?php echo $r->title; ?></b>
-                                    </h4>
-                                    <h5 style="color:#8A8A8A"><?php echo trans('010'); ?> <?php echo $r->Info['maxAdults']; ?> <?php echo trans('011'); ?> <?php echo $r->Info['maxChild']; ?></h5>
-                                    <div class="visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
-                                        <div>
-                                            <a data-toggle="modal" href="#details<?php echo $r->id; ?>"><?php echo trans("0640"); ?></a>                
-                                        </div>
+                            <?php if($r->issale>0 && $r->onsale==true) { ?>
+                            <div class="col-md-6">
+                            <?php }else { ?>
+                            <div class="row col-md-10">
+                            <?php } ?>
+                                <h4 class="mtb0 RTL go-text-right">
+                                    <b><?php echo $r->title; ?></b>
+                                </h4>
+                                <h5 style="color:#8A8A8A"><?php echo trans('010'); ?> <?php echo $r->Info['maxAdults']; ?> <?php echo trans('011'); ?> <?php echo $r->Info['maxChild']; ?></h5>
+                                <div class="visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
+                                    <div>
+                                        <a data-toggle="modal" href="#details<?php echo $r->id; ?>"><?php echo trans("0640"); ?></a>                
                                     </div>
-                                 
                                 </div>
+                             
+                            </div>
 
-                                <?php if($r->issale>0 && $r->onsale==true) { ?>
-                                <div class="col-md-4">
-                                    <div class="five-star">
-                                        <h5 class="red"><?php echo trans('0709');?></h5>
-                                        <div class="from-date"><?php echo trans('0712');?><?php echo gmdate('d/m/Y',$r->salefrom); ?></div>
-                                        <div class="to-date"><?php echo trans('0713');?><?php echo gmdate('d/m/Y',$r->saleto); ?></div>
-                                    </div>
+                            <?php if($r->issale>0 && $r->onsale==true) { ?>
+                            <div class="col-md-4">
+                                <div class="five-star">
+                                    <h5 class="red"><?php echo trans('0709');?></h5>
+                                    <div class="from-date"><?php echo trans('0712');?><?php echo gmdate('d/m/Y',$r->salefrom); ?></div>
+                                    <div class="to-date"><?php echo trans('0713');?><?php echo gmdate('d/m/Y',$r->saleto); ?></div>
                                 </div>
-                                <?php } ?>
-                                <!--is_sale.php-->
-                                <div class="col-md-2">
-                                    <span class="ipull-right">
-                                        <?php if ($r->price > 0) { ?>
-                                        <span class="purple size18">
-                                            <?php if ($module->price_status == 'Yes') { if($r->issale>0 && $r->onsale==true) echo "<b>". $r->saleprice ."</b>"; else echo "<b>". $r->price ."</b>"; ?>                                            
-                                        </span>
-                                        <br/>
-                                        <span class="size11 grey" style="white-space: nowrap;"><strong><?php echo trans('070'); ?> <?php echo $modulelib->stay; ?> <?php echo trans('0122'); ?></strong> </span>
-                                        <?php } else { ?>
-                                        <span class="size13" style="white-space: nowrap;text-align: center;"><a href="#emailme<?php echo $module->id; ?>" data-toggle="modal" data-content="<?php echo trans('0800'); ?>" rel="popover" data-placement="top" data-original-title="<?php echo $item->title; ?>" data-trigger="hover"><?php echo trans('0799'); ?></a></span>
-                                        <?php } ?>
-                                        <div class="clearfix"></div>
-                                        <?php } ?>
+                            </div>
+                            <?php } ?>
+                            <!--is_sale.php-->
+                            <div class="col-md-2">
+                                <span class="ipull-right">
+                                    <?php if ($r->price > 0) { ?>
+                                    <span class="purple size18">
+                                        <?php if ($module->price_status == 'Yes') { if($r->issale>0 && $r->onsale==true) echo "<b>". $r->saleprice ."</b>"; else echo "<b>". $r->price ."</b>"; ?>                                            
                                     </span>
-                                </div><!--col-md-2-->                                
+                                    <br/>
+                                    <span class="size11 grey" style="white-space: nowrap;"><strong><?php echo trans('070'); ?> <?php echo $modulelib->stay; ?> <?php echo trans('0122'); ?></strong> </span>
+                                    <?php } else { ?>
+                                    <span class="size13" style="white-space: nowrap;text-align: center;"><a href="#emailme<?php echo $module->id; ?>" data-toggle="modal" data-content="<?php echo trans('0800'); ?>" rel="popover" data-placement="top" data-original-title="<?php echo $item->title; ?>" data-trigger="hover"><?php echo trans('0799'); ?></a></span>
+                                    <?php } ?>
+                                    <div class="clearfix"></div>
+                                    <?php } ?>
+                                </span>
+                            </div><!--col-md-2-->                                
                                 
-                                <ul class="hotelpreferences go-right hidden-xs">
-                                    <?php $cnt = 0;
-                                        foreach ($item->amenities as $amt) {
-                                            $cnt++;
-                                            if ($cnt <= 10) {
-                                                if (!empty($amt->name)) { ?>
-                                    <li><img title="<?php echo $amt->name; ?>" data-toggle="tooltip" data-placement="top" style="height:25px;" src="<?php echo $amt->icon; ?>" alt="<?php echo $amt->name; ?>" /></li>
-                                    <?php }
-                                        }
-                                        } ?>
-                                </ul>
+                            <ul class="hotelpreferences go-right hidden-xs">
+                                <?php $cnt = 0;
+                                    foreach ($item->amenities as $amt) {
+                                        $cnt++;
+                                        if ($cnt <= 10) {
+                                            if (!empty($amt->name)) { ?>
+                                <li><img title="<?php echo $amt->name; ?>" data-toggle="tooltip" data-placement="top" style="height:25px;" src="<?php echo $amt->icon; ?>" alt="<?php echo $amt->name; ?>" /></li>
+                                <?php }
+                                    }
+                                    } ?>
+                            </ul>
                      
                             <!-- issale price -->
                             <?php if($r->issale>0 && $r->onsale==true) { ?>
                             <div class="basic-price-line"></div>
                             <div class="basic-price">
                                 <div class="col-md-3 go-left">
-                                    <?php if ($r->price > 0) { ?>
+                                    <!-- <?php if ($r->price > 0) { ?>
                                     <button style="margin-bottom:5px" type="submit" class="btn btn-action btn-block chk"><?php echo trans('0142'); ?></button>
-                                    <?php } ?>
+                                    <?php } ?> -->
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h5 class="size12"><?php echo trans('0374'); ?></h5>
@@ -489,42 +489,7 @@
                             <?php } ?>
                             <!-- basic price -->
                         </div><!--col-md-9 labelleft2 rtl_title_home go-text-right RTL-->
-                        <div class="col-md-3 go-left">
-                            <?php if ($r->price > 0) { ?>
-                            <button style="margin-bottom:5px" type="submit" class="btn btn-action btn-block chk"><?php echo trans('0142'); ?></button>
-                            <?php } ?>
-                            <div class="clearfix"></div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 class="size12"><?php echo trans('0374'); ?></h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <select class="form-control mySelectBoxClass input-sm" name="roomscount" >
-                                            <?php for ($q = 1; $q <= $r->maxQuantity; $q++) { ?>
-                                            <option value="<?php echo $q; ?>"><?php echo $q; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <?php if ($r->extraBeds > 0) { ?>
-                                <div class="col-md-6" style="white-space: nowrap;">
-                                    <h5 class="size12"><?php echo trans('0428'); ?></h5>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="">
-                                        <select name="extrabeds" class="form-control mySelectBoxClass input-sm" id="">
-                                            <option value="0">0</option>
-                                            <?php for ($i = 1; $i <= $r->extraBeds; $i++) { ?>
-                                            <option value="<?php echo $i; ?>"> <?php echo $i; ?> <?php echo $r->currCode . " " . $r->currSymbol . $i * $r->extrabedCharges; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <?php } ?>
-                            </div>
-                        </div><!--col-md-3 go-left-->
+                        
                     </div>
                     <div class="clearfix"></div>
                 </div><!--rooms-update-->

@@ -7412,55 +7412,74 @@ ul.footerlist.go-right.go-text-right,
 .hospi_img_list {
     background: black;
     overflow: hidden;
-    min-height: 150px;
     text-align: center;
     position: relative;
 }
-.hospi_img_list img {
+/*.hospi_img_list img {
     display: block;
     -webkit-transition: all 0.5s linear;
     -moz-transition: all 0.5s linear;
     -ms-transition: all 0.5s linear;
     -o-transition: all 0.5s linear;
     transition: all 0.5s linear;
-    width: auto;
-    height: 280px;
-    position: absolute;
-    left: -10%;
-}
-.hospi_img_list a img {
-    margin-left: 60px;
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
 }
 .hospi_img_list a img {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}*/
+.featured-item-content  {
+  margin-bottom: 40px;background: rgba(255,255,255,1);
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(29%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1)));
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
+  background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
+  background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=0 );
 }
-.itemlabel_hospi {
-    background: #fff;
-    width: 100%;
-    height: 150px;
-    font-size: 13px;
-    line-height: 15px;
-    overflow: hidden;
-    border: 1px solid #e2e2e2;
+.featured-item-content .itemlabel_hospi {
+  height: 100%;
+  padding: 10px 0 10px 10px;
 }
-.itemlabel_hospi:hover {
-    background: #FAFAFA;
-    transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -webkit-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
+.featured-item-content .itemlabel_hospi h4 {
+  margin-bottom: 20px;
+  height: 48px;
+  overflow: hidden;
 }
-.offer-page .itemlabel_hospi {
-    min-height: 150px;
-    padding: 10px 0;
-    position: relative;
+.featured-item-content .itemlabel_hospi h4 a {
+  font-family: 'AndesRounded';
+  font-size: 20px;
+  line-height: 24px;
+}
+.featured-item-content .itemlabel_hospi .sub_rtl_title_home {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+.view_more_db {
+  line-height: 1;
+  margin-bottom: 25px;
+}
+.view_more_db a {
+  color: #660033;
+  font-size: 14px;
+  position: relative;
+  padding-left: 20px;
+}
+.view_more_db a:before {
+  content: url(../../assets/img/double_collapsearrow.png);
+  position: absolute;
+  top: 1px;
+  left: 0;
+}
+.featured-item-content .cb_price {
+  background: #6c113e;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 22px;
 }
 .content-bestchoice {
     position: absolute;
