@@ -210,7 +210,7 @@
             </div>
         </div>
         <div class="block-module">
-            <form  class="hospifilter" action="<?php echo base_url() . $appModule; ?>/search" method="GET" role="search">
+            <form  class="hospifilter" action="<?php echo base_url() . $appModule; ?>/search" method="GET" role="search" id="formSearchAjax">
                 <!--<a class="btn btn-block btn-default" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap"><i class="icon_set_1_icon-41"></i> <?php echo trans('067'); ?></a>-->
                 <!-- TOP TIP
                 <div class="filtertip">
@@ -491,7 +491,7 @@
                 <div class="block-md-item">
                     <div class="clearfix"></div>
                     <br/>
-                    <input type="hidden" name="sortby" value="<?php if (!empty($_GET['sortby'])) {
+                    <input type="hidden" name="sortby" id="sortbyajax" value="<?php if (!empty($_GET['sortby'])) {
                         echo $_GET['sortby'];
                         } ?>">
                     <input type="hidden" name="txtSearch" value="<?php if (!empty($_GET['txtSearch'])) {
@@ -595,17 +595,17 @@
                             echo $_GET['searching'];
                             } ?>">
                         <div class="col-md-3"><span class="sap-xep-theo andes-bold lblue"><?php echo trans('0736'); ?></span></div>
-                        <div class="col-md-3"><input type="radio" id="thap-cao" name="sortby" class="hospi-checkbox" value="p_lh" <?php if ($_GET['sortby'] == "p_lh") {
+                        <div class="col-md-3"><input type="radio" id="thap-cao" name="sortby" class="hospi-checkbox sortajax" value="p_lh" <?php if ($_GET['sortby'] == "p_lh") {
                             echo 'checked="checked"';
                             } ?>>  <label for="thap-cao" class="hospi-label">&nbsp;</label>
                             <span class="txt-label"><?php echo trans('0723'); ?></span>
                         </div>
-                        <div class="col-md-3"><input type="radio" id="cao-thap" name="sortby" class="hospi-checkbox" value="p_hl" <?php if ($_GET['sortby'] == "p_hl") {
+                        <div class="col-md-3"><input type="radio" id="cao-thap" name="sortby" class="hospi-checkbox sortajax" value="p_hl" <?php if ($_GET['sortby'] == "p_hl") {
                             echo 'checked="checked"';
                             } ?>>  <label for="cao-thap" class="hospi-label">&nbsp;</label>
                             <span class="txt-label"><?php echo trans('0724'); ?></span>
                         </div>
-                        <div class="col-md-3"><input type="radio" id="feature" name="sortby" class="hospi-checkbox" value="featured" <?php if ($_GET['sortby'] == "featured") {
+                        <div class="col-md-3"><input type="radio" id="feature" name="sortby" class="hospi-checkbox sortajax" value="featured" <?php if ($_GET['sortby'] == "featured") {
                             echo 'checked="checked"';
                             } ?>>  <label for="feature" class="hospi-label">&nbsp;</label>
                             <span class="txt-label"><?php echo trans('0725'); ?></span>
@@ -1005,25 +1005,18 @@
         }); }; });
 </script>
 <script src="<?php echo $theme_url; ?>assets/js/infobox.js"></script>
-<script src="<?php echo $theme_url; ?>assets/include/icheck/icheck.min.js"></script>
-<link href="<?php echo $theme_url; ?>assets/include/icheck/square/grey.css" rel="stylesheet">
 <script type="text/javascript">
-    var cb, optionSet1;
-    $(".checkbox").iCheck({
-    checkboxClass: "icheckbox_square-grey",
-            radioClass: "iradio_square-grey"
-    });
-    $(".radio").iCheck({
-    checkboxClass: "icheckbox_square-grey",
-            radioClass: "iradio_square-grey"
-    });
+    var cb, optionSet1;    
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-    $('input[type=radio][name=sortby]').change(function() {
-    $('form').submit();
-    });
-    });
+            
+        $(document).on('ifChanged', 'input.sortajax', function(){
+            alert('123');
+            $('#sortbyajax').val($(this).val());  
+            var obj = $('#sortbyajax');
+            ajaxSearch(obj);
+        });  
+    
 </script>
 <script type='text/javascript'>//<![CDATA[
     $(window).load(function(){
