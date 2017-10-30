@@ -9370,15 +9370,42 @@ ul.footerlist li:before {
     opacity: 0;
     margin: 0;
 }
-.block-check-sale input[type='checkbox'] + span{
+.block-check-sale input[type='checkbox'] + span {
     background: url(../img/check.png) no-repeat center left;
     padding-left: 18px;
     margin-left: -12px;
     padding-top: 1px;
 }
-.block-check-sale input[type='checkbox']:checked + span{
+.block-check-sale input[type='checkbox']:checked + span {
     background: url(../img/checked.png) no-repeat center left;
 }
+
+.block-check-sale-sb {
+  margin-bottom: 5px;
+}
+.block-check-sale-sb input[type='checkbox'] {
+    display: none;
+    margin: 0;
+}
+.block-check-sale-sb input[type='checkbox'] + span {
+    background: url(../../assets/img/check-gray.png) no-repeat center left;
+    padding-left: 23px;
+    margin-left: 0;
+    margin-right: 5px;
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.block-check-sale-sb input[type='checkbox'] + span:hover {
+    background: url(../../assets/img/check-gray-hover.png) no-repeat; 
+}
+.block-check-sale-sb input[type='checkbox']:checked + span{
+    background: url(../../assets/img/checked-gray.png) no-repeat;
+}
+
 
 p.view-pos {
     margin-bottom: 5px;

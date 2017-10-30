@@ -112,9 +112,6 @@
                             <br/><br/><br/>
                             <div class="opensans"><?php echo trans('0566'); ?>: <span class="big-price"><?php echo $item->price; ?></span> <span class="med-price"><?php echo $item->currSymbol; ?></span></div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 rtl_title_home content-bestchoice">
-                            <img src="<?php echo $theme_url; ?>/assets/img/hospichoice.png" width="107" height="64" data-retina="true" class="bestchoi img-responsive">
-                        </div>
                     </div>
                 </div>
             </div>

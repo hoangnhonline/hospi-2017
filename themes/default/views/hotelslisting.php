@@ -235,25 +235,44 @@
                                 $arrStar =@$_GET['stars'];                                
                                 ?>
                                 <div  class="rating" style="font-size: 14px;">
-                                    <div class="go-right"><input id="1" type="checkbox" name="stars[]" class="go-right radio filter" value="1" <?php if (in_array(1, $arrStar)) {
-                                        echo "checked";
-                                        } ?>>&nbsp;&nbsp;<label class="go-left" for="1"><?php echo $star; ?><?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
+                                    <div class="block-check-sale-sb go-right">
+                                        <label class="go-left" for="1">
+                                            <input id="1" type="checkbox" name="stars[]" class="go-right radio filter" value="1" <?php if (in_array(1, $arrStar)) {echo "checked";} ?>>
+                                            <span></span>
+                                            <?php echo $star; ?><?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $stars; ?> <?php } ?>
+                                        </label>
+                                    </div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="2" type="checkbox" name="stars[]" class="radio go-right filter" value="2" <?php if (in_array(2, $arrStar)) {
-                                        echo "checked";
-                                        } ?>>&nbsp;&nbsp;<label class="go-left" for="2"><?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
+                                    <div class="block-check-sale-sb go-right">
+                                        <label class="go-left" for="2">
+                                            <input id="2" type="checkbox" name="stars[]" class="radio go-right filter" value="2" <?php if (in_array(2, $arrStar)) {echo "checked";} ?>>
+                                            <span></span>
+                                            <?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $stars; ?> <?php } ?>
+                                        </label>
+                                    </div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right "><input id="3" type="checkbox" name="stars[]" class="radio filter" value="3" <?php if (in_array(3, $arrStar)) {
-                                        echo "checked";
-                                        } ?>>&nbsp;&nbsp;<label class="go-left" for="3"><?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
+                                    <div class="block-check-sale-sb go-right">
+                                        <label class="go-left" for="3">
+                                            <input id="3" type="checkbox" name="stars[]" class="radio filter" value="3" <?php if (in_array(3, $arrStar)) {echo "checked";} ?>>
+                                            <span></span>
+                                            <?php for ($i = 1; $i <= 3; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 2; $i++) { ?> <?php echo $stars; ?> <?php } ?>
+                                        </label>
+                                    </div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="4" type="checkbox" name="stars[]" class="radio filter" value="4" <?php if (in_array(4, $arrStar)) {
-                                        echo "checked";
-                                        } ?>>&nbsp;&nbsp;<label class="go-left" for="4"><?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 1; $i++) { ?> <?php echo $stars; ?> <?php } ?></label></div>
+                                    <div class="block-check-sale-sb go-right">
+                                        <label class="go-left" for="4">
+                                            <input id="4" type="checkbox" name="stars[]" class="radio filter" value="4" <?php if (in_array(4, $arrStar)) {echo "checked";} ?>>
+                                            <span></span>
+                                            <?php for ($i = 1; $i <= 4; $i++) { ?> <?php echo $star; ?> <?php } ?><?php for ($i = 1; $i <= 1; $i++) { ?> <?php echo $stars; ?> <?php } ?></label>
+                                    </div>
                                     <div class="clearfix"></div>
-                                    <div class="go-right"><input id="5" type="checkbox" name="stars[]" class="radio filter" value="5" <?php if (in_array(5, $arrStar)) {
-                                        echo "checked";
-                                        } ?>>&nbsp;&nbsp;<label class="go-left" for="5"><?php for ($i = 1; $i <= 5; $i++) { ?> <?php echo $star; ?> <?php } ?></label></div>
+                                    <div class="block-check-sale-sb go-right">
+                                        <label class="go-left" for="5">
+                                        <input id="5" type="checkbox" name="stars[]" class="radio filter" value="5" <?php if (in_array(5, $arrStar)) {echo "checked";} ?>>
+                                        <span></span>
+                                        <?php for ($i = 1; $i <= 5; $i++) { ?> <?php echo $star; ?> <?php } ?>
+                                        </label>
+                                    </div>
                                     <!--<div class="clearfix"></div>
                                         <div class="go-right"><input id="7" type="radio" name="stars" class="radio" value="7" <?php if (@$_GET['stars'] == "7") {
                                             echo "checked";
@@ -276,29 +295,44 @@
                             <div class="hpadding20">
                                 <br>
                                 <div class="clearfix"></div>
-                                <div class="go-right">
-                                    <input type="checkbox" value="0;500000"  name="price" id="Dưới 500.000" class="go-right radio filter" />
-                                    <label for="Dưới 500.000" class="css-label go-left">&nbsp;&nbsp;Dưới 500.000</label>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="Dưới 500.000" class="css-label go-left">
+                                        <input type="checkbox" value="0;500000"  name="price" id="Dưới 500.000" class="go-right radio filter" />
+                                        <span></span>
+                                        Dưới 500.000
+                                    </label>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right">
-                                    <input type="checkbox" value="500000;1000000"  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio filter" />
-                                    <label for="Từ 500.000 - 1,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 500.000 - 1,000.000</label>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="Từ 500.000 - 1,000.000" class="css-label go-left">
+                                        <input type="checkbox" value="500000;1000000"  name="price" id="Từ 500.000 - 1,000.000" class="go-right radio filter" />
+                                        <span></span>
+                                        Từ 500.000 - 1,000.000
+                                    </label>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right">
-                                    <input type="checkbox" value="1000000;2000000"  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio filter" />
-                                    <label for="Từ 1,000.000 - 2,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 1,000.000 - 2,000.000</label>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="Từ 1,000.000 - 2,000.000" class="css-label go-left">
+                                        <input type="checkbox" value="1000000;2000000"  name="price" id="Từ 1,000.000 - 2,000.000" class="go-right radio filter" />
+                                        <span></span>
+                                        Từ 1,000.000 - 2,000.000
+                                    </label>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right">
-                                    <input type="checkbox" value="2000000;4000000"  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio filter" />
-                                    <label for="Từ 2,000.000 - 4,000.000" class="css-label go-left">&nbsp;&nbsp;Từ 2,000.000 - 4,000.000</label>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="Từ 2,000.000 - 4,000.000" class="css-label go-left">
+                                        <input type="checkbox" value="2000000;4000000"  name="price" id="Từ 2,000.000 - 4,000.000" class="go-right radio filter" />
+                                        <span></span>
+                                        Từ 2,000.000 - 4,000.000
+                                    </label>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right">
-                                    <input type="checkbox" value="4000000;100000000"  name="price" id="Trên  4,000.000" class="go-right radio filter" />
-                                    <label for="Trên  4,000.000" class="css-label go-left">&nbsp;&nbsp;Trên  4,000.000</label>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="Trên  4,000.000" class="css-label go-left">
+                                        <input type="checkbox" value="4000000;100000000"  name="price" id="Trên  4,000.000" class="go-right radio filter" />
+                                        <span></span>
+                                        Trên  4,000.000
+                                    </label>
                                 </div>
                                 <div class="clearfix"></div>
                                 <br>
@@ -336,21 +370,37 @@
                                         $varpickup = "";
                                     }
                                     ?>
-                                <div class="go-right"> <input type="checkbox" value="yes" <?php if ($varsaleoff == "yes") {
-                                    echo "checked";
-                                    } ?> name="issale" id="issale" class="checkbox  filter" /> <label for="issale" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0709'); ?></label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="issale" class="css-label go-left">
+                                        <input type="checkbox" value="yes" <?php if ($varsaleoff == "yes") {echo "checked";} ?> name="issale" id="issale" class="checkbox  filter" />
+                                        <span></span>
+                                        <?php echo trans('0709'); ?>
+                                    </label>
+                                </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right"> <input type="checkbox" value="yes" <?php if ($uudai == "yes") {
-                                    echo "checked";
-                                    } ?> name="uudai" id="uudai" class="checkbox  filter" /> <label for="uudai" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0710'); ?></label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="uudai" class="css-label go-left">
+                                        <input type="checkbox" value="yes" <?php if ($uudai == "yes") {echo "checked";} ?> name="uudai" id="uudai" class="checkbox  filter" />
+                                        <span></span>
+                                        <?php echo trans('0710'); ?>
+                                    </label>
+                                </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right"> <input type="checkbox" value="yes" <?php if ($honeymoon == "yes") {
-                                    echo "checked";
-                                    } ?> name="honeymoon" id="honeymoon" class="checkbox  filter" /> <label for="honeymoon" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0567'); ?></label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="honeymoon" class="css-label go-left">
+                                        <input type="checkbox" value="yes" <?php if ($honeymoon == "yes") {echo "checked";} ?> name="honeymoon" id="honeymoon" class="checkbox  filter" />
+                                        <span></span>
+                                        <?php echo trans('0567'); ?>
+                                    </label>
+                                </div>
                                 <div class="clearfix"></div>
-                                <div class="go-right"> <input type="checkbox" value="yes" <?php if ($varpickup == "yes") {
-                                    echo "checked";
-                                    } ?> name="pickup" id="pickup" class="checkbox  filter" /> <label for="pickup" class="css-label go-left">&nbsp;&nbsp;<?php echo trans('0711'); ?></label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="pickup" class="css-label go-left">
+                                        <input type="checkbox" value="yes" <?php if ($varpickup == "yes") {echo "checked";} ?> name="pickup" id="pickup" class="checkbox  filter" />
+                                        <span></span>
+                                        <?php echo trans('0711'); ?>
+                                    </label>
+                                </div>
                                 <div class="clearfix"></div>
                                 <br>
                             </div>
@@ -385,14 +435,22 @@
                                         if (!empty($mtype->name)) {
                                             if ($appModule == "hotels") {
                                                 ?>
-                                <div class="go-right"> <input type="checkbox" value="<?php echo $mtype->id; ?>" <?php if (in_array($mtype->id, $vartype)) {
-                                    echo "checked";
-                                    } ?> name="type[]" id="<?php echo $mtype->name; ?>" class="checkbox  filter" /> <label for="<?php echo $mtype->name; ?>" class="css-label go-left">&nbsp;&nbsp;<?php echo $mtype->name; ?></label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="<?php echo $mtype->name; ?>" class="css-label go-left">
+                                        <input type="checkbox" value="<?php echo $mtype->id; ?>" <?php if (in_array($mtype->id, $vartype)) {echo "checked";} ?> name="type[]" id="<?php echo $mtype->name; ?>" class="checkbox  filter" />
+                                        <span></span>
+                                        <?php echo $mtype->name; ?>
+                                    </label>
+                                </div>
                                 <div class="clearfix"></div>
                                 <?php } else if ($appModule == "tours" || $appModule == "cars") { ?>
-                                <div class="go-right"><input class="radio" type="radio" value="<?php echo $mtype->id; ?>" name="type" id="<?php echo $mtype->name; ?>" class="checkbox go-right  filter" <?php if ($mtype->id == $vartype) {
-                                    echo "checked";
-                                    } ?> /><label for="<?php echo $mtype->name; ?>" class="css-label go-left"> &nbsp;&nbsp; <?php echo $mtype->name; ?> &nbsp;&nbsp;</label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="<?php echo $mtype->name; ?>" class="css-label go-left">
+                                        <input class="radio" type="radio" value="<?php echo $mtype->id; ?>" name="type" id="<?php echo $mtype->name; ?>" class="checkbox go-right  filter" <?php if ($mtype->id == $vartype) {echo "checked";} ?> />
+                                        <span></span>
+                                        <?php echo $mtype->name; ?> 
+                                    </label>
+                                </div>
                                 <div class="clearfix"></div>
                                 <?php }
                                     }
@@ -424,9 +482,13 @@
                                         $eachnear = explode(',', $near->near);
                                         foreach ($eachnear as $item) {
                                             ?>
-                                <div class="go-right"><input type="checkbox" value="<?php echo trim($item); ?>" <?php if (trim($item) == str_replace("+", ' ', $varNear)) {
-                                    echo "checked";
-                                    } ?> name="near" id="<?php echo trim($item); ?>" class="checkbox filter" /><label for="<?php echo trim($item); ?>" class="css-label go-left">&nbsp;<?php echo trim($item); ?></label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="<?php echo trim($item); ?>" class="css-label go-left">
+                                        <input type="checkbox" value="<?php echo trim($item); ?>" <?php if (trim($item) == str_replace("+", ' ', $varNear)) {echo "checked";} ?> name="near" id="<?php echo trim($item); ?>" class="checkbox filter" />
+                                        <span></span>
+                                        <?php echo trim($item); ?>
+                                    </label>
+                                </div>
                                 <?php }
                                     } ?>
                                 <br>
@@ -454,9 +516,13 @@
                                     }
                                     foreach ($amenities as $hamt) {
                                         ?>
-                                <div class="go-right"><input type="checkbox" value="<?php echo $hamt->id; ?>" <?php if (in_array($hamt->id, $varAmt)) {
-                                    echo "checked";
-                                    } ?> name="amenities[]" id="<?php echo $hamt->name; ?>" class="checkbox  filter" /><label for="<?php echo $hamt->name; ?>" class="css-label go-left"> <img class="go-right" style="height: 22px;margin-right:5px;margin-left:5px" src="<?php echo $hamt->icon; ?>">  <?php echo $hamt->name; ?></label></div>
+                                <div class="block-check-sale-sb go-right">
+                                    <label for="<?php echo $hamt->name; ?>" class="css-label go-left">
+                                        <input type="checkbox" value="<?php echo $hamt->id; ?>" <?php if (in_array($hamt->id, $varAmt)) {echo "checked";} ?> name="amenities[]" id="<?php echo $hamt->name; ?>" class="checkbox  filter" />
+                                        <span></span>
+                                        <img class="go-right" style="height: 22px;margin-right:5px;margin-left:5px" src="<?php echo $hamt->icon; ?>">  <?php echo $hamt->name; ?>
+                                    </label>
+                                </div>
                                 <div class="clearfix"></div>
                                 <?php } ?>
                                 <br>
