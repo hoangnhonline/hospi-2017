@@ -4609,8 +4609,8 @@ a:hover.xnext img {
     display: block;
 }
 .listing-search {
-    color: #C4C4C4;
-    background: #555;
+    color: #333;
+    background: #F5F5F5;
     padding: 20px 0 10px 0;
     border-bottom: solid 1px #e7e7e7;
 }
