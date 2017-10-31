@@ -137,13 +137,22 @@
                                 <hr>
                                 <?php } ?>
                                 <?php } ?>
+                                <?php if (pt_is_module_enabled('reviews')) { ?>
+                                    <?php if ($item->avgReviews->overall > 0) { ?>
+                                            <div class="review text-center size18"><i class="icon-thumbs-up-4"></i><?php echo $item->avgReviews->overall; ?></div>
+                                            <!--<?php echo $item->avgReviews->totalReviews; ?>-->
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                    <?php } ?>
+                                <?php } ?>
+
                                 <?php if ($appModule == "ean") {
                                     if ($item->tripAdvisorRating > 0) { ?>
-                                <div class="review text-center size18"><i class="icon-thumbs-up-4"></i><?php echo $item->tripAdvisorRating; ?> </div>
-                                <div class="clearfix"></div>
-                                <hr>
-                                <?php }
-                                    } ?>
+                                            <div class="review text-center size18"><i class="icon-thumbs-up-4"></i><?php echo $item->tripAdvisorRating; ?> </div>
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                    <?php }
+                                } ?>
                                 <?php if (isset($_GET['honeymoon']) && !empty($_GET['honeymoon'])) { ?>
                                 <a href="<?php echo $item->slug;?>/?details=<?php echo $item->roomid;?>">
                                 <?php } else { ?>

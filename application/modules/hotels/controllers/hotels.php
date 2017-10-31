@@ -133,7 +133,7 @@ class Hotels extends MX_Controller {
 	                        $recentlyViewed = array_reverse($recentlyViewed);
 	                        $recentlyViewed = array_diff($recentlyViewed, array($this->data['module']->id));
 	                        $recentlyViewed = array_filter($recentlyViewed);
-	                        
+	                        //var_dump($recentlyViewed);
 	                        $this->data['recents'] = $recentlyViewed;
 
 	                                            /* Bread crum */

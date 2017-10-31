@@ -137,20 +137,20 @@
                             <div class="col-md-12 col-sm-12 go-right" ng-controller="autoSuggest">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
-                                    <input id="search" name="txtSearch" class="form-control form-control-small" placeholder="<?php echo trans('026');?>"/>
+                                    <input id="search" name="txtSearch" value="<?php echo $_GET['txtSearch']; ?>" class="form-control form-control-small" placeholder="<?php echo trans('026');?>"/>
                                     <div id="autocomlete-container"></div>
                                     <input id="searching" type="hidden" name="searching" value="{{searching}}"> <input id="modType" type="hidden" name="modType" value="{{modType}}">
                                 </div>
                             </div>
                             <!-- start hotels checkin checkout fields -->
                             <?php if ($appModule == "hotels") { ?>
-                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-12 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
                                     <input type="text" placeholder="<?php echo trans('07'); ?> " name="checkin" class="form-control mySelectCalendar dpd1" value="<?php echo @$checkin; ?>" required >
                                 </div>
                             </div>
-                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-12 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
                                     <input type="text" placeholder="<?php echo trans('09'); ?> " name="checkout" class="form-control mySelectCalendar dpd2" value="<?php echo @$checkout; ?>" required >
@@ -158,7 +158,7 @@
                             </div>
                             <?php } ?>
                             <!-- end hotels checkin checkout fields -->
-                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-12 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
                                     <select  required class="form-control" placeholder=" <?php echo trans(''); ?> " name="adults" id="adults">
@@ -172,7 +172,7 @@
                             </div>
                             <!-- start hotels child field -->
                             <?php if ($appModule == "hotels") { ?>
-                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-12 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="clearfix"></div>
                                     <select  class="form-control" placeholder=" <?php echo trans('011'); ?> " name="child" id="child">
@@ -192,7 +192,7 @@
                                 }
                                 ?>
                             <!-- start coupon child field -->
-                            <div class="col-md-10 col-sm-12 col-xs-12 go-right">
+                            <div class="col-md-12 col-sm-12 col-xs-12 go-right">
                                 <div class="form-group">
                                     <div class="coupon">
                                       <input type="text" class="form-control form-control-small inputcoupon" name="inputcoupon" placeholder="<?php echo trans('0745');?>" style="padding-right: 20px;">
@@ -681,9 +681,11 @@
                     $i = 1;
                     $moduleForeach = isset($resultSort) ? $resultSort : $module;
                     foreach ($moduleForeach as $htl_id => $item) {
+                       
                     if(isset($resultSort)){
-                        $item = $module[$htl_id];
+                        $item = $module[$htl_id];                        
                     }
+                    //var_dump("<pre>", $item, "</pre>");
                         ?>
             <div class="offset-2">
                 <div class="searching-item row-eq-height">
@@ -731,13 +733,22 @@
                                     <hr>
                                     <?php } ?>
                                     <?php } ?>
+                                   <?php if (pt_is_module_enabled('reviews')) { ?>
+                                        <?php if ($item->avgReviews->overall > 0) { ?>
+                                                <div class="review text-center size18"><i class="icon-thumbs-up-4"></i><?php echo $item->avgReviews->overall; ?></div>
+                                                <!--<?php echo $item->avgReviews->totalReviews; ?>-->
+                                                <div class="clearfix"></div>
+                                                <hr>
+                                        <?php } ?>
+                                    <?php } ?>
+
                                     <?php if ($appModule == "ean") {
                                         if ($item->tripAdvisorRating > 0) { ?>
-                                    <div class="review text-center size18"><i class="icon-thumbs-up-4"></i><?php echo $item->tripAdvisorRating; ?> </div>
-                                    <div class="clearfix"></div>
-                                    <hr>
-                                    <?php }
-                                        } ?>
+                                                <div class="review text-center size18"><i class="icon-thumbs-up-4"></i><?php echo $item->tripAdvisorRating; ?> </div>
+                                                <div class="clearfix"></div>
+                                                <hr>
+                                        <?php }
+                                    } ?>
                                     <?php if (isset($_GET['honeymoon']) && !empty($_GET['honeymoon'])) { ?>
                                     <a href="<?php echo $item->slug;?>/?details=<?php echo $item->roomid;?>">
                                     <?php } else { ?>
@@ -757,10 +768,12 @@
                                 <?php if ($appModule != "offers") { ?> <a class="go-right" href="javascript:void(0);" onclick="showMap('<?php echo base_url(); ?>home/maps/<?php echo $item->latitude; ?>/<?php echo $item->longitude; ?>/<?php echo $appModule; ?>/<?php echo $item->id; ?>', 'modal');" title="<?php echo $item->location; ?>"><i style="margin-left: -3px;" class="icon-location-6 go-right"></i><?php echo character_limiter($item->location, 10); ?></a> <span class="go-right"><?php echo $item->stars; ?></span> <?php } ?>
                                 <br>
                                 <ul class="itemlabel-info">
-                                    <li><a href="#" title="Combo"><span>Combo</span></a></li>
+                                    <!--<li><a href="#" title="Combo"><span>Combo</span></a></li>
                                     <li><a href="#" title="Deals - Giảm giá"><span>Deals - Giảm giá</span></a></li>
-                                    <li><a href="#" title="Gói honeymoon"><span>Gói honeymoon</span></a></li>
-                                    <li><a href="#" title="Đang khuyễn mãi"><span>Đang khuyễn mãi</span></a></li>
+                                    <li><a href="#" title="Gói honeymoon"><span>Gói honeymoon</span></a></li>-->
+                                    <?php if($item->salefrom) { ?>
+                                    <li><span style="color:#660033">Đang khuyến mãi</span></li>
+                                    <?php } ?>
                                 </ul>
                                 <?php if (is_sales_off_hotel($item->id)) { ?>
                                 <div class="purple sale-off-now-icon"><?php echo trans('0709'); ?>

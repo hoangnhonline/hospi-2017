@@ -1658,7 +1658,9 @@ class Hotels_lib
                         'featuredto' => $h->hotel_featured_to,
                         'salefrom' => $h->hotel_sale_from,
                         'saleto' => $h->hotel_sale_to,
-                        'salepercent' => $h->hotel_is_sale_percent
+                        'honeymoon' => $h->honeymoon,
+                        'salepercent' => $h->hotel_is_sale_percent,
+                        'offer_title' => $h->offer_title
                     );
                     
                 }
@@ -1690,7 +1692,9 @@ class Hotels_lib
                     'featuredto' => $h->hotel_featured_to,
                     'salefrom' => $h->hotel_sale_from,
                     'saleto' => $h->hotel_sale_to,
-                    'salepercent' => $h->hotel_is_sale_percent
+                    'salepercent' => $h->hotel_is_sale_percent,
+                    'honeymoon' => $h->honeymoon,
+                    'offer_title' => $h->offer_title
                 );                
                 
             } //hoangnh            

@@ -105,7 +105,7 @@ class Special_offers_model extends CI_Model {
 				$this->db->where('offer_id', $id);
 				$this->db->update('pt_special_offers', $data);
                 $this->update_translation($this->input->post('translated'), $id);
-
+                //
                 }
 
 // Remove From special offers
