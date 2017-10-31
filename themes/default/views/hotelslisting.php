@@ -15,8 +15,7 @@
             <li class="active"><?php echo $_GET['txtSearch']; ?></li>
         </ol>
     </div>
-</div>
-<!-- <div style="margin-top: 20px;"></div> -->
+</div><!-- block-breadcrumb -->
 <div class="container offer-banners">
     <div id="carousel-banner" class="banner-by-location carousel slide" data-ride="carousel">
         <?php //echo run_widget(get_widget_id($_GET['searching'], "Hotel"));
@@ -28,7 +27,7 @@
             <a data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap"><i class="icon-location-6"></i> <?php echo trans('067'); ?></a>
         </div>
     </div>
-</div>
+</div><!-- container offer-banners -->
 <?php } else { ?>
 <div class="listing-search">
     <form class="container" action="<?php echo base_url() . $appModule; ?>/search" method="GET">
@@ -114,13 +113,13 @@
         </div>
         <div class="clearfix"></div>
     </form>
-</div>
+</div><!-- listing-search -->
 <?php } ?>
 <!-- CONTENT -->
 <div class="collapse" id="collapseMap">
     <div id="map" class="map"></div>
     <br>
-</div>
+</div><!-- #collapseMap -->
 <div class="container pagecontainer">
     <div class="clearfix"></div>
     <!-- FILTERS -->
@@ -924,7 +923,7 @@
         <!-- END OF LIST CONTENT-->
     </div>
     <!-- END OF container-->
-</div>
+</div><!-- container pagecontainer -->
 <!-- END OF CONTENT -->
 <br><br><br>
 <!-- End container -->
@@ -1068,13 +1067,11 @@
     var cb, optionSet1;    
 </script>
 <script type="text/javascript">
-            
-        $(document).on('change', 'input.sortajax', function(){            
-            $('#sortbyajax').val($(this).val());  
-            var obj = $('#sortbyajax');
-            ajaxSearch(obj);
-        });  
-    
+    $(document).on('change', 'input.sortajax', function(){            
+        $('#sortbyajax').val($(this).val());  
+        var obj = $('#sortbyajax');
+        ajaxSearch(obj);
+    });
 </script>
 <script type='text/javascript'>//<![CDATA[
     $(window).load(function(){

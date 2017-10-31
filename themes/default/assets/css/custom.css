@@ -9828,17 +9828,17 @@ content: url(../../assets/img/collapsearrow.png);
   margin-top: 0;
 }
 
-.romm-package h4 {
+.room-package h4 {
   font-size: 14px;
 }
-.rooms-update.romm-package {
+.rooms-update.room-package {
   padding: 7px;
   position: relative;
   overflow: hidden;
   margin-bottom: 0;
   margin-top: 10px;
 }
-.rooms-update.romm-package h4:before {
+.rooms-update.room-package h4:before {
   content: url(../../assets/img/triangle_right.png);
   position: absolute;
   left: 0;
@@ -9875,13 +9875,13 @@ content: url(../../assets/img/collapsearrow.png);
   font-size: 13px;
   color: #999;
 }
-.romm-package .des-package {}
+.room-package .des-package {}
 .view-more-package {
   font-size: 13px;
   color: #666666;
   text-decoration: underline;
 }
-.romm-package .price-package {}
+.room-package .price-package {}
 
 #itemlist.itemlist-cus {
   display: inline-block!important;

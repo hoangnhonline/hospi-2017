@@ -81,10 +81,10 @@
                 <div style="margin-top:30px"></div>
             </div>
             <?php if(!empty($module)){ $line=0; foreach($module as $item){
-                if($line==3) echo "<div class='clearfix'></div><div style='margin-top:40px'></div><div class='col-md-8 col-sm-12 col-xs-12'><ul class='offset-2 offer-page'>";
-                if($line==6) { echo "</ul></div><div class='col-md-4 col-sm-12 col-xs-12'>"; echo run_widget(83);echo "</div>";echo "<div class='clearfix'></div><div style='margin-top:40px'></div>";}
-                if($line<3||$line>5) { ?>
-            <div class="col-lg-4 col-md-4 col-sm-4">
+                if($line==4) echo "<div class='clearfix'></div><div class='col-sm-6 col-xs-6'><ul class='offset-2 offer-page'>";
+                if($line==6) { echo "</ul></div><div class='col-sm-6 col-xs-6'>"; echo run_widget(83);echo "</div>";echo "<div class='clearfix'></div>";}
+                if($line<4||$line>5) { ?>
+            <div class="col-sm-3 col-xs-6">
                 <div class="wow fadeInUp offset-0 go-right">
                     <div class="img_list">
                         <a href="<?php echo $item->slug;?>">
@@ -111,6 +111,7 @@
                 </div>
             </div>
             <?php } else { ?>
+            <!-- News -->
             <li>
                 <a class="sub-menu-link" href="<?php echo $item->slug; ?>" target="_blank">
                     <h4 class="offer-3title offer-title-listing"><b><?php echo $item->title; ?></b></h4>
@@ -120,9 +121,10 @@
                     </div>
                 </a>
             </li>
+            <!-- End New -->
             <?php } ?>
             <?php $line++;
-                if($line%3==0) echo "<div class='clearfix' style='margin-bottom:10px;''></div>";
+                if($line%4==0) echo "<div class='clearfix' style='margin-bottom:10px;''></div>";
                 } ?>
             <div class="clearfix"></div>
             <div class="col-md-12 pull-right go-right"><?php echo createPagination($info);?></div>
