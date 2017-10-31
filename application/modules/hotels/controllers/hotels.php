@@ -133,7 +133,7 @@ class Hotels extends MX_Controller {
 	                        $recentlyViewed = array_reverse($recentlyViewed);
 	                        $recentlyViewed = array_diff($recentlyViewed, array($this->data['module']->id));
 	                        $recentlyViewed = array_filter($recentlyViewed);
-	                        //var_dump($recentlyViewed);
+	                        
 	                        $this->data['recents'] = $recentlyViewed;
 
 	                                            /* Bread crum */
@@ -177,8 +177,7 @@ class Hotels extends MX_Controller {
 				$this->data['maxprice'] = $this->hotels_lib->convertAmount($settings[0]->front_search_max_price);
 
 				//$this->data['popular_hotels'] = $this->hotels_model->popular_hotels_front();
-				$allhotels = $this->hotels_lib->show_hotels($offset);
-				//var_dump("<pre>", $allhotels);die;
+				$allhotels = $this->hotels_lib->show_hotels($offset);				
 				$honeymoon = @$_GET['honeymoon'];
 				if(!empty($honeymoon)) {
 					$allhotels = $this->hotels_lib->show_honeymoons($offset,1);
@@ -327,8 +326,7 @@ class Hotels extends MX_Controller {
                             if($honeymoon=="yes") {                            	
                                 $allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset,'','', $honeymoon);
                             } else {                            	
-								$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);
-                        		//var_dump("<pre>", $allhotels);die;
+								$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);                        		
                             }
                             
 						}
@@ -337,8 +335,7 @@ class Hotels extends MX_Controller {
                             if($honeymoon=="yes") {
 								$allhotels = $this->hotels_lib->search_hotels($offset, $honeymoon);
                                                     } else {
-							$allhotels = $this->hotels_lib->search_hotels($offset);
-							//var_dump("<pre>", $allhotels, "</pre>");
+							$allhotels = $this->hotels_lib->search_hotels($offset);							
                                                     }
 						}
 						//
@@ -349,7 +346,7 @@ class Hotels extends MX_Controller {
 								$tmpArr[$htl->id] = $htl;
 							}
 						}	
-						//var_dump("<pre>kkkk", $allhotels['resultSort'], "</pre>");					
+						
                         $this->data['module'] = $tmpArr;
                         $this->data['resultSort'] = $allhotels['resultSort'];
 			        	$this->data['info'] = $allhotels['paginationinfo'];
@@ -468,8 +465,7 @@ class Hotels extends MX_Controller {
                             if($honeymoon=="yes") {
                                 $allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset,'','', $honeymoon);
                             } else {
-								$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);
-                        		//var_dump("<pre>", $allhotels);die;
+								$allhotels = $this->hotels_lib->search_hotels_by_text($cityid, $offset);                        		
                             }
                             
 						}

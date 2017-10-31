@@ -322,7 +322,7 @@ class Hotels_lib
         $tmp = $this->getResultObject($hotels['all'], null, $orderby);        
         $data['all'] = $tmp['result'];
        	$resultSort = $tmp['resultSort'];
-       	//var_dump("<pre>aaaa", $resultSort,"</pre>");        
+       	
         if ($honeymoon != null) {
             $data['all'] = $this->getHoneyObject($hotels['all']);
         }
@@ -360,7 +360,9 @@ class Hotels_lib
         // $hotelslist = $this->hotelswithrooms();
         $rh          = $this->ci->hotels_model->search_hotels_by_text($cityid, '', '', '', '', '');
         $hotels      = $this->ci->hotels_model->search_hotels_by_text($cityid, $perpage, $offset, $orderby, $checkin, $checkout);
+        
         $tmp = $this->getResultObject($hotels['all'], null, $orderby);
+
         $resultSort = $tmp['resultSort'];
         $data['all'] = $tmp['result'];
         
@@ -1626,10 +1628,10 @@ class Hotels_lib
             
             $avgReviews = $this->hotelReviewsAvg();
             
-            if (!empty($_GET['price'])) {
-            	
-                $priceRange = $this->priceRange($_GET['price']);
-                if (($price >= $priceRange->minprice) && ($price <= $priceRange->maxprice)) {
+            if (!empty($_GET['price'])) {            	
+                $priceRange = $this->priceRange($_GET['price']);                
+                $price_int = (int) str_replace(",", "", $price);
+                if (($price_int >= $priceRange->minprice) && ($price_int <= $priceRange->maxprice)) {
                     $arrPriceSort[$this->hotelid] = str_replace(",", "", $price);                    
                     $result[] = (object) array(
                         'id' => $this->hotelid,

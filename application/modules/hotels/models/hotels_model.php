@@ -985,6 +985,7 @@ class Hotels_model extends CI_Model
         $child     = $this->input->get('child');
         $stars     = $this->input->get('stars');
         $sprice    = $this->input->get('price');
+
         $types     = $this->input->get('type');
         $near      = $this->input->get('near');
         $issale    = $this->input->get('issale');
@@ -1038,8 +1039,7 @@ class Hotels_model extends CI_Model
             $this->db->where_in('pt_hotels.hotel_type', $types);
         }
         if (!empty($sprice)) {
-            $tmp = explode(";", $sprice);
-            
+            $tmp = explode(";", $sprice);            
             $this->db->where('pt_rooms.room_basic_price >=', $tmp[0]);
             $this->db->where('pt_rooms.room_basic_price <=', $tmp[1]);
         }
@@ -1082,8 +1082,7 @@ class Hotels_model extends CI_Model
             
         }
         
-        $data['all'] = $query->result();
-       
+        $data['all'] = $query->result();     
         $data['rows'] = $query->num_rows();
         return $data;
     }
