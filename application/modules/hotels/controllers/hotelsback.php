@@ -205,8 +205,8 @@ class hotelsback extends MX_Controller {
 				}
 				else {
 						$this->data['main_content'] = 'hotels/manage';
-						$this->data['page_title'] = 'Add Hotel';
-						$this->data['headingText'] = 'Add Hotel';
+						$this->data['page_title'] = 'Thêm khách sạn';
+						$this->data['headingText'] = 'Thêm khách sạn';
 						$this->data['default_checkin_out'] = $this->settings_model->get_default_checkin_out();
 						$this->data['checkin'] = $this->data['default_checkin_out'][0]->front_checkin_time;
 						$this->data['checkout'] = $this->data['default_checkin_out'][0]->front_checkout_time;
@@ -296,8 +296,8 @@ class hotelsback extends MX_Controller {
 								}
 						}
 						$this->data['main_content'] = 'hotels/manage';
-						$this->data['page_title'] = 'Manage Hotel';
-						$this->data['headingText'] = 'Update ' . $this->data['hdata'][0]->hotel_title;
+						$this->data['page_title'] = 'Quản lý khách sạn';
+						$this->data['headingText'] = 'Cập nhật: ' . $this->data['hdata'][0]->hotel_title;
 						$this->data['checkin'] = $this->data['hdata'][0]->hotel_check_in;
 						$this->data['checkout'] = $this->data['hdata'][0]->hotel_check_out;
 						$this->data['hrelated'] = explode(",", $this->data['hdata'][0]->hotel_related);
@@ -366,8 +366,8 @@ if(!$this->data['addpermission'] && !$this->editpermission && !$this->deleteperm
 								$this->data['hotels'] = $this->hotels_model->all_hotels_names($userid);
 								$this->data['hotelid'] = $this->input->post('hotelid');
 							   	$this->data['main_content'] = 'hotels/rooms/manage';
-								$this->data['page_title'] = 'Add Room';
-                                $this->data['headingText'] = 'Add Room';
+								$this->data['page_title'] = 'Thêm phòng';
+                                $this->data['headingText'] = 'Thêm phòng';
                                 $this->load->view('admin/template', $this->data);
 						}
 				}
@@ -420,8 +420,8 @@ if(!$this->data['addpermission'] && !$this->editpermission && !$this->deleteperm
 								$this->load->library('hotels/hotels_calendar_lib');
 								$this->data['calendar'] = $this->hotels_calendar_lib;
 								$this->data['main_content'] = 'hotels/rooms/manage';
-								$this->data['page_title'] = 'Edit Room';
-                                                                $this->data['headingText'] = 'Update ' . $this->data['rdata'][0]->room_title;
+								$this->data['page_title'] = 'Cập nhật phòng';
+                                                                $this->data['headingText'] = 'Cập nhật: ' . $this->data['rdata'][0]->room_title;
                                                                 $saletype = $this->data['rdata'][0]->room_is_sale_type;
                                                                 $saleval = $this->data['rdata'][0]->room_is_sale_val;
                                                                 
