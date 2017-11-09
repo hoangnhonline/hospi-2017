@@ -344,7 +344,7 @@ class Hotels_lib
         $data['resultSort'] = $resultSort;        
         return $data;
     }
-    
+   
     function search_hotels_by_text($cityid, $offset = null, $checkin = null, $checkout = null, $honeymoon = null)
     {
         

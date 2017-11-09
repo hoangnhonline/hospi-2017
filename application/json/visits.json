@@ -41,109 +41,12 @@
             "ip": []
         },
         {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
             "unique": 1,
-            "hits": 237,
+            "hits": 817,
             "ip": [
-                "::1"
-            ]
-        },
-        {
-            "unique": 1,
-            "hits": 10,
-            "ip": [
-                "::1"
+                "127.0.0.1"
             ]
         }
     ],
-    "currMonth": "10"
+    "currMonth": "11"
 }
