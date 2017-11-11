@@ -185,6 +185,7 @@ class Supplier_hotel_model extends CI_Model{
             'hotel_main_policy' => $this->input->post('hotelmainpolicy'),
             'hotel_terms' => $this->input->post('hotelterms'),
             'hotel_policy' => $this->input->post('hotelpolicy'),
+            'hotel_surcharge' => $this->input->post('hotel_surcharge'),
             'hotel_refund' => $this->input->post('hotelrefund'),
             'hotel_status' => $this->input->post('hotelstatus'),
             'hotel_related' => $relatedhotels,

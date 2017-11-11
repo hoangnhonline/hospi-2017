@@ -2,7 +2,7 @@
   <div class="panel-heading"><?php echo $header_title; ?></div>
 
    <div class="panel-body">
-   <div class="add_button_modal" > <button type="button" data-toggle="modal" data-target="#ADD_BLOG_CAT" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add</button></div>
+   <div class="add_button_modal" > <button type="button" data-toggle="modal" data-target="#ADD_BLOG_CAT" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Thêm mới</button></div>
      <?php echo $content; ?>
    </div>
  </div>

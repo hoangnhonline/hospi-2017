@@ -44,12 +44,12 @@
 <form action="" method="POST" class="hotel-form" enctype="multipart/form-data" onsubmit="return false;" >
   <div class="panel panel-default">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#GENERAL" data-toggle="tab">General</a></li>
-      <li class=""><a href="#FACILITIES" data-toggle="tab">Facilities</a></li>
-      <li class=""><a href="#META_INFO" data-toggle="tab">Meta Info</a></li>
-      <li class=""><a href="#POLICY" data-toggle="tab">Policy</a></li>
-      <li class=""><a href="#CONTACT" data-toggle="tab">Contact</a></li>
-      <li class=""><a href="#TRANSLATE" data-toggle="tab">Translate</a></li>
+      <li class="active"><a href="#GENERAL" data-toggle="tab">Thông tin chung</a></li>
+      <li class=""><a href="#FACILITIES" data-toggle="tab">Tiện nghi</a></li>
+      <li class=""><a href="#META_INFO" data-toggle="tab">Thông tin meta</a></li>
+      <li class=""><a href="#POLICY" data-toggle="tab">Chính sách</a></li>
+      <li class=""><a href="#CONTACT" data-toggle="tab">Thông tin liên hệ</a></li>
+      <li class=""><a href="#TRANSLATE" data-toggle="tab">Dịch</a></li>
     </ul>
     <div class="panel-body">
       <br>
@@ -57,38 +57,38 @@
         <div class="tab-pane wow fadeIn animated active in" id="GENERAL">
           <div class="clearfix"></div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Status</label>
+            <label class="col-md-2 control-label text-left">Trạng thái</label>
             <div class="col-md-2">
               <select data-placeholder="Select" class="form-control" name="hotelstatus">
-                <option value="Yes" <?php if(@$hdata[0]->price_status == "Yes"){ echo "selected"; }?> >Enabled</option>
-                <option value="No" <?php if(@$hdata[0]->hotel_status == "No"){ echo "selected"; }?> >Disabled</option>
+                <option value="Yes" <?php if(@$hdata[0]->price_status == "Yes"){ echo "selected"; }?> >Hiển thị</option>
+                <option value="No" <?php if(@$hdata[0]->hotel_status == "No"){ echo "selected"; }?> >Ẩn</option>
               </select>
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Room Price</label>
+            <label class="col-md-2 control-label text-left">Giá phòng</label>
             <div class="col-md-2">
               <select data-placeholder="Select" class="form-control" name="pricestatus">
-                <option value="Yes" <?php if(@$hdata[0]->price_status == "Yes"){ echo "selected"; }?> >Show</option>
-                <option value="No" <?php if(@$hdata[0]->price_status == "No"){ echo "selected"; }?> >Not Show</option>
+                <option value="Yes" <?php if(@$hdata[0]->price_status == "Yes"){ echo "selected"; }?> >Hiển thị</option>
+                <option value="No" <?php if(@$hdata[0]->price_status == "No"){ echo "selected"; }?> >Ẩn</option>
               </select>
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Hotel Name</label>
+            <label class="col-md-2 control-label text-left">Tên khách sạn</label>
             <div class="col-md-4">
               <input name="hotelname" type="text" placeholder="Hotel Name" class="form-control" value="<?php echo @$hdata[0]->hotel_title;?>" />
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Hotel Description</label>
+            <label class="col-md-2 control-label text-left">Mô tả khách sạn</label>
             <div class="col-md-10">
               <?php $this->ckeditor->editor('hoteldesc', @$hdata[0]->hotel_desc, $ckconfig,'hoteldesc'); ?>
             </div>
           </div>
           <div class="row form-group">
            <?php if($isadmin){ ?>
-            <label class="col-md-2 control-label text-left">Stars</label>
+            <label class="col-md-2 control-label text-left">Số sao</label>
             <div class="col-md-2">
               <select data-placeholder="Select" class="form-control" name="hotelstars">
                 <?php for($stars = 1; $stars <= 7;$stars++){ ?>
@@ -101,7 +101,7 @@
             <?php } ?>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Hotel Type</label>
+            <label class="col-md-2 control-label text-left">Loại hình</label>
             <div class="col-md-2">
               <select data-placeholder="Select" class="form-control" name="hoteltype">
                 <?php foreach($htypes as $ht){ ?>
@@ -112,79 +112,37 @@
           </div>
           
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Airport Pickup</label>
+            <label class="col-md-2 control-label text-left">Đón tiễn sân bay</label>
             <div class="col-md-2">
               <select data-placeholder="Select" class="form-control" name="pickup">
-                <option value="No" <?php if(@$hdata[0]->hotel_pickup == "No"){ echo 'selected'; } ?>>No</option>
-                <option value="Yes" <?php if(@$hdata[0]->hotel_pickup == "Yes"){ echo 'selected'; } ?>>Yes</option>
+                <option value="No" <?php if(@$hdata[0]->hotel_pickup == "No"){ echo 'selected'; } ?>>Có</option>
+                <option value="Yes" <?php if(@$hdata[0]->hotel_pickup == "Yes"){ echo 'selected'; } ?>>Không</option>
               </select>
             </div>
           </div>
           
           <div class="row form-group">
-           <?php if($isadmin){ ?>
-            <label class="col-md-2 control-label text-left">Sales off</label>
-            
-            <div class="col-md-2">
-              <select data-placeholder="Select" class="form-control" name="issale">
-                <option value="no" <?php if(@$hdata[0]->hotel_is_sale == "no"){ echo 'selected'; } ?>>No</option>
-                <option value="yes" <?php if(@$hdata[0]->hotel_is_sale == "yes"){ echo 'selected'; } ?>>Yes</option>
-                
-              </select>
-            </div>
-            <div class="col-md-2">
-              <select name="taxtype" class="form-control">
-                <!--<option value="fixed" <?php if(@$hotelsaletype == "fixed"){ echo 'selected'; } ?> >Fixed</option>-->
-                <option value="percentage" <?php if(@$hotelsaletype == "percentage"){ echo 'selected'; } ?> >Percentage</option>
-              </select>
-            </div>
-            <div class="col-md-2">
-              <input name="percent" type="text" placeholder="Value" class="form-control" value="<?php echo @$saleval; ?>" />
-            </div>
-            <div class="col-md-2">
-              <input name="sfrom" type="text" placeholder="From" class="form-control dpd1" value="<?php echo @$salefrom; ?>" />
-            </div>
-            <div class="col-md-2">
-              <input name="sto" type="text" placeholder="To" class="form-control dpd2" value="<?php echo @$saleto; ?>" />
-            </div>
-            
-               <?php  }else{ ?>
+           
           <input type="hidden" name="issale" value="<?php echo @$hdata[0]->hotel_is_sale; ?>">
           <input type="hidden" name="percent" value="<?php echo @$percent; ?>">
           <input type="hidden" name="sfrom" value="<?php echo @$salefrom; ?>">
-          <input type="hidden" name="sto" value="<?php echo @$saleto; ?>">
-          <?php } ?>
+          <input type="hidden" name="sto" value="<?php echo @$saleto; ?>">          
 
           </div>
           
           <div class="row form-group">
-           <?php if($isadmin){ ?>
-            <label class="col-md-2 control-label text-left">Featured</label>
-            <div class="col-md-2">
-              <select data-placeholder="Select" class="form-control" name="isfeatured">
-                  <option value="no" <?php if(@$hdata[0]->hotel_is_featured == "no"){ echo 'selected'; } ?>>No</option>
-                <option value="yes" <?php if(@$hdata[0]->hotel_is_featured == "yes"){ echo 'selected'; } ?>>Yes</option>
-                
-              </select>
-            </div>
-            <div class="col-md-2">
-              <input name="ffrom" type="text" placeholder="From" class="form-control dpd1" value="<?php echo @$featuredfrom; ?>" />
-            </div>
-            <div class="col-md-2">
-              <input name="fto" type="text" placeholder="To" class="form-control dpd2" value="<?php echo @$featuredto; ?>" />
-            </div>
-               <?php  }else{ ?>
+          
           <input type="hidden" name="isfeatured" value="<?php echo @$hdata[0]->hotel_is_featured; ?>">
           <input type="hidden" name="ffrom" value="<?php echo @$featuredfrom; ?>">
           <input type="hidden" name="fto" value="<?php echo @$featuredto; ?>">
-          <?php } ?>
+    
 
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Location</label>
+            <label class="col-md-2 control-label text-left">Thành phố</label>
             <div class="col-md-4">
               <select name="hotelcity" class="chosen-select" required>
-                <option value="">Select</option>
+                <option value="">--chọn--</option>
                 <?php foreach($locations as $loc){ ?>
                 <option value="<?php echo $loc->id; ?>" <?php makeSelected(@$loc->id, @$hdata[0]->hotel_city); ?> ><?php echo $loc->location;?></option>
                 <?php } ?>
@@ -196,7 +154,7 @@
           
           
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Near</label>
+            <label class="col-md-2 control-label text-left">Gần địa điểm</label>
             <div class="col-md-8">
               <select multiple class="chosen-multi-select" name="near[]">
                 <?php foreach($nears as $near){ 
@@ -222,7 +180,7 @@
           </div>-->
           <?php if($tripadvisor){ ?>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">TripAdvisor</label>
+            <label class="col-md-2 control-label text-left">Đánh giá TripAdvisor</label>
             <div class="col-md-4">
               <input type="text" name="tripadvisor" class="form-control" placeholder="TripAdvisor ID" value="<?php echo @$hdata[0]->tripadvisor_id;?>" />
             </div>
@@ -243,33 +201,33 @@
             </div>
           </div>-->
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left text-danger">Vat Tax</label>
+            <label class="col-md-2 control-label text-left text-danger">Thuế VAT</label>
             <div class="col-md-2">
               <select name="taxtype" class="form-control">
-                <option value="fixed" <?php if(@$hoteltaxtype == "fixed"){ echo 'selected'; } ?> >Fixed</option>
-                <option value="percentage" <?php if(@$hoteltaxtype == "percentage"){ echo 'selected'; } ?> >Percentage</option>
+                <option value="fixed" <?php if(@$hoteltaxtype == "fixed"){ echo 'selected'; } ?> >Phí thành tiền</option>
+                <option value="percentage" <?php if(@$hoteltaxtype == "percentage"){ echo 'selected'; } ?> >Phí %</option>
               </select>
             </div>
             <div class="col-md-2">
               <input class="form-control" id="" Placeholder="Value" type="text" name="taxvalue" value="<?php echo @$hoteltaxval;?>" />
             </div>
-            <span class="help-block">Leave blank if the price include VAT Tax</span>
+            <span class="help-block">Vui lòng để trống nếu giá đã bao gồm thuế VAT</span>
           </div>
             <div class="row form-group">
-            <label class="col-md-2 control-label text-left text-danger">Service Fee</label>
+            <label class="col-md-2 control-label text-left text-danger">Phí dịch vụ</label>
             <div class="col-md-2">
               <select name="servicetype" class="form-control">
-                <option value="fixed" <?php if(@$hotelservicetype == "fixed"){ echo 'selected'; } ?> >Fixed</option>
-                <option value="percentage" <?php if(@$hotelservicetype == "percentage"){ echo 'selected'; } ?> >Percentage</option>
+                <option value="fixed" <?php if(@$hotelservicetype == "fixed"){ echo 'selected'; } ?> >Phí thành tiền</option>
+                <option value="percentage" <?php if(@$hotelservicetype == "percentage"){ echo 'selected'; } ?> >Phí %</option>
               </select>
             </div>
             <div class="col-md-2">
               <input class="form-control" id="" Placeholder="Value" type="text" name="servicevalue" value="<?php echo @$hotelserviceval;?>" />
             </div>
-            <span class="help-block">Leave blank if the price include Service Fee</span>
+            <span class="help-block">Vui lòng để trống nếu giá đã bao gồm phí dịch vụ</span>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Related Hotels</label>
+            <label class="col-md-2 control-label text-left">Khách sạn tương đương</label>
             <div class="col-md-8">
               <select multiple class="chosen-multi-select" name="relatedhotels[]">
                 <?php foreach($all_hotels as $hotel){ if($hdata[0]->hotel_id != $hotel->hotel_id){ ?>
@@ -284,12 +242,12 @@
       <!-- Address and Map -->
 
         <div class="panel panel-default">
-        <div class="panel-heading"><strong>Map Address</strong></div>
+        <div class="panel-heading"><strong>Bản đồ</strong></div>
         <div class="well well-sm" style="margin-bottom: 0px;">
         <div class="col-md-6 form-horizontal">
         <table class="table">
         <tr>
-        <td>Address on Map</td>
+        <td>Địa chỉ trên bản đồ</td>
         <td>
        <input type="text" class="form-control Places" id="mapaddress" name="hotelmapaddress" value="<?php echo $hdata[0]->hotel_map_city;?>">
         </td>
@@ -298,11 +256,11 @@
         <td></td>
         </tr>
         <tr>
-        <td>Latitude</td>
+        <td>Vĩ độ</td>
         <td><input type="text" class="form-control" id="latitude" value="<?php echo $hdata[0]->hotel_latitude;?>"  name="latitude" /></td>
         </tr>
         <tr>
-        <td>Longitude</td>
+        <td>Kinh độ</td>
         <td><input type="text" class="form-control" id="longitude" value="<?php echo $hdata[0]->hotel_longitude;?>"  name="longitude" /></td>
         </tr>
         </table>
@@ -323,7 +281,7 @@
           <div class="row form-group">
             <div class="col-md-12">
               <div class="col-md-4">
-                <label class="pointer"><input class="all" type="checkbox" name="" value="" id="select_all" > Select All</label>
+                <label class="pointer"><input class="all" type="checkbox" name="" value="" id="select_all" > Chọn tất cả</label>
               </div>
               <div class="clearfix"></div>
               <hr>
@@ -347,29 +305,29 @@
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Meta Keywords</label>
             <div class="col-md-6">
-              <textarea name="hotelkeywords" placeholder="Keywords" class="form-control" id="" cols="30" rows="2"><?php echo @$hdata[0]->hotel_meta_keywords;?></textarea>
+              <textarea name="hotelkeywords" placeholder="Keywords" class="form-control" id="" cols="30" rows="5"><?php echo @$hdata[0]->hotel_meta_keywords;?></textarea>
             </div>
           </div>
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Meta Description</label>
             <div class="col-md-6">
-              <textarea name="hotelmetadesc" placeholder="Description" class="form-control" id="" cols="30" rows="4"><?php echo @$hdata[0]->hotel_meta_desc;?></textarea>
+              <textarea name="hotelmetadesc" placeholder="Description" class="form-control" id="" cols="30" rows="5"><?php echo @$hdata[0]->hotel_meta_desc;?></textarea>
             </div>
           </div>
         </div>
         <div class="tab-pane wow fadeIn animated in" id="POLICY">
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Check In</label>
+            <label class="col-md-2 control-label text-left">Giờ nhận phòng</label>
             <div class="col-md-2">
               <input name="checkintime" type="text" placeholder="Check In" class="form-control timepicker" data-format="hh:mm A" value="<?php echo $checkin;?>" />
             </div>
-            <label class="col-md-2 control-label text-left">Check Out</label>
+            <label class="col-md-2 control-label text-left">Giờ trả phòng</label>
             <div class="col-md-2">
               <input name="checkouttime" type="text" placeholder="Check Out" class="form-control timepicker" data-format="hh:mm A" value="<?php echo $checkout;?>" />
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Payment Options</label>
+            <label class="col-md-2 control-label text-left">Phương thức thanh toán</label>
             <div class="col-md-6">
               <select multiple class="chosen-multi-select" name="hotelpayments[]">
                 <?php foreach($hpayments as $hpayment){ ?>
@@ -381,29 +339,35 @@
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Policy And Terms</label>
+            <label class="col-md-2 control-label text-left">Chính sách hủy đổi</label>
             <div class="col-md-8">
-              <textarea name="hotelpolicy" placeholder="Policy..." class="form-control" id="" cols="30" rows="7"><?php echo @$hdata[0]->hotel_policy;?></textarea>
+              <textarea name="hotelpolicy" placeholder="" class="form-control" id="" cols="30" rows="7"><?php echo @$hdata[0]->hotel_policy;?></textarea>
+            </div>
+          </div>
+          <div class="row form-group">
+            <label class="col-md-2 control-label text-left">Chính sách phụ thu</label>
+            <div class="col-md-8">
+              <textarea name="hotelsurcharge" placeholder="" class="form-control" id="" cols="30" rows="7"><?php echo @$hdata[0]->hotel_surcharge;?></textarea>
             </div>
           </div>
         </div>
         <div class="tab-pane wow fadeIn animated in" id="CONTACT">
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Hotel's Email</label>
+            <label class="col-md-2 control-label text-left">Email khách sạn</label>
             <div class="col-md-4">
               <input name="hotelemail" type="text" placeholder="Email" class="form-control " value="<?php echo @$hdata[0]->hotel_email;?>" />
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Hotel's Website</label>
+            <label class="col-md-2 control-label text-left">Website khách sạn</label>
             <div class="col-md-4">
               <input name="hotelwebsite" type="text" placeholder="Website" class="form-control " value="<?php echo @$hdata[0]->hotel_website;?>" />
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Phone</label>
+            <label class="col-md-2 control-label text-left">Số điện thoại</label>
             <div class="col-md-4">
-              <input name="hotelphone" type="text" placeholder="Phone" class="form-control" value="<?php echo @$hdata[0]->hotel_phone;?>" />
+              <input name="hotelphone" type="text" placeholder="Số điện thoại" class="form-control" value="<?php echo @$hdata[0]->hotel_phone;?>" />
             </div>
           </div>
          <!--  <div class="row form-group">
@@ -472,7 +436,7 @@
       <input type="hidden" id="slug" value="<?php echo @$hdata[0]->hotel_slug;?>" />
       <input type="hidden" name="submittype" value="<?php echo $submittype;?>" />
       <input type="hidden" name="hotelid" value="<?php echo @$hotelid;?>" />
-      <button class="btn btn-primary submitfrm" id="<?php echo $submittype; ?>">Submit</button>
+      <button class="btn btn-primary submitfrm" id="<?php echo $submittype; ?>">Lưu</button>
     </div>
   </div>
 </form>

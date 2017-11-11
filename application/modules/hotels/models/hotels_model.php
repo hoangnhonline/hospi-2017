@@ -211,6 +211,7 @@ class Hotels_model extends CI_Model
             'hotel_check_in' => $this->input->post('checkintime'),
             'hotel_check_out' => $this->input->post('checkouttime'),
             'hotel_policy' => $this->input->post('hotelpolicy'),
+            'hotel_surcharge' => $this->input->post('hotelsurcharge'),
             'hotel_status' => $this->input->post('hotelstatus'),
             'price_status' => $this->input->post('pricestatus'),
             'hotel_related' => $relatedhotels,
@@ -360,6 +361,7 @@ class Hotels_model extends CI_Model
             'hotel_check_in' => $this->input->post('checkintime'),
             'hotel_check_out' => $this->input->post('checkouttime'),
             'hotel_policy' => $this->input->post('hotelpolicy'),
+            'hotel_surcharge' => $this->input->post('hotelsurcharge'),
             'hotel_status' => $this->input->post('hotelstatus'),
             'price_status' => $this->input->post('pricestatus'),
             'hotel_related' => $relatedhotels,
@@ -967,6 +969,31 @@ class Hotels_model extends CI_Model
         
         return $data;
     }
+
+    // Search hotels from home page
+    function search($params, $perpage = null, $offset = null)
+    {
+        $data         = array();       
+        
+        
+        $this->db->select('pt_hotels.*');
+        foreach($params as $key => $value){
+            if($value){
+                $query = $this->db->where('pt_hotels.'.$key, $value);    
+            }
+        }
+        if ($perpage) {
+            
+            $query = $this->db->get('pt_hotels', $perpage, $offset);
+            $data = $query->result();            
+        } else {
+            
+            $query = $this->db->get('pt_hotels');
+            $data = $query->num_rows();
+        }        
+        return $data;
+    }
+
     //search hotels by text
     function search_hotels_by_text($cityid, $perpage = null, $offset = null, $orderby = null, $cities = null, $lists = null, $checkin = null, $checkout = null)
     {   
