@@ -33,6 +33,7 @@ class Bookings extends MX_Controller {
         $this->data['isadmin'] = $this->session->userdata('pt_logged_admin');
         $this->data['isSuperAdmin'] = $this->session->userdata('pt_logged_super_admin');
         $this->role = $this->session->userdata('pt_role');
+        $this->load->model('locations_model');
         $this->data['role'] = $this->role;
         $this->data['addpermission'] = true;
         if($this->role == "admin"){
@@ -192,6 +193,7 @@ class Bookings extends MX_Controller {
     }
 
     function edit($module, $id) {
+
          if(!$this->editpermission){
                  echo "<center><h1>Access Denied</h1></center>";
                  backError_404($this->data);
@@ -208,7 +210,7 @@ class Bookings extends MX_Controller {
         if (!empty ($module) && !empty ($id)) {
             $this->data['chklib'] = $this->ptmodules;
             $refNo = $this->bookings_model->getBookingRefNo($id);
-            $this->data['bdetails'] = invoiceDetails($id, $refNo);
+            $this->data['bdetails'] = invoiceDetails($id, $refNo);            
             $this->data['service'] = $this->data['bdetails']->module;
             $this->data['applytax'] = "yes";
             foreach ($this->data['bdetails']->bookingExtras as $extras) {
@@ -245,6 +247,24 @@ class Bookings extends MX_Controller {
             redirect('admin/bookings');
         }
      }
+    
+    }
+
+    function add() {
+        
+        $this->load->helper('invoice');
+        $this->load->model('payments_model');
+        $this->data['paygateways'] = $this->payments_model->getAllPaymentsBack();
+        $this->data['chklib'] = $this->ptmodules;          
+        
+        $this->load->library('hotels/hotels_lib');               
+        $this->data['checkinlabel'] = "Check-In";
+        $this->data['checkoutlabel'] = "Check-Out";   
+        
+        $this->data['main_content'] = 'modules/bookings/add';
+        $this->data['page_title'] = 'Tạo Booking';
+        $this->data['locations'] = $this->locations_model->getLocationsBackend();       
+        $this->load->view('template', $this->data);
     
     }
 

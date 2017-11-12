@@ -21,6 +21,8 @@ class hotelsback extends MX_Controller {
 				$this->role = $this->session->userdata('pt_role');
 				$this->load->library('hotels/hotels_lib');
                 $this->load->model('hotels/hotels_model');
+                $this->load->model('locations_model');
+                $this->load->model('accounts_model');                
 		        $this->data['userloggedin'] = $this->session->userdata('pt_logged_id');
 				if (empty ($this->data['userloggedin'])) {
 					$urisegment =  $this->uri->segment(1); 
@@ -72,6 +74,7 @@ class hotelsback extends MX_Controller {
 				$this->load->model('admin/accounts_model');
 				$this->data['isadmin'] = $this->session->userdata('pt_logged_admin');
 				$this->data['isSuperAdmin'] = $this->session->userdata('pt_logged_super_admin');
+
 				
 		}
 		function index2() {
@@ -117,7 +120,7 @@ class hotelsback extends MX_Controller {
 				$xcrud->label('thumbnail_image', 'Image');
 				$xcrud->label('hotel_slug', 'Gallery');
 				$xcrud->label('hotel_status', 'Status');
-				$xcrud->column_callback('hotel_stars', 'create_stars');
+				//$xcrud->column_callback('hotel_stars', 'create_stars');
 				$xcrud->column_callback('pt_hotels.hotel_order', 'orderInputHotels');
 				$xcrud->column_callback('pt_hotels.hotel_is_featured', 'feature_stars');
 				$xcrud->column_callback('hotel_slug', 'hotelGallery');
@@ -131,72 +134,77 @@ class hotelsback extends MX_Controller {
 				$this->data['page_title'] = 'Hotels Management';
 				$this->data['main_content'] = 'temp_view';				
 				$this->data['header_title'] = 'Hotels Management';
+
 				$this->data['add_link'] = base_url(). $this->data['adminsegment'] . '/hotels/add';
+				$this->load->helper('pt_LocationsInfo');
 				$this->load->view('admin/template', $this->data);
 			}
 
                 
 		}
 		function index() {
-				if(!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission){
-                	backError_404($this->data);
-                	
-                }else{
-                	$params = [];
-                	$data         = array();
-                	$params['hotel_city'] = $this->input->get('hotel_city') ? $this->input->get('hotel_city') : null;
-                	$params['hotel_status'] = $this->input->get('hotel_status') ? $this->input->get('hotel_status') : null;
-                			        			        
-			        $limit     = $this->input->get('limit') ? $this->input->get('limit') : 10;
-			        $page     = $this->input->get('page') ? $this->input->get('page') : 1;
-        			$offset = ($page -1 )* $limit;
-			        $total_records = $this->hotels_model->search($params);		      
+			if(!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission){
+            	backError_404($this->data);
+            	
+            }else{
+            	$params = [];
+            	$data         = array();
+            	$params['hotel_city'] = $this->input->get('hotel_city') ? $this->input->get('hotel_city') : null;
+            	$params['hotel_status'] = $this->input->get('hotel_status') ? $this->input->get('hotel_status') : null;
+            	$params['hotel_stars'] = $this->input->get('hotel_stars') ? $this->input->get('hotel_stars') : null;
+            	$params['hotel_status'] = $this->input->get('hotel_status') ? $this->input->get('hotel_status') : null;
+            	$params['hotel_status'] = $this->input->get('hotel_status') ? $this->input->get('hotel_status') : null;
+            	$params['hotel_is_featured'] = $this->input->get('hotel_is_featured') ? $this->input->get('hotel_is_featured') : null;
+            			        			        
+		        $limit     = $this->input->get('limit') ? $this->input->get('limit') : 100;
+		        $page     = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
+    			$offset = ($page - 1 )* $limit;
+		        $total_records = $this->hotels_model->search($params);		
+		        $config['base_url'] = base_url() .'admin/hotels'.'?'.http_build_query($params,'',"&amp;");
+        		$config['total_rows'] = $total_records;		                       
+		       	$config['per_page'] = 50;
+		        // integrate bootstrap pagination
+		        $config['full_tag_open'] = '<ul class="pagination" style="margin: 0px 0px;margin-bottom:5px;">';
+		        $config['full_tag_close'] = '</ul>';			      
+		        $config['first_tag_open'] = '<li>';
+		        $config['first_tag_close'] = '</li>';
+		        $config['prev_link'] = '«';
+		        $config['prev_tag_open'] = '<li class="prev">';
+		        $config['prev_tag_close'] = '</li>';
+		        $config['next_link'] = '»';
+		        $config['next_tag_open'] = '<li>';
+		        $config['next_tag_close'] = '</li>';
+		        $config['last_tag_open'] = '<li>';
+		        $config['last_tag_close'] = '</li>';
+		        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+		        $config['cur_tag_close'] = '</a></li>';
+		        $config['num_tag_open'] = '<li>';
+		        $config['num_tag_close'] = '</li>';		        
+		        //echo "<pre>";
+	            //print_r($config);die;
+	            $this->pagination->initialize($config);
+	            
+	            $this->data['links'] = $this->pagination->create_links();
 
-			        $config['base_url'] = base_url() . $this->data['adminsegment'] . '/hotels'.'?'.http_build_query($params,'',"&amp;");
-            		$config['total_rows'] = $total_records;		                       
-		            		       
-			        $choice = $config["total_rows"]/$limit;
-			        $config["num_links"] = floor($choice);
-			   
-			        // integrate bootstrap pagination
-			        $config['full_tag_open'] = '<ul class="pagination">';
-			        $config['full_tag_close'] = '</ul>';
-			        $config['first_link'] = false;
-			        $config['last_link'] = false;
-			        $config['use_page_numbers'] = true;
-			        $config['first_tag_open'] = '<li>';
-			        $config['first_tag_close'] = '</li>';
-			        $config['prev_link'] = '«';
-			        $config['prev_tag_open'] = '<li class="prev">';
-			        $config['prev_tag_close'] = '</li>';
-			        $config['next_link'] = '»';
-			        $config['next_tag_open'] = '<li>';
-			        $config['next_tag_close'] = '</li>';
-			        $config['last_tag_open'] = '<li>';
-			        $config['last_tag_close'] = '</li>';
-			        $config['cur_tag_open'] = '<li class="active"><a href="#">';
-			        $config['cur_tag_close'] = '</a></li>';
-			        $config['num_tag_open'] = '<li>';
-			        $config['num_tag_close'] = '</li>';		        
-			       /// echo "<pre>";
-		            // print_r($config);die;
-		            $this->pagination->initialize($config);
-		            
-		            $this->data['links'] = $this->pagination->create_links();
-
-			        $data = $this->hotels_model->search($params, $limit, $offset);	        
-			        
-
-				
-				
-				
+		        $data = $this->hotels_model->search($params, $limit, $page);
+		        $locationArr = $photoArr = [];
+				if(!empty($data)){
+					foreach($data as $item){
+						$locationArr[$item->hotel_city] = pt_LocationsInfo($item->hotel_city)->city;
+						$photoArr[$item->hotel_id] = pt_HotelPhotosCount($item->hotel_id);
+					}
+				}								
 				$this->data['content'] = $data;				
-				
+				$this->data['locationArr'] = $locationArr;	
+				$this->data['photoArr'] = $photoArr;					
 				$this->data['page_title'] = 'Hotels Management';
 				$this->data['main_content'] = 'temp_view';
 				$this->data['main_content'] = 'hotels/index';
 				$this->data['header_title'] = 'Hotels Management';
-				$this->data['add_link'] = base_url(). $this->data['adminsegment'] . '/hotels/add';
+				$this->data['params'] = $params;
+				$this->data['deletepermission'] = $this->deletepermission;
+				$this->data['add_link'] = base_url(). $this->data['adminsegment'] . '/hotels/add';				
+				$this->data['locations'] = $this->locations_model->getLocationsBackend();				
 				$this->load->view('admin/template', $this->data);
 			}
 

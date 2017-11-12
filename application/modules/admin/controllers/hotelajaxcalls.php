@@ -196,6 +196,18 @@ class Hotelajaxcalls extends MX_Controller {
 			  }
 		}
 
+		function hotel_by_city() {
+			$hotel_city = $this->input->get('hotel_city');
+			
+			$data = $this->hotels_model->search(['hotel_city' => $hotel_city], 500, 0);
+			echo '<option value="">--Chọn--</option>';
+			if(!empty($data)){
+				foreach($data as $hotel){
+					echo '<option value="'.$hotel->hotel_id.'">'.$hotel->hotel_title.'</option>';
+				}
+			}
+		}
+
 		function add_price() {
 				$this->hotels_model->add_aprice();
 		}

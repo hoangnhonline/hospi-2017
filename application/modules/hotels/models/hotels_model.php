@@ -971,23 +971,27 @@ class Hotels_model extends CI_Model
     }
 
     // Search hotels from home page
-    function search($params, $perpage = null, $offset = null)
+    function search($params, $limit = null, $start = null)
     {
         $data         = array();       
-        
-        
-        $this->db->select('pt_hotels.*');
+       
         foreach($params as $key => $value){
-            if($value){
-                $query = $this->db->where('pt_hotels.'.$key, $value);    
+            if($key == 'hotel_title'){                
+                $query = $this->db->like('pt_hotels.hotel_title', $value); 
+            }else{
+                if($value){
+                    $query = $this->db->where('pt_hotels.'.$key, $value);    
+                }    
             }
+            
         }
-        if ($perpage) {
-            
-            $query = $this->db->get('pt_hotels', $perpage, $offset);
+        if ($limit) {
+            $this->db->join('pt_accounts', 'pt_accounts.accounts_id = pt_hotels.hotel_owned_by');
+            $this->db->limit($limit, $start);
+
+            $query = $this->db->get('pt_hotels');
             $data = $query->result();            
-        } else {
-            
+        } else {                        
             $query = $this->db->get('pt_hotels');
             $data = $query->num_rows();
         }        
