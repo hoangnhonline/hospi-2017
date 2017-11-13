@@ -11,8 +11,8 @@
   <div class="modal-content">
     <div class="modal-body">
       <br><br>
-      <div class="center-block">
-        <center>
+      <div class="center-block">aaaaaaaaaaa
+        <center>aaaaaaaaaaaaaa
           <button class="btn btn-circle block-center btn-lg btn-success"><i class="fa fa-check"></i></button>
           <h3 class="text-center"><?php echo trans('0409');?> <b class="text-success wow flash animted animated"><?php echo trans('0135');?></b></h3>
           <p class="text-center"><?php echo $msg;?></p>

@@ -84,7 +84,7 @@ var response = $.parseJSON(resp);
 
 
    <div class="panel-body">
-   <div class="add_button_modal" > <button type="button" data-toggle="modal" data-target="#ADD_COUPON" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Add</button></div>
+   <div class="add_button_modal" > <button type="button" data-toggle="modal" data-target="#ADD_COUPON" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Thêm mới</button></div>
      <?php echo $content; ?>
    </div>
  </div>

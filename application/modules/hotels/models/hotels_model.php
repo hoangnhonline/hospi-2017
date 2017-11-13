@@ -211,6 +211,7 @@ class Hotels_model extends CI_Model
             'hotel_check_in' => $this->input->post('checkintime'),
             'hotel_check_out' => $this->input->post('checkouttime'),
             'hotel_policy' => $this->input->post('hotelpolicy'),
+            'hotel_surcharge' => $this->input->post('hotelsurcharge'),
             'hotel_status' => $this->input->post('hotelstatus'),
             'price_status' => $this->input->post('pricestatus'),
             'hotel_related' => $relatedhotels,
@@ -360,6 +361,7 @@ class Hotels_model extends CI_Model
             'hotel_check_in' => $this->input->post('checkintime'),
             'hotel_check_out' => $this->input->post('checkouttime'),
             'hotel_policy' => $this->input->post('hotelpolicy'),
+            'hotel_surcharge' => $this->input->post('hotelsurcharge'),
             'hotel_status' => $this->input->post('hotelstatus'),
             'price_status' => $this->input->post('pricestatus'),
             'hotel_related' => $relatedhotels,
@@ -967,6 +969,35 @@ class Hotels_model extends CI_Model
         
         return $data;
     }
+
+    // Search hotels from home page
+    function search($params, $limit = null, $start = null)
+    {
+        $data         = array();       
+       
+        foreach($params as $key => $value){
+            if($key == 'hotel_title'){                
+                $query = $this->db->like('pt_hotels.hotel_title', $value); 
+            }else{
+                if($value){
+                    $query = $this->db->where('pt_hotels.'.$key, $value);    
+                }    
+            }
+            
+        }
+        if ($limit) {
+            $this->db->join('pt_accounts', 'pt_accounts.accounts_id = pt_hotels.hotel_owned_by');
+            $this->db->limit($limit, $start);
+
+            $query = $this->db->get('pt_hotels');
+            $data = $query->result();            
+        } else {                        
+            $query = $this->db->get('pt_hotels');
+            $data = $query->num_rows();
+        }        
+        return $data;
+    }
+
     //search hotels by text
     function search_hotels_by_text($cityid, $perpage = null, $offset = null, $orderby = null, $cities = null, $lists = null, $checkin = null, $checkout = null)
     {   

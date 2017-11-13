@@ -19,7 +19,10 @@ class hotelsback extends MX_Controller {
 				$checkingadmin = $this->session->userdata('pt_logged_admin');
 				$this->accType = $this->session->userdata('pt_accountType');
 				$this->role = $this->session->userdata('pt_role');
-
+				$this->load->library('hotels/hotels_lib');
+                $this->load->model('hotels/hotels_model');
+                $this->load->model('locations_model');
+                $this->load->model('accounts_model');                
 		        $this->data['userloggedin'] = $this->session->userdata('pt_logged_id');
 				if (empty ($this->data['userloggedin'])) {
 					$urisegment =  $this->uri->segment(1); 
@@ -71,14 +74,16 @@ class hotelsback extends MX_Controller {
 				$this->load->model('admin/accounts_model');
 				$this->data['isadmin'] = $this->session->userdata('pt_logged_admin');
 				$this->data['isSuperAdmin'] = $this->session->userdata('pt_logged_super_admin');
+
 				
 		}
-
-		function index() {
+		function index2() {
 				if(!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission){
                 	backError_404($this->data);
                 	
                 }else{
+
+
 				$xcrud = xcrud_get_instance();
 
 				$xcrud->table('pt_hotels');
@@ -115,7 +120,7 @@ class hotelsback extends MX_Controller {
 				$xcrud->label('thumbnail_image', 'Image');
 				$xcrud->label('hotel_slug', 'Gallery');
 				$xcrud->label('hotel_status', 'Status');
-				$xcrud->column_callback('hotel_stars', 'create_stars');
+				//$xcrud->column_callback('hotel_stars', 'create_stars');
 				$xcrud->column_callback('pt_hotels.hotel_order', 'orderInputHotels');
 				$xcrud->column_callback('pt_hotels.hotel_is_featured', 'feature_stars');
 				$xcrud->column_callback('hotel_slug', 'hotelGallery');
@@ -127,9 +132,79 @@ class hotelsback extends MX_Controller {
 				
 				$this->data['content'] = $xcrud->render();
 				$this->data['page_title'] = 'Hotels Management';
-				$this->data['main_content'] = 'temp_view';
+				$this->data['main_content'] = 'temp_view';				
 				$this->data['header_title'] = 'Hotels Management';
+
 				$this->data['add_link'] = base_url(). $this->data['adminsegment'] . '/hotels/add';
+				$this->load->helper('pt_LocationsInfo');
+				$this->load->view('admin/template', $this->data);
+			}
+
+                
+		}
+		function index() {
+			if(!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission){
+            	backError_404($this->data);
+            	
+            }else{
+            	$params = [];
+            	$data         = array();
+            	$params['hotel_city'] = $this->input->get('hotel_city') ? $this->input->get('hotel_city') : null;
+            	$params['hotel_status'] = $this->input->get('hotel_status') ? $this->input->get('hotel_status') : null;
+            	$params['hotel_stars'] = $this->input->get('hotel_stars') ? $this->input->get('hotel_stars') : null;
+            	$params['hotel_status'] = $this->input->get('hotel_status') ? $this->input->get('hotel_status') : null;
+            	$params['hotel_status'] = $this->input->get('hotel_status') ? $this->input->get('hotel_status') : null;
+            	$params['hotel_is_featured'] = $this->input->get('hotel_is_featured') ? $this->input->get('hotel_is_featured') : null;
+            			        			        
+		        $limit     = $this->input->get('limit') ? $this->input->get('limit') : 100;
+		        $page     = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
+    			$offset = ($page - 1 )* $limit;
+		        $total_records = $this->hotels_model->search($params);		
+		        $config['base_url'] = base_url() .'admin/hotels'.'?'.http_build_query($params,'',"&amp;");
+        		$config['total_rows'] = $total_records;		                       
+		       	$config['per_page'] = 50;
+		        // integrate bootstrap pagination
+		        $config['full_tag_open'] = '<ul class="pagination" style="margin: 0px 0px;margin-bottom:5px;">';
+		        $config['full_tag_close'] = '</ul>';			      
+		        $config['first_tag_open'] = '<li>';
+		        $config['first_tag_close'] = '</li>';
+		        $config['prev_link'] = '«';
+		        $config['prev_tag_open'] = '<li class="prev">';
+		        $config['prev_tag_close'] = '</li>';
+		        $config['next_link'] = '»';
+		        $config['next_tag_open'] = '<li>';
+		        $config['next_tag_close'] = '</li>';
+		        $config['last_tag_open'] = '<li>';
+		        $config['last_tag_close'] = '</li>';
+		        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+		        $config['cur_tag_close'] = '</a></li>';
+		        $config['num_tag_open'] = '<li>';
+		        $config['num_tag_close'] = '</li>';		        
+		        //echo "<pre>";
+	            //print_r($config);die;
+	            $this->pagination->initialize($config);
+	            
+	            $this->data['links'] = $this->pagination->create_links();
+
+		        $data = $this->hotels_model->search($params, $limit, $page);
+		        $locationArr = $photoArr = [];
+				if(!empty($data)){
+					foreach($data as $item){
+						$locationArr[$item->hotel_city] = pt_LocationsInfo($item->hotel_city)->city;
+						$photoArr[$item->hotel_id] = pt_HotelPhotosCount($item->hotel_id);
+					}
+				}								
+				$this->data['content'] = $data;				
+				$this->data['locationArr'] = $locationArr;	
+				$this->data['photoArr'] = $photoArr;					
+				$this->data['page_title'] = 'Hotels Management';
+				$this->data['main_content'] = 'temp_view';
+				$this->data['main_content'] = 'hotels/index';
+				$this->data['header_title'] = 'Hotels Management';
+				$this->data['params'] = $params;
+				$this->data['deletepermission'] = $this->deletepermission;
+				$this->data['add_link'] = base_url(). $this->data['adminsegment'] . '/hotels/add';				
+				$this->data['locations'] = $this->locations_model->getLocationsBackend();				
 				$this->load->view('admin/template', $this->data);
 			}
 
@@ -205,8 +280,8 @@ class hotelsback extends MX_Controller {
 				}
 				else {
 						$this->data['main_content'] = 'hotels/manage';
-						$this->data['page_title'] = 'Add Hotel';
-						$this->data['headingText'] = 'Add Hotel';
+						$this->data['page_title'] = 'Thêm khách sạn';
+						$this->data['headingText'] = 'Thêm khách sạn';
 						$this->data['default_checkin_out'] = $this->settings_model->get_default_checkin_out();
 						$this->data['checkin'] = $this->data['default_checkin_out'][0]->front_checkin_time;
 						$this->data['checkout'] = $this->data['default_checkin_out'][0]->front_checkout_time;
@@ -296,8 +371,8 @@ class hotelsback extends MX_Controller {
 								}
 						}
 						$this->data['main_content'] = 'hotels/manage';
-						$this->data['page_title'] = 'Manage Hotel';
-						$this->data['headingText'] = 'Update ' . $this->data['hdata'][0]->hotel_title;
+						$this->data['page_title'] = 'Quản lý khách sạn';
+						$this->data['headingText'] = 'Cập nhật: ' . $this->data['hdata'][0]->hotel_title;
 						$this->data['checkin'] = $this->data['hdata'][0]->hotel_check_in;
 						$this->data['checkout'] = $this->data['hdata'][0]->hotel_check_out;
 						$this->data['hrelated'] = explode(",", $this->data['hdata'][0]->hotel_related);
@@ -366,8 +441,8 @@ if(!$this->data['addpermission'] && !$this->editpermission && !$this->deleteperm
 								$this->data['hotels'] = $this->hotels_model->all_hotels_names($userid);
 								$this->data['hotelid'] = $this->input->post('hotelid');
 							   	$this->data['main_content'] = 'hotels/rooms/manage';
-								$this->data['page_title'] = 'Add Room';
-                                $this->data['headingText'] = 'Add Room';
+								$this->data['page_title'] = 'Thêm phòng';
+                                $this->data['headingText'] = 'Thêm phòng';
                                 $this->load->view('admin/template', $this->data);
 						}
 				}
@@ -420,8 +495,8 @@ if(!$this->data['addpermission'] && !$this->editpermission && !$this->deleteperm
 								$this->load->library('hotels/hotels_calendar_lib');
 								$this->data['calendar'] = $this->hotels_calendar_lib;
 								$this->data['main_content'] = 'hotels/rooms/manage';
-								$this->data['page_title'] = 'Edit Room';
-                                                                $this->data['headingText'] = 'Update ' . $this->data['rdata'][0]->room_title;
+								$this->data['page_title'] = 'Cập nhật phòng';
+                                                                $this->data['headingText'] = 'Cập nhật: ' . $this->data['rdata'][0]->room_title;
                                                                 $saletype = $this->data['rdata'][0]->room_is_sale_type;
                                                                 $saleval = $this->data['rdata'][0]->room_is_sale_val;
                                                                 

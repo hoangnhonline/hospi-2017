@@ -12,7 +12,7 @@ class Locations_model extends CI_Model {
 		}
 
 		//get locations list admin panel
-		function getLocationsBackend($id = null){
+		function getLocationsBackend(){
 
 			$this->db->where('status','yes');
 			$this->db->order_by('id','desc');

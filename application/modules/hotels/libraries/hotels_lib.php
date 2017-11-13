@@ -22,6 +22,7 @@ class Hotels_lib
     public $location;
     public $country;
     public $policy;
+    public $surcharge;
     public $roomid;
     public $roomtitle;
     public $roomdesc;
@@ -343,7 +344,7 @@ class Hotels_lib
         $data['resultSort'] = $resultSort;        
         return $data;
     }
-    
+   
     function search_hotels_by_text($cityid, $offset = null, $checkin = null, $checkout = null, $honeymoon = null)
     {
         
@@ -560,6 +561,7 @@ class Hotels_lib
         $near          = $details[0]->near;
         $desc          = $this->get_description($details[0]->hotel_desc, $details[0]->hotel_id);
         $policy        = $this->get_policy($details[0]->hotel_policy, $details[0]->hotel_id);
+        $surcharge        = $details[0]->hotel_surcharge;
         $keywords      = $this->get_keywords($details[0]->hotel_meta_keywords, $details[0]->hotel_id);
         $metadesc      = $this->get_metaDesc($details[0]->hotel_meta_desc, $details[0]->hotel_id);
         
@@ -665,7 +667,7 @@ class Hotels_lib
     
     function hotel_short_details()
     {
-        $this->db->select('hotel_id,hotel_phone,hotel_email,hotel_website,hotel_map_city,hotel_title,hotel_desc,hotel_policy,tripadvisor_id,hotel_city,hotel_basic_price,hotel_basic_discount,hotel_is_featured,price_status,
+        $this->db->select('hotel_id,hotel_phone,hotel_email,hotel_website,hotel_map_city,hotel_title,hotel_desc,hotel_policy,hotel_surcharge,tripadvisor_id,hotel_city,hotel_basic_price,hotel_basic_discount,hotel_is_featured,price_status,
 
    hotel_trusted,hotel_best_price,hotel_stars,hotel_slug,hotel_refundable,hotel_ratings,hotel_arrivalpay,thumbnail_image,hotel_amenities,hotel_latitude,hotel_longitude,hotel_meta_keywords,hotel_meta_desc,hotel_tax_fixed,hotel_tax_percentage,hotel_service_fixed,hotel_service_percentage');
         
@@ -676,6 +678,7 @@ class Hotels_lib
         $this->stars         = $details[0]->hotel_stars;
         $this->desc          = $this->get_description($details[0]->hotel_desc);
         $this->policy        = $this->get_policy($details[0]->hotel_policy);
+        $this->surcharge        = $details[0]->hotel_surcharge;
         $this->keywords      = $this->get_keywords($details[0]->hotel_meta_keywords, $details[0]->hotel_id);
         $this->metadesc      = $this->get_metaDesc($details[0]->hotel_meta_desc, $details[0]->hotel_id);
         $hotelAmenities      = explode(",", $details[0]->hotel_amenities);
@@ -1999,6 +2002,7 @@ class Hotels_lib
             'depositAmount' => $depositAmount,
             'serviceAmount' => $serviceAmount,
             'policy' => $this->policy,
+            'surcharge' => $this->surcharge,
             'extraChkUrl' => $extrasCheckUrl,
             'adults' => $this->adults,
             'children' => $this->children,
