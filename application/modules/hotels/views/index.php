@@ -104,7 +104,7 @@
                   ?>
                 </td>          
                 <td class="zoom_img">
-                  <!--<img class="img-thumbnail" width="120" src="<?php echo '../../'.PT_HOTELS_SLIDER_THUMBS_UPLOAD.$item->thumbnail_image; ?>" alt="<?php echo $item->hotel_title; ?>" title="<?php echo $item->hotel_title; ?>" />-->
+                  <img class="img-thumbnail" width="120" src="<?php echo '../../'.PT_HOTELS_SLIDER_THUMBS_UPLOAD.$item->thumbnail_image; ?>" alt="<?php echo $item->hotel_title; ?>" title="<?php echo $item->hotel_title; ?>" />
                 </td>
                 <td>                  
                   <a href="<?php echo base_url() . 'admin/hotels/manage/'.$item->hotel_slug; ?>" target="_self"><?php echo $item->hotel_title; ?></a>
