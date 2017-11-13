@@ -117,7 +117,11 @@ Dropzone.options.dropzone = {
 })
 </script>
 
-
+<?php 
+$roomDetail = $room[0];
+?>
+<a href="<?php echo base_url(); ?>admin/hotels?hotel_city=<?php echo $detailHotel->hotel_city; ?>" class="btn btn-default btn-sm">Quay lại</a>
+<h3 style="margin-top: 5px;color:#0073aa"><?php echo $detailHotel->title; ?></h3>
  <div class="panel panel-default">
   <div class="panel-heading">Quản lý hình ảnh</div>
 
@@ -142,7 +146,7 @@ Dropzone.options.dropzone = {
                                  <div class="clearfix"></div>
 
                                 </th>
-                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Delete Selected Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Xóa</span></th>
+                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Xóa mục đã chọn Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Xóa</span></th>
                                 <th class="col-md-2 text-center">Thứ tự</th>
                                 <th class="col-md-2 text-center">Trạng thái</th>
                                 <th class="col-md-2 text-center">Ảnh đại diện</th>

@@ -142,7 +142,7 @@ Dropzone.options.dropzone = {
                                  <div class="clearfix"></div>
 
                                 </th>
-                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Delete Selected Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Delete</span></th>
+                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Xóa mục đã chọn Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Delete</span></th>
                                 <th class="col-md-2 text-center">Order</th>
                                 <th class="col-md-2 text-center">Active</th>
                                 <th class="col-md-2 text-center">Thumbnail</th>

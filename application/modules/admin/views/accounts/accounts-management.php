@@ -18,39 +18,39 @@ echo $validationerrors; ?>
     <div class="panel-body">
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">First Name</label>
-          <input class="form-control" type="text" placeholder="First name" name="fname" value="<?php echo setFrmVal(@$profile[0]->ai_first_name,set_value('fname')); ?>">
+          <label class="required">Tên</label>
+          <input class="form-control" type="text" placeholder="Tên" name="fname" value="<?php echo setFrmVal(@$profile[0]->ai_first_name,set_value('fname')); ?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Last Name</label>
-          <input class="form-control" type="text" placeholder="Last name" name="lname" value="<?php echo setFrmVal(@$profile[0]->ai_last_name,set_value('lname')); ?>">
+          <label class="required">Họ</label>
+          <input class="form-control" type="text" placeholder="Họ" name="lname" value="<?php echo setFrmVal(@$profile[0]->ai_last_name,set_value('lname')); ?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
           <label class="required">Email</label>
-          <input class="form-control" type="email" placeholder="Email address" name="email" value="<?php echo setFrmVal(@$profile[0]->accounts_email,set_value('email')); ?>">
+          <input class="form-control" type="email" placeholder="Email" name="email" value="<?php echo setFrmVal(@$profile[0]->accounts_email,set_value('email')); ?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Password</label>
-          <input class="form-control" type="password" placeholder="Password" name="password">
+          <label class="required">Mật khẩu</label>
+          <input class="form-control" type="password" placeholder="Mật khẩu" name="password">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Mobile Number</label>
-          <input class="form-control" type="text" placeholder="Mobile Number" name="mobile" value="<?php echo setFrmVal(@$profile[0]->ai_mobile,set_value('mobile')); ?>">
+          <label class="required">Số điện thoại</label>
+          <input class="form-control" type="text" placeholder="Số điện thoại" name="mobile" value="<?php echo setFrmVal(@$profile[0]->ai_mobile,set_value('mobile')); ?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Country</label>
+          <label class="required">Khu vực</label>
           <select class="chosen-select" name="country" id="">
-           <option value="">Please Select</option>
+           <option value="">-- Chọn --</option>
             <?php foreach($countries as $c){ ?>
             <option value="<?php echo $c->iso2;?>" <?php if(setFrmVal(@$profile[0]->ai_country,set_value('country')) == $c->iso2){ echo "selected"; }?> ><?php echo $c->short_name;?></option>
             <?php } ?>
@@ -60,13 +60,13 @@ echo $validationerrors; ?>
       <div class="clearfix"></div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Address 1</label>
+          <label class="required">Địa chỉ 1</label>
           <input class="form-control" type="text" placeholder="Full address" name="address1" value="<?php echo setFrmVal(@$profile[0]->ai_address_1,set_value('address1')); ?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Address 2</label>
+          <label class="required">Địa chỉ 2</label>
           <input class="form-control" type="text" placeholder="Full address" name="address2" value="<?php echo setFrmVal(@$profile[0]->ai_address_2,set_value('address2')); ?>">
         </div>
       </div>
@@ -75,10 +75,10 @@ echo $validationerrors; ?>
         <div class="col-md-4">
         <div class="row">
        <div class="form-group ">
-          <label class="required">Status</label>
+          <label class="required">Trạng thái</label>
           <select name="status" class="form-control">
-          <option value="yes" <?php  makeSelected($profile[0]->accounts_status,"yes"); ?>>Enabled</option>
-          <option value="no"  <?php  makeSelected($profile[0]->accounts_status,"no"); ?> >Disabled</option>
+          <option value="yes" <?php  makeSelected($profile[0]->accounts_status,"yes"); ?>>Cho phép</option>
+          <option value="no"  <?php  makeSelected($profile[0]->accounts_status,"no"); ?> >Khóa</option>
           </select>
         </div>
 

@@ -128,7 +128,7 @@
   <?php if($this->session->flashdata('flashmsgs')){ echo NOTIFY; } ?>
   <div class="panel panel-primary table-bg">
     <div class="panel-heading">
-      <span class="panel-title pull-left"><i class="fa fa-star-half-o"></i> Extras Management</span>
+      <span class="panel-title pull-left"><i class="fa fa-star-half-o"></i> Quản lý thông tin khác</span>
       <div class="pull-right">
         <a data-toggle="modal" href="<?php echo base_url().$this->uri->segment(1);?>/extras/add/"><?php echo PT_ADD; ?></a>
         <span class="del_selected">   <?php echo PT_DEL_SELECTED; ?></span>

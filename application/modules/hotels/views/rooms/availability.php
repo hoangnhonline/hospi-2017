@@ -1,3 +1,8 @@
+<?php 
+$roomDetail = $room[0];
+?>
+<a href="<?php echo base_url(); ?>admin/hotels/rooms?room_hotel=<?php echo $roomDetail->hotel_id; ?>" class="btn btn-default btn-sm">Quay lại</a>
+<h3 style="margin-top: 5px;color:#0073aa"><?php echo $roomDetail->room_title; ?> - <?php echo $roomDetail->hotel_title; ?></h3>
  <div class="panel panel-default">
   <div class="panel-heading">Room Availability</div>
       	<form action="" id="frmRoomAvailability" method="post">

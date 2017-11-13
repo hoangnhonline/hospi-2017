@@ -223,7 +223,7 @@ class Tourajaxcalls extends MX_Controller {
 				//$this->form_validation->set_rules('email', 'Email', 'required|valid_email|matches[confirmemail]');
                                 $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 				$this->form_validation->set_rules('firstname', 'First name', 'trim|required');
-				$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
+				$this->form_validation->set_rules('lastname', 'Họ', 'trim|required');
 				if ($this->form_validation->run() == FALSE) {
 						echo validation_errors();
 				}
@@ -255,7 +255,7 @@ class Tourajaxcalls extends MX_Controller {
 				$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 				$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|matches[confirmpassword]');
 				$this->form_validation->set_rules('firstname', 'First name', 'trim|required');
-				$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
+				$this->form_validation->set_rules('lastname', 'Họ', 'trim|required');
 				if ($this->form_validation->run() == FALSE) {
 						echo "<div class='alert alert-danger'>" . validation_errors() . "</div>";
 				}
@@ -281,7 +281,7 @@ $this->form_validation->set_message('is_unique', 'Email Already exists.');
 $this->form_validation->set_message('matches', 'Passwords not matching.');
 $this->form_validation->set_rules('email','Email', 'required|valid_email|is_unique[pt_accounts.accounts_email]');
 $this->form_validation->set_rules('firstname','First name', 'trim|required');
-$this->form_validation->set_rules('lastname','Last Name', 'trim|required');
+$this->form_validation->set_rules('lastname','Họ', 'trim|required');
 $this->form_validation->set_rules('password','Password', 'required|min_length[6]|matches[confirmpassword]');
 
 

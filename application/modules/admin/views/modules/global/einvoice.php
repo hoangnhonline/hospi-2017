@@ -72,10 +72,10 @@
       var year = parseInt($("#expiry-year").val(), 10);
 
        if($.trim(firstname) == ""){
-       $(".submitresult").html("Enter First Name").fadeIn("slow");
+       $(".submitresult").html("Enter Tên").fadeIn("slow");
        return false;
        }else if($.trim(lastname) == ""){
-      $(".submitresult").html("Enter Last Name").fadeIn("slow");
+      $(".submitresult").html("Enter Họ").fadeIn("slow");
        return false;
        }else if($.trim(cardno) == ""){
       $(".submitresult").html("Enter Card number").fadeIn("slow");
@@ -286,15 +286,15 @@
         <form  class="form-horizontal" role="form" action="<?php echo base_url();?>checkout" method="POST">
           <fieldset>
             <div class="form-group">
-              <label class="col-sm-4 control-label" for="card-holder-name">First Name</label>
+              <label class="col-sm-4 control-label" for="card-holder-name">Tên</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" name="firstName" id="card-holder-firstname" placeholder="Card Holder's First Name">
+                <input type="text" class="form-control" name="firstName" id="card-holder-firstname" placeholder="Card Holder's Tên">
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-4 control-label" for="card-holder-name">Last Name</label>
+              <label class="col-sm-4 control-label" for="card-holder-name">Họ</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" name="lastName" id="card-holder-lastname" placeholder="Card Holder's Last Name">
+                <input type="text" class="form-control" name="lastName" id="card-holder-lastname" placeholder="Card Holder's Họ">
               </div>
             </div>
             <div class="form-group">

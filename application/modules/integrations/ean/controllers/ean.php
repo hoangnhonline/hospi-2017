@@ -421,8 +421,8 @@ if (!empty ($sprice)) {
 				$this->data['allcountries'] = $this->countries_model->get_all_countries();
 				$pay = $this->input->post('pay');
 				$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-				$this->form_validation->set_rules('firstName', 'First Name', 'trim');
-				$this->form_validation->set_rules('lastName', 'Last name', 'trim');
+				$this->form_validation->set_rules('firstName', 'Tên', 'trim');
+				$this->form_validation->set_rules('lastName', 'Họ', 'trim');
 				$this->form_validation->set_rules('policy', 'Cancellation Policy', 'required');
 				$this->form_validation->set_rules('address', 'Address', 'trim');
 				$this->form_validation->set_rules('cvv', 'CVV', 'trim');

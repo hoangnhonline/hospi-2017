@@ -95,7 +95,7 @@ function create_status_icon($value, $fieldname, $primary_key, $row, $xcrud)
 function long_date_fmt($value, $fieldname, $primary_key, $row, $xcrud)
 {
   if (!empty($value)) {
-    return date("F j Y, h:i a", $value);
+    return date("d/m/Y H:i:s", $value);
   }
   else {
     return "";

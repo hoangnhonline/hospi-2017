@@ -167,7 +167,7 @@ function faturah_link($params) {
     $order = new Order();
     $order->addItem('1', 'Hotel Name', 'Book Room', '1', 120*$rate);
     $order->deliveryCharge = 0;
-    $order->customerName= 'First Name';
+    $order->customerName= 'Tên';
     $order->customerEmail= 'test@test.com';
     $order->customerPhoneNumber = '1234567890';
     $order->lang = 'ar';

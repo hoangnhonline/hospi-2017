@@ -56,13 +56,13 @@ redirect('admin');
 						$this->data['variables'] = $this->emails_model->shortcode_variables($template);
 						$this->data['details'] = $this->templates_model->get_template_detail($template);
 						$this->data['main_content'] = 'modules/templates/email/update';
-						$this->data['page_title'] = 'Email Templates';
+						$this->data['page_title'] = 'Mẫu gửi email';
 						$this->load->view('template', $this->data);
 				}
 				else {
 						$this->data['templates'] = $this->templates_model->get_all_templates();
 						$this->data['main_content'] = 'modules/templates/email/index';
-						$this->data['page_title'] = 'Email Templates';
+						$this->data['page_title'] = 'Mẫu gửi email';
 						$this->load->view('template', $this->data);
 				}
 		}

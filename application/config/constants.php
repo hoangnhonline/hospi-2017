@@ -206,7 +206,7 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('NOTIFY','<script type="text/javascript"> $(function(){ $.notify("Changes Saved","info"); }) </script>');
 
 define('PT_ADD','<span data-toggle="tooltip" data-placement="top" title="Add New" class="btn btn-xs btn-success"><i class="fa fa-plus-square"></i> Add New</span>');
-define('PT_DEL_SELECTED','<span data-toggle="tooltip" data-placement="top" title="Delete Selected" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></span>');
+define('PT_DEL_SELECTED','<span data-toggle="tooltip" data-placement="top" title="Xóa mục đã chọn" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></span>');
 define('PT_DIS_SELECTED','<span data-toggle="tooltip" data-placement="top" title="Disable Selected" class="btn btn-xs btn-info"><i class="fa fa-minus-square"></i></span>');
 define('PT_ENA_SELECTED','<span data-toggle="tooltip" data-placement="top" title="Enable Selected" class="btn btn-xs btn-enable"><i class="fa fa-check-square-o"></i></span>');
 define('PT_ADV_SEARCH','<span data-toggle="tooltip" data-placement="top" title="Advance Search" class="btn btn-xs btn-primary"><i class="fa fa-search"></i></span>');

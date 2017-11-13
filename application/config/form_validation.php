@@ -29,12 +29,12 @@ $config = array(
                                          ),
                                     array(
                                             'field' => 'fname',
-                                            'label' => 'First Name',
+                                            'label' => 'Tên',
                                             'rules' => 'trim|required'
                                          ),
                                     array(
                                             'field' => 'lname',
-                                            'label' => 'Last Name',
+                                            'label' => 'Họ',
                                             'rules' => 'trim|required'
                                          ),
                                     array(
@@ -86,12 +86,12 @@ $config = array(
                                          ),
                                     array(
                                             'field' => 'fname',
-                                            'label' => 'First Name',
+                                            'label' => 'Tên',
                                             'rules' => 'trim|required'
                                          ),
                                     array(
                                             'field' => 'lname',
-                                            'label' => 'Last Name',
+                                            'label' => 'Họ',
                                             'rules' => 'trim|required'
                                          ),
                                     array(

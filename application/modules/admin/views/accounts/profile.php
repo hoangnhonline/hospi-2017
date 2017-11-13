@@ -1,25 +1,25 @@
 <form action="" method="POST">
 <?php echo @$msg; ?>
 <div class="panel panel-default">
-  <div class="panel-heading">Profile</div>
+  <div class="panel-heading">Thông tin</div>
   <div class="panel-body">
     <div class="panel-body">
       <div class="col-md-12">
         <div class="form-group ">
-          <label class="required">Account Type</label>
+          <label class="required">Loại tài khoản</label>
           <input class="form-control" type="text" disabled="disabled" placeholder="Account Type" name="" value="<?php echo $accType;?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">First Name</label>
-          <input class="form-control" type="text" placeholder="First name" name="fname" value="<?php echo $profile[0]->ai_first_name;?>">
+          <label class="required">Tên</label>
+          <input class="form-control" type="text" placeholder="Tên" name="fname" value="<?php echo $profile[0]->ai_first_name;?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Last Name</label>
-          <input class="form-control" type="text" placeholder="Last name" name="lname" value="<?php echo $profile[0]->ai_last_name;?>">
+          <label class="required">Họ</label>
+          <input class="form-control" type="text" placeholder="Họ" name="lname" value="<?php echo $profile[0]->ai_last_name;?>">
         </div>
       </div>
       <div class="col-md-6">
@@ -30,21 +30,21 @@
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Password</label>
-          <input class="form-control" type="password" placeholder="Password" name="password">
+          <label class="required">Mật khẩu</label>
+          <input class="form-control" type="password" placeholder="Mật khẩu" name="password">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Mobile Number</label>
-          <input class="form-control" type="text" placeholder="Mobile Number" name="mobile" value="<?php echo $profile[0]->ai_mobile;?>">
+          <label class="required">Số điện thoại</label>
+          <input class="form-control" type="text" placeholder="Số điện thoại" name="mobile" value="<?php echo $profile[0]->ai_mobile;?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Country</label>
+          <label class="required">Quốc gia</label>
           <select class="chosen-select" name="country" id="">
-          <option value="">Select</option>
+          <option value="">-Chọn-</option>
             <?php foreach($countries as $c){ ?>
             <option value="<?php echo $c->iso2;?>" <?php if($profile[0]->ai_country == $c->iso2){ echo "selected"; }?> ><?php echo $c->short_name;?></option>
             <?php } ?>
@@ -54,13 +54,13 @@
       <div class="clearfix"></div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Address 1</label>
+          <label class="required">Địa chỉ 1</label>
           <input class="form-control" type="text" placeholder="Full address" name="address1" value="<?php echo $profile[0]->ai_address_1;?>">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
-          <label class="required">Address 2</label>
+          <label class="required">Địa chỉ 2</label>
           <input class="form-control" type="text" placeholder="Full address" name="address2" value="<?php echo $profile[0]->ai_address_2;?>">
         </div>
       </div>
@@ -83,7 +83,7 @@
   <input type="hidden" name="type" value="<?php echo $profile[0]->accounts_type;?>" />
   <input type="hidden" name="status" value="<?php echo $profile[0]->accounts_status;?>" />
   <input type="hidden" name="oldemail" value="<?php echo $profile[0]->accounts_email;?>" />
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary">Lưu</button>
   </div>
 </div>
 </form>

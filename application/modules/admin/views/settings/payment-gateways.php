@@ -37,7 +37,7 @@ input, button, select, textarea  {
 <?php if($this->session->flashdata('flashmsgs')){ echo NOTIFY; } ?>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <span class="panel-title pull-left"> Payment Gateways Management</span>
+    <span class="panel-title pull-left"> Quản lý thanh toán</span>
     <div class="clearfix"></div>
   </div>
   <div class="panel-body">

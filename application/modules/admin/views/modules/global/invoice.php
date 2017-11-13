@@ -309,10 +309,10 @@
       var year = parseInt($("#expiry-year").val(), 10);
 
        if($.trim(firstname) == ""){
-       $(".submitresult").html("Enter First Name").fadeIn("slow");
+       $(".submitresult").html("Enter Tên").fadeIn("slow");
        return false;
        }else if($.trim(lastname) == ""){
-      $(".submitresult").html("Enter Last Name").fadeIn("slow");
+      $(".submitresult").html("Enter Họ").fadeIn("slow");
        return false;
        }else if($.trim(cardno) == ""){
       $(".submitresult").html("Enter Card number").fadeIn("slow");

@@ -105,8 +105,8 @@ class Account extends MX_Controller {
 				$cpassword = $this->input->post('confirmpassword');
 				$oldemail = $this->input->post('oldemail');
 				$newemail = $this->input->post('email');
-// $this->form_validation->set_rules('firstname','First Name', 'trim|required');
-//  $this->form_validation->set_rules('lastname','Last Name', 'trim|required');
+// $this->form_validation->set_rules('firstname','Tên', 'trim|required');
+//  $this->form_validation->set_rules('lastname','Họ', 'trim|required');
 				$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required');
 				if (!empty ($password)) {
 						$this->form_validation->set_message('matches', 'Passwords not matching.');
@@ -190,7 +190,7 @@ class Account extends MX_Controller {
 				$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 				$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|matches[confirmpassword]');
 				$this->form_validation->set_rules('firstname', 'First name', 'trim|required');
-				$this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
+				$this->form_validation->set_rules('lastname', 'Họ', 'trim|required');
 				if ($this->form_validation->run() == FALSE) {
 						echo "<div class='alert alert-danger'>" . validation_errors() . "</div>";
 				}

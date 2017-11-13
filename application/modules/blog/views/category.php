@@ -142,7 +142,7 @@ function changePerpage(perpage){
 <div class="<?php echo body;?>">
   <div class="panel panel-primary table-bg">
       <div class="panel-heading">
-      <span class="panel-title pull-left"><i class="glyphicon glyphicon-th-large"></i> Blog Categories</span>
+      <span class="panel-title pull-left"><i class="glyphicon glyphicon-th-large"></i> Danh mục blog</span>
       <div class="pull-right">
         <a data-toggle="modal" data-target="#add"><?php echo PT_ADD; ?></a>
         <span class="del_selected">   <?php echo PT_DEL_SELECTED; ?></span>

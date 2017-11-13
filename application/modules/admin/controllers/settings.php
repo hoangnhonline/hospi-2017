@@ -408,9 +408,9 @@ class Settings extends MX_Controller {
         $xcrud->multiDelUrl = base_url().'admin/ajaxcalls/delMultipleSocials';
 
         $this->data['content'] = $xcrud->render();
-        $this->data['page_title'] = 'Social Connections Management';
+        $this->data['page_title'] = 'Quản lý mạng xã hội';
         $this->data['main_content'] = 'temp_view';
-        $this->data['header_title'] = 'Social Connections Management';
+        $this->data['header_title'] = 'Quản lý mạng xã hội';
         $this->load->view('template', $this->data);
 
            		}

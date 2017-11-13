@@ -36,7 +36,7 @@
       </div>
      <div class="box">       
      <div class="btn-group pull-right">
-                <a style="margin-bottom: 5px;" href="javascript: multiDelfunc('<?php echo  base_url(); ?>admin/hotelajaxcalls/delMultipleHotels', 'checkboxcls')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Xóa mục đã chọn</a> 
+                <a style="margin-bottom: 5px;" href="javascript: multiDelfunc('<?php echo  base_url(); ?>admin/hotelajaxcalls/delMultipleRooms', 'checkboxcls')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Xóa mục đã chọn</a> 
                 </div>
                 <div class="clearfix"></div>
         <!-- /.box-header -->
@@ -122,10 +122,10 @@
                   <a href="<?php echo base_url() . 'admin/hotels/rooms/manage/'.$item->room_id; ?>" class="btn btn-warning btn-sm" target="_self"><i class="fa fa-edit"></i></a>
                   <?php
                   if($deletepermission){
-                    $delurl = base_url().'admin/hotelajaxcalls/delHotel';                
+                    $delurl = base_url().'admin/hotelajaxcalls/delRoom';                
                 
                   ?>
-                  <a onclick="javascript: delfunc('<?php echo $item->hotel_id; ?>','<?php echo $delurl; ?>')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
+                  <a onclick="javascript: delfunc('<?php echo $item->room_id; ?>','<?php echo $delurl; ?>')" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i></a>
                   <?php } ?>
                 </td>
               </tr> 

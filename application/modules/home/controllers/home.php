@@ -280,8 +280,8 @@ class Home extends MX_Controller {
 						$this->form_validation->set_rules('country', 'Country', 'trim|required');
 						$this->form_validation->set_rules('city', 'City', 'trim');
 						$this->form_validation->set_rules('state', 'State', 'trim');
-						$this->form_validation->set_rules('fname', 'First Name', 'trim');
-						$this->form_validation->set_rules('lname', 'Last Name', 'trim');
+						$this->form_validation->set_rules('fname', 'Tên', 'trim');
+						$this->form_validation->set_rules('lname', 'Họ', 'trim');
 						$this->form_validation->set_rules('address1', 'address 1', 'trim');
 						$this->form_validation->set_rules('address2', 'address 2', 'trim');
 						$this->form_validation->set_rules('mobile', 'mobile', 'trim');

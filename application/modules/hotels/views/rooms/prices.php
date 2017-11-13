@@ -1,27 +1,45 @@
+<?php 
+$roomDetail = $room[0];
+?>
+<a href="<?php echo base_url(); ?>admin/hotels/rooms?room_hotel=<?php echo $roomDetail->hotel_id; ?>" class="btn btn-default btn-sm">Quay lại</a>
+<h3 style="margin-top: 5px;color:#0073aa"><?php echo $roomDetail->room_title; ?> - <?php echo $roomDetail->hotel_title; ?></h3>
 <?php echo $errormsg;?>
 <div class="panel panel-default">
-  <div class="panel-heading">Rooms Prices</div>
+  <div class="panel-heading">Giá phòng</div>
   <div class="panel-body">
   <form action="" method="POST" >
     <div class="col-md-2">
       <div class="form-group">
-        <label class="required">From Date</label>
-        <input type="text" placeholder="From" name="fromdate" class="form-control input-sm dpd1" value="<?php echo set_value('fromdate'); ?>"/>
+        <label class="required">Từ ngày</label>
+        <input type="text" placeholder="" name="fromdate" class="form-control input-sm dpd1" value="<?php echo set_value('fromdate'); ?>"/>
       </div>
     </div>
     <div class="col-md-2">
       <div class="form-group">
-        <label class="required">To Date</label>
-        <input type="text" placeholder="To" name="todate" class="form-control input-sm dpd2" value="<?php echo set_value('todate'); ?>"/>
+        <label class="required">Đến ngày</label>
+        <input type="text" placeholder="" name="todate" class="form-control input-sm dpd2" value="<?php echo set_value('todate'); ?>"/>
       </div>
     </div>
-    <div class="clearfix"></div>
-    <div class="well well-sm">
+    <div class="col-md-2">
+        <div class="form-group">
+          <label class="required">Giường phụ</label>
+          <select name="isExtraBed" class="form-control input-day input-sm" id="isExtraBed" style="width: 100%">            
+            <option value="0" >Không áp dụng</option>
+            <option value="1" >Áp dụng</option>
+          </select>
+        </div>
+      </div>
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Adults</label>
-          <select name="adult" class="form-control input input-sm" id="">
-            <?php for($adults = 1; $adults <= $room[0]->room_adults; $adults++){ ?>
+          <label class="required">Phí giường phụ</label>
+          <input type="number" placeholder="" name="bedcharges" class="form-control input-day  input-sm" value="<?php echo $roomDetail->extra_bed_charges;?>" <?php if($roomDetail->extra_bed < 1){ echo "readonly"; } ?> />
+        </div>
+      </div>
+      <div class="col-md-1">
+        <div class="form-group">
+          <label class="required">Người lớn</label>
+          <select name="adult" class="form-control input input-day input-sm" id="">
+            <?php for($adults = 1; $adults <= $roomDetail->room_adults; $adults++){ ?>
               <option value="<?php echo $adults; ?>" ><?php echo $adults; ?></option>
             <?php } ?>
           </select>
@@ -29,25 +47,22 @@
       </div>
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Children </label>
-          <select name="child" class="form-control input input-sm" id="">
-            <?php for($child = 0; $child <= $room[0]->room_children; $child++){ ?>
+          <label class="required">Trẻ em </label>
+          <select name="child" class="form-control input  input-day input-sm" id="">
+            <?php for($child = 0; $child <= $roomDetail->room_children; $child++){ ?>
               <option value="<?php echo $child; ?>" ><?php echo $child; ?></option>
               <?php } ?>
           </select>
         </div>
       </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label class="required">Extra Bed </label>
-          <input type="number" placeholder="" name="bedcharges" class="form-control input  input-sm" value="<?php echo $room[0]->extra_bed_charges;?>" <?php if($room[0]->extra_bed < 1){ echo "readonly"; } ?> />
-        </div>
-      </div>
-      <div class="col-md-2" style="width:100px;">
-        <label class="required">Mon</label>
+      
+      <div class="clearfix"></div>
+    <div class="">
+      <div class="col-md-2" style="width:150px;margin-right: 20px">
+        <label class="required">Thứ 2</label>
       <div class="input-group" >
 
-      <input type="number" step="any" name="mon" id="new_mon" class="form-control input  input-sm" placeholder="<?php echo $appSettings->currencysign;?>" style="width:60px;" ><span class="input-group-addon pointer"  onclick="copyPrices('new')"><i class="fa fa-angle-double-right"></i></span>
+      <input type="number" step="any" name="mon" id="new_mon" class="form-control input input-day-mon  input-sm" placeholder="" style="width:120px;" ><span class="input-group-addon pointer"  onclick="copyPrices('new')"><i class="fa fa-angle-double-right"></i></span>
 
       </div>
 
@@ -55,38 +70,38 @@
 
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Tue</label>
-          <input type="number" step="any" id="new_tue" name="tue" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input  input-sm"/>
+          <label class="required">Thứ 3</label>
+          <input type="number" step="any" id="new_tue" name="tue" placeholder="" class="form-control input input-day input-sm"/>
         </div>
       </div>
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Wed</label>
-          <input type="number" step="any" id="new_wed" name="wed" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm"/>
+          <label class="required">Thứ 4</label>
+          <input type="number" step="any" id="new_wed" name="wed" placeholder="" class="form-control input input-day input-sm"/>
         </div>
       </div>
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Thu</label>
-          <input type="number" step="any" id="new_thu" name="thu" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm"/>
+          <label class="required">Thứ 5</label>
+          <input type="number" step="any" id="new_thu" name="thu" placeholder="" class="form-control input input-day input-sm"/>
         </div>
       </div>
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Fri</label>
-          <input type="number" step="any" id="new_fri" name="fri" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm"/>
+          <label class="required">Thứ 6</label>
+          <input type="number" step="any" id="new_fri" name="fri" placeholder="" class="form-control input input-day input-sm"/>
         </div>
       </div>
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Sat</label>
-          <input type="number" step="any" id="new_sat" name="sat" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm"/>
+          <label class="required">Thứ 7</label>
+          <input type="number" step="any" id="new_sat" name="sat" placeholder="" class="form-control input input-day input-sm"/>
         </div>
       </div>
       <div class="col-md-1">
         <div class="form-group">
-          <label class="required">Sun</label>
-          <input type="number" step="any" id="new_sun" name="sun" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm"/>
+          <label class="required">Chủ nhật</label>
+          <input type="number" step="any" id="new_sun" name="sun" placeholder="" class="form-control input input-day input-sm"/>
         </div>
       </div>
       <div class="col-md-1">
@@ -95,68 +110,42 @@
           <input type="hidden" name="action" value="add" />
           <input type="hidden" name="roomid" value="<?php echo $roomid;?>" />
           <input type="hidden" name="dateformat" value="<?php echo $appSettings->dateFormat;?>" />
-          <button class="btn btn-primary" type="submit">Add</button>
+          <button class="btn btn-primary btn-sm" type="submit" style="margin-top:4px">Thêm</button>
         </div>
       </div>
       <div class="clearfix"></div>
     </div>
     </form>
-    <div class="clearfix"></div>
-    <hr>
-    <form action="" method="POST">
-    <table class="table table-striped form-horizontal">
+    <div class="clearfix"></div>      
+    <table class="table table-bordered form-horizontal">
       <thead>
         <tr>
-          <th>Date From - To</th>
-          <th>Adults</th>
-          <th>Children</th>
-          <th>Extra Beds</th>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th>Sat</th>
-          <th>Sun</th>
+          <th>Từ ngày - đến ngày</th>         
+          <th class="text-right">Giường phụ</th>     
+          <th class="text-right">Thứ 2</th>
+          <th class="text-right">Thứ 3</th>
+          <th class="text-right">Thứ 4</th>
+          <th class="text-right">Thứ 5</th>
+          <th class="text-right">Thứ 6</th>
+          <th class="text-right">Thứ 7</th>
+          <th class="text-right">Chủ nhật</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
       <?php foreach($prices as $p): ?>
         <tr id="tr_<?php echo $p->id;?>">
-          <th><?php echo formatFullDate($p->date_from, $appSettings->dateFormat); ?> - <?php echo formatFullDate($p->date_to, $appSettings->dateFormat); ?></th>
-          <td>
-            <select name='<?php echo "pricesdata[$p->id][adults]"; ?>' class="form-control input input-sm" id="">
-              <?php for($adults = 1; $adults <= $room[0]->room_adults; $adults++){ ?>
-              <option value="<?php echo $adults; ?>" <?php if($adults == $p->adults){ echo "selected"; }?> ><?php echo $adults; ?></option>
-              <?php } ?>
-            </select>
-          </td>
-          <td>
-            <select name='<?php echo "pricesdata[$p->id][child]"; ?>' class="form-control input input-sm" id="">
-             <?php for($child = 0; $child <= $room[0]->room_children; $child++){ ?>
-              <option value="<?php echo $child; ?>" <?php if($child == $p->children){ echo "selected"; }?> ><?php echo $child; ?></option>
-              <?php } ?>
-            </select>
-          </td>
-          <td><input type="number" name='<?php echo "pricesdata[$p->id][extra_bed_charges]"; ?>' placeholder="" class="form-control input input-sm" value="<?php echo $p->extra_bed_charge;?>" <?php if($room[0]->extra_bed < 1){ echo "readonly"; } ?> /></td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td style="width:120px;"><div class="input-group" >
-          <input type="number" step="any" name='<?php echo "pricesdata[$p->id][mon]"; ?>' id="<?php echo $p->id;?>_mon" class="form-control input input-sm" placeholder="<?php echo $appSettings->currencysign;?>" value="<?php echo $p->mon;?>" ><span class="input-group-addon pointer"  onclick="copyPrices('<?php echo $p->id;?>')"><i class="fa fa-angle-double-right"></i></span>
-          </div>
-          </td>
-          <td><input type="number" step="any" name='<?php echo "pricesdata[$p->id][tue]"; ?>' id="<?php echo $p->id;?>_tue" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm" value="<?php echo $p->tue;?>" /></td>
-          <td><input type="number" step="any" name='<?php echo "pricesdata[$p->id][wed]"; ?>' id="<?php echo $p->id;?>_wed" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm" value="<?php echo $p->wed;?>" /></td>
-          <td><input type="number" step="any" name='<?php echo "pricesdata[$p->id][thu]"; ?>' id="<?php echo $p->id;?>_thu" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm" value="<?php echo $p->thu;?>" /></td>
-          <td><input type="number" step="any" name='<?php echo "pricesdata[$p->id][fri]"; ?>' id="<?php echo $p->id;?>_fri" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm" value="<?php echo $p->fri;?>" /></td>
-          <td><input type="number" step="any" name='<?php echo "pricesdata[$p->id][sat]"; ?>' id="<?php echo $p->id;?>_sat" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm" value="<?php echo $p->sat;?>"/></td>
-          <td><input type="number" step="any" name='<?php echo "pricesdata[$p->id][sun]"; ?>' id="<?php echo $p->id;?>_sun" placeholder="<?php echo $appSettings->currencysign;?>" class="form-control input input-sm" value="<?php echo $p->sun;?>" /></td>
-          <td><span class="btn btn-sm btn-danger delete" id="<?php echo $p->id;?>"><i class="fa fa-trash-o fa-lg"></i>&nbsp;Delete</span></td>
+          <th><?php echo date('d/m/Y', strtotime($p->date_from)); ?> - <?php echo date('d/m/Y', strtotime($p->date_to)); ?></th>          
+          <td class="text-right"><?php echo number_format($p->extra_bed_charge);?></td>
+         
+          <td style="width:120px;" class="text-right"><?php echo number_format($p->mon);?></td>
+          <td style="width:120px;" class="text-right"><?php echo number_format($p->tue);?></td>
+          <td style="width:120px;" class="text-right"><?php echo number_format($p->wed);?></td>
+          <td style="width:120px;" class="text-right"><?php echo number_format($p->thu);?></td>
+          <td style="width:120px;" class="text-right"><?php echo number_format($p->fri);?></td>
+          <td style="width:120px;" class="text-right"><?php echo number_format($p->sat);?></td>
+          <td style="width:120px;" class="text-right"><?php echo number_format($p->sun);?></td>
+          <td><span class="btn btn-sm btn-danger delete" id="<?php echo $p->id;?>"><i class="fa fa-trash-o fa-lg"></i>&nbsp;Xóa</span></td>
         </tr>
        <?php endforeach; ?>
 
@@ -165,15 +154,22 @@
     </table>
 
   </div>
-  <div class="panel-footer">
-    <input type="hidden" name="action" value="update" />
-    <button class="btn btn-primary" type="submit"> Update </button>
-  </div>
-  </form>
+ 
+ 
 </div>
 <style>
   .input {
   width:60px;
+  }
+  .input-day{
+    width: 120px;
+  }
+  .input-day-mon{
+    width: 170px;
+  }
+  .datepicker{
+    left: 30px !important;
+    margin-top: 60px !important;
   }
 </style>
 <script type="text/javascript">

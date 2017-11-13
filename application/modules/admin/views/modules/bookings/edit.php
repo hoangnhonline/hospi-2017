@@ -226,7 +226,7 @@
    <?php if(!empty($service)){  ?>
     <div class="col-md-4 pull-right">
     <div class="panel panel-default" >
-      <div style="font-size:16px" class="panel-heading"><strong>Booking Summary</strong></div>
+      <div style="font-size:16px" class="panel-heading"><strong>Tóm lược booking</strong></div>
 
       <table class="table summary">
        <tr style="background-color:#ffffdf">

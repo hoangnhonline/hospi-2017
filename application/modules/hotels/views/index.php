@@ -77,7 +77,7 @@
               <th width="80px">Số sao</th>                              
               <th>Người tạo</th>
               <th>Tỉnh/TP</th>
-              <th>Gallery</th>
+              <th>Hình ảnh</th>              
               <th width="7%">Thứ tự</th>
               <th style="white-space: nowrap">Trạng thái</th>
               <th width="1%"></th>
@@ -147,9 +147,9 @@
                   }
 
                   $photocounts =  isset($photoArr[$item->hotel_id]) ? $photoArr[$item->hotel_id] : 0;
-                  echo "<a href=".base_url().$role."/hotels/gallery/".$item->hotel_slug.">Upload (".$photocounts.")</a>";
+                  echo "<a href=".base_url().$role."/hotels/gallery/".$item->hotel_slug.">Tải hình ảnh (".$photocounts.")</a>";
                   ?>
-                </td>
+                </td>                
                 <td>
                   <?php 
                     $url = base_url()."admin/hotelajaxcalls/update_hotel_order";

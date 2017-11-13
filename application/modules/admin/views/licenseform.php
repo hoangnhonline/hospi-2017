@@ -30,7 +30,7 @@
                   </div>
                   <input type="hidden" name="check" value="1" />
                   <?php echo $invalidlicense;?>
-                  <input class="btn btn-success btn-block" type="submit" value="Submit">
+                  <input class="btn btn-success btn-block" type="submit" value="Lưu">
                 </fieldset>
               </form>
             </div>

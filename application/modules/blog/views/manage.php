@@ -44,8 +44,8 @@ $(function(){
     <div class="panel panel-default">
 
             <ul class="nav nav-tabs nav-justified" role="tablist">
-            <li class="active"><a href="#GENERAL" data-toggle="tab"><?php echo ucfirst($action);?> Post</a></li>
-            <li class=""><a href="#TRANSLATE" data-toggle="tab">Translate</a></li>
+            <li class="active"><a href="#GENERAL" data-toggle="tab"><?php echo ucfirst($action) == 'Update' ? "Cập nhật" : "Tạo mới";?> bài viết</a></li>
+            <li class=""><a href="#TRANSLATE" data-toggle="tab">Dịch</a></li>
         </ul>
 
       <div class="panel-body">
@@ -55,7 +55,7 @@ $(function(){
           <div class="col-md-12">
             <div class="col-md-4">
               <div class="form-group ">
-                <label class="required">Post Title</label>
+                <label class="required">Tiêu đề</label>
                 <input class="form-control posttitle" type="text" placeholder="Post Title" name="title" value="<?php echo  @$pdata[0]->post_title;?>">
               </div>
             </div>
@@ -75,27 +75,27 @@ $(function(){
           </div>
           <div class="clearfix"></div>
           <hr>
-          <div class="row">
+          <div class="container">
             <div class="col-md-12">
               <div class="panel panel-default">
-                <div class="panel-heading">Post Settings</div>
+                <div class="panel-heading">Cài đặt bài viết</div>
                 <div class="panel-body">
 
                 <div class="col-md-6">
               <div class="form-group ">
-                <label class="required">Status</label>
+                <label class="required">Trạng thái</label>
                 <select data-placeholder="Select" name="status" class="form-control" tabindex="2">
-                        <option value="Yes" <?php if(@$pdata[0]->post_status == "Yes"){ echo "selected";} ?> >Enable</option>
-                        <option value="No" <?php if(@$pdata[0]->post_status == "No"){ echo "selected";} ?>>Disable</option>
+                        <option value="Yes" <?php if(@$pdata[0]->post_status == "Yes"){ echo "selected";} ?> >Hiển thị</option>
+                        <option value="No" <?php if(@$pdata[0]->post_status == "No"){ echo "selected";} ?>>Ẩn</option>
                       </select>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group ">
-                <label class="required">Category</label>
+                <label class="required">Danh mục</label>
                  <select data-placeholder="Select" name="category" class="form-control" tabindex="2" required>
-               <option value="">Select</option>
+               <option value="">-Chọn-</option>
                <?php foreach($categories as $cat){ ?>
                  <option value="<?php echo $cat->cat_id;?>" <?php if(@$pdata[0]->post_category == $cat->cat_id){ echo "selected"; } ?> > <?php echo $cat->cat_name;?> </option>
                <?php } ?>
@@ -106,7 +106,7 @@ $(function(){
 
             <div class="col-md-6">
               <div class="form-group ">
-                <label class="required">Related Posts</label>
+                <label class="required">Bài liên quan</label>
                  <select multiple class="chosen-multi-select" name="relatedposts[]">
         <?php if(!empty($all_posts)){
               foreach($all_posts as $p):
@@ -119,9 +119,9 @@ $(function(){
             </div>
                     <div class="col-md-6">
               <div class="form-group ">
-                  <label class="required">Related Location</label>
+                  <label class="required">Vị trí liên quan</label>
                  <select name="location" class="chosen-select">
-                <option value="">Select</option>
+                <option value="">-chọn-</option>
                 <?php foreach($locations as $loc){ ?>
                 <option value="<?php echo $loc->id; ?>" <?php makeSelected(@$loc->id, @$pdata[0]->location); ?> ><?php echo $loc->location;?></option>
                 <?php } ?>
@@ -133,7 +133,7 @@ $(function(){
                     
             <div class="col-md-6">
               <div class="form-group ">
-                <label class="required">Thumbnail</label>
+                <label class="required">Ảnh đại diện</label>
                 <input style="width:220px" type="file" name="defaultphoto" class="btn btn-default" id="image_default" >
 
                  <?php if(!empty($pdata[0]->post_img)){ ?>
@@ -147,7 +147,7 @@ $(function(){
 
                <div class="col-md-6">
               <div class="form-group ">
-                <label class="required">Feeatured article</label>
+                <label class="required">Bài viết nổi bật</label>
                 <select data-placeholder="Select" name="featured" class="form-control" tabindex="2">
                         <option value="Yes" <?php if(@$pdata[0]->post_feature == "Yes"){ echo "selected";} ?> >Enable</option>
                         <option value="No" <?php if(@$pdata[0]->post_feature == "No"){ echo "selected";} ?>>Disable</option>
@@ -163,7 +163,7 @@ $(function(){
             </div>
             .
           </div>
-          <div class="row">
+          <div class="container">
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-heading">SEO</div>
@@ -195,14 +195,14 @@ $(function(){
                         <div class="panel-heading"><img src="<?php echo PT_LANGUAGE_IMAGES.$lang.".png"?>" height="20" alt="" /> <?php echo $val['name']; ?></div>
                         <div class="panel-body">
                             <div class="row form-group">
-                                <label class="col-md-2 control-label text-left">Post Title</label>
+                                <label class="col-md-2 control-label text-left">Tiêu đề</label>
                                 <div class="col-md-4">
                                     <input name='<?php echo "translated[$lang][title]"; ?>' type="text" placeholder="Post Title" class="form-control" value="<?php echo @$trans[0]->trans_title;?>" />
                                 </div>
                             </div>
 
                             <div class="row form-group">
-                                <label class="col-md-2 control-label text-left">Post Content</label>
+                                <label class="col-md-2 control-label text-left">Nội dung</label>
                                 <div class="col-md-10">
                                  <?php $this->ckeditor->editor("translated[$lang][desc]", @$trans[0]->trans_desc, $ckconfig,"translated[$lang][desc]"); ?>
 
@@ -240,7 +240,7 @@ $(function(){
       <input type="hidden" id="postid" name="postid" value="<?php echo @$pdata[0]->post_id;?>" />
       <input type="hidden" name="defimg" value="<?php echo @$pdata[0]->post_img; ?>" /> 
 
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Lưu</button>
       </div>
     </div>
   </form>

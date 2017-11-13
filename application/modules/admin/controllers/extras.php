@@ -112,9 +112,9 @@ class Extras extends MX_Controller {
 	
 				$this->data['content'] = $xcrud->render();
 				$this->data['extras'] = $this->extras_model->get_all_extras();
-				$this->data['page_title'] = 'Extras Management';
+				$this->data['page_title'] = 'Quản lý thông tin khác';
 				$this->data['main_content'] = 'extras_view';
-				$this->data['header_title'] = 'Extras Management';
+				$this->data['header_title'] = 'Quản lý thông tin khác';
 				$this->load->view('admin/template', $this->data);
         }
 

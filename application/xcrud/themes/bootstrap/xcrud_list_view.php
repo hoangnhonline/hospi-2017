@@ -3,7 +3,7 @@
         <div class="xcrud-top-actions">
         <div class="btn-group pull-right">
         <?php if(!empty($this->multiDelUrl)){ ?>
-        <a href="javascript: multiDelfunc('<?php echo $this->multiDelUrl;?>', '<?php echo $this->chkboxClass;?>')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete Selected</a>
+        <a href="javascript: multiDelfunc('<?php echo $this->multiDelUrl;?>', '<?php echo $this->chkboxClass;?>')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Xóa mục đã chọn</a>
         <?php } ?>     
         <?php if ($this->is_csv or $this->is_print){ ?>
                 <?php echo $this->print_button('btn btn-default','glyphicon glyphicon-print');

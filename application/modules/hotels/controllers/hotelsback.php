@@ -790,6 +790,7 @@ class hotelsback extends MX_Controller
 				// $this->data['sqldata'] = $room->result();
 
 				$this->data['calendar'] = $output;
+				$this->data['room'] = $this->rooms_model->getRoomData($editroom);
 				$this->data['main_content'] = 'hotels/rooms/availability';
 				$this->data['page_title'] = 'Room Availability';
 				$this->load->view('admin/template', $this->data);
@@ -820,9 +821,10 @@ class hotelsback extends MX_Controller
 
 				$this->data['prices'] = $this->rooms_model->getRoomPrices($editroom);
 				$this->data['room'] = $this->rooms_model->getRoomData($editroom);
+			//	var_dump($this->data['room']);die;
 				$this->data['roomid'] = $editroom;
 				$this->data['main_content'] = 'hotels/rooms/prices';
-				$this->data['page_title'] = 'Room Prices';
+				$this->data['page_title'] = 'Gía phòng';
 				$this->load->view('admin/template', $this->data);
 			}
 			else {
@@ -896,9 +898,6 @@ class hotelsback extends MX_Controller
 				$config['num_tag_open'] = '<li>';
 				$config['num_tag_close'] = '</li>';
 
-				// echo "<pre>";
-				// print_r($config);die;
-
 				$this->pagination->initialize($config);
 				$this->data['links'] = $this->pagination->create_links();
 				$data = $this->rooms_model->search($params, $limit, $page);
@@ -926,6 +925,7 @@ class hotelsback extends MX_Controller
 				$this->data['page_title'] = 'Quản lý loại phòng';
 				$this->data['main_content'] = 'hotels/rooms/index';
 				$this->data['header_title'] = 'Quản lý loại phòng';
+				$this->data['deletepermission'] = $this->deletepermission;
 				$this->data['add_link'] = base_url() . 'admin/hotels/rooms/add';
 				$this->load->view('admin/template', $this->data);
 			}
@@ -1011,7 +1011,8 @@ class hotelsback extends MX_Controller
 		$this->data['fullImgDir'] = PT_HOTELS_SLIDER;
 		$this->data['thumbsDir'] = PT_HOTELS_SLIDER_THUMBS;
 		$this->data['main_content'] = 'hotels/gallery';
-		$this->data['page_title'] = 'Hotel Gallery';
+		$this->data['page_title'] = 'Hình khách sạn';
+		$this->data['detailHotel'] = $this->hotels_lib->hotel_details();		
 		$this->load->view('admin/template', $this->data);
 	}
 
@@ -1027,8 +1028,9 @@ class hotelsback extends MX_Controller
 		$this->data['fullImgDir'] = PT_ROOMS_IMAGES;
 		$this->data['thumbsDir'] = PT_ROOMS_THUMBS;
 		$this->data['itemid'] = $id;
+		$this->data['room'] = $this->rooms_model->getRoomData($id);
 		$this->data['main_content'] = 'hotels/gallery';
-		$this->data['page_title'] = 'Room Gallery';
+		$this->data['page_title'] = 'Hình ảnh phòng';
 		$this->load->view('admin/template', $this->data);
 	}
 

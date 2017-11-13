@@ -64,8 +64,8 @@ redirect('admin');
 								$this->form_validation->set_rules('password', 'Password', 'min_length[6]');
 						}
 						$this->form_validation->set_rules('city', 'City', 'trim');
-						$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
-						$this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
+						$this->form_validation->set_rules('fname', 'Tên', 'trim|required');
+						$this->form_validation->set_rules('lname', 'Họ', 'trim|required');
 						if ($this->form_validation->run() == FALSE) {
 								echo '<div class="alert alert-danger">' . validation_errors() . '</div>';
 						}
@@ -211,7 +211,7 @@ redirect('admin');
         $xcrud->search_columns('ai_first_name,ai_last_name,accounts_email,accounts_status');
         $xcrud->column_callback('accounts_status','create_status_icon');
         $xcrud->column_callback('accounts_last_login','long_date_fmt');
-        $xcrud->label('ai_first_name','First Name')->label('ai_last_name','Last Name')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Last Login');
+        $xcrud->label('ai_first_name','Tên')->label('ai_last_name','Họ')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Đăng nhập lần cuối');
         
         $xcrud->multiDelUrl = base_url().'admin/ajaxcalls/multiDelAcc';
 
@@ -340,7 +340,7 @@ redirect('admin');
         $xcrud->search_columns('ai_first_name,ai_last_name,accounts_email,accounts_status');
         $xcrud->column_callback('accounts_status','create_status_icon');
         $xcrud->column_callback('accounts_last_login','long_date_fmt');
-        $xcrud->label('ai_first_name','First Name')->label('ai_last_name','Last Name')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Last Login');
+        $xcrud->label('ai_first_name','Tên')->label('ai_last_name','Họ')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Đăng nhập lần cuối');
         
         $xcrud->multiDelUrl = base_url().'admin/ajaxcalls/multiDelAcc';
         $this->data['content'] = $xcrud->render();
@@ -516,7 +516,7 @@ redirect('admin');
         $xcrud->search_columns('ai_first_name,ai_last_name,accounts_email,accounts_status');
         $xcrud->column_callback('accounts_status','create_status_icon');
         $xcrud->column_callback('accounts_last_login','long_date_fmt');
-        $xcrud->label('ai_first_name','First Name')->label('ai_last_name','Last Name')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Last Login');
+        $xcrud->label('ai_first_name','Tên')->label('ai_last_name','Họ')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Đăng nhập lần cuối');
         
         $xcrud->multiDelUrl = base_url().'admin/ajaxcalls/multiDelAcc';
 
@@ -743,15 +743,15 @@ redirect('admin');
         $xcrud->search_columns('ai_first_name,ai_last_name,accounts_email,accounts_status');
         $xcrud->column_callback('accounts_status','create_status_icon');
         $xcrud->column_callback('accounts_last_login','long_date_fmt');
-        $xcrud->label('ai_first_name','First Name')->label('ai_last_name','Last Name')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Last Login');
+        $xcrud->label('ai_first_name','Tên')->label('ai_last_name','Họ')->label('accounts_email','Email')->label('accounts_status','Active')->label('accounts_last_login','Đăng nhập lần cuối');
         $this->data['addpermission'] = true;
 
         $xcrud->multiDelUrl = base_url().'admin/ajaxcalls/multiDelAcc';
 
         $this->data['content'] = $xcrud->render();
-        $this->data['page_title'] = 'Admins Management';
+        $this->data['page_title'] = 'Quản lý quản trị viên';
         $this->data['main_content'] = 'temp_view';
-        $this->data['header_title'] = 'Admins Management';
+        $this->data['header_title'] = 'Quản lý quản trị viên';
         $this->data['add_link'] = base_url().'admin/accounts/admins/add';
 
 				}

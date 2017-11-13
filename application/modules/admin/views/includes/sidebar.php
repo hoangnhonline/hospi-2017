@@ -85,59 +85,55 @@
           <?php $chkupdates = checkUpdatesCount(); if($chkupdates->showUpdates){ if($isSuperAdmin){ ?>
           <li>
             <a href="<?php echo base_url(); ?>admin/updates/"><i class="fa fa-refresh"></i>
-            <span>Updates</span><span class="pull-right label label-danger" id="updatescount"><?php if($chkupdates->count > 0){ echo $chkupdates->count; }; ?></span>
+            <span>Cập nhật</span><span class="pull-right label label-danger" id="updatescount"><?php if($chkupdates->count > 0){ echo $chkupdates->count; }; ?></span>
             </a>
           </li>
           <?php } } ?>
           <li>
             <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#ACCOUNTS"><i class="glyphicon glyphicon-user"></i>
-            <span><?php echo trans('017');?></span><i class="fa arrow"></i>
+            <span>Tài khoản</span><i class="fa arrow"></i>
             </a>
             <ul id="<?php echo trans('017');?>" class="collapse wow fadeIn animated">
               <?php if($role != "admin"){ ?>
-              <li><a href="<?php echo base_url();?>admin/accounts/admins/"><?php echo trans('021');?></a></li>
+              <li><a href="<?php echo base_url();?>admin/accounts/admins/">Quản trị viên</a></li>
               <?php } ?>
-              <li><a href="<?php echo base_url();?>admin/accounts/suppliers/"><?php echo trans('023');?></a></li>
-              <li><a href="<?php echo base_url();?>admin/accounts/customers/"><?php echo trans('025');?></a></li>
-              <li><a href="<?php echo base_url();?>admin/accounts/guest/"><?php echo trans('027');?> <?php echo trans('025');?></a></li>
+              <li><a href="<?php echo base_url();?>admin/accounts/suppliers/">Đối tác</a></li>
+              <li><a href="<?php echo base_url();?>admin/accounts/customers/">Khách hàng</a></li>              
             </ul>
           </li>
           <?php if($isSuperAdmin){ ?>
           <li>
             <a href="#menu-ui" data-toggle="collapse" data-parent="#social-sidebar-menu">
               <!-- icon--><i class="fa fa-cogs"></i>
-              <span><?php echo trans('03');?></span>
+              <span>Thông tin chung</span>
               <!-- arrow--><i class="fa arrow"></i>
             </a>
             <!-- BEGIN SUB-ELEMENT MENU-->
             <ul id="menu-ui" class="collapse wow fadeIn animated">
-              <li> <a href="<?php echo base_url();?>admin/settings/"><?php echo trans('04');?></a> </li>
-              <!-- <li>
-                <a href="<?php echo base_url();?>admin/settings/api/"><?php echo trans('036');?></a>
-                </li> -->
+              <li> <a href="<?php echo base_url();?>admin/settings/">Cài đặt</a> </li>             
               <li>
-                <a href="<?php echo base_url();?>admin/settings/modules/"><?php echo trans('08');?></a>
+                <a href="<?php echo base_url();?>admin/settings/modules/">Cấu trúc</a>
               </li>
               <li>
-                <a href="<?php echo base_url();?>admin/settings/currencies/">Currencies</a>
+                <a href="<?php echo base_url();?>admin/settings/currencies/">Tiền tệ</a>
               </li>
               <li>
-                <a href="<?php echo base_url();?>admin/settings/paymentgateways/"><?php echo trans('05');?></a>
+                <a href="<?php echo base_url();?>admin/settings/paymentgateways/">Quản lý thanh toán</a>
               </li>
               <li>
-                <a href="<?php echo base_url();?>admin/settings/social/"><?php echo trans('07');?></a>
+                <a href="<?php echo base_url();?>admin/settings/social/">Quản lý mạng xã hội</a>
               </li>
               <li>
-                <a href="<?php echo base_url();?>admin/settings/widgets/"><?php echo trans('010');?></a>
+                <a href="<?php echo base_url();?>admin/settings/widgets/">Tiện ích giao diện</a>
               </li>
               <li>
-                <a href="<?php echo base_url();?>admin/settings/sliders/"><?php echo trans('011');?></a>
+                <a href="<?php echo base_url();?>admin/settings/sliders/">Trình chiếu hình ảnh</a>
               </li>
               <li>
-                <a href="<?php echo base_url();?>admin/templates/email/"><?php echo trans('012');?></a>
+                <a href="<?php echo base_url();?>admin/templates/email/">Mẫu gửi email</a>
               </li>
               <li>
-                <a href="<?php echo base_url();?>admin/backup/">BackUp</a>
+                <a href="<?php echo base_url();?>admin/backup/">Sao lưu</a>
               </li>
             </ul>
             <!-- END SUB-ELEMENT MENU-->
@@ -180,7 +176,7 @@
             <i class="fa arrow"></i>
             </a>
             <ul id="<?php echo $modl['DisplayName']; ?>" class="collapse  wow fadeIn animated">
-              <?php echo str_replace("%baseurl%","$baseurl",$submenu); ?>
+             <?php echo str_replace("%baseurl%","$baseurl",$submenu); ?>
             </ul>
           </li>
           <?php } } } } } ?>
@@ -197,14 +193,14 @@
           <?php } if(pt_is_module_enabled('coupons')){  ?>
           <li>
             <a href="<?php echo base_url();?>admin/coupons/"><i class="fa fa-asterisk"></i>
-            <span>Coupons</span>
+            <span>Mã ưu đãi</span>
             </a>
           </li>
           <?php } } ?>
           <?php if(pt_permissions('locations',@$userloggedin)){ ?>
           <li>
           <a href="<?php echo base_url().$this->uri->segment(1);?>/locations"><i class="fa fa-map-marker"></i>
-          <span>Locations</span><span class="pull-right label label-danger" id=""></span>
+          <span>Vị trí</span><span class="pull-right label label-danger" id=""></span>
           </a>
           </li>
           <?php } ?>
@@ -212,7 +208,7 @@
            <?php if(pt_permissions('newsletter',@$userloggedin)){ ?>
           <li>
             <a href="<?php echo base_url();?>admin/newsletter/"><i class="fa fa-envelope"></i>
-            <span><?php echo trans('031');?></span><span class="pull-right label label-danger" id=""></span>
+            <span>Thư</span><span class="pull-right label label-danger" id=""></span>
             </a>
           </li>
           <?php } } } ?>

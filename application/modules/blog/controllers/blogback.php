@@ -76,7 +76,7 @@ class Blogback extends MX_Controller {
 		$xcrud->change_type('post_category','select','email2@ex.com','email1@ex.com,email2@ex.com,email3@ex.com,email4@ex.com,email5@ex.com');
 		$xcrud->order_by('post_id','desc');
 		$xcrud->columns('post_img,post_title,pt_blog_categories.cat_name,post_created_at,post_order,post_status');
-		$xcrud->label('post_title','Name')->label('pt_blog_categories.cat_name','Category')->label('post_created_at','Date')->label('post_order','Order')->label('post_status','Status')->label('post_img','Thumb');
+		$xcrud->label('post_title','Tiêu đề')->label('pt_blog_categories.cat_name','Danh mục')->label('post_created_at','Ngày tạo')->label('post_order','Thứ tự')->label('post_status','Trạng thái')->label('post_img','Ảnh đại diện');
 		$xcrud->fields('post_img,post_title,pt_blog_categories.cat_name,post_desc,post_created_at,post_status');
 		$xcrud->change_type('post_img', 'image', false, array(
 			'width' => 200,
@@ -106,9 +106,9 @@ class Blogback extends MX_Controller {
 		$xcrud->multiDelUrl = base_url().'blog/blogajaxcalls/delMultiplePosts';
 
 		$this->data['content'] = $xcrud->render();
-		$this->data['page_title'] = 'Blog Management';
+		$this->data['page_title'] = 'Quản lý Blog';
 		$this->data['main_content'] = 'temp_view';
-		$this->data['header_title'] = 'Blog Management';
+		$this->data['header_title'] = 'Quản lý Blog';
 		$this->load->view('template', $this->data);
 
 	}
@@ -229,8 +229,8 @@ class Blogback extends MX_Controller {
 		$xcrud->table('pt_blog_categories');
 		$xcrud->order_by('cat_id','desc');
 		$xcrud->columns('cat_name,cat_slug,cat_status');
-		$xcrud->label('cat_name','Name')->label('cat_slug','Slug')->label('cat_status','Status');
-		$xcrud->button('#cat{cat_id}', 'Edit', 'fa fa-edit', 'btn btn-warning', array('data-toggle' => 'modal'));
+		$xcrud->label('cat_name','Tên danh mục')->label('cat_slug','Slug')->label('cat_status','Trạng thái');
+		$xcrud->button('#cat{cat_id}', 'Chỉnh sửa', 'fa fa-edit', 'btn btn-warning', array('data-toggle' => 'modal'));
 		$delurl = base_url().'admin/ajaxcalls/delBlogCat';
         $xcrud->button("javascript: delfunc('{cat_id}','$delurl')",'DELETE','fa fa-times', 'btn-danger',array('target'=>'_self'));
        
@@ -244,9 +244,9 @@ class Blogback extends MX_Controller {
 		$xcrud->multiDelUrl = base_url().'blog/blogajaxcalls/delMultipleCategories';
 
 		$this->data['content'] = $xcrud->render();
-		$this->data['page_title'] = 'Blog Categories';
+		$this->data['page_title'] = 'Danh mục blog';
 		$this->data['main_content'] = 'blog_categories_view';
-		$this->data['header_title'] = 'Blog Categories';
+		$this->data['header_title'] = 'Danh mục blog';
                 $this->data['categoriesparent'] = $this->blog_model->get_all_categoriesparent_back();
 		$this->load->view('template', $this->data);
 	}

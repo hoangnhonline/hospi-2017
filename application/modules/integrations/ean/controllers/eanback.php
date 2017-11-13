@@ -136,9 +136,9 @@ class Eanback extends MX_Controller {
         $xcrud->unset_print();
         $xcrud->unset_csv();
         $this->data['content'] = $xcrud->render();
-        $this->data['page_title'] = 'Recent Bookings';
+        $this->data['page_title'] = 'Bookings gần đây';
         $this->data['main_content'] = 'temp_view';
-        $this->data['header_title'] = 'Expedia Recent Bookings';
+        $this->data['header_title'] = 'Expedia Bookings gần đây';
         
 
 

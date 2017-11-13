@@ -4,7 +4,7 @@
   <?php if($canQuickBook){ ?>
   <div class="col-xs-6 col-sm-6 col-md-2">
     <button data-toggle="modal" data-target="#quickbook" class="btn btn-danger btn-block">
-      <div class="h5"><i class="fa fa-dashboard fa-lg"></i> Quick Booking</div>
+      <div class="h5"><i class="fa fa-dashboard fa-lg"></i> Đặt nhanh</div>
     </button>
   </div>
   <?php } ?>
@@ -57,7 +57,7 @@
 <div class="row">
   <div class="col-md-8">
     <div class="panel panel-default">
-      <div class="panel-heading">Revenue Chart</div>
+      <div class="panel-heading">Sơ đồ doanh thu </div>
       <div class="panel-body">
         <style>
           .rev-but { padding: 8px 16px; background-color:#f7f7f7; }
@@ -121,7 +121,7 @@
             $(function () {
                 $('#container').highcharts({
                     title: {
-                        text: 'Last 30 Days Bookings Report',
+                        text: 'Thống kê 30 ngày cuối',
                         x: -20 //center
                     },
                     xAxis: {
@@ -129,7 +129,7 @@
                     },
                     yAxis: {
                         title: {
-                            text: 'Booking Amount'
+                            text: 'Số tiền Booking'
                         },
                      min: 0,
                         plotLines: [{
@@ -157,7 +157,7 @@
               <div class="panel panel-default mb0">
                 <div class="pad8">
                   <button class="btn btn-default btn-block rev-but">
-                  Today
+                  Hôm nay
                   </button>
                   <div class="pad8 text-center">
                     <h4><strong><?php echo $currCode;?> <?php echo $todayPaid->totalPaidAmount + $todayExpedia->totalAmount;?></strong></h4>
@@ -171,7 +171,7 @@
               <div class="panel panel-default mb0">
                 <div class="pad8">
                   <button class="btn btn-default btn-block rev-but">
-                  Last 30 Days
+                  30 ngày cuối
                   </button>
                   <div class="pad8 text-center">
                     <h4><strong><?php echo $currCode;?> <?php echo $thirtyDaysPaid->totalPaidAmount + $thirtyDaysExpedia->totalAmount;?></strong></h4>
@@ -185,7 +185,7 @@
               <div class="panel panel-default mb0">
                 <div class="pad8">
                   <button class="btn btn-default btn-block rev-but">
-                  Last 90 Days
+                  90 ngày cuối
                   </button>
                   <div class="pad8 text-center">
                     <h4><strong><?php echo $currCode;?> <?php echo $nintyDaysPaid->totalPaidAmount + $nintyDaysExpedia->totalAmount;?></strong></h4>
@@ -200,7 +200,7 @@
   </div>
   <div class="col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading">Booking Summary </div>
+      <div class="panel-heading">Tóm lược booking </div>
       <div class="panel-body">
         <div class="block">
           <div class="pad8 rev-bg">
@@ -211,12 +211,12 @@
             </div>
             <div class="col-lg-8 col-md-12 col-sm-7">
               <div class="text-left">
-                <h4><strong>Today's Booking</strong></h4>
-                <p>Yesterday's : <?php echo $yesterday->totalCount + $yesterdayExpedia->totalCount;?></p>
+                <h4><strong>Hôm nay</strong></h4>
+                <p>Hôm qua : <?php echo $yesterday->totalCount + $yesterdayExpedia->totalCount;?></p>
                 <hr class="mtb04">
-                <span class="text-success"><strong>Paid :</strong> <?php echo $today->paidAmount + $todayExpedia->paidAmount;?></span>
+                <span class="text-success"><strong>Đã thanh toán :</strong> <?php echo $today->paidAmount + $todayExpedia->paidAmount;?></span>
                 <div class="clearfix"></div>
-                <span class="text-danger"><strong>Unpaid :</strong> <?php echo $today->unpaidAmount;?></span>
+                <span class="text-danger"><strong>Chưa thanh toán :</strong> <?php echo $today->unpaidAmount;?></span>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -234,12 +234,12 @@
             </div>
             <div class="col-lg-8 col-md-12 col-sm-7">
               <div class="text-left">
-                <h4><strong>Last 30 Day's</strong></h4>
-                <p>Last 60 Day's : <?php echo $sixtyDays->totalCount + $sixtyDaysExpedia->totalCount;?></p>
+                <h4><strong>30 ngày trước</strong></h4>
+                <p>60 ngày trước : <?php echo $sixtyDays->totalCount + $sixtyDaysExpedia->totalCount;?></p>
                 <hr class="mtb04">
-                <span class="text-success"><strong>Paid :</strong> <?php echo $thirtyDays->paidAmount + $thirtyDaysExpedia->paidAmount;?></span>
+                <span class="text-success"><strong>Đã thanh toán :</strong> <?php echo $thirtyDays->paidAmount + $thirtyDaysExpedia->paidAmount;?></span>
                 <div class="clearfix"></div>
-                <span class="text-danger"><strong>Unpaid :</strong> <?php echo $thirtyDays->unpaidAmount;?></span>
+                <span class="text-danger"><strong>Chưa thanh toán :</strong> <?php echo $thirtyDays->unpaidAmount;?></span>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -257,12 +257,12 @@
             </div>
             <div class="col-lg-8 col-md-12 col-sm-7">
               <div class="text-left">
-                <h4><strong>Last 90 Day's</strong></h4>
-                <p>Last 180 Day's : <?php echo $oneEightyDays->totalCount + $oneEightyDaysExpedia->totalCount;?></p>
+                <h4><strong>90 ngày trước</strong></h4>
+                <p>180 ngày trước : <?php echo $oneEightyDays->totalCount + $oneEightyDaysExpedia->totalCount;?></p>
                 <hr class="mtb04">
-                <span class="text-success"><strong>Paid :</strong> <?php echo $nintyDays->paidAmount + $nintyDaysExpedia->paidAmount;?></span>
+                <span class="text-success"><strong>Đã thanh toán :</strong> <?php echo $nintyDays->paidAmount + $nintyDaysExpedia->paidAmount;?></span>
                 <div class="clearfix"></div>
-                <span class="text-danger"><strong>Unpaid :</strong> <?php echo $nintyDays->unpaidAmount;?></span>
+                <span class="text-danger"><strong>Chưa thanh toán :</strong> <?php echo $nintyDays->unpaidAmount;?></span>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -279,23 +279,23 @@
 <!-- Reports section -->
 
 
-<!-- Recent Bookings -->
+<!-- Bookings gần đây -->
 <?php if(pt_permissions('booking',@$userloggedin)){ ?>
 <?php  echo modules::run($UriSegment.'/bookings/dashboardBookings'); ?>
 <?php } ?>
-<!--Recent Bookings -->
+<!--Bookings gần đây -->
 
-<!-- Expedia Recent Bookings -->
+<!-- Expedia Bookings gần đây -->
 <?php if(!empty($isadmin)){ $chkExpedia = $chklib->is_mod_available_enabled("ean");
  if($chkExpedia){ echo modules::run('ean/eanback/dashboardBookings'); } } ?>
-<!--Expedia Recent Bookings -->
+<!--Expedia Bookings gần đây -->
 <div class="row">
   <div class="col-md-12">
     <?php if(!empty($isadmin)){ ?>
     <div class="panel panel-default">
       <div class="panel-heading">
-       <div class="pull-left"> <span class="fa fa-bar-chart-o"></span> Visit Statistics of <?php echo date('F', time()); ?></div>
-       <div class="pull-right btn btn-xs btn-danger resetChart"> <span class="fa fa-bar-chart-o"></span> Reset Chart </div>
+       <div class="pull-left"> <span class="fa fa-bar-chart-o"></span> Thống kê truy cập <?php echo date('m/Y', time()); ?></div>
+       <div class="pull-right btn btn-xs btn-danger resetChart"> <span class="fa fa-bar-chart-o"></span> Reset sơ đồ </div>
       <div class="clearfix"></div>
      </div>
 
@@ -315,23 +315,23 @@
       <form action="<?php echo base_url().$this->uri->segment(1); ?>/quickbooking/" method="GET">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Quick Booking</h4>
+          <h4 class="modal-title">Đặt nhanh</h4>
         </div>
         <div class="modal-body form-horizontal">
           <div class="form-group">
-            <label class="col-md-3 control-label" >Apply Tax</label>
+            <label class="col-md-3 control-label" >Áp dụng thuế</label>
             <div class="col-md-4">
               <select name="applytax" class="form-control" id="apply" >
-                <option value="yes" >Yes</option>
-                <option value="no">No</option>
+                <option value="yes" >Có</option>
+                <option value="no">Không</option>
               </select>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-3 control-label" id="service" >Service</label>
+            <label class="col-md-3 control-label" id="service" >Dịch vụ</label>
             <div class="col-md-4">
               <select required name="service" data-placeholder="Select" class="form-control" id="servicetype" tabindex="1">
-                <option value="">Select</option>
+                <option value="">-Chọn-</option>
                 <?php
                   foreach($quickmodules as $mod):
                     $istrue = $chklib->is_mod_available_enabled($mod);
@@ -346,8 +346,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Next</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+          <button type="submit" class="btn btn-primary">Tiếp tục</button>
         </div>
       </form>
     </div>
@@ -362,7 +362,7 @@
 
     $(".resetChart").on("click",function(){
       
-  $.alert.open('confirm', 'Are you sure you want to reset visits data?', function(answer) {
+  $.alert.open('confirm', 'Bạn chắc chắn muốn reset thống kê truy cập?', function(answer) {
    if(answer == 'yes'){
      
       $.post("<?php echo base_url();?>admin/resetVisits",{isAjax: "yes"},function(resp){

@@ -3,7 +3,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <span class="panel-title pull-left">Quick Booking</span>
+      <span class="panel-title pull-left">Đặt nhanh</span>
       <input type="hidden" id="currenturl" value="<?php echo current_url();?>" />
       <input type="hidden" id="baseurl" value="<?php echo base_url().$this->uri->segment(1);?>" />
       <div class="clearfix"></div>
@@ -109,16 +109,16 @@
 
 							<fieldset id="guestacc">
                                  <div class="form-group">
-								   <label class="col-md-3 control-label">First Name </label>
+								   <label class="col-md-3 control-label">Tên </label>
 									 <div class="col-md-8">
 					 	<input class="form-control" type="text" placeholder="First name" name="firstname" id="fname"  value="" >
 									</div>
 								 </div>
 
                                  <div class="form-group">
-								   <label class="col-md-3 control-label">Last Name</label>
+								   <label class="col-md-3 control-label">Họ</label>
 									 <div class="col-md-8">
-											<input class="form-control" type="text" placeholder="Last name" id="lname" name="lastname" value="" >
+											<input class="form-control" type="text" placeholder="Họ" id="lname" name="lastname" value="" >
 									</div>
 								 </div>
 
@@ -402,7 +402,7 @@
    <?php if(!empty($service)){  ?>
     <div class="col-md-4 pull-right">
     <div class="panel panel-default" >
-      <div style="font-size:16px" class="panel-heading"><strong>Booking Summary</strong></div>
+      <div style="font-size:16px" class="panel-heading"><strong>Tóm lược booking</strong></div>
 
       <table class="table summary">
        <tr style="background-color:#ffffdf">
