@@ -1,109 +1,11 @@
 {
     "days": [
         {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
-        },
-        {
-            "unique": 0,
-            "hits": 0,
-            "ip": []
+            "unique": 1,
+            "hits": 85,
+            "ip": [
+                "::1"
+            ]
         },
         {
             "unique": 0,
@@ -132,18 +34,18 @@
         },
         {
             "unique": 1,
-            "hits": 237,
+            "hits": 1,
             "ip": [
                 "::1"
             ]
         },
         {
             "unique": 1,
-            "hits": 10,
+            "hits": 1,
             "ip": [
                 "::1"
             ]
         }
     ],
-    "currMonth": "10"
+    "currMonth": "11"
 }
