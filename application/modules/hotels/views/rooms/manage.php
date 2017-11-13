@@ -45,9 +45,9 @@
 <form class="form-horizontal room-form" method="POST" action="" onsubmit="return false;" >
   <div class="panel panel-default">
     <ul class="nav nav-tabs nav-justified" role="tablist">
-      <li class="active"><a href="#GENERAL" data-toggle="tab">General</a></li>
-      <li class=""><a href="#AMENITIES" data-toggle="tab">Amenities</a></li>
-      <li class=""><a href="#TRANSLATE" data-toggle="tab">Translate</a></li>
+      <li class="active"><a href="#GENERAL" data-toggle="tab">Thông tin chung</a></li>
+      <li class=""><a href="#AMENITIES" data-toggle="tab">Tiện nghi</a></li>
+      <li class=""><a href="#TRANSLATE" data-toggle="tab">Dịch</a></li>
     </ul>
     <div class="panel-body">
       <br>
@@ -55,48 +55,13 @@
         <div class="tab-pane wow fadeIn animated active in" id="GENERAL">
           <div class="clearfix"></div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Room Title</label>
+            <label class="col-md-2 control-label text-left">Loại phòng</label>
             <div class="col-md-6">
-              <input class="form-control" Placeholder="Room Title" type="text" name="title" value="<?php echo @$rdata[0]->room_title;?>" />
+              <input class="form-control" Placeholder="Nhập tên loại phòng" type="text" name="title" value="<?php echo @$rdata[0]->room_title;?>" />
             </div>
           </div>
-          <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Honey moon</label>
-            <div class="col-md-2">
-              <select class="form-control" name="honey">
-                <option value="No" <?php if(@$rdata[0]->honey_moon == 'No'){echo "selected";}?> >No</option>
-                <option value="Yes" <?php if(@$rdata[0]->honey_moon == 'Yes'){echo "selected";}?> >Yes</option>
-              </select>
-            </div>
-            <div class="col-md-2">
-              <input name="honeyfrom" type="text" placeholder="From" class="form-control dpd1" value="<?php echo date('d/m/Y',@$rdata[0]->honey_moon_from); ?>" />
-            </div>
-            <div class="col-md-2">
-              <input name="honeyto" type="text" placeholder="To" class="form-control dpd2" value="<?php echo date('d/m/Y',@$rdata[0]->honey_moon_to); ?>" />
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Status</label>
-            <div class="col-md-2">
-              <select class="form-control" name="roomstatus">
-                <option value="Yes" <?php if(@$rdata[0]->room_status == 'Yes'){echo "selected";}?> >Enabled</option>
-                <option value="No" <?php if(@$rdata[0]->room_status == 'No'){echo "selected";}?> >Disabled</option>
-              </select>
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Room Type</label>
-            <div class="col-md-6">
-              <select data-placeholder="Room Type" class="chosen-select" name="roomtype">
-                <option value=""></option>
-                <?php $rtypes = pt_get_hsettings_data("rtypes");    foreach($rtypes as $rtype){   ?>
-                <option value="<?php echo $rtype->sett_id;?>" <?php if(@$rdata[0]->room_type == $rtype->sett_id){echo "selected";}?>  ><?php echo $rtype->sett_name;?></option>
-                <?php } ?>
-              </select>
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Hotel</label>
+           <div class="row form-group">
+            <label class="col-md-2 control-label text-left">Tên khách sạn</label>
             <div class="col-md-6">
               <select data-placeholder="Hotel Name" class="chosen-select" name="hotelid" >
                 <?php foreach($hotels as $h){ ?>
@@ -106,78 +71,65 @@
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Room Description</label>
+            <label class="col-md-2 control-label text-left">Trạng thái</label>
+            <div class="col-md-2">
+              <select class="form-control" name="roomstatus">
+                <option value="Yes" <?php if(@$rdata[0]->room_status == 'Yes'){echo "selected";}?> >Hiển thị</option>
+                <option value="No" <?php if(@$rdata[0]->room_status == 'No'){echo "selected";}?> >Ẩn</option>
+              </select>
+            </div>
+          </div>
+          <input type="hidden" name="roomtype">
+         
+          <div class="row form-group">
+            <label class="col-md-2 control-label text-left">Mô tả loại phòng</label>
             <div class="col-md-10">
               <?php $this->ckeditor->editor('roomdesc', @$rdata[0]->room_desc, $ckconfig,'roomdesc'); ?>
             </div>
           </div>
+          <input type="hidden" name="basicprice">
+          
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Price</label>
-            <div class="col-md-2">
-              <input class="form-control" Placeholder="Price" type="number" name="basicprice" value="<?php echo @$rdata[0]->room_basic_price;?>" />
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Sales off</label>
-            
-            
-            <div class="col-md-2">
-              <select name="saletype" class="form-control">
-                <option value="fixed" <?php if(@$rsaletype == "fixed"){ echo 'selected'; } ?> >Fixed</option>
-                <option value="percentage" <?php if(@$rsaletype == "percentage"){ echo 'selected'; } ?> >Percentage</option>
-              </select>
-            </div>
-            <div class="col-md-2">
-              <input name="saleval" type="text" placeholder="Value" class="form-control" value="<?php echo @$saleval; ?>" />
-            </div>
-            <div class="col-md-2">
-              <input name="sfrom" type="text" placeholder="From" class="form-control dpd3" value="<?php echo @$salefrom; ?>" />
-            </div>
-            <div class="col-md-2">
-              <input name="sto" type="text" placeholder="To" class="form-control dpd4" value="<?php echo @$saleto; ?>" />
-            </div>
-          </div>
-          <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Include breakfast ?</label>
+            <label class="col-md-2 control-label text-left">Ăn sáng ?</label>
             <div class="col-md-2">
               <select class="form-control" name="breakfast">
-                <option value="Yes" <?php if(@$rdata[0]->breakfast == 'Yes'){echo "selected";}?> >Yes</option>
-                <option value="No" <?php if(@$rdata[0]->breakfast == 'No'){echo "selected";}?> >No</option>
+                <option value="Yes" <?php if(@$rdata[0]->breakfast == 'Yes'){echo "selected";}?> >Có</option>
+                <option value="No" <?php if(@$rdata[0]->breakfast == 'No'){echo "selected";}?> >Không</option>
               </select>
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Quantity</label>
+            <label class="col-md-2 control-label text-left">Số phòng</label>
             <div class="col-md-2">
               <input class="form-control" Placeholder="Quantity" type="number" name="quantity" value="<?php echo @$rdata[0]->room_quantity;?>" />
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Minimum Stay</label>
+            <label class="col-md-2 control-label text-left">Số đêm nhỏ nhất</label>
             <div class="col-md-2">
               <input class="form-control" Placeholder="Minimum Stay" type="number" min=1 name="minstay" value="<?php echo @$rdata[0]->room_min_stay;?>" />
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Max Adults</label>
+            <label class="col-md-2 control-label text-left">Người lớn tối đa</label>
             <div class="col-md-2">
               <input class="form-control" type="number" placeholder="Max Adults" name="adults"  value="<?php echo @$rdata[0]->room_adults;?>">
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Max Children</label>
+            <label class="col-md-2 control-label text-left">Trẻ em tối đa</label>
             <div class="col-md-2">
               <input class="form-control" type="number" placeholder="Max Children" name="children"  value="<?php echo @$rdata[0]->room_children;?>">
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">No. of Exrta Beds</label>
+            <label class="col-md-2 control-label text-left">Số giường phụ</label>
             <div class="col-md-2">
               <input class="form-control" type="number" placeholder="Extra beds" name="extrabeds"  value="<?php echo @$rdata[0]->extra_bed;?>">
             </div>
           </div>
           <div class="row form-group">
-            <label class="col-md-2 control-label text-left">Extra Bed Charges</label>
+            <label class="col-md-2 control-label text-left">Phí giường phụ</label>
             <div class="col-md-2">
               <input class="form-control" type="number" placeholder="Beds charges" name="bedcharges"  value="<?php echo @$rdata[0]->extra_bed_charges;?>">
             </div>
@@ -187,7 +139,7 @@
           <div class="row form-group">
             <div class="col-md-12">
               <div class="col-md-4">
-                <label class="pointer"><input class="all" type="checkbox" name="" value="" id="select_all" > Select All</label>
+                <label class="pointer"><input class="all" type="checkbox" name="" value="" id="select_all" > Chọn tất cả</label>
               </div>
               <div class="clearfix"></div>
               <hr>
@@ -229,7 +181,7 @@
       <input type="hidden" id="roomid" name="roomid" value="<?php echo @$rdata[0]->room_id;?>" />
       <input type="hidden" name="oldquantity" value="<?php echo @$rdata[0]->room_quantity;?>" />
       <input type="hidden" name="submittype" value="<?php echo $submittype;?>" />
-      <button class="btn btn-primary submitfrm" id="<?php echo $submittype; ?>">Submit</button>
+      <button class="btn btn-primary submitfrm" id="<?php echo $submittype; ?>">Lưu</button>
     </div>
   </div>
 </form>

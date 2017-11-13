@@ -158,25 +158,7 @@
 							   </div>
 							   </div>
 
-                               <div class="form-group">
-                               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
-								 <select data-placeholder="Room Type" class="chosen-select" name="roomtype">
-                                 <option>Room Type</option>
-                                 <?php
-                                         $rtypes = pt_get_hsettings_data("rtypes");
-                                                 foreach($rtypes as $rtype){
-                                          ?>
-
-                                       <option value="<?php echo $rtype->sett_id;?>"  ><?php echo $rtype->sett_name;?></option>
-
-                                          <?php
-                                        }
-
-                                       ?>
-
-                                 </select>
-							   </div>
-							   </div>
+                               
 
 
 
@@ -185,12 +167,7 @@
                               <hr>
 
 
-                               <div class="form-group">
-                               <label class="col-md-6 control-label"> Basic Price</label>
-							   <div class="col-md-6">
-								 <input class="form-control" Placeholder="Price" type="number" name="basicprice" />
-							  </div>
-                              </div>
+                               <input class="form-control" Placeholder="Price" type="hidden" name="basicprice" />
 
                              <!-- <div class="form-group">
                                <label class="col-md-4 control-label"> Discount</label>

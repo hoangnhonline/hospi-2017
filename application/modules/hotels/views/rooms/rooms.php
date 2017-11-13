@@ -6,7 +6,6 @@
 $(".advsearch").on("click",function() {
 
 var roomtitle = $("#roomtitle").val();
-var roomtype = $("#roomtype").val();
 var status = $("#status").val();
 var hotelid = $("#hotelid").val();
 
@@ -14,7 +13,7 @@ var hotelid = $("#hotelid").val();
 
      $(".loadbg").css("display","block");
 
-     var dataString = 'advsearch=1&perpage='+perpage+'&hotelid='+hotelid+'&roomtitle='+roomtitle+'&roomtype='+roomtype+'&status='+status;
+     var dataString = 'advsearch=1&perpage='+perpage+'&hotelid='+hotelid+'&roomtitle='+roomtitle+'&status='+status;
 
     $.ajax({
            type: "POST",
@@ -70,12 +69,12 @@ var hotelid = $("#hotelid").val();
       var count_checked = $("[name='room_ids[]']:checked").length;
       if(count_checked == 0) {
 
-         $.alert.open('info', 'Please select a Room to Delete.');
+         $.alert.open('info', 'Vui lòng chọn 1 phòng để xóa');
         return false;
          }
 
 
-    $.alert.open('confirm', 'Are you sure you want to Delete it', function(answer) {
+    $.alert.open('confirm', 'Bạn chắc chắn muốn xóa ?', function(answer) {
         if (answer == 'yes')
 
 
@@ -335,27 +334,7 @@ function changePerpage(perpage){
 
 
 
-</div>
- <div class="form-group">
- <label class="col-md-2 control-label">Room Type</label>
-          <div class="col-md-4">
-          <select data-placeholder="Room Type" class="chosen-select" id="roomtype" name="roomtype">
-          <option value=""></option>
-          <?php $rtypes = pt_get_hsettings_data("rtypes");
-          foreach($rtypes as $rtype){  ?>
-          <option value="<?php echo $rtype->sett_id;?>" <?php if($rdata[0]->room_type == $rtype->sett_id){echo "selected";}?>  ><?php echo $rtype->sett_name;?></option>
-          <?php } ?>
-          </select>
-          </div>
-
-<label class="col-md-2 control-label">Room Status</label>
-          <div class="col-md-2">
-          <select class="form-control" id="status">
-          <option value="1">Enable</option>
-          <option value="0">Disable</option>
-           </select>
-          </div>
- </div>
+</div> 
 
                                         <div class="form-group">
       								   <label class="col-md-2 control-label"></label>
@@ -557,23 +536,7 @@ function changePerpage(perpage){
                     <input class="form-control dprto" type="text" placeholder="To" name="fto"  >
                   </div>
                 </div>
-              </div>
-              <hr class="divider">
-              <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4">
-                  <select data-placeholder="Room Type" class="chosen-select" name="roomtype">
-                    <?php
-                      $rtypes = pt_get_hsettings_data("rtypes");
-                              foreach($rtypes as $rtype){
-                       ?>
-                    <option value="<?php echo $rtype->sett_id;?>"  ><?php echo $rtype->sett_name;?></option>
-                    <?php
-                      }
-
-                      ?>
-                  </select>
-                </div>
-              </div>
+              </div>            
               <hr class="divider">
               <hr class="colorgraph">
               <div class="row">

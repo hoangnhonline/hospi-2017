@@ -6,7 +6,7 @@ $(function(){
                 var imgname =  $(this).attr('name');
                 var itemid =  $("#itemid").val();
 
-    $.alert.open('confirm', 'Are you sure you want to delete', function(answer) {
+    $.alert.open('confirm', 'Bạn chắc chắn muốn xóa?', function(answer) {
     if (answer == 'yes'){
   $.post("<?php echo $delimgUrl;?>", { imgid: imgid, itemid: itemid, imgname: imgname }, function(theResponse){
             $("#tr_"+imgid).fadeOut('slow');
@@ -86,12 +86,12 @@ $(function(){
       var count_checked = $("[name='img_ids[]']:checked").length;
 
          if(count_checked == 0) {
-          $.alert.open('info', 'Please select an Image to delete.');
+          $.alert.open('info', 'Vui lòng chọn 1 hình để xóa');
               return false;
 
          }
 
-         $.alert.open('confirm', 'Are you sure you want to delete', function(answer) {
+         $.alert.open('confirm', 'Bạn có chắc chắn muốn xóa?', function(answer) {
 
            if (answer == 'yes'){
 
@@ -119,7 +119,7 @@ Dropzone.options.dropzone = {
 
 
  <div class="panel panel-default">
-  <div class="panel-heading">Gallery Management</div>
+  <div class="panel-heading">Quản lý hình ảnh</div>
 
 <div class="panel-body">
 <div class="collapse" id="UploadPhotos">
@@ -137,16 +137,16 @@ Dropzone.options.dropzone = {
                             <tr>
                                 <th class="col-md-2">
                                  <a class="btn btn-success" data-toggle="collapse" href="#UploadPhotos" aria-expanded="false" aria-controls="UploadPhotos">
-                                  <i class="fa fa-photo"></i> Add Photos
+                                  <i class="fa fa-photo"></i> Thêm hình ảnh
                                  </a>
                                  <div class="clearfix"></div>
 
                                 </th>
-                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Delete Selected Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Delete</span></th>
-                                <th class="col-md-2 text-center">Order</th>
-                                <th class="col-md-2 text-center">Active</th>
-                                <th class="col-md-2 text-center">Thumbnail</th>
-                                <th class="col-md-2 text-center">Action</th>
+                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Delete Selected Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Xóa</span></th>
+                                <th class="col-md-2 text-center">Thứ tự</th>
+                                <th class="col-md-2 text-center">Trạng thái</th>
+                                <th class="col-md-2 text-center">Ảnh đại diện</th>
+                                <th class="col-md-2 text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -174,13 +174,13 @@ Dropzone.options.dropzone = {
                                 </td>
                                 <td style="padding:35px">
                                  <?php if($img->thumbnail == $img->image): ?>
-                                    <button class="btn btn-primary btn-block btn-md btnthumb" id="<?php echo $img->image;?>"> Yes </button>
+                                    <button class="btn btn-primary btn-block btn-md btnthumb" id="<?php echo $img->image;?>"> Có </button>
                                    <?php else: ?>
-                                    <button class="btn btn-default btn-block btn-md btnthumb" id="<?php echo $img->image;?>"> No </button>
+                                    <button class="btn btn-default btn-block btn-md btnthumb" id="<?php echo $img->image;?>"> Không </button>
                                    <?php endif; ?>
                                 </td>
                                 <td style="padding:35px">
-                                    <button class="btn btn-danger btn-block btn-md deleteImg" id="<?php echo $img->id;?>" name="<?php echo $img->image;?>" > Delete </button>
+                                    <button class="btn btn-danger btn-block btn-md deleteImg" id="<?php echo $img->id;?>" name="<?php echo $img->image;?>" > Xóa </button>
                                 </td>
                             </tr>
 
