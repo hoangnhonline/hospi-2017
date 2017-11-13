@@ -4,7 +4,7 @@ $(function(){
   $(".makeDefault").on('click',function(){
   var id = $(this).attr('id');
   var baseurl =  $(this).data('url');
-  var answer = confirm("Are you sure you want it Default?");
+  var answer = confirm("Bạn có chắc chắn chọn mục này là Mặc định?");
   if (answer){
      $.post(baseurl, { id: id }, function(theResponse){
           location.reload();
@@ -89,7 +89,7 @@ $("#overall").val(avg);
 
 function delfunc(id,baseurl){
 
-  var answer = confirm("Are you sure you want to delete?");
+  var answer = confirm("Bạn chắc chắn muốn xóa?");
   if (answer){
      $.post(baseurl, { id: id }, function(theResponse){
                  location.reload();
@@ -110,11 +110,11 @@ var checkedValues = $('.'+chkclass+':checked').map(function() {
 }).get();
 
 if(checkedValues.length < 1){
-  alert("Please select atleast one.");
+  alert("Vui lòng chọn ít nhất 1 mục.");
 
 }else{
 
-   var answer = confirm("Are you sure you want to delete?");
+   var answer = confirm("Bạn chắc chắn muốn xóa?");
    if (answer){
      $.post(url, { items: checkedValues }, function(theResponse){
       window.location = window.location.href;
@@ -134,7 +134,7 @@ if(checkedValues.length < 1){
 
 function approvefunc(id,baseurl){
 
-  var answer = confirm("Are you sure you want to proceed with this action?");
+  var answer = confirm("Bạn chắc chắn thực hiện thao tác này?");
   if (answer){
      $.post(baseurl, { id: id }, function(theResponse){
                  location.reload();
