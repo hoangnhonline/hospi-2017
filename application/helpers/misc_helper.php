@@ -38,7 +38,7 @@ if (!function_exists('Error_404')) {
 		  if(!empty($msg)){
                      echo "<script>
                       new PNotify({
-                      title: 'Changes Saved!',
+                      title: 'Lưu thành công.',
                       type: 'info',
                       animation: 'fade'
                       });

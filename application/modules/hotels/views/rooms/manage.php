@@ -101,37 +101,37 @@
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Số phòng</label>
             <div class="col-md-2">
-              <input class="form-control" Placeholder="Quantity" type="number" name="quantity" value="<?php echo @$rdata[0]->room_quantity;?>" />
+              <input class="form-control" Placeholder="" type="number" name="quantity" value="<?php echo @$rdata[0]->room_quantity;?>" />
             </div>
           </div>
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Số đêm nhỏ nhất</label>
             <div class="col-md-2">
-              <input class="form-control" Placeholder="Minimum Stay" type="number" min=1 name="minstay" value="<?php echo @$rdata[0]->room_min_stay;?>" />
+              <input class="form-control" Placeholder="" type="number" min=1 name="minstay" value="<?php echo $rdata[0]->room_min_stay ? $rdata[0]->room_min_stay : 1;?>" />
             </div>
           </div>
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Người lớn tối đa</label>
             <div class="col-md-2">
-              <input class="form-control" type="number" placeholder="Max Adults" name="adults"  value="<?php echo @$rdata[0]->room_adults;?>">
+              <input class="form-control" type="number" placeholder="" name="adults"  value="<?php echo @$rdata[0]->room_adults;?>">
             </div>
           </div>
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Trẻ em tối đa</label>
             <div class="col-md-2">
-              <input class="form-control" type="number" placeholder="Max Children" name="children"  value="<?php echo @$rdata[0]->room_children;?>">
+              <input class="form-control" type="number" placeholder="" name="children"  value="<?php echo @$rdata[0]->room_children;?>">
             </div>
           </div>
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Số giường phụ</label>
             <div class="col-md-2">
-              <input class="form-control" type="number" placeholder="Extra beds" name="extrabeds"  value="<?php echo @$rdata[0]->extra_bed;?>">
+              <input class="form-control" type="number" placeholder="" name="extrabeds"  value="<?php echo @$rdata[0]->extra_bed;?>">
             </div>
           </div>
           <div class="row form-group">
             <label class="col-md-2 control-label text-left">Phí giường phụ</label>
             <div class="col-md-2">
-              <input class="form-control" type="number" placeholder="Beds charges" name="bedcharges"  value="<?php echo @$rdata[0]->extra_bed_charges;?>">
+              <input class="form-control number" placeholder="" name="bedcharges"  value="<?php echo @$rdata[0]->extra_bed_charges;?>">
             </div>
           </div>
         </div>

@@ -17,10 +17,12 @@
 <!-- icheck -->
 <script src="<?php echo base_url(); ?>assets/include/icheck/icheck.min.js"></script>
 <link href="<?php echo base_url(); ?>assets/include/icheck/square/grey.css" rel="stylesheet">
+<script src="<?php echo base_url();?>assets/js/jquery.number.min.js"></script>
 <script>
 var cb, optionSet1;
 
 $(function () {
+    $('input.number').number( true, 0 );
     var checkAll = $('input.all');
     var checkboxes = $('input.checkboxcls');
 

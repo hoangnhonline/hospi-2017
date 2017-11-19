@@ -811,16 +811,22 @@ class hotelsback extends MX_Controller
 
 						$roomid = $this->input->post('roomid');
 						$this->rooms_model->addRoomPrices($roomid);
-						redirect($this->data['adminsegment'] . '/hotels/rooms/prices/' . $roomid);
+						redirect(base_url().$this->data['adminsegment'] . '/hotels/rooms/prices/' . $roomid);
 					}
 				}
 				elseif ($action == "update") {
-					$this->rooms_model->updateRoomPrices($this->input->post('pricesdata'));
-					redirect($this->data['adminsegment'] . '/hotels/rooms/prices/' . $editroom);
+					$this->rooms_model->updateRoomPrices();
+					redirect(base_url().$this->data['adminsegment'] . '/hotels/rooms/prices/' . $editroom);
 				}
-
+				$price_id = isset($_GET['price_id']) ? (int) $_GET['price_id'] : 0;
+				$detailPrice = array();
+				if($price_id > 0){
+					$detailPrice = $this->rooms_model->getDetailPrice($price_id);
+					//var_dump($detailPrice);die;
+				}
 				$this->data['prices'] = $this->rooms_model->getRoomPrices($editroom);
 				$this->data['room'] = $this->rooms_model->getRoomData($editroom);
+				$this->data['detailPrice'] = $detailPrice;
 			//	var_dump($this->data['room']);die;
 				$this->data['roomid'] = $editroom;
 				$this->data['main_content'] = 'hotels/rooms/prices';
@@ -917,6 +923,8 @@ class hotelsback extends MX_Controller
 						redirect('supplier/hotels');
 					}
 				}
+
+
 
 				$this->data['hotels'] = $this->hotels_model->all_hotels_names($userid);
 				$this->data['content'] = $data;

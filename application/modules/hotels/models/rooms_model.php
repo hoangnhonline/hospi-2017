@@ -301,6 +301,10 @@ class Rooms_model extends CI_Model
     return $roomid;
   }
 
+  function getDetailPrice($id){
+    $this->db->where('id', $id);    
+    return $this->db->get('pt_rooms_prices')->result();
+  }
   // update room data
 
   function update_room($roomid)
@@ -719,49 +723,64 @@ class Rooms_model extends CI_Model
 
   function addRoomPrices($roomid)
   {
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
     $datefrom = databaseDate($this->input->post('fromdate'));
     $dateto = databaseDate($this->input->post('todate'));
     $data = array(
       'room_id' => $roomid,
       'date_from' => $datefrom,
       'date_to' => $dateto,
+      'type' => $this->input->post('type'),
+      'type_apply' => $this->input->post('type_apply'),
       'adults' => intval($this->input->post('adult')) ,
       'children' => intval($this->input->post('child')) ,
-      'extra_bed_charge' => floatval($this->input->post('bedcharges')) ,
-      'mon' => floatval($this->input->post('mon')) ,
-      'tue' => floatval($this->input->post('tue')) ,
-      'wed' => floatval($this->input->post('wed')) ,
-      'thu' => floatval($this->input->post('thu')) ,
-      'fri' => floatval($this->input->post('fri')) ,
-      'sat' => floatval($this->input->post('sat')) ,
-      'sun' => floatval($this->input->post('sun'))
+      'extra_bed_charge' => floatval($this->replaceCommas($this->input->post('bedcharges'))) ,
+      'mon' => floatval($this->replaceCommas($this->input->post('mon'))) ,
+      'tue' => floatval($this->replaceCommas($this->input->post('tue'))) ,
+      'wed' => floatval($this->replaceCommas($this->input->post('wed'))) ,
+      'thu' => floatval($this->replaceCommas($this->input->post('thu'))) ,
+      'fri' => floatval($this->replaceCommas($this->input->post('fri'))) ,
+      'sat' => floatval($this->replaceCommas($this->input->post('sat'))) ,
+      'sun' => floatval($this->replaceCommas($this->input->post('sun'))),
+      'created_user' => $this->session->userdata('pt_logged_admin'),
+      'updated_user' => $this->session->userdata('pt_logged_admin'),
+      'created_at' => date('Y-m-d H:i:s'),
+      'updated_at' => date('Y-m-d H:i:s')
     );
     $this->db->insert('pt_rooms_prices', $data);
-    $this->session->set_flashdata('flashmsgs', "Price Added Successfully");
+    $this->session->set_flashdata('flashmsgs', "Thêm giá thành công.");
+  }
+  public function replaceCommas($number){
+    return str_replace(",", "", $number);
   }
 
-  // Add Room advanced prices
-
-  function updateRoomPrices($prices)
+  function updateRoomPrices()
   {
-    foreach($prices as $p => $v) {
-      $data = array(
-        'adults' => intval($v['adults']) ,
-        'children' => intval($v['child']) ,
-        'extra_bed_charge' => floatval($v['extra_bed_charges']) ,
-        'mon' => floatval($v['mon']) ,
-        'tue' => floatval($v['tue']) ,
-        'wed' => floatval($v['wed']) ,
-        'thu' => floatval($v['thu']) ,
-        'fri' => floatval($v['fri']) ,
-        'sat' => floatval($v['sat']) ,
-        'sun' => floatval($v['sun'])
-      );
-      $this->db->where('id', $p);
-      $this->db->update('pt_rooms_prices', $data);
-    }
-
-    $this->session->set_flashdata('flashmsgs', "Price Updated Successfully");
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $datefrom = databaseDate($this->input->post('fromdate'));
+    $dateto = databaseDate($this->input->post('todate'));
+    $data = array(
+      'room_id' => $this->input->post('roomid'),
+      'date_from' => $datefrom,
+      'type' => $this->input->post('type'),
+      'type_apply' => $this->input->post('type_apply'),
+      'date_to' => $dateto,
+      'adults' => intval($this->input->post('adult')) ,
+      'children' => intval($this->input->post('child')) ,
+      'extra_bed_charge' => floatval($this->replaceCommas($this->input->post('bedcharges'))) ,
+      'mon' => floatval($this->replaceCommas($this->input->post('mon'))) ,
+      'tue' => floatval($this->replaceCommas($this->input->post('tue'))) ,
+      'wed' => floatval($this->replaceCommas($this->input->post('wed'))) ,
+      'thu' => floatval($this->replaceCommas($this->input->post('thu'))) ,
+      'fri' => floatval($this->replaceCommas($this->input->post('fri'))) ,
+      'sat' => floatval($this->replaceCommas($this->input->post('sat'))) ,
+      'sun' => floatval($this->replaceCommas($this->input->post('sun'))),      
+      'updated_user' => $this->session->userdata('pt_logged_admin'),      
+      'updated_at' => date('Y-m-d H:i:s')
+    );
+    $this->db->where('id', $this->input->post('price_id'));
+    $this->db->update('pt_rooms_prices', $data);
+    $this->session->set_flashdata('flashmsgs', "Cập nhật giá thành công.");
   }
 
   // get Room advanced prices
@@ -769,6 +788,7 @@ class Rooms_model extends CI_Model
   function getRoomPrices($roomid)
   {
     $this->db->where('room_id', $roomid);
+    $this->db->join('pt_accounts', 'pt_accounts.accounts_id = pt_rooms_prices.updated_user');
     $this->db->order_by('date_from', 'ASC');
     return $this->db->get('pt_rooms_prices')->result();
   }
