@@ -50,7 +50,7 @@ redirect('admin');
 						$update = $this->input->post('update');
 						if (!empty ($update)) {
 								$this->templates_model->update_details();
-								redirect('admin/templates/email');
+								redirect(base_url().'admin/templates/email');
 						}
 						$this->load->model("emails_model");
 						$this->data['variables'] = $this->emails_model->shortcode_variables($template);

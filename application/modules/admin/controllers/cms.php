@@ -63,7 +63,7 @@ class Cms extends MX_Controller {
 
 		public function pages($args, $pageid = null, $langid = null) {
 				if ($args == null) {
-						redirect('admin/cms');
+						redirect(base_url().'admin/cms');
 				}
 				elseif ($args == 'add') {
 						$addpage = $this->input->post('action');
@@ -80,7 +80,7 @@ class Cms extends MX_Controller {
 										$pageid = $this->cms_model->addpage();
                                         $this->cms_model->add_translation($this->input->post('translated'),$pageid);
 									    $this->session->set_flashdata('flashmsgs', 'Page added Successfully');
-										redirect('admin/cms');
+										redirect(base_url().'admin/cms');
 
 								}
 						}
@@ -95,7 +95,7 @@ class Cms extends MX_Controller {
 // $edit  =  $this->input->post('editpage');
 // $pageid = $this->input->post('pageid');
 						if (empty ($pageid)) {
-								redirect('admin/cms');
+								redirect(base_url().'admin/cms');
 						}
 						else {
 								$updatepage = $this->input->post('action');
@@ -210,7 +210,7 @@ class Cms extends MX_Controller {
 						$this->load->view('template', $this->data);
 				}
 				else {
-						redirect('admin/cms');
+						redirect(base_url().'admin/cms');
 				}
 		}
 

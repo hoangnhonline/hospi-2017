@@ -143,7 +143,7 @@ class Settings extends MX_Controller {
 								$this->data['errormsg'] = $errortxt;
 						}
 
-                       redirect('admin/settings/','refresh');
+                       redirect(base_url().'admin/settings/','refresh');
                         
                         
 				}
@@ -206,7 +206,7 @@ class Settings extends MX_Controller {
 								else {
 										$widgetid = $this->widgets_model->addWidget();
                                         $this->session->set_flashdata('flashmsgs', 'Widget added Successfully');
-										redirect('admin/settings/widgets');
+										redirect(base_url().'admin/settings/widgets');
 
 								}
 						}
@@ -218,7 +218,7 @@ class Settings extends MX_Controller {
 				elseif ($args == 'edit') {
 
 						if (empty ($widgetid)) {
-								redirect('admin/settings/widgets');
+								redirect(base_url().'admin/settings/widgets');
 						}
 						else {
 								$updatepage = $this->input->post('action');
@@ -230,7 +230,7 @@ class Settings extends MX_Controller {
 										}
 										else {
 											$this->widgets_model->updateWidget($widgetid); 
-											redirect('admin/settings/widgets');                                              
+											redirect(base_url().'admin/settings/widgets');                                              
 
 										}
 								}
@@ -293,18 +293,18 @@ class Settings extends MX_Controller {
 					$gateway = $this->input->post('gateway');
 					$gatewayconfig = $this->payments_model->getGatewayConfigData($gateway);
 					$this->payments_model->activateGateway($gatewayconfig);
-					redirect('admin/settings/paymentgateways');
+					redirect(base_url().'admin/settings/paymentgateways');
 				}
 				if ($action == "save") {
 
 					//print_r($this->input->post()); exit;
 					$this->payments_model->updateGateway();
-					redirect('admin/settings/paymentgateways');
+					redirect(base_url().'admin/settings/paymentgateways');
 				}
 				if ($action == "deactivate") {
 
 					$this->payments_model->deActivateGateway();
-					redirect('admin/settings/paymentgateways');
+					redirect(base_url().'admin/settings/paymentgateways');
 				}
 				$this->data['all_payments'] = $this->payments_model->getAllPaymentsBack();
 
@@ -346,7 +346,7 @@ class Settings extends MX_Controller {
 						$update = $this->input->post('update');
 
 						if (empty ($id)) {
-								redirect('admin/sliders/');
+								redirect(base_url().'admin/sliders/');
 						}
 
 						if (!empty ($update)) {
@@ -426,7 +426,7 @@ class Settings extends MX_Controller {
 		}
 
 		function integrations() {
-			redirect('admin/settings');
+			redirect(base_url().'admin/settings');
 				/*$hasintegration = $this->ptmodules->has_integration();
 				if ($hasintegration) {
 						$this->data['modules'] = $this->ptmodules->integratedmodules;
@@ -435,7 +435,7 @@ class Settings extends MX_Controller {
 						$this->load->view('template', $this->data);
 				}
 				else {
-						redirect('admin/settings');
+						redirect(base_url().'admin/settings');
 				}*/
 		}
 
@@ -449,7 +449,7 @@ class Settings extends MX_Controller {
                 $this->db->where('user','webadmin');
                 $this->db->update('pt_app_settings',$data);
                 $this->session->set_flashdata('flashmsgs', 'Updated Successfully');
-                redirect('admin/settings/mobile');
+                redirect(base_url().'admin/settings/mobile');
 
               }
               $this->data['settings'] = $this->settings_model->get_settings_data();
@@ -482,7 +482,7 @@ class Settings extends MX_Controller {
 
       
        function redirectSettings($param = null){
-      redirect('admin/settings/'.$param,'refresh');
+      redirect(base_url().'admin/settings/'.$param,'refresh');
    }
 
 }

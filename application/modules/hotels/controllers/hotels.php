@@ -435,7 +435,7 @@ class Hotels extends MX_Controller {
 					$cityid = $locationInfo->id;
 					if(!empty($cityid) && $modType == "location"){
 
-                        redirect('hotels/search/'.$country.'/'.$city.'/'.$cityid.'?'.$surl);
+                        redirect(base_url().'hotels/search/'.$country.'/'.$city.'/'.$cityid.'?'.$surl);
 
 					}else if(!empty($cityid) && $modType == "hotel"){
 						$this->hotels_lib->set_id($cityid);

@@ -326,7 +326,7 @@ class Admin extends MX_Controller {
              $this->session->set_flashdata('flashmsgs', 'Profile Updated');
 
              $this->data['msg'] = "";
-             redirect('admin/profile','refresh');
+             redirect(base_url().'admin//profile','refresh');
 
           }else{
 
@@ -352,7 +352,7 @@ class Admin extends MX_Controller {
 				if (!empty ($submit)) {
 						$key = $this->input->post('licensekey');
 						$this->update_license_key($key);
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				$this->data['invalidlicense'] = $this->session->flashdata('invalid');
 				$this->data['pagetitle'] = 'Verify Your License';
@@ -451,7 +451,7 @@ class Admin extends MX_Controller {
 				$this->db->where('accounts_id', $this->userid);
 				$this->db->update('pt_accounts', $updatelogin);
 				$this->session->sess_destroy();
-				redirect('admin');
+				redirect(base_url().'admin/');
 		}
 
 		function phptravels_check_license() {
@@ -645,7 +645,7 @@ class Admin extends MX_Controller {
 		function hotels($args = null, $id = null, $roomid = null) {
 				$hotelsmod = modules :: load('hotels/hotelsback/');
 				if (!method_exists($hotelsmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 						$hotelsmod->index();
@@ -681,7 +681,7 @@ class Admin extends MX_Controller {
 		function cars($args = null, $id = null, $lang = null) {
 				$carsmod = modules :: load('cars/carsback/');
 				if (!method_exists($carsmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 						$carsmod->index();
@@ -710,7 +710,7 @@ class Admin extends MX_Controller {
 		function tours($args = null, $id = null, $lang = null) {
 				$toursmod = modules :: load('tours/toursback/');
 				if (!method_exists($toursmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 						$toursmod->index();
@@ -740,7 +740,7 @@ class Admin extends MX_Controller {
 		function ean($args = null, $id = null) {
 				$eanmod = modules :: load('ean/eanback/');
 				if (!method_exists($eanmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 //$eanmod->index();
@@ -763,7 +763,7 @@ class Admin extends MX_Controller {
 		function flightsdohop($args = null, $id = null) {
 				$dohopmod = modules :: load('flightsdohop/flightsdohopback/');
 				if (!method_exists($dohopmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 //$dohopmod->index();
@@ -783,7 +783,7 @@ class Admin extends MX_Controller {
 		function flightstravelstart($args = null, $id = null) {
 				$travelstartmod = modules :: load('flightstravelstart/flightstravelstartback/');
 				if (!method_exists($travelstartmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 //$dohopmod->index();
@@ -803,7 +803,7 @@ class Admin extends MX_Controller {
 		function rentalcars($args = null, $id = null) {
 				$rentalcarmod = modules :: load('rentalcars/rentalcarsback/');
 				if (!method_exists($rentalcarmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 //$rentalcarmod->index();
@@ -823,7 +823,7 @@ class Admin extends MX_Controller {
 		function hotelscombined($args = null, $id = null) {
 				$hotelscombinedmod = modules :: load('hotelscombined/hotelscombinedback/');
 				if (!method_exists($hotelscombinedmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 //$hotelscombinedmod->index();
@@ -843,7 +843,7 @@ class Admin extends MX_Controller {
 		function booking($args = null, $id = null) {
 				$bookingmod = modules :: load('booking/bookingback/');
 				if (!method_exists($bookingmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 //$bookingmod->index();
@@ -863,7 +863,7 @@ class Admin extends MX_Controller {
 		function tripadvisor($args = null, $id = null) {
 				$tripadvisormod = modules :: load('tripadvisor/tripadvisorback/');
 				if (!method_exists($tripadvisormod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 //$tripadvisormod->index();
@@ -883,7 +883,7 @@ class Admin extends MX_Controller {
 		function cartrawler($args = null, $id = null) {
 				$cartrawlermod = modules :: load('cartrawler/cartrawlerback/');
 				if (!method_exists($cartrawlermod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 
@@ -903,7 +903,7 @@ class Admin extends MX_Controller {
 		function blog($args = null, $id = null, $lang = null) {
 				$blogmod = modules :: load('blog/blogback/');
 				if (!method_exists($blogmod, 'index')) {
-						redirect('admin');
+						redirect(base_url().'admin/');
 				}
 				if ($args == "") {
 						$blogmod->index();

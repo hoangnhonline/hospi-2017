@@ -69,7 +69,7 @@ class Newsletter extends MX_Controller {
 
                 $this->newsletter_model->sendNewsletter($msg,$subject);
                 $this->session->set_flashdata('flashmsgs', "Newsletter Sent Successfully");
-                redirect('admin/newsletter/');
+                redirect(base_url().'admin/newsletter/');
                 }
 
 				$this->data['page_title'] = 'Send Newsletter';

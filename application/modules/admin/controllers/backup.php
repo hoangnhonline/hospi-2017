@@ -46,7 +46,7 @@ class Backup extends MX_Controller {
 
   }
 
-  redirect('admin/backup');
+  redirect(base_url().'admin/backup');
 
 }
 $this->data['main_content'] = 'admin/backup/backup';
@@ -145,7 +145,7 @@ function reset_database(){
    }
 }
    function redirectBackup(){
-      redirect('admin/backup','refresh');
+      redirect(base_url().'admin/backup','refresh');
    }
 
 

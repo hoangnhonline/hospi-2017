@@ -141,13 +141,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Customer Account Added Successfully");
-														redirect('admin/accounts/customers/');
+														redirect(base_url().'admin/accounts/customers/');
 												}
 										}
 										else {
 												$this->accounts_model->add_account($filename_db);
 												$this->session->set_flashdata('flashmsgs', "Customer Account Added Successfully");
-												redirect('admin/accounts/customers/');
+												redirect(base_url().'admin/accounts/customers/');
 										}
 								}
 						}
@@ -181,13 +181,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Customer Account Added Successfully");
-														redirect('admin/accounts/customers/');
+														redirect(base_url().'admin/accounts/customers/');
 												}
 										}
 										else {
 												$this->accounts_model->update_profile('customers',$id,$filename_db);
 												$this->session->set_flashdata('flashmsgs', "Customer Account Updated Successfully");
-												redirect('admin/accounts/customers/');
+												redirect(base_url().'admin/accounts/customers/');
 										}
 								}
 						}
@@ -269,13 +269,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Guest Account Added Successfully");
-														redirect('admin/accounts/guest/');
+														redirect(base_url().'admin/accounts/guest/');
 												}
 										}
 										else {
 												$this->accounts_model->add_account($filename_db);
 												$this->session->set_flashdata('flashmsgs', "Guest Account Added Successfully");
-												redirect('admin/accounts/guest/');
+												redirect(base_url().'admin/accounts/guest/');
 										}
 								}
 						}
@@ -309,13 +309,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Guest Account Added Successfully");
-														redirect('admin/accounts/guest/');
+														redirect(base_url().'admin/accounts/guest/');
 												}
 										}
 										else {
 												$this->accounts_model->update_profile('guest',$id,$filename_db);
 												$this->session->set_flashdata('flashmsgs', "Guest Account Updated Successfully");
-												redirect('admin/accounts/guest/');
+												redirect(base_url().'admin/accounts/guest/');
 										}
 								}
 						}
@@ -402,13 +402,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Supplier Account Added Successfully");
-														redirect('admin/accounts/suppliers/');
+														redirect(base_url().'admin/accounts/suppliers/');
 												}
 										}
 										else {
 												$this->accounts_model->add_account($filename_db);
 												$this->session->set_flashdata('flashmsgs', "Supplier Account Added Successfully");
-												redirect('admin/accounts/suppliers/');
+												redirect(base_url().'admin/accounts/suppliers/');
 										}
 								}
 						}
@@ -464,13 +464,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Supplier Account Added Successfully");
-														redirect('admin/accounts/suppliers/');
+														redirect(base_url().'admin/accounts/suppliers/');
 												}
 										}
 										else {
 												$this->accounts_model->update_profile('supplier',$id,$filename_db);
 												$this->session->set_flashdata('flashmsgs', "Supplier Account Updated Successfully");
-												redirect('admin/accounts/suppliers/');
+												redirect(base_url().'admin/accounts/suppliers/');
 										}
 								}
 						}
@@ -559,13 +559,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Manager Account Added Successfully");
-														redirect('admin/accounts/managers/');
+														redirect(base_url().'admin/accounts/managers/');
 												}
 										}
 										else {
 												$this->accounts_model->add_account($filename_db);
 												$this->session->set_flashdata('flashmsgs', "Manager Account Added Successfully");
-												redirect('admin/accounts/managers/');
+												redirect(base_url().'admin/accounts/managers/');
 										}
 								}
 						}
@@ -609,13 +609,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Staff Account Added Successfully");
-														redirect('admin/accounts/staff/');
+														redirect(base_url().'admin/accounts/staff/');
 												}
 										}
 										else {
 												$this->accounts_model->add_account($filename_db);
 												$this->session->set_flashdata('flashmsgs', "Staff Account Added Successfully");
-												redirect('admin/accounts/staff/');
+												redirect(base_url().'admin/accounts/staff/');
 										}
 								}
 						}
@@ -672,13 +672,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Admin Account Added Successfully");
-														redirect('admin/accounts/admins/');
+														redirect(base_url().'admin/accounts/admins/');
 												}
 										}
 										else {
 												$this->accounts_model->add_account($filename_db);
 												$this->session->set_flashdata('flashmsgs', "Admin Account Added Successfully");
-												redirect('admin/accounts/admins/');
+												redirect(base_url().'admin/accounts/admins/');
 										}
 								}
 						}
@@ -712,13 +712,13 @@ redirect('admin');
 												}
 												elseif ($result == '3') {
 														$this->session->set_flashdata('flashmsgs', "Admin Account Added Successfully");
-														redirect('admin/accounts/admins/');
+														redirect(base_url().'admin/accounts/admins/');
 												}
 										}
 										else {
 												$this->accounts_model->update_profile('admin',$id,$filename_db);
 												$this->session->set_flashdata('flashmsgs', "Admin Account Updated Successfully");
-												redirect('admin/accounts/admins/');
+												redirect(base_url().'admin/accounts/admins/');
 										}
 								}
 						}
@@ -762,7 +762,7 @@ redirect('admin');
 
      function delete($type,$id){
        $this->accounts_model->delete_account($id);
-       redirect('admin/accounts/'.$type);
+       redirect(base_url().'admin/accounts/'.$type);
 
      }
 

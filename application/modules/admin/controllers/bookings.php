@@ -244,7 +244,7 @@ class Bookings extends MX_Controller {
             $this->load->view('template', $this->data);
         }
         else {
-            redirect('admin/bookings');
+            redirect(base_url().'admin/bookings');
         }
      }
     

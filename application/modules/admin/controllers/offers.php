@@ -164,7 +164,7 @@ class Offers extends MX_Controller {
 				$updatesett = $this->input->post('updatesettings');
 				if (!empty ($updatesett)) {
 						$this->settings_model->update_front_settings();
-						redirect('admin/offers/settings');
+						redirect(base_url().'admin/offers/settings');
 				}
 				$this->data['settings'] = $this->settings_model->get_front_settings("offers");
 				$this->data['main_content'] = 'modules/offers/settings';

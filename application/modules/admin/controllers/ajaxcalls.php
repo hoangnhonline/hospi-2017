@@ -24,7 +24,7 @@ class Ajaxcalls extends MX_Controller {
 				if (!empty ($userid)) {
 						$this->accounts_model->remove_profile_image($userid, $oldphoto);
 						$this->session->set_flashdata('flashmsgs', 'Profile Updated Successfully');
-						redirect('admin/accounts/profile');
+						redirect(base_url().'admin/accounts/profile');
 				}
 		}
 // update menu order
