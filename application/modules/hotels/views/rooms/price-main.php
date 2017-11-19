@@ -113,7 +113,7 @@
     <table class="table table-bordered form-horizontal">
       <thead>
         <tr>
-          <th>Từ ngày - đến ngày</th>         
+          <th style="white-space:nowrap">Từ ngày - đến ngày</th>         
           <th class="text-right">Giường phụ</th>     
           <th class="text-right">Thứ 2</th>
           <th class="text-right">Thứ 3</th>
@@ -122,7 +122,7 @@
           <th class="text-right">Thứ 6</th>
           <th class="text-right">Thứ 7</th>
           <th class="text-right">Chủ nhật</th>
-          <th></th>
+          <th ></th>
         </tr>
       </thead>
       <tbody>
@@ -130,7 +130,7 @@
       if($p->type == 1):
       	?>
         <tr id="tr_<?php echo $p->id;?>">
-          <th><?php echo date('d/m/Y', strtotime($p->date_from)); ?> - <?php echo date('d/m/Y', strtotime($p->date_to)); ?></th>          
+          <th style="white-space:nowrap"><?php echo date('d/m/Y', strtotime($p->date_from)); ?> - <?php echo date('d/m/Y', strtotime($p->date_to)); ?></th>          
           <td class="text-right"><?php echo number_format($p->extra_bed_charge);?></td>
          
           <td style="width:120px;" class="text-right"><?php echo number_format($p->mon);?></td>
@@ -140,7 +140,7 @@
           <td style="width:120px;" class="text-right"><?php echo number_format($p->fri);?></td>
           <td style="width:120px;" class="text-right"><?php echo number_format($p->sat);?></td>
           <td style="width:120px;" class="text-right"><?php echo number_format($p->sun);?></td>
-          <td>
+          <td style="white-space:nowrap">
           <a href="<?php echo base_url() . 'admin/hotels/rooms/prices/'.$roomDetail->room_id; ?>?price_id=<?php echo $p->id; ?>#p_main" class="btn btn-warning btn-sm" ><i class="fa fa-edit"></i></a>
           <span class="btn btn-sm btn-danger delete" id="<?php echo $p->id;?>"><i class="fa fa-trash-o fa-lg"></i></span>
           </td>
