@@ -25,7 +25,7 @@ if(!empty($detailPrice)){
 
 <style>
   .col-md-1{
-    width: 120px !important;
+    width: 122px !important;
   }
   .input {
   width:60px;
