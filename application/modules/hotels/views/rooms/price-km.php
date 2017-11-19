@@ -98,7 +98,7 @@
           <input id="new_sun" name="sun" value="<?php echo @$priceKmDetail->sun; ?>" placeholder="" class="form-control input input-day input-sm number week"/>
         </div>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-2">
         <div class="form-group">
           <div>&nbsp;</div>
           <input type="hidden" name="action" value="<?php echo empty($priceKmDetail) ? "add" : "update"; ?>" />
