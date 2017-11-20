@@ -28,7 +28,7 @@
                 if ($.trim(response) != "done") {
                     $(".output").html(response);
                 } else {
-                    window.location.href = "<?php echo base_url() . $adminsegment . " / offers / " ?>";
+                    window.location.href = "<?php echo base_url() . $adminsegment . "/offers/" ?>";
                 }
 
             });
