@@ -39,6 +39,7 @@
 
     })
 </script>
+<a href="<?php echo base_url(); ?>admin/honeymoon?offer_city=<?php echo $offerdata[0]->offer_city; ?>" class="btn btn-default btn-sm">Quay lại</a>
 <h3 class="margin-top-0">
     <?php echo $headingText; ?>
 </h3>
