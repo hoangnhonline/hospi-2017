@@ -13,7 +13,7 @@ class Pending extends MX_Controller {
 				$chkadmin = modules :: run('admin/validadmin');
 				if (!$chkadmin) {
 					$this->session->set_userdata('prevURL', current_url());
-						redirect('admin');
+						redirect(base_url().'admin');
 				}
 				$this->data['userloggedin'] = $this->session->userdata('pt_logged_admin');
 				$this->data['isadmin'] = $this->session->userdata('pt_logged_admin');
@@ -38,7 +38,7 @@ class Pending extends MX_Controller {
 						if ($this->data['type'] == 'reviews') {
 								$chking = modules :: run('home/is_module_enabled', 'reviews');
 								if (!$chking) {
-										redirect('admin');
+										redirect(base_url().'admin');
 								}
 								$this->data['reviews'] = $this->get_all_pending_reviews($this->data['module']);
 						}
@@ -46,42 +46,42 @@ class Pending extends MX_Controller {
 								if ($this->data['module'] == "hotels") {
 										$chking = $this->ptmodules->is_mod_available_enabled("hotels");
 										if (!$chking) {
-												redirect('admin');
+												redirect(base_url().'admin');
 										}
 										$this->data['hotelimages'] = $this->get_all_pending_images('hotels');
 								}
 								elseif ($this->data['module'] == "rooms") {
 										$chking = $this->ptmodules->is_mod_available_enabled("hotels");
 										if (!$chking) {
-												redirect('admin');
+												redirect(base_url().'admin');
 										}
 										$this->data['roomimages'] = $this->get_all_pending_images('rooms');
 								}
 								elseif ($this->data['module'] == "cruises") {
 										$chking = $this->ptmodules->is_mod_available_enabled("cruises");
 										if (!$chking) {
-												redirect('admin');
+												redirect(base_url().'admin');
 										}
 										$this->data['cruiseimages'] = $this->get_all_pending_images('cruises');
 								}
 								elseif ($this->data['module'] == "crooms") {
 										$chking = $this->ptmodules->is_mod_available_enabled("cruises");
 										if (!$chking) {
-												redirect('admin');
+												redirect(base_url().'admin');
 										}
 										$this->data['croomimages'] = $this->get_all_pending_images('crooms');
 								}
 								elseif ($this->data['module'] == "tours") {
 										$chking = $this->ptmodules->is_mod_available_enabled("tours");
 										if (!$chking) {
-												redirect('admin');
+												redirect(base_url().'admin');
 										}
 										$this->data['tourimages'] = $this->get_all_pending_images('tours');
 								}
 								elseif ($this->data['module'] == "cars") {
 										$chking = $this->ptmodules->is_mod_available_enabled("cars");
 										if (!$chking) {
-												redirect('admin');
+												redirect(base_url().'admin');
 										}
 										$this->data['carimages'] = $this->get_all_pending_images('cars');
 								}

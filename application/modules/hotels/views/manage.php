@@ -127,7 +127,7 @@
           <input type="hidden" name="percent" value="<?php echo @$percent; ?>">
           <input type="hidden" name="sfrom" value="<?php echo @$salefrom; ?>">
           <input type="hidden" name="sto" value="<?php echo @$saleto; ?>">          
-
+          
           </div>
           
           <div class="row form-group">

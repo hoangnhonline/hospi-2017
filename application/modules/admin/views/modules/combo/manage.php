@@ -17,10 +17,10 @@
 
             }, 'slow');
             if (submitType == "add") {
-                url = "<?php echo base_url(); ?>admin/offers/add";
+                url = "<?php echo base_url(); ?>admin/combo/add";
 
             } else {
-                url = "<?php echo base_url(); ?>admin/offers/manage/" + slug;
+                url = "<?php echo base_url(); ?>admin/combo/manage/" + slug;
 
             }
 
@@ -28,7 +28,7 @@
                 if ($.trim(response) != "done") {
                     $(".output").html(response);
                 } else {
-                    window.location.href = "<?php echo base_url() . $adminsegment . " / offers / " ?>";
+                    window.location.href = "<?php echo base_url() . $adminsegment . "/combo/" ?>";
                 }
 
             });
@@ -39,6 +39,7 @@
 
     })
 </script>
+<a href="<?php echo base_url(); ?>admin/combo?offer_city=<?php echo $offerdata[0]->offer_city; ?>" class="btn btn-default btn-sm">Quay lại</a>
 <h3 class="margin-top-0">
     <?php echo $headingText; ?>
 </h3>
@@ -88,7 +89,7 @@
 
                     </div>
                     <div class="row form-group">
-                        <label class="col-md-2 control-label text-left">Tên ưu đãi</label>
+                        <label class="col-md-2 control-label text-left">Tên combo</label>
                         <div class="col-md-4">
                             <input name="offertitle" type="text" placeholder="" class="form-control" value="<?php echo @$offerdata[0]->offer_title; ?>" />
                         </div>
@@ -107,14 +108,14 @@
                             <input name="offeremail" type="numbers" placeholder="" class="form-control" value="<?php echo @$offerdata[0]->offer_email; ?>" />
                         </div>
                     </div>
-
+                    -->
                     <div class="row form-group">
-                        <label class="col-md-2 control-label text-left">Giá ưu đãi</label>
+                        <label class="col-md-2 control-label text-left">Giá combo</label>
                         <div class="col-md-2">
-                            <input name="offerprice" type="text" placeholder="" class="form-control" value="<?php echo @$offerdata[0]->offer_price; ?>" />
+                            <input name="offerprice" type="text" placeholder="" class="form-control number" value="<?php echo @$offerdata[0]->offer_price; ?>" />
                         </div>
                     </div>
--->
+
                     <div class="row form-group">
                         <label class="col-md-2 control-label text-left">Áp dụng</label>
                         <div class="col-md-2">
@@ -160,7 +161,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="row form-group">
-                                <label class="col-md-2 control-label text-left">Tên ưu đãi</label>
+                                <label class="col-md-2 control-label text-left">Tên combo</label>
                                 <div class="col-md-4">
                                     <input name='<?php echo "translated[$lang][title]"; ?>' type="text" placeholder="Offer Name" class="form-control" value="<?php echo @$trans[0]->trans_title; ?>" />
                                 </div>
@@ -185,7 +186,7 @@
             <input type="hidden" id="slug" value="<?php echo @$offerdata[0]->offer_slug; ?>" />
             <input type="hidden" name="submittype" value="<?php echo $submittype; ?>" />
             <input type="hidden" name="offerid" value="<?php echo @$offerid; ?>" />
-            <input type="hidden" name="offer_type" value="1">
+            <input type="hidden" name="offer_type" value="2">
             <button class="btn btn-primary submitfrm" id="<?php echo $submittype; ?>">Lưu</button>
         </div>
     </div>

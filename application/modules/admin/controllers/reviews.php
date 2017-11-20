@@ -7,12 +7,12 @@ modules::load('admin');
 $chkadmin = modules::run('admin/validadmin');
 if(!$chkadmin){
         $this->session->set_userdata('prevURL', current_url());
-redirect('admin');
+redirect(base_url().'admin');
 }
 $chk = modules::run('home/is_module_enabled','reviews');
 if(!$chk){
       
-redirect('admin');
+redirect(base_url().'admin');
 }
 $this->data['userloggedin'] = $this->session->userdata('pt_logged_admin');
 $this->data['isadmin'] = $this->session->userdata('pt_logged_admin');
@@ -21,7 +21,7 @@ $this->role = $this->session->userdata('pt_role');
 $this->data['role'] = $this->role;
 
 if(!pt_permissions('reviews',$this->data['userloggedin'])){
-redirect('admin');
+redirect(base_url().'admin');
 }
 $this->load->model('reviews_model');
 $this->data['modModel'] = $this->modules_model;

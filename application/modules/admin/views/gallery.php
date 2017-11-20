@@ -119,7 +119,7 @@ Dropzone.options.dropzone = {
 
 
  <div class="panel panel-default">
-  <div class="panel-heading">Gallery Management</div>
+  <div class="panel-heading">Quản lý hình ảnh</div>
 
 <div class="panel-body">
 <div class="collapse" id="UploadPhotos">
@@ -137,18 +137,18 @@ Dropzone.options.dropzone = {
                             <tr>
                                 <th class="col-md-2">
                                  <a class="btn btn-success" data-toggle="collapse" href="#UploadPhotos" aria-expanded="false" aria-controls="UploadPhotos">
-                                  <i class="fa fa-photo"></i> Add Photos
+                                  <i class="fa fa-photo"></i> Thêm ảnh
                                  </a>
                                  <div class="clearfix"></div>
 
                                 </th>
-                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Xóa mục đã chọn Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Delete</span></th>
-                                <th class="col-md-2 text-center">Order</th>
+                                <th class="col-md-2" style="padding-left:35px" ><input class="pointer all" data-imgname="" type="checkbox" data-toggle="tooltip" data-placement="top"  title="Select All" id="select_all" />  <span data-toggle="tooltip" data-placement="top" title="Xóa mục đã chọn Images from Table only" class="btn btn-danger btn-xs col-md-9 pull-right delMultiple"><i class="fa fa-trash-o"></i> Xóa</span></th>
+                                <th class="col-md-2 text-center">Thứ tự</th>
                                 <?php if(!empty($showactive)){ ?>
-                                <th class="col-md-2 text-center">Active</th>
+                                <th class="col-md-2 text-center">Trạng thái</th>
                                 <?php } ?>
-                                <th class="col-md-2 text-center">Thumbnail</th>
-                                <th class="col-md-2 text-center">Action</th>
+                                <th class="col-md-2 text-center">Ảnh đại diện</th>
+                                <th class="col-md-2 text-center">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,7 +183,7 @@ Dropzone.options.dropzone = {
                                    <?php endif; ?>
                                 </td>
                                 <td style="padding:35px">
-                                    <button class="btn btn-danger btn-block btn-md deleteImg" id="<?php echo $img->id;?>" name="<?php echo $img->image;?>" > Delete </button>
+                                    <button class="btn btn-danger btn-block btn-md deleteImg" id="<?php echo $img->id;?>" name="<?php echo $img->image;?>" > Xóa </button>
                                 </td>
                             </tr>
 

@@ -183,11 +183,11 @@
           <?php if($isadmin && $role != "admin"){ if(pt_is_module_enabled('offers')){  ?>
           <li>
             <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#SPECIAL_OFFERS"><i class="fa fa-gift"></i>
-            <span>Offers</span><i class="fa arrow"></i>
+            <span>Ưu đãi</span><i class="fa arrow"></i>
             </a>
             <ul id="SPECIAL_OFFERS" class="collapse  wow fadeIn animated">
-              <li><a href="<?php echo base_url();?>admin/offers/"><?php echo trans('029');?> <?php echo trans('030');?></a></li>
-              <li><a href="<?php echo base_url();?>admin/offers/settings/"><?php echo trans('030');?> <?php echo trans('04');?></a></li>
+              <li><a href="<?php echo base_url();?>admin/offers/">Quản lý ưu đãi</a></li>
+              <li><a href="<?php echo base_url();?>admin/offers/settings/">Cài đặt ưu đãi</a></li>
             </ul>
           </li>
           <?php } if(pt_is_module_enabled('coupons')){  ?>
@@ -197,6 +197,25 @@
             </a>
           </li>
           <?php } } ?>
+          <li>
+            <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#COMBO"><i class="fa fa-gift"></i>
+            <span>Combo</span><i class="fa arrow"></i>
+            </a>
+            <ul id="COMBO" class="collapse  wow fadeIn animated">
+              <li><a href="<?php echo base_url();?>admin/combo/">Quản lý Combo</a></li>
+              <li><a href="<?php echo base_url();?>admin/combo/add/">Thêm combo</a></li>
+            </ul>
+          </li>
+          <li>
+            <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#HONEYMOON"><i class="fa fa-gift"></i>
+            <span>Honeymoon</span><i class="fa arrow"></i>
+            </a>
+            <ul id="HONEYMOON" class="collapse  wow fadeIn animated">
+              <li><a href="<?php echo base_url();?>admin/honeymoon/">Quản lý honeymoon</a></li>
+              <li><a href="<?php echo base_url();?>admin/honeymoon/add/">Thêm honeymoon</a></li>
+            </ul>
+          </li>
+
           <?php if(pt_permissions('locations',@$userloggedin)){ ?>
           <li>
           <a href="<?php echo base_url().$this->uri->segment(1);?>/locations"><i class="fa fa-map-marker"></i>

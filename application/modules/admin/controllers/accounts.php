@@ -15,7 +15,7 @@ class Accounts extends MX_Controller {
 
 if(!$chkadmin){
 
-redirect('admin');
+redirect(base_url().'admin');
 
 }*/
 				$this->load->model('admin/uploads_model');
@@ -91,7 +91,7 @@ redirect('admin');
 								}
 								else {
 										echo 'done';
-										redirect('admin');
+										redirect(base_url().'admin');
 								}
 						}
 				}
@@ -104,7 +104,7 @@ redirect('admin');
             $this->data['addpermission'] = true;
            }else{
 
-             redirect('admin');
+             redirect(base_url().'admin');
            }
 			    $this->data['type'] = "customers";
                 $userdata = $this->accounts_model->get_profile_details($id);
@@ -232,7 +232,7 @@ redirect('admin');
             $this->data['addpermission'] = true;
            }else{
 
-             redirect('admin');
+             redirect(base_url().'admin');
            }
 			   $this->data['type'] = "guest";
                 $userdata = $this->accounts_model->get_profile_details($id);
@@ -360,7 +360,7 @@ redirect('admin');
             $this->data['addpermission'] = true;
            }else{
 
-             redirect('admin');
+             redirect(base_url().'admin');
            }
   				$this->data['type'] = "supplier";
   				$this->data['mainmodules'] = $this->ptmodules->supplierModulesPermission();
@@ -535,7 +535,7 @@ redirect('admin');
 		public function managers($args = null) {
 				$chkadmin = modules :: run('admin/validadmin');
 				if (!$chkadmin) {
-						redirect('admin');
+						redirect(base_url().'admin');
 				}
 				$this->data['type'] = "managers";
 				if ($args == 'add') {
@@ -585,7 +585,7 @@ redirect('admin');
 		public function staff($args = null) {
 				$chkadmin = modules :: run('admin/validadmin');
 				if (!$chkadmin) {
-						redirect('admin');
+						redirect(base_url().'admin');
 				}
 				$this->data['type'] = "staff";
 				if ($args == 'add') {
@@ -635,7 +635,7 @@ redirect('admin');
 
 
 		   if($this->admin->role != "webadmin" ){
-                redirect('admin');
+                redirect(base_url().'admin');
            }
 				$this->data['type'] = "admin";
                 $userdata = $this->accounts_model->get_profile_details($id);

@@ -16,7 +16,7 @@ class Settings extends MX_Controller {
 					$this->session->set_userdata('prevURL', current_url());
 				
 
-						redirect('admin');
+						redirect(base_url().'admin');
 										
 				}
 
@@ -440,7 +440,7 @@ class Settings extends MX_Controller {
 		}
 
         function api(){
-        	redirect('admin');
+        	redirect(base_url().'admin');
              /* $submit = $this->input->post('mobilesettings');
               if(!empty($submit)){
                 $data = array(

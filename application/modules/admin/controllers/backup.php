@@ -13,7 +13,7 @@ class Backup extends MX_Controller {
           $this->session->set_userdata('prevURL', current_url());
         
 
-            redirect('admin');
+            redirect(base_url().'admin');
                     
         }
       $this->data['userloggedin'] = $this->session->userdata('pt_logged_admin');

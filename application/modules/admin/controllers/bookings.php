@@ -12,7 +12,7 @@ class Bookings extends MX_Controller {
         $chkadmin = modules :: run('admin/validadmin');
         if (!$chkadmin) {
             $this->session->set_userdata('prevURL', current_url());
-            redirect('admin');
+            redirect(base_url().'admin');
         }
         $this->data['app_settings'] = $this->settings_model->get_settings_data();
         $checkingadmin = $this->session->userdata('pt_logged_admin');
@@ -97,7 +97,7 @@ class Bookings extends MX_Controller {
 // delete single booking
     function delBooking() {
         if (!$this->input->is_ajax_request()) {
-            redirect('admin');
+            redirect(base_url().'admin');
         }
         else {
             $id = $this->input->post('id');
@@ -109,7 +109,7 @@ class Bookings extends MX_Controller {
 // Delete Multiple Bookings
     function delMultipleBookings(){
           if (!$this->input->is_ajax_request()) {
-            redirect('admin');
+            redirect(base_url().'admin');
         }
         else {
             $items = $this->input->post('items');
@@ -124,7 +124,7 @@ class Bookings extends MX_Controller {
 // change booking status to paid
     function booking_status_paid() {
         if (!$this->input->is_ajax_request()) {
-            redirect('admin');
+            redirect(base_url().'admin');
         }
         else {
             $bookinglist = $this->input->post('booklist');
@@ -138,7 +138,7 @@ class Bookings extends MX_Controller {
 // change booking status to unpaid
     function booking_status_unpaid() {
         if (!$this->input->is_ajax_request()) {
-            redirect('admin');
+            redirect(base_url().'admin');
         }
         else {
             $bookinglist = $this->input->post('booklist');
@@ -152,7 +152,7 @@ class Bookings extends MX_Controller {
 //change single bookin status to paid
     function single_booking_status_paid() {
         if (!$this->input->is_ajax_request()) {
-            redirect('admin');
+            redirect(base_url().'admin');
         }
         else {
             $id = $this->input->post('id');
@@ -163,7 +163,7 @@ class Bookings extends MX_Controller {
 //change single bookin status to unpaid
     function single_booking_status_unpaid() {
         if (!$this->input->is_ajax_request()) {
-            redirect('admin');
+            redirect(base_url().'admin');
         }
         else {
             $id = $this->input->post('id');

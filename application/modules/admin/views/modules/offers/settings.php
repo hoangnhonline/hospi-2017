@@ -1,6 +1,6 @@
 <form action="" class="form-horizontal" method="POST">
   <div class="panel panel-default">
-    <div class="panel-heading"> Special Offers Settings</div>
+    <div class="panel-heading"> Cài đặt ưu đãi</div>
     <div class="panel-body">
       <?php if($this->session->flashdata('flashmsgs')){ echo NOTIFY; } ?>
       <div class="row form-group">
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="row form-group">
-        <label class="col-md-2 control-label text-left">Homepage</label>
+        <label class="col-md-2 control-label text-left">Trang chủ</label>
         <div class="col-md-4">
           <input class="form-control" type="text" placeholder="" name="home"  value="<?php echo $settings[0]->front_homepage;?>">
         </div>
@@ -40,7 +40,7 @@
     <div class="panel-footer">
       <input type="hidden" name="updatesettings" value="1" />
       <input type="hidden" name="updatefor" value="offers" />
-      <button class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary">Lưu</button>
     </div>
   </div>
 </form>

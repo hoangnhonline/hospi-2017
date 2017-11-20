@@ -14,7 +14,7 @@ $chkadmin = modules::run('admin/validadmin');
 
 if(!$chkadmin){
 $this->session->set_userdata('prevURL', current_url());
-redirect('admin');
+redirect(base_url().'admin');
 
 }
 

@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Offers extends MX_Controller
+class Honeymoon extends MX_Controller
 
 {
 	private $data = array();
@@ -112,7 +112,7 @@ class Offers extends MX_Controller
 		$xcrud->column_width('offer_order', '10%');
 		$xcrud->columns('offer_thumb,offer_title,offer_price,offer_status,offer_forever,offer_order');
 		$xcrud->search_columns('offer_title,offer_price,offer_order');
-		$xcrud->button(base_url() . $this->data['adminsegment'] . '/offers/manage/{offer_slug}', 'Edit', 'fa fa-edit', 'btn btn-warning', array(
+		$xcrud->button(base_url() . $this->data['adminsegment'] . '/honeymoon/manage/{offer_slug}', 'Edit', 'fa fa-edit', 'btn btn-warning', array(
 			'target' => '_self'
 		));
 		$delurl = base_url() . 'admin/ajaxcalls/delOffer';
@@ -141,11 +141,11 @@ class Offers extends MX_Controller
 		$xcrud->label('offer_title', 'Title');
 		$xcrud->column_callback('offer_forever', 'OffersPhotos');
 		$xcrud->column_callback('offer_order', 'orderInputOffers');
-		$this->data['add_link'] = base_url() . $this->data['adminsegment'] . '/offers/add';
+		$this->data['add_link'] = base_url() . $this->data['adminsegment'] . '/honeymoon/add';
 		$this->data['content'] = $xcrud->render();
-		$this->data['page_title'] = 'Quản lý ưu đãi';
+		$this->data['page_title'] = 'Quản lý combo';
 		$this->data['main_content'] = 'temp_view';
-		$this->data['header_title'] = 'Quản lý ưu đãi';
+		$this->data['header_title'] = 'Quản lý combo';
 		$this->load->view('template', $this->data);
 	}
 	function index()
@@ -155,13 +155,13 @@ class Offers extends MX_Controller
 		$data = array();
 		$params['offer_city'] = $this->input->get('offer_city') ? $this->input->get('offer_city') : null;
 		$params['offer_status'] = $this->input->get('offer_status') ? $this->input->get('offer_status') : null;			
-		$params['offer_title'] = $this->input->get('offer_title') ? $this->input->get('offer_title') : null;
-		$params['offer_type'] = 1;			
+		$params['offer_title'] = $this->input->get('offer_title') ? $this->input->get('offer_title') : null;			
+		$params['offer_type'] = 3;
 		$limit = $this->input->get('limit') ? $this->input->get('limit') : 100;
 		$page = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
 		$offset = ($page - 1) * $limit;
 		$total_records = $this->special_offers_model->search($params);
-		$config['base_url'] = base_url() . 'admin/offers' . '?' . http_build_query($params, '', "&amp;");
+		$config['base_url'] = base_url() . 'admin/combo' . '?' . http_build_query($params, '', "&amp;");
 		$config['total_rows'] = $total_records;
 		$config['per_page'] = 50;
 
@@ -200,12 +200,12 @@ class Offers extends MX_Controller
 		$this->data['content'] = $data;		
 		$this->data['delurl'] = $delurl;		
 		$this->data['photoArr'] = $photoArr;			
-		$this->data['page_title'] = 'Quản lý ưu đãi';			
-		$this->data['main_content'] = 'modules/offers/index';
-		$this->data['header_title'] = 'Quản lý ưu đãi';
+		$this->data['page_title'] = 'Quản lý combo';			
+		$this->data['main_content'] = 'modules/honeymoon/index';
+		$this->data['header_title'] = 'Quản lý combo';
 		$this->data['params'] = $params;
 		$this->data['deletepermission'] = $this->deletepermission;
-		$this->data['add_link'] = base_url() . $this->data['adminsegment'] . '/offers/add';
+		$this->data['add_link'] = base_url() . $this->data['adminsegment'] . '/honeymoon/add';
 		$this->data['locations'] = $this->locations_model->getLocationsBackend();
 		$this->load->view('admin/template', $this->data);
 	
@@ -229,10 +229,10 @@ class Offers extends MX_Controller
 			}
 		}
 		else {
-			$this->data['page_title'] = 'Thêm ưu đãi';
-			$this->data['main_content'] = 'modules/offers/manage';
-			$this->data['header_title'] = 'Quản lý ưu đãi';
-			$this->data['headingText'] = 'Thêm mới ưu đãi';
+			$this->data['page_title'] = 'Thêm combo';
+			$this->data['main_content'] = 'modules/honeymoon/manage';
+			$this->data['header_title'] = 'Quản lý combo';
+			$this->data['headingText'] = 'Thêm mới honeymoon';
 			$this->load->model('admin/locations_model');
 			$this->data['locations'] = $this->locations_model->getLocationsBackend();
 			$this->data['hotels'] = $this->locations_model->getRelatedhotels();
@@ -243,7 +243,7 @@ class Offers extends MX_Controller
 	function manage($offerslug)
 	{
 		if (empty($offerslug)) {
-			redirect($this->data['adminsegment'] . '/offers/');
+			redirect(base_url().$this->data['adminsegment'] . '/honeymoon/');
 		}
 
 		$updateoffer = $this->input->post('submittype');
@@ -267,8 +267,8 @@ class Offers extends MX_Controller
 			$this->data['ofrom'] = pt_show_date_php($this->data['offerdata'][0]->offer_from);
 			$this->data['oto'] = pt_show_date_php($this->data['offerdata'][0]->offer_to);
 			$this->data['offerid'] = $this->data['offerdata'][0]->offer_id;
-			$this->data['main_content'] = 'modules/offers/manage';
-			$this->data['header_title'] = 'Quản lý ưu đãi';
+			$this->data['main_content'] = 'modules/honeymoon/manage';
+			$this->data['header_title'] = 'Quản lý combo';
 			$this->data['hrelated'] = explode(",", $this->data['offerdata'][0]->hotel_related);
 			$this->load->model('admin/locations_model');
 			$this->data['locations'] = $this->locations_model->getLocationsBackend();
@@ -282,11 +282,11 @@ class Offers extends MX_Controller
 		$updatesett = $this->input->post('updatesettings');
 		if (!empty($updatesett)) {
 			$this->settings_model->update_front_settings();
-			redirect(base_url() . 'admin/offers/settings');
+			redirect(base_url() . 'admin/honeymoon/settings');
 		}
 
 		$this->data['settings'] = $this->settings_model->get_front_settings("offers");
-		$this->data['main_content'] = 'modules/offers/settings';
+		$this->data['main_content'] = 'modules/honeymoon/settings';
 		$this->data['page_title'] = 'Special Offer Settings';
 		$this->load->view('template', $this->data);
 	}
@@ -295,7 +295,7 @@ class Offers extends MX_Controller
 	{
 		$this->data['images'] = $this->special_offers_model->offerGallery($id);
 		$this->data['imgorderUrl'] = base_url() . 'admin/ajaxcalls/update_offer_image_order';
-		$this->data['uploadUrl'] = base_url() . 'admin/offers/galleryUpload/';
+		$this->data['uploadUrl'] = base_url() . 'admin/honeymoon/galleryUpload/';
 		$this->data['delimgUrl'] = base_url() . 'admin/ajaxcalls/delete_offer_image';
 		$this->data['makeThumbUrl'] = base_url() . 'admin/ajaxcalls/offer_makethumb';
 		$this->data['delMultipleImgsUrl'] = base_url() . 'admin/ajaxcalls/deleteMultipleOfferImages';

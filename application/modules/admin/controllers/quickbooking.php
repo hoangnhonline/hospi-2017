@@ -11,7 +11,7 @@ class Quickbooking extends MX_Controller {
                 $chkadmin = modules :: run('admin/validadmin');
                 if (!$chkadmin) {
                     $this->session->set_userdata('prevURL', current_url());
-                        redirect('admin');
+                        redirect(base_url().'admin');
                 }
                 $this->load->model('admin/bookings_model');
                 $this->load->model('admin/payments_model');

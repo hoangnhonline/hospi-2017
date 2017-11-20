@@ -16,13 +16,13 @@ class Templates extends MX_Controller {
           $this->session->set_userdata('prevURL', current_url());
         
 
-            redirect('admin');
+            redirect(base_url().'admin');
                     
         }
 				$this->load->model('templates_model');
 /*  $chk = modules::run('home/is_module_enabled','coupons');
 if(!$chk){
-redirect('admin');
+redirect(base_url().'admin');
 }*/
 				$this->data['userloggedin'] = $this->session->userdata('pt_logged_admin');
 				$this->data['isadmin'] = $this->session->userdata('pt_logged_admin');
@@ -30,7 +30,7 @@ redirect('admin');
                	$this->role = $this->session->userdata('pt_role');
 				$this->data['role'] = $this->role;
 /*  if(!pt_permissions('coupons',$this->data['userloggedin'])){
-redirect('admin');
+redirect(base_url().'admin');
 }*/
 // $this->load->model('coupons_model');
 				$this->load->library('ckeditor');

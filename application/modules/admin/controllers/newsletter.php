@@ -11,12 +11,12 @@ class Newsletter extends MX_Controller {
 				$chkadmin = modules :: run('admin/validadmin');
 				if (!$chkadmin) {
 					$this->session->set_userdata('prevURL', current_url());
-						redirect('admin');
+						redirect(base_url().'admin');
 				}
 				$chk = modules :: run('home/is_module_enabled', 'newsletter');
 				if (!$chk) {
 					$this->session->set_userdata('prevURL', current_url());
-						redirect('admin');
+						redirect(base_url().'admin');
 				}
 				$this->data['userloggedin'] = $this->session->userdata('pt_logged_admin');
 				$this->data['isadmin'] = $this->session->userdata('pt_logged_admin');
@@ -25,7 +25,7 @@ class Newsletter extends MX_Controller {
 				$this->data['role'] = $this->role;
     
 				if (!pt_permissions('newsletter', $this->data['userloggedin'])) {
-						redirect('admin');
+						redirect(base_url().'admin');
 				}
 		}
 

@@ -36,7 +36,7 @@
               <select class="form-control" name="hotel_status" id="hotel_status">
                 <option value="">Trạng thái</option>
                 <option value="Yes" <?php echo isset($params['hotel_status']) && 'Yes' == $params['hotel_status'] ? "selected" : "";  ?>>Hiển thị</option>
-                <option value="No" <?php echo isset($params['Yes']) && 'No' == $params['Yes'] ? "selected" : "";  ?>>Ẩn</option>                
+                <option value="No" <?php echo isset($params['hotel_status']) && 'No' == $params['hotel_status'] ? "selected" : "";  ?>>Ẩn</option>                
               </select>
             </div>             
             <div class="form-group">              

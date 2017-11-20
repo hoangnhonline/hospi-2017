@@ -11,7 +11,7 @@ class Cms extends MX_Controller {
 				$chk = modules :: run('admin/validadmin');
 				if (!$chk) {
 					$this->session->set_userdata('prevURL', current_url());
-						redirect('admin');
+						redirect(base_url().'admin');
 				}
 				$this->load->library('ckeditor');
 				$this->data['ckconfig'] = array();
