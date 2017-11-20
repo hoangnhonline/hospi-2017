@@ -122,6 +122,7 @@
           <th class="text-right">Thứ 6</th>
           <th class="text-right">Thứ 7</th>
           <th class="text-right">Chủ nhật</th>
+          <th class="text-right">Cập nhật</th>    
           <th ></th>
         </tr>
       </thead>
@@ -140,6 +141,8 @@
           <td style="width:120px;" class="text-right"><?php echo number_format($p->fri);?></td>
           <td style="width:120px;" class="text-right"><?php echo number_format($p->sat);?></td>
           <td style="width:120px;" class="text-right"><?php echo number_format($p->sun);?></td>
+          <td style="white-space:nowrap"><?php echo date('d/m/Y H:i', strtotime($p->updated_at)); ?><br>
+          <?php echo $p->ai_first_name. " ". $p->ai_last_name; ?></td>  
           <td style="white-space:nowrap">
           <a href="<?php echo base_url() . 'admin/hotels/rooms/prices/'.$roomDetail->room_id; ?>?price_id=<?php echo $p->id; ?>#p_main" class="btn btn-warning btn-sm" ><i class="fa fa-edit"></i></a>
           <span class="btn btn-sm btn-danger delete" id="<?php echo $p->id;?>"><i class="fa fa-trash-o fa-lg"></i></span>

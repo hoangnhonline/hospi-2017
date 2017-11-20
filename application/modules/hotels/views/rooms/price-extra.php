@@ -1,7 +1,7 @@
 <div class="panel panel-default" id="p_extra">
   <div class="panel-heading">
   <?php if(empty($priceExtraDetail)){ ?>
-  Thêm giá giá phụ thu
+  Thêm giá phụ thu
   <?php }else{ ?>
     Cập nhật giá phụ thu
     <?php }
