@@ -7708,7 +7708,8 @@ p.room-title {
 }
 .container .panel {
     border-radius: 0px;
-    border-bottom: none;
+    -webkit-box-shadow: none;
+    box-shadow: none; 
 }
 div#OVERVIEW {
     margin-top: 10px;
@@ -9838,26 +9839,56 @@ content: url(../../assets/img/collapsearrow.png);
   background-repeat-y: no-repeat;
 }
 
-.room-package h4 {
-  font-size: 14px;
-}
-.rooms-update.room-package {
-  padding: 7px;
-  position: relative;
+/* Package */
+.block-package {
   overflow: hidden;
-  margin-bottom: 0;
-  margin-top: 10px;
+  position: relative;
+  margin-bottom: 15px;
 }
-.rooms-update.room-package h4:before {
+.block-package .package-info {
+  border: 1px solid #cccccc;
+  position: relative;
+  list-style-type: none;
+  padding: 20px 15px;
+  margin-bottom: 10px;
+}
+.block-package .package-info:last-child {
+  margin-bottom: 0;
+}
+.block-package .package-info:before {
   content: url(../../assets/img/triangle_right.png);
   position: absolute;
+  top: 50%;
   left: 0;
-  top: 45%;
-  transform: translate(0, -45%);
-  -ms-transform: translate(0, -45%);
-  -webkit-transform: translate(0, -45%);
-  -o-transform: translate(0, -45%);
+  -webkit-transform: translate(0,-50%);
+  -ms-transform: translate(0,-50%);
+  transform: translate(0,-50%);
 }
+.block-package .package-info .package-name {
+  font-size: 14px;
+  color: #660033;
+  font-family: "AndesRoundedBold";
+  display: inline-block;
+  margin-right: 10px;
+}
+.block-package .package-info .package-des,
+.block-package .package-info .package-price {
+  font-size: 14px;
+  color: #666666;
+  font-family: 'Arial';
+  margin-top: -5px;
+}
+.block-package .package-info .package-price span {
+  color: #660033;
+  font-size: 20px;
+  font-family: "AndesRoundedBold";
+}
+.block-package .package-info .package-view {
+  font-size: 12px;
+  color: #666666;
+  text-decoration: underline;
+}
+
 .block-people h5 {
   color: #666666;
   font-size: 14px;
@@ -9935,6 +9966,7 @@ h4.hotel-name{
   font-size: 16px;
 }
 
+/* Process Evaluate */
 .block-process-evaluate .panel-body {
   padding: 0;
 }
@@ -9958,7 +9990,6 @@ h4.hotel-name{
   text-align: center;
   background: url(../../assets/img/backgound-pos2.jpg);
 }
-
 .block-process-evaluate .circle-evaluate {
   background: #ccc;
   margin-left: 25%;
@@ -10041,58 +10072,96 @@ h4.hotel-name{
 }
 
 /* Block Table Rooms */
-.block-tb-rooms {
-  width: 100%;
-  max-width: 100%;
-  margin-bottom: 20px;
-  border: 1px solid #cccccc;
-  border-spacing: 0;
-  border-collapse: collapse;
+.block-rooms .table-customize {
+  border: 1px solid #ddd;
+  background-color: transparent;
 }
-.block-tb-rooms .block-tb-rooms-head {
-  background: #e1e1e1;
-}
-.block-tb-rooms .tb-room-col {
-  float: left;
-}
-.block-tb-rooms .tb-room-col-1 {
-  width: 342px;
-}
-.block-tb-rooms .tb-room-col-2 {
-  width: 360px;
-}
-.block-tb-rooms .tb-room-col-3 {
-  width: 143px;
-}
-.block-tb-rooms .tb-room-col .tb-room-col-item {
-  padding: 7px 10px;
-}
-.block-tb-rooms .tb-room-col-2 .tb-room-col-item {
-  width: 50%;
-  float: left;
-}
-
-.block-tb-rooms .block-tb-rooms-body {
-  border-top: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
-  border-spacing: 0;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-.block-tb-rooms .block-tb-rooms-body:last-child {
-  border-bottom: none;
-}
-.block-tb-rooms .block-tb-rooms-body:last-child {
-  border-bottom: none;
-}
-.block-tb-rooms .block-tb-rooms-body .tb-room-col {
+.table > thead > tr > th, .table > tbody > tr > th,
+.table > tfoot > tr > th, .table > thead > tr > td,
+.table > tbody > tr > td, .table > tfoot > tr > td {
+  padding: 8px;
   line-height: 1.42857143;
   vertical-align: middle;
+  border-top: 1px solid #ddd;
+  position: relative;
 }
-// .block-tb-rooms .block-tb-rooms-body .tb-room-col-1 {
-//   border-left: 1px solid #cccccc;
-// }
-// .block-tb-rooms .block-tb-rooms-body .tb-room-col-2 .tb-room-col-item {
-//   border: 1px solid #cccccc;
-//   border-bottom: none;
-// }
+.table-customize > thead > tr > th,
+.table-customize > tbody > tr > th,
+.table-customize > tfoot > tr > th,
+.table-customize > thead > tr > td,
+.table-customize > tbody > tr > td,
+.table-customize > tfoot > tr > td {
+  border: 1px solid #ddd;
+}
+.table-customize > thead > tr > th {
+  background: #e1e1e1;
+}
+.block-rooms .zoom-gallery img {
+  width: 135px;
+  height: auto;
+}
+.block-rooms .zoom-gallery,
+.block-rooms .info {
+  display: inline-block;
+  vertical-align: baseline;
+}
+.block-rooms .info {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.block-rooms .info > * {
+  margin-top: 5px;
+}
+.block-rooms .info .block-people h5:first-child {
+  margin-top: 5px;
+}
+.block-rooms .item-countroom h5,
+.block-rooms .item-countroom select {
+  display: inline-block;
+  width: 48%;
+}
+.block-rooms .item-countroom:first-child {
+  margin-bottom: 10px;
+}
+.block-rooms .block-price {
+  padding-left: 30px;
+}
+.block-rooms .block-price .sale {
+  width: 39px;
+  height: 38px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.block-rooms .block-price .sale .hover {
+  width: 175px;
+  border: 1px solid #ff0101;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 50px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.block-rooms .block-price .sale .hover p {
+  font-size: 12px;
+  color: #666;
+}
+.block-rooms .block-price .sale .hover p:first-child {
+  color: #ff0101;
+  font-size: 13px;
+}
+.block-rooms .block-price .sale:hover .hover {
+  left: 30px;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
