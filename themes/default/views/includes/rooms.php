@@ -1,24 +1,25 @@
 <section id="ROOMS" style="background-color:#FFFFFF" style="position: relative;">
     <div style="background-color:#fff">
-        <div class="rooms-update rooms-update-bg" style="margin-bottom: 50px !important;">
+        <div class="rooms-update rooms-update-bg">
             <form action="" method="GET">
                 <div class="row">
-                    <div class="col-md-3 col-sm-3 go-right">
-                        <!-- <label class="size12 RTL go-right" style="white-space: nowrap;"><i class="icon-calendar-7"></i> <?php echo trans('07'); ?></label> -->
+                    <div class="col-sm-3 col-xs-12 go-right">
+                        <label class="size12 RTL go-right" style="white-space: nowrap;"><?php echo trans('07'); ?></label>
                         <input type="text" placeholder="<?php echo trans('07'); ?>" name="checkin" class="form-control mySelectCalendar dpd1" value="<?php echo $modulelib->checkin; ?>" required>
                     </div>
-                    <div class="col-md-3 col-sm-3 go-right">
-                        <!-- <label class="size12 RTL go-right"><i class="icon-calendar-7"></i> <?php echo trans('09'); ?></label> -->
+                    <div class="col-sm-3 col-xs-12 go-right">
+                        <label class="size12 RTL go-right"><?php echo trans('09'); ?></label>
                         <input type="text" placeholder="<?php echo trans('09'); ?>" name="checkout" class="form-control mySelectCalendar dpd2" value="<?php echo $modulelib->checkout; ?>" required>
                     </div>
-                    <div class="col-md-3 col-sm-3">
+                    <div class="col-xs-12 col-sm-2" style="margin-top: 10px;">
+                        <label>&nbsp;</label>
                         <?php if (!empty($rooms)) { ?>
                         <h5 class="text-left size16"><strong><i class="icon_set_1_icon-83"></i> <?php echo $modulelib->stay; ?> <?php echo trans('0122'); ?></strong> </h5>
                         <?php } ?>
                     </div>
-                    <div class="col-md-3 col-sm-3 go-right">
-                        <!-- <label>&nbsp;</label> -->
-                        <button class="btn btn-block btn-success textupper"><?php echo trans('0106'); ?></button>
+                    <div class="col-sm-4 col-xs-12 go-right">
+                        <label>&nbsp;</label>
+                        <button class="btn btn-block btn-success pull-right"><?php echo trans('0106'); ?></button>
                         <input type="hidden" id="loggedin" value="<?php echo $usersession; ?>" />
                         <input type="hidden" id="itemid" value="<?php echo $module->id; ?>" />
                         <input type="hidden" id="module" value="<?php echo $appModule; ?>" />
@@ -30,7 +31,6 @@
             <div class="clearfix"></div>
         </div><!-- update rooms-update-bg -->
 
-
         <div class="clearfix"></div>
         <?php if (!empty($modulelib->stayerror)) { ?>
         <div class="panel-body">
@@ -40,6 +40,106 @@
         </div><!-- panel-body -->
 
         <?php } ?>
+
+        <div class="table-responsive">
+          <table class="table table-bordered" style="margin-top: 30px;">
+            <tr>
+              <th colspan="2">aaaaaa</th>
+              <th>aaaaaa</th>
+              <th>aaaaaa</th>
+            </tr>
+            <tr>
+              <td colspan="2">asdasdasdasd</td>
+              <td>asdasdasdasd</td>
+              <td>
+                <tr>
+                  <td>asdasdas</td>
+                  <td>asdasdas</td>
+                  <td>asdasdas</td>
+                  <td>asdasdas</td>
+                </tr>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="clearfix">
+          <div class="block-tb-rooms" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="block-tb-rooms-head clearfix">
+              <div class="tb-room-col tb-room-col-1">
+                <div class="tb-room-col-item">
+                  Loại Phòng
+                </div>
+              </div>
+              <div class="tb-room-col tb-room-col-2">
+                <div class="tb-room-col-item text-center">
+                  Giá Phòng
+                </div>
+                <div class="tb-room-col-item text-center">
+                  Số Phòng
+                </div>
+              </div>
+              <div class="tb-room-col tb-room-col-3">
+                <div class="tb-room-col-item">
+                  Loại Phòng
+                </div>
+              </div>
+            </div>
+            <div class="block-tb-rooms-body clearfix">
+              <div class="tb-room-col tb-room-col-1">
+                <div class="tb-room-col-item">
+                  Loại Phòng
+                </div>
+              </div>
+              <div class="tb-room-col tb-room-col-2">
+                <div class="tb-room-col-item">
+                  Giá Phòng
+                </div>
+                <div class="tb-room-col-item">
+                  Số Phòng
+                </div>
+                <div class="tb-room-col-item">
+                  Giá Phòng
+                </div>
+                <div class="tb-room-col-item">
+                  Số Phòng
+                </div>
+              </div>
+              <div class="tb-room-col tb-room-col-3">
+                <div class="tb-room-col-item">
+                  Loại Phòng
+                </div>
+              </div>
+            </div>
+            <div class="block-tb-rooms-body clearfix">
+              <div class="tb-room-col tb-room-col-1">
+                <div class="tb-room-col-item">
+                  Loại Phòng
+                </div>
+              </div>
+              <div class="tb-room-col tb-room-col-2">
+                <div class="tb-room-col-item">
+                  Giá Phòng
+                </div>
+                <div class="tb-room-col-item">
+                  Số Phòng
+                </div>
+                <div class="tb-room-col-item">
+                  Giá Phòng
+                </div>
+                <div class="tb-room-col-item">
+                  Số Phòng
+                </div>
+              </div>
+              <div class="tb-room-col tb-room-col-3">
+                <div class="tb-room-col-item">
+                  Loại Phòng
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="clearfix">
             <div class="block-rooms-rela">
                 <?php if (!empty($rooms)) { ?>

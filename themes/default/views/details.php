@@ -56,7 +56,7 @@
                         <a class="btn btn-primary pull-right btn-block" data-toggle="modal" href="#call" ><?php echo trans('0438');?></a>
                     </div>
                     <!-- Start Offers Call Modal -->
-                    <div class="modal fade" id="call" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <dv class="modal fade" id="call" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -245,337 +245,345 @@
         <!-- slider -->
         <!-- aside -->
         <div class="secondary col-md-3 go-left">
-            <div class="panel-body panel panel-default">
-                <!-- Start Offers Contact Form -->
-                <?php if($appModule == "offers"){ ?> 
-                <div class="panel-heading"><?php echo trans('0439');?></div>
-                <h3 class="inner"></h3>
-                <?php if(!empty($module->email)){ ?>
-                <form action="" method="POST">
-                    <fieldset>
-                        <?php if(!empty($success)){ ?>
-                        <div class="alert alert-success successMsg"><?php echo trans('0479');?></div>
-                        <?php } ?>
-                        <div class="col-md-6 go-right">
-                            <label class="go-right"><?php echo trans('0350');?></label>
-                            <input class="form-control" placeholder="<?php echo trans('0350');?>" type="text" name="name" value="" required>
-                        </div>
-                        <div class="col-md-6 go-left">
-                            <label class="go-right"><?php echo trans('092');?></label>
-                            <input class="form-control" placeholder="<?php echo trans('092');?>" type="text" name="phone" value="" required><br>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-md-12">
-                            <label class="go-right"><?php echo trans('0262');?></label>
-                            <textarea class="form-control" placeholder="<?php echo trans('0262');?>" name="message" rows="4" cols="25" required></textarea><br>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-md-12">
-                            <input type="hidden" name="toemail" value="<?php echo $module->email;?>">
-                            <input type="hidden" name="sendmsg" value="1">
-                            <input class="btn btn-success btn-success btn-block btn-lg" type="submit" name="" value="<?php echo trans('0439');?>">
-                        </div>
-                        <br>
-                        <!-- END CONTACT FORM -->
-                    </fieldset>
-                </form>
-                <?php } if(!$module->offerForever){ ?>
-                <!-- Start Offers countdown -->
-                <i class="fa fa-clock-o go-right"></i>
-                <h4><?php echo trans('0269');?></h4>
-                <p href="#" class="phone"><span class="wow fadeInLeft animated" id="countdown"></span></p>
-                <!-- End Offers countdown -->
-                <?php } ?>
-                <div class="clearfix"></div>
-                <script type="text/javascript">
-                    // set the date we're counting down to
-                    var target_date = new Date('<?php echo $module->fullExpiryDate; ?>').getTime();
-                    
-                    // variables for time units
-                    var days, hours, minutes, seconds;
-                    
-                    // get tag element
-                    var countdown = document.getElementById('countdown');
-                    
-                    // update the tag with id "countdown" every 1 second
-                    setInterval(function () {
-                    
-                    // find the amount of "seconds" between now and target
-                    var current_date = new Date().getTime();
-                    var seconds_left = (target_date - current_date) / 1000;
-                    
-                    // do some time calculations
-                    days = parseInt(seconds_left / 86400);
-                    seconds_left = seconds_left % 86400;
-                    
-                    hours = parseInt(seconds_left / 3600);
-                    seconds_left = seconds_left % 3600;
-                    
-                    minutes = parseInt(seconds_left / 60);
-                    seconds = parseInt(seconds_left % 60);
-                    
-                    // format countdown string + set tag value
-                    countdown.innerHTML = '<span class="days">' + days +  ' <b><?php echo trans("0440");?></b></span> <span class="hours">' + hours + ' <b><?php echo trans("0441");?></b></span> <span class="minutes">'
-                    + minutes + ' <b><?php echo trans("0442");?></b></span> <span class="seconds">' + seconds + ' <b><?php echo trans("0443");?></b></span>';
-                    
-                    }, 1000);
-                    
-                    $(function(){
-                        setTimeout(function(){
-                    $(".successMsg").fadeOut("slow");
-                    }, 7000);
-                    
-                    });
-                    
-                </script>
-                <?php } ?>
-                <!-- End Offers Contact Form -->
-                <?php if($appModule != "cars" && $appModule != "offers"){ ?>
-                <!-- Start Review Total -->
-                <center>
-                    <h4 class="text-center andes-bold"><strong><?php echo $avgReviews->totalReviews; ?></strong> <?php echo trans('042');?></h4>
-                    <hr>
-                    <div class="c100 p<?php echo $avgReviews->overall * 10;?>" style="margin-top:10px;margin-left: 20%;">
-                        <span><strong><?php echo $avgReviews->overall;?> </strong>/<small>10</small></span>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </center>
-                <br>
-                <!-- End Review Total -->
-                <?php } ?>
-                <!-- Start Hotel Reviews bars -->
-                <?php if($appModule == "hotels"){ ?>
-                <label class="text-left andes"><?php echo trans('033');?></label>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                        aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->facilities * 10;?>%">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
-                <label class="text-left andes"><?php echo trans('034');?></label>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="80"
-                        aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->staff * 10;?>%">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
-                <label class="text-left andes"><?php echo trans('0722');?></label>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                        aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->comfort * 10;?>%">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
-                <label class="text-left andes"><?php echo trans('032');?></label>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                        aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->location * 10;?>%">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
-                <label class="text-left andes"><?php echo trans('0720');?></label>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                        aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews ->anuong * 10;?>%">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
-                <label class="text-left andes"><?php echo trans('030');?></label>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                        aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews->clean * 10;?>%">
-                        <span class="sr-only"></span>
-                    </div>
-                </div>
-                <?php } ?>
-                <!-- End Hotel Reviews bars -->
-                <?php include 'tripadvisor.php';?>
-                <!-- End aside Short Description -->
-                <!-- Start Tour Form aside -->
-                <?php if($appModule == "tours"){ ?>
-                <form action="" method="GET" >
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><?php echo trans('0158');?> <?php echo trans('08');?></div>
-                        <div class="panel-body">
-                            <input id="tchkin" name="date" value="<?php echo $module->date; ?>" placeholder="date" type="text" class="form-control form-group" placeholder="<?php echo trans('012');?>">
-                            <button type="submit" class="btn btn-block btn-info pull-right"><?php echo trans('0454');?></button>
-                        </div>
-                    </div>
-                </form>
-                <br>
-                <form  action="<?php echo base_url().$appModule;?>/book/<?php echo $module->bookingSlug;?>" method="GET" role="search">
-                    <input type="hidden" name="date" value="<?php echo $module->date;?>">
-                    <table style="width:100%" class="table table-bordered">
-                        <?php if(!empty($modulelib->error)){ ?>
-                        <div class="alert alert-danger go-text-right">
-                            <?php echo trans($modulelib->errorCode); ?>
-                        </div>
-                        <?php } ?>
-                        <thead>
-                            <tr>
-                                <th  style="line-height: 1.428571;"><?php echo trans('068');?></th>
-                                <th style="line-height: 1.428571;"><?php echo trans('0450');?></th>
-                                <th  style="line-height: 1.428571;" class="text-center"><?php echo trans('070');?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if($module->adultStatus){ ?>
-                            <tr>
-                                <th scope="row"><?php echo trans('010');?> <span class="weak"><?php echo $module->currSymbol;?><?php echo $module->perAdultPrice;?></span></th>
-                                <td>
-                                    <select style="min-width:50px" name="adults" class="selectx changeInfo input-sm" id="selectedAdults">
-                                        <?php for($adults = 1; $adults <= $module->maxAdults; $adults++){ ?>
-                                        <option value="<?php echo $adults;?>" <?php echo makeSelected($selectedAdults, $adults); ?>><?php echo $adults;?></option>
-                                        <?php } ?>
-                                    </select>
-                                </td>
-                                <td class="text-center adultPrice"><?php echo $module->currSymbol;?><?php echo $module->adultPrice;?></td>
-                            </tr>
-                            <?php } if($module->childStatus){ ?>
-                            <tr>
-                                <th scope="row"><?php echo trans('011');?> <span class="weak"><?php echo $module->currSymbol;?><?php echo $module->perChildPrice;?></span></th>
-                                <td>
-                                    <select name="child" class="selectx changeInfo input-sm" id="selectedChild">
-                                        <option value="0">0</option>
-                                        <?php for($child = 1; $child <= $module->maxChild; $child++){ ?>
-                                        <option value="<?php echo $child;?>" <?php echo makeSelected($selectedChild, $child); ?> ><?php echo $child;?></option>
-                                        <?php } ?>
-                                    </select>
-                                </td>
-                                <td class="text-center childPrice"><?php echo $module->currSymbol;?><?php echo $module->childPrice;?></td>
-                            </tr>
-                            <?php } if($module->infantStatus){  ?>
-                            <tr>
-                                <th scope="row"><?php echo trans('0282');?> <span class="weak"><?php echo $module->currSymbol;?><?php echo $module->perInfantPrice;?></span></th>
-                                <td>
-                                    <select name="infant" class="selectx changeInfo input-sm" id="selectedInfants">
-                                        <option value="0">0</option>
-                                        <?php for($infant = 1; $infant <= $module->maxInfant; $infant++){ ?>
-                                        <option value="<?php echo $infant;?>" <?php echo makeSelected($selectedInfants, $infant); ?> ><?php echo $infant;?></option>
-                                        <?php } ?>
-                                    </select>
-                                </td>
-                                <td class="text-center infantPrice"><?php echo $module->currSymbol;?><?php echo $module->infantPrice;?></td>
-                            </tr>
+            <div class="block-process-evaluate">
+                <div class="panel-body panel panel-default">
+                    <!-- Start Offers Contact Form -->
+                    <?php if($appModule == "offers"){ ?> 
+                    <div class="panel-heading"><?php echo trans('0439');?></div>
+                    <h3 class="inner"></h3>
+                    <?php if(!empty($module->email)){ ?>
+                    <form action="" method="POST">
+                        <fieldset>
+                            <?php if(!empty($success)){ ?>
+                            <div class="alert alert-success successMsg"><?php echo trans('0479');?></div>
                             <?php } ?>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="well well-sm text-center size20" style="margin-top: 4px; margin-bottom: 14px;"><span style="color:#333333;" class="totalCost"><?php echo $module->currCode;?> <?php echo $module->currSymbol;?><strong><?php echo $module->totalCost;?></strong></span><br>
-                                <small style="font-size: 12px;"> <?php echo trans('0126');?> <span class="totaldeposit"> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><?php echo $module->totalDeposit;?></span> </small>
-                            </h4>
-                        </div>
-                        <div class="col-md-12">
-                            <button style="height: 64px; margin: 3px;" type="submit" class="btn btn-block btn-action btn-lg"><?php echo trans('0142');?></button>
-                        </div>
-                    </div>
-                </form>
-                <?php } ?>
-                <!-- End Tour Form aside -->
-                <!-- Start Car From aside -->
-                <?php if($appModule == "cars"){ ?>
-                <form class="form-horizontal" action="<?php echo base_url().$appModule;?>/book/<?php echo $module->bookingSlug;?>" method="GET" role="search">
-                    <div class="row form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label go-right"><i class="icon_set_1_icon-21"></i> <?php echo trans('0210');?></label>
-                        </div>
-                        <div class="col-xs-12">
-                            <select name="pickupLocation" class="chosen-select RTL selectLoc" id="pickuplocation" required>
-                                <option value=""><?php echo trans('0447');?></option>
-                                <?php foreach($carspickuplocationsList as $locations): ?>
-                                <option value="<?php echo $locations->id;?>" <?php echo makeSelected($selectedpickupLocation, $locations->id); ?> ><?php echo $locations->name;?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label go-right"><i class="icon_set_1_icon-21"></i> <?php echo trans('0211');?></label>
-                        </div>
-                        <div class="col-xs-12">
-                            <select name="dropoffLocation" class="chosen-select RTL selectLoc" id="droplocation" required>
-                                <option value=""><?php echo trans('0447');?></option>
-                                <?php if(!empty($selecteddropoffLocation)){ foreach($carsdropofflocationsList as $locations): ?>
-                                <option value="<?php echo $locations->id;?>" <?php echo makeSelected($selecteddropoffLocation, $locations->id); ?> ><?php echo $locations->name;?></option>
-                                <?php endforeach; } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label go-right"><i class="icon_set_1_icon-53"></i> <?php echo trans('0210');?> <?php echo trans('08');?></label>
-                        </div>
-                        <div class="col-xs-12">
-                            <input id="departcar" name="pickupDate" value="<?php echo $module->pickupDate;?>" placeholder="date" type="text" class="form-control carDates" required>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label go-right"><i class="icon_set_1_icon-52"></i> <?php echo trans('0210');?> <?php echo trans('0259');?></label>
-                        </div>
-                        <div class="col-xs-12">
-                            <select class="form-control input" name="pickupTime">
-                                <?php foreach($carModTiming as $time){ ?>
-                                <option value="<?php echo $time; ?>" <?php makeSelected($pickupTime,$time); ?> ><?php echo $time; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label go-right"><i class="icon_set_1_icon-53"></i> <?php echo trans('0211');?> <?php echo trans('08');?></label>
-                        </div>
-                        <div class="col-xs-12">
-                            <input id="returncar" name="dropoffDate" value="<?php echo $module->dropoffDate;?>" placeholder="date" type="text" class="form-control carDates" required>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-xs-12">
-                            <label class="control-label go-right"><i class="icon_set_1_icon-52"></i> <?php echo trans('0211');?> <?php echo trans('0259');?></label>
-                        </div>
-                        <div class="col-xs-12">
-                            <select class="form-control input" name="dropoffTime">
-                                <?php foreach($carModTiming as $time){ ?>
-                                <option value="<?php echo $time; ?>" <?php makeSelected($dropoffTime,$time); ?> ><?php echo $time; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <input type="hidden" id="cartotals" value="<?php echo $module->showTotal; ?>">
-                    <div class="showTotal">
-                        <div class="col-xs-12 well well-sm text-center">
-                            <h4 class="totalCost"><?php echo trans('078');?> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><strong><span class="grandTotal"><?php echo $module->totalCost;?></span></strong></h4>
-                        </div>
-                        <div class="col-xs-12 h4">
-                            <small> <?php echo trans('0153');?> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span class="totalTax"> <?php echo $module->taxAmount;?></span> </small>
+                            <div class="col-md-6 go-right">
+                                <label class="go-right"><?php echo trans('0350');?></label>
+                                <input class="form-control" placeholder="<?php echo trans('0350');?>" type="text" name="name" value="" required>
+                            </div>
+                            <div class="col-md-6 go-left">
+                                <label class="go-right"><?php echo trans('092');?></label>
+                                <input class="form-control" placeholder="<?php echo trans('092');?>" type="text" name="phone" value="" required><br>
+                            </div>
                             <div class="clearfix"></div>
-                            <small> <?php echo trans('0126');?> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span class="totaldeposit"> <?php echo $module->totalDeposit;?></span> </small>
+                            <div class="col-md-12">
+                                <label class="go-right"><?php echo trans('0262');?></label>
+                                <textarea class="form-control" placeholder="<?php echo trans('0262');?>" name="message" rows="4" cols="25" required></textarea><br>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+                                <input type="hidden" name="toemail" value="<?php echo $module->email;?>">
+                                <input type="hidden" name="sendmsg" value="1">
+                                <input class="btn btn-success btn-success btn-block btn-lg" type="submit" name="" value="<?php echo trans('0439');?>">
+                            </div>
+                            <br>
+                            <!-- END CONTACT FORM -->
+                        </fieldset>
+                    </form>
+                    <?php } if(!$module->offerForever){ ?>
+                    <!-- Start Offers countdown -->
+                    <i class="fa fa-clock-o go-right"></i>
+                    <h4><?php echo trans('0269');?></h4>
+                    <p href="#" class="phone"><span class="wow fadeInLeft animated" id="countdown"></span></p>
+                    <!-- End Offers countdown -->
+                    <?php } ?>
+                    <div class="clearfix"></div>
+                    <script type="text/javascript">
+                        // set the date we're counting down to
+                        var target_date = new Date('<?php echo $module->fullExpiryDate; ?>').getTime();
+                        
+                        // variables for time units
+                        var days, hours, minutes, seconds;
+                        
+                        // get tag element
+                        var countdown = document.getElementById('countdown');
+                        
+                        // update the tag with id "countdown" every 1 second
+                        setInterval(function () {
+                        
+                        // find the amount of "seconds" between now and target
+                        var current_date = new Date().getTime();
+                        var seconds_left = (target_date - current_date) / 1000;
+                        
+                        // do some time calculations
+                        days = parseInt(seconds_left / 86400);
+                        seconds_left = seconds_left % 86400;
+                        
+                        hours = parseInt(seconds_left / 3600);
+                        seconds_left = seconds_left % 3600;
+                        
+                        minutes = parseInt(seconds_left / 60);
+                        seconds = parseInt(seconds_left % 60);
+                        
+                        // format countdown string + set tag value
+                        countdown.innerHTML = '<span class="days">' + days +  ' <b><?php echo trans("0440");?></b></span> <span class="hours">' + hours + ' <b><?php echo trans("0441");?></b></span> <span class="minutes">'
+                        + minutes + ' <b><?php echo trans("0442");?></b></span> <span class="seconds">' + seconds + ' <b><?php echo trans("0443");?></b></span>';
+                        
+                        }, 1000);
+                        
+                        $(function(){
+                            setTimeout(function(){
+                        $(".successMsg").fadeOut("slow");
+                        }, 7000);
+                        
+                        });
+                        
+                    </script>
+                    <?php } ?>
+                    <!-- End Offers Contact Form -->
+                    <?php if($appModule != "cars" && $appModule != "offers"){ ?>
+                    <!-- Start Review Total -->
+                    <center>
+                        <h4 class="block-title"><?php echo trans('042');?> <span>(<?php echo $avgReviews->totalReviews; ?>)</span></h4>
+                        <div class="block-content">
+                            <div class="circle-evaluate c100 p<?php echo $avgReviews->overall * 10;?>">
+                                <span>
+                                    <small><?php echo $avgReviews->overall;?></small>
+                                    <hr>
+                                    <small>10</small>
+                                </span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <p class="andes purple size25" style="margin-top: 10px;">&ldquo;Rất tốt&rdquo;</p>
+                        </div>
+                    </center>
+                    <div class="block-content">
+                        <!-- End Review Total -->
+                        <?php } ?>
+                        <!-- Start Hotel Reviews bars -->
+                        <?php if($appModule == "hotels"){ ?>
+                        <label class="text-left andes"><?php echo trans('033');?></label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->facilities * 10;?>%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <label class="text-left andes"><?php echo trans('034');?></label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="80"
+                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->staff * 10;?>%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <label class="text-left andes"><?php echo trans('0722');?></label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->comfort * 10;?>%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <label class="text-left andes"><?php echo trans('032');?></label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->location * 10;?>%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <label class="text-left andes"><?php echo trans('0720');?></label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews ->anuong * 10;?>%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <label class="text-left andes"><?php echo trans('030');?></label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews->clean * 10;?>%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <!-- End Hotel Reviews bars -->
+                        <?php include 'tripadvisor.php';?>
+                        <!-- End aside Short Description -->
+                        <!-- Start Tour Form aside -->
+                        <?php if($appModule == "tours"){ ?>
+                        <form action="" method="GET" >
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><?php echo trans('0158');?> <?php echo trans('08');?></div>
+                                <div class="panel-body">
+                                    <input id="tchkin" name="date" value="<?php echo $module->date; ?>" placeholder="date" type="text" class="form-control form-group" placeholder="<?php echo trans('012');?>">
+                                    <button type="submit" class="btn btn-block btn-info pull-right"><?php echo trans('0454');?></button>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <form  action="<?php echo base_url().$appModule;?>/book/<?php echo $module->bookingSlug;?>" method="GET" role="search">
+                            <input type="hidden" name="date" value="<?php echo $module->date;?>">
+                            <table style="width:100%" class="table table-bordered">
+                                <?php if(!empty($modulelib->error)){ ?>
+                                <div class="alert alert-danger go-text-right">
+                                    <?php echo trans($modulelib->errorCode); ?>
+                                </div>
+                                <?php } ?>
+                                <thead>
+                                    <tr>
+                                        <th  style="line-height: 1.428571;"><?php echo trans('068');?></th>
+                                        <th style="line-height: 1.428571;"><?php echo trans('0450');?></th>
+                                        <th  style="line-height: 1.428571;" class="text-center"><?php echo trans('070');?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if($module->adultStatus){ ?>
+                                    <tr>
+                                        <th scope="row"><?php echo trans('010');?> <span class="weak"><?php echo $module->currSymbol;?><?php echo $module->perAdultPrice;?></span></th>
+                                        <td>
+                                            <select style="min-width:50px" name="adults" class="selectx changeInfo input-sm" id="selectedAdults">
+                                                <?php for($adults = 1; $adults <= $module->maxAdults; $adults++){ ?>
+                                                <option value="<?php echo $adults;?>" <?php echo makeSelected($selectedAdults, $adults); ?>><?php echo $adults;?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </td>
+                                        <td class="text-center adultPrice"><?php echo $module->currSymbol;?><?php echo $module->adultPrice;?></td>
+                                    </tr>
+                                    <?php } if($module->childStatus){ ?>
+                                    <tr>
+                                        <th scope="row"><?php echo trans('011');?> <span class="weak"><?php echo $module->currSymbol;?><?php echo $module->perChildPrice;?></span></th>
+                                        <td>
+                                            <select name="child" class="selectx changeInfo input-sm" id="selectedChild">
+                                                <option value="0">0</option>
+                                                <?php for($child = 1; $child <= $module->maxChild; $child++){ ?>
+                                                <option value="<?php echo $child;?>" <?php echo makeSelected($selectedChild, $child); ?> ><?php echo $child;?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </td>
+                                        <td class="text-center childPrice"><?php echo $module->currSymbol;?><?php echo $module->childPrice;?></td>
+                                    </tr>
+                                    <?php } if($module->infantStatus){  ?>
+                                    <tr>
+                                        <th scope="row"><?php echo trans('0282');?> <span class="weak"><?php echo $module->currSymbol;?><?php echo $module->perInfantPrice;?></span></th>
+                                        <td>
+                                            <select name="infant" class="selectx changeInfo input-sm" id="selectedInfants">
+                                                <option value="0">0</option>
+                                                <?php for($infant = 1; $infant <= $module->maxInfant; $infant++){ ?>
+                                                <option value="<?php echo $infant;?>" <?php echo makeSelected($selectedInfants, $infant); ?> ><?php echo $infant;?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </td>
+                                        <td class="text-center infantPrice"><?php echo $module->currSymbol;?><?php echo $module->infantPrice;?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 class="well well-sm text-center size20" style="margin-top: 4px; margin-bottom: 14px;"><span style="color:#333333;" class="totalCost"><?php echo $module->currCode;?> <?php echo $module->currSymbol;?><strong><?php echo $module->totalCost;?></strong></span><br>
+                                        <small style="font-size: 12px;"> <?php echo trans('0126');?> <span class="totaldeposit"> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><?php echo $module->totalDeposit;?></span> </small>
+                                    </h4>
+                                </div>
+                                <div class="col-md-12">
+                                    <button style="height: 64px; margin: 3px;" type="submit" class="btn btn-block btn-action btn-lg"><?php echo trans('0142');?></button>
+                                </div>
+                            </div>
+                        </form>
+                        <?php } ?>
+                        <!-- End Tour Form aside -->
+                        <!-- Start Car From aside -->
+                        <?php if($appModule == "cars"){ ?>
+                        <form class="form-horizontal" action="<?php echo base_url().$appModule;?>/book/<?php echo $module->bookingSlug;?>" method="GET" role="search">
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <label class="control-label go-right"><i class="icon_set_1_icon-21"></i> <?php echo trans('0210');?></label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <select name="pickupLocation" class="chosen-select RTL selectLoc" id="pickuplocation" required>
+                                        <option value=""><?php echo trans('0447');?></option>
+                                        <?php foreach($carspickuplocationsList as $locations): ?>
+                                        <option value="<?php echo $locations->id;?>" <?php echo makeSelected($selectedpickupLocation, $locations->id); ?> ><?php echo $locations->name;?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <label class="control-label go-right"><i class="icon_set_1_icon-21"></i> <?php echo trans('0211');?></label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <select name="dropoffLocation" class="chosen-select RTL selectLoc" id="droplocation" required>
+                                        <option value=""><?php echo trans('0447');?></option>
+                                        <?php if(!empty($selecteddropoffLocation)){ foreach($carsdropofflocationsList as $locations): ?>
+                                        <option value="<?php echo $locations->id;?>" <?php echo makeSelected($selecteddropoffLocation, $locations->id); ?> ><?php echo $locations->name;?></option>
+                                        <?php endforeach; } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <label class="control-label go-right"><i class="icon_set_1_icon-53"></i> <?php echo trans('0210');?> <?php echo trans('08');?></label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input id="departcar" name="pickupDate" value="<?php echo $module->pickupDate;?>" placeholder="date" type="text" class="form-control carDates" required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <label class="control-label go-right"><i class="icon_set_1_icon-52"></i> <?php echo trans('0210');?> <?php echo trans('0259');?></label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <select class="form-control input" name="pickupTime">
+                                        <?php foreach($carModTiming as $time){ ?>
+                                        <option value="<?php echo $time; ?>" <?php makeSelected($pickupTime,$time); ?> ><?php echo $time; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <label class="control-label go-right"><i class="icon_set_1_icon-53"></i> <?php echo trans('0211');?> <?php echo trans('08');?></label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <input id="returncar" name="dropoffDate" value="<?php echo $module->dropoffDate;?>" placeholder="date" type="text" class="form-control carDates" required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-xs-12">
+                                    <label class="control-label go-right"><i class="icon_set_1_icon-52"></i> <?php echo trans('0211');?> <?php echo trans('0259');?></label>
+                                </div>
+                                <div class="col-xs-12">
+                                    <select class="form-control input" name="dropoffTime">
+                                        <?php foreach($carModTiming as $time){ ?>
+                                        <option value="<?php echo $time; ?>" <?php makeSelected($dropoffTime,$time); ?> ><?php echo $time; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" id="cartotals" value="<?php echo $module->showTotal; ?>">
+                            <div class="showTotal">
+                                <div class="col-xs-12 well well-sm text-center">
+                                    <h4 class="totalCost"><?php echo trans('078');?> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><strong><span class="grandTotal"><?php echo $module->totalCost;?></span></strong></h4>
+                                </div>
+                                <div class="col-xs-12 h4">
+                                    <small> <?php echo trans('0153');?> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span class="totalTax"> <?php echo $module->taxAmount;?></span> </small>
+                                    <div class="clearfix"></div>
+                                    <small> <?php echo trans('0126');?> <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span class="totaldeposit"> <?php echo $module->totalDeposit;?></span> </small>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr style="margin-top: 5px; margin-bottom: 12px;">
+                            <button type="submit" class="btn btn-block btn-action btn-lg"><?php echo trans('0142');?></button>
+                        </form>
+                        <?php } ?>
+                        <!-- End  Car From aside -->
+                        <input type="hidden" id="loggedin" value="<?php echo $usersession;?>" />
+                        <input type="hidden" id="itemid" value="<?php echo $module->id; ?>" />
+                        <input type="hidden" id="module" value="<?php echo $appModule;?>" />
+                        <input type="hidden" id="addtxt" value="<?php echo trans('029');?>" />
+                        <input type="hidden" id="removetxt" value="<?php echo trans('028');?>" />
+                        <!-- Start Add/Remove Wish list Review Section -->
+                        <div class="group-btn">
+                            <?php if($appModule != "cars" && $appModule != "ean" && $appModule != "offers"){ ?>
+                            <button  data-toggle="collapse" data-parent="#accordion" class="writeReview btn btn-write-evu" href="#ADDREVIEW"> <?php echo trans('083');?></button>
+                            <?php if(!empty($reviews) > 0){ ?>
+                            <a href="#REVIEWS" class="tabsBtn btn btn-view-evu"> <?php echo trans('0394');?></a>
+                            <?php } } ?>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    <hr style="margin-top: 5px; margin-bottom: 12px;">
-                    <button type="submit" class="btn btn-block btn-action btn-lg"><?php echo trans('0142');?></button>
-                </form>
-                <?php } ?>
-                <!-- End  Car From aside -->
-                <input type="hidden" id="loggedin" value="<?php echo $usersession;?>" />
-                <input type="hidden" id="itemid" value="<?php echo $module->id; ?>" />
-                <input type="hidden" id="module" value="<?php echo $appModule;?>" />
-                <input type="hidden" id="addtxt" value="<?php echo trans('029');?>" />
-                <input type="hidden" id="removetxt" value="<?php echo trans('028');?>" />
-                <!-- Start Add/Remove Wish list Review Section -->
-                <hr>
-                <div class="row">
-                    <?php if($appModule != "cars" && $appModule != "ean" && $appModule != "offers"){ ?>
-                    <div class="col-md-12 form-group"><button  data-toggle="collapse" data-parent="#accordion" class="writeReview btn-lg btn btn-success btn-block btn-lgs andes" href="#ADDREVIEW"><i class="icon_set_1_icon-68"></i> <?php echo trans('083');?></button></div>
-                    <?php if(!empty($reviews) > 0){ ?>
-                    <div class="col-md-12 form-group"><a href="#REVIEWS" class="tabsBtn btn btn-primary btn-lg btn-block btn-lgs andes"><i class="icon_set_1_icon-93"></i> <?php echo trans('0394');?></a></div>
-                    <?php } } ?>
                 </div>
             </div>
             <!-- End Add/Remove Wish list Review Section -->

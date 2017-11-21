@@ -331,6 +331,9 @@ img.fullwidth {
 .size24 {
     font-size: 24px;
 }
+.size25 {
+    font-size: 25px;
+}
 .size28 {
     font-size: 28px;
 }
@@ -342,6 +345,9 @@ img.fullwidth {
 }
 .size40 {
     font-size: 40px;
+}
+.size45 {
+    font-size: 45px;
 }
 .size48 {
     font-size: 48px;
@@ -9748,11 +9754,15 @@ content: url(../../assets/img/collapsearrow.png);
 .breadcrumb > li a {
   color: #999999;
   font-weight: normal;
-  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  font-family: 'Arial', sans-serif;
 }
 .block-breadcrumb #breadcrumb span {
   color: #660033;
   text-transform: none;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
 }
 
 /*.block-pagination {
@@ -9823,9 +9833,9 @@ content: url(../../assets/img/collapsearrow.png);
   margin-bottom: 0 !important;
 }
 .rooms-update.rooms-update-bg {
-  background: url(../../assets/img/Untitled-3.png);
-  padding: 7px;
+  background: #e3e3e3;
   margin-top: 0;
+  background-repeat-y: no-repeat;
 }
 
 .room-package h4 {
@@ -9926,5 +9936,166 @@ select:focus {
   font-size: 18px;
 }
 h4.hotel-name{
-    font-size: 16px;
+  font-size: 16px;
+}
+
+.block-process-evaluate .panel-body {
+  padding: 0;
+}
+.block-process-evaluate .panel-body .block-content {
+  padding: 15px;
+}
+.block-process-evaluate .block-title {
+  font-family: "AndesRounded", sans-serif;
+  width: 100%;
+  height: 43px;
+  line-height: 43px;
+  border-top: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
+  border-bottom: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #660033;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+  background: url(../../assets/img/backgound-pos2.jpg);
+}
+
+.block-process-evaluate .circle-evaluate {
+  background: #ccc;
+  margin-left: 25%;
+}
+.block-process-evaluate .circle-evaluate:after {
+  top: .04em;
+  left: .04em;
+  width: .92em;
+  height: .92em;
+  background-color: #660033;
+}
+.block-process-evaluate .circle-evaluate>span {
+  color: #fff;
+  line-height: normal;
+  margin-top: 22px;
+}
+.block-process-evaluate .circle-evaluate>span small {
+  display: block;
+}
+.block-process-evaluate .circle-evaluate>span small:first-child {
+  font-size: 45px;
+  line-height: 1;
+}
+.block-process-evaluate .circle-evaluate>span small:last-child {
+  font-size: 30px;
+  line-height: 1;
+}
+.block-process-evaluate .circle-evaluate>span hr {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border: 0;
+  width: 60px;
+  border-top: 1px solid #eee;
+}
+.block-process-evaluate .circle-evaluate:hover>span {
+  width: 100%;
+  line-height: normal;
+  font-size: .2em;
+  color: #fff;
+}
+
+.block-process-evaluate label.text-left {
+  font-family: 'Arial';
+  font-size: 14px;
+  color: #333333;
+  font-weight: normal;
+}
+.block-process-evaluate .progress {
+  height: 17px;
+  margin-bottom: 15px;
+  margin-top: 0;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 0;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  margin-left: 0;
+}
+.block-process-evaluate .progress .progress-bar {
+  background-color: #cccccc;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.block-process-evaluate .group-btn .btn {
+  display: block;
+  width: 135px;
+  margin: 0 auto;
+}
+.block-process-evaluate .group-btn .btn-write-evu {
+  color: #fff;
+  background-color: #660033;
+  border-color: #660033;
+  margin-bottom: 15px;
+}
+.block-process-evaluate .group-btn .btn-view-evu {
+  color: #333333;
+  background-color: #cccccc;
+  border-color: #cccccc;
+}
+
+/* Block Table Rooms */
+.block-tb-rooms {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid #cccccc;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.block-tb-rooms .block-tb-rooms-head {
+  background: #e1e1e1;
+}
+.block-tb-rooms .tb-room-col {
+  float: left;
+}
+.block-tb-rooms .tb-room-col-1 {
+  width: 342px;
+}
+.block-tb-rooms .tb-room-col-2 {
+  width: 360px;
+}
+.block-tb-rooms .tb-room-col-3 {
+  width: 143px;
+}
+.block-tb-rooms .tb-room-col .tb-room-col-item {
+  padding: 7px 10px;
+}
+.block-tb-rooms .tb-room-col-2 .tb-room-col-item {
+  width: 50%;
+  float: left;
+}
+
+.block-tb-rooms .block-tb-rooms-body {
+  border: 1px solid #cccccc;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.block-tb-rooms .block-tb-rooms-body:last-child {
+  border-bottom: none;
+}
+.block-tb-rooms .block-tb-rooms-body:last-child {
+  border-bottom: none;
+}
+.block-tb-rooms .block-tb-rooms-body .tb-room-col {
+  line-height: 1.42857143;
+  vertical-align: middle;
+}
+.block-tb-rooms .block-tb-rooms-body .tb-room-col-1 {
+  border-left: 1px solid #cccccc;
+}
+.block-tb-rooms .block-tb-rooms-body .tb-room-col-2 .tb-room-col-item {
+  border: 1px solid #cccccc;
+  border-bottom: none;
 }
