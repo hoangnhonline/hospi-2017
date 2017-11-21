@@ -41,28 +41,6 @@
 
         <?php } ?>
 
-        <div class="table-responsive">
-          <table class="table table-bordered" style="margin-top: 30px;">
-            <tr>
-              <th colspan="2">aaaaaa</th>
-              <th>aaaaaa</th>
-              <th>aaaaaa</th>
-            </tr>
-            <tr>
-              <td colspan="2">asdasdasdasd</td>
-              <td>asdasdasdasd</td>
-              <td>
-                <tr>
-                  <td>asdasdas</td>
-                  <td>asdasdas</td>
-                  <td>asdasdas</td>
-                  <td>asdasdas</td>
-                </tr>
-              </td>
-            </tr>
-          </table>
-        </div>
-
         <div class="clearfix">
           <div class="block-tb-rooms" style="margin-top: 20px; margin-bottom: 20px;">
             <div class="block-tb-rooms-head clearfix">
@@ -88,15 +66,40 @@
             <div class="block-tb-rooms-body clearfix">
               <div class="tb-room-col tb-room-col-1">
                 <div class="tb-room-col-item">
-                  Loại Phòng
+                  <div class="col-sm-3">
+                    <a href="#" data-source="" title="">
+                      <img class="img-responsive" src="assets/img/335887_honeymoon_at_the_beach--hospi.jpg">
+                    </a>
+                  </div>
+                    <h4><b class="purple"><?php echo $r->title; ?></b></h4>
+                    <div class="block-people">
+                        <h5><?php echo trans('010'); ?>: <span>02</span> </h5>
+                        <h5><?php echo trans('011'); ?>: <span>02</span></h5>
+                    </div>
+                    <div class="block-view-detail">
+                        <div class="visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
+                          <a data-toggle="modal" href="#details<?php echo $r->id; ?>"><?php echo trans("0640"); ?></a>
+                        </div>
+                    </div>
                 </div>
               </div>
               <div class="tb-room-col tb-room-col-2">
                 <div class="tb-room-col-item">
-                  Giá Phòng
+                  <h5 class="size12" style="white-space: nowrap;"><?php echo trans('0374'); ?></h5>
+                  <select class="form-control mySelectBoxClass input-sm" name="roomscount" >
+                    <?php for ($q = 1; $q <= $r->maxQuantity; $q++) { ?>
+                    <option value="<?php echo $q; ?>"><?php echo $q; ?></option>
+                    <?php } ?>
+                  </select>
                 </div>
                 <div class="tb-room-col-item">
-                  Số Phòng
+                  <h5 class="size12"><?php echo trans('0428'); ?></h5>
+                  <select name="extrabeds" class="form-control mySelectBoxClass input-sm" id="">
+                    <option value="0">0</option>
+                    <?php for ($i = 1; $i <= $r->extraBeds; $i++) { ?>
+                    <option value="<?php echo $i; ?>"> <?php echo $i; ?> <?php echo $r->currCode . " " . $r->currSymbol . $i * $r->extrabedCharges; ?></option>
+                    <?php } ?>
+                  </select>
                 </div>
                 <div class="tb-room-col-item">
                   Giá Phòng
