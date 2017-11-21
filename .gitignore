@@ -6,3 +6,6 @@ composer.lock
 /uploads
 .env
 /db
+.settings
+.project
+.idea
