@@ -116,6 +116,9 @@
             <tr>
               <td>
                 <div class="zoom-gallery">
+                  <div title="" data-toggle="tooltip" data-placement="left" id="131" data-module="hotels" class="wishlist wishlistcheck hotelswishtext131" data-original-title="Add to wishlist">
+                    <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);"><span class="hotelswishsign131">+</span></a>
+                  </div>
                   <a href="#" data-source="" title="Honeymoon">
                   <img class="img-responsive" src="assets/img/335887_honeymoon_at_the_beach--hospi.jpg">
                   </a>
@@ -167,7 +170,9 @@
               <td>
                 <div class="block-price">
                   <p class="purple size18"><b>8,822,000</b></p>
-                  <p class="size13 grey">Giá VND/2 đêm</p>
+                  <p class="size13 grey">Giá VND/2 đêm
+                    <span class="tooltip-info"><i class="fa fa-question-circle"></i></span>
+                  </p>
                   <p class="block-price-info">
                     <span>Bao gồm: Ăn sáng.</span>
                     <span>Phí dịch vụ 5%, VAT 10%</span>
@@ -176,7 +181,11 @@
               </td>
               <td rowspan="4">
                 <p><button style="margin-bottom:5px" type="submit" class="btn btn-action btn-block chk">Đặt phòng</button></p>
-                <p>Bạn vui lòng chọn số lượng phòng, Bạn có thể đặt một lúc nhiều loại phòng </p>
+                <p class="size13">Bạn vui lòng chọn số lượng phòng, Bạn có thể đặt một lúc nhiều loại phòng </p>
+                <hr>
+                <p class="purple andes-bold size13 text-center">Yêu cầu giường</p>
+                <p class="size13 text-center"><label class="radio-inline"><input type="radio" name="radiobeds" value="1">1 giường</label></p>
+                <p class="size13 text-center"><label class="radio-inline"><input type="radio" name="radiobeds" value="2">2 giường</label></p>
               </td>
             </tr>
 
@@ -386,3 +395,9 @@
         </div>
     </div>
 </div><!-- modal -->
+
+<script>
+$(document).ready(function(){
+  $('.tooltip-info').tooltip({title: '<div class="block-tooltip-info-price-rooms"><div class="tooltip-inner"><p>Giá phòng/đêm</p><p class="purple size14">Ocean Villa 2 phòng ngủ</p><p>Đêm 20/11: 760,000 VND</p><p>Đêm 21/11: 1,230,000 VND</p><p>Tổng 2 đêm: 1.990,000 VND</p></div></div>', html: true, placement: 'bottom', customClass: 'tooltip-custom'}); 
+});
+</script>
