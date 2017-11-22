@@ -120,7 +120,7 @@
                     <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);"><span class="hotelswishsign131">+</span></a>
                   </div>
                   <a href="#" data-source="" title="Honeymoon">
-                  <img class="img-responsive" src="assets/img/335887_honeymoon_at_the_beach--hospi.jpg">
+                    <img class="img-responsive" src="assets/img/335887_honeymoon_at_the_beach--hospi.jpg">
                   </a>
                 </div>
                 <div class="info">
@@ -170,9 +170,19 @@
               <td>
                 <div class="block-price">
                   <p class="purple size18"><b>8,822,000</b></p>
-                  <p class="size13 grey">Giá VND/2 đêm
-                    <span class="tooltip-info"><i class="fa fa-question-circle"></i></span>
-                  </p>
+                  <div class="size13 grey">
+                    Giá VND/2 đêm
+                    <div class="block-price-info" style="display: inline-block;">
+                      <i class="fa fa-question-circle"></i>
+                      <div class="block-info-price-rooms">
+                        <p>Giá phòng/đêm</p>
+                        <p class="purple size14">Ocean Villa 2 phòng ngủ</p>
+                        <p>Đêm 20/11: 760,000 VND</p>
+                        <p>Đêm 21/11: 1,230,000 VND</p>
+                        <p>Tổng 2 đêm: 1.990,000 VND</p>
+                      </div>
+                    </div>
+                  </div>
                   <p class="block-price-info">
                     <span>Bao gồm: Ăn sáng.</span>
                     <span>Phí dịch vụ 5%, VAT 10%</span>
@@ -395,9 +405,3 @@
         </div>
     </div>
 </div><!-- modal -->
-
-<script>
-$(document).ready(function(){
-  $('.tooltip-info').tooltip({title: '<div class="block-tooltip-info-price-rooms"><div class="tooltip-inner"><p>Giá phòng/đêm</p><p class="purple size14">Ocean Villa 2 phòng ngủ</p><p>Đêm 20/11: 760,000 VND</p><p>Đêm 21/11: 1,230,000 VND</p><p>Tổng 2 đêm: 1.990,000 VND</p></div></div>', html: true, placement: 'bottom', customClass: 'tooltip-custom'}); 
-});
-</script>
