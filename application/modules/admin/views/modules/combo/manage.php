@@ -119,12 +119,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <label class="col-md-2 control-label text-left">Giá combo</label>
-                        <div class="col-md-2">
-                            <input name="offerprice" type="text" placeholder="" class="form-control number" value="<?php echo @$offerdata[0]->offer_price; ?>" />
-                        </div>
-                    </div>
+                    
 
                     <div class="row form-group">
                         <label class="col-md-2 control-label text-left">Áp dụng</label>
@@ -143,7 +138,19 @@
                         </div>
                     </div>
                     
+                    <div class="row form-group">
+                        <label class="col-md-2 control-label text-left">Giá trọn gói</label>
+                        <div class="col-md-2">
+                            <input name="offerprice" type="text" placeholder="" class="form-control number" value="<?php echo @$offerdata[0]->offer_price; ?>" />
+                        </div>
+                        <label class="col-md-1 control-label text-left">Số khách</label>
+                        <div class="col-md-2">
 
+                            <input name="adults" type="number" placeholder="" class="form-control number" value="<?php echo @$offerdata[0]->adults; ?>" />
+                        </div>
+                        <label style="margin-top: 6px;"><input type="checkbox" name="show_price" value="1" <?php if(!isset($offerdata) || @$offerdata[0]->show_price == 1) { ?> checked="checked" <?php } ?>> Hiển thị giá</label>
+                    </div>
+                    
                 </div>
                 <div class="tab-pane wow fadeIn animated in" id="DK">
                     <div class="row form-group">
