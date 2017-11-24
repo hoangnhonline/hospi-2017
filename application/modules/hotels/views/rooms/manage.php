@@ -29,7 +29,7 @@
           if($.trim(response) != "done"){
           $(".output").html(response);
           }else{
-             window.location.href = "<?php echo base_url().$adminsegment.'/hotels/rooms/'?>";
+             window.location.href = "<?php echo base_url().$adminsegment.'/hotels/rooms/'?>" + '?room_hotel=' + $('#hotelid').val();
           }
 
           });
@@ -40,6 +40,7 @@
 
   })
 </script>
+<a href="<?php echo base_url(); ?>admin/hotels/rooms?room_hotel=<?php if(isset($room_hotel)){ echo $room_hotel;}else{ echo @$rdata[0]->room_hotel; } ?>" class="btn btn-default btn-sm">Quay lại</a>
 <h3 class="margin-top-0"><?php echo $headingText;?></h3>
 <div class="output"></div>
 <form class="form-horizontal room-form" method="POST" action="" onsubmit="return false;" >
@@ -62,10 +63,11 @@
           </div>
            <div class="row form-group">
             <label class="col-md-2 control-label text-left">Tên khách sạn</label>
-            <div class="col-md-6">
-              <select data-placeholder="Hotel Name" class="chosen-select" name="hotelid" >
+            <div class="col-md-6">             
+              <select data-placeholder="Hotel Name" class="chosen-select" name="hotelid" id="hotelid" >
+                <option value="">--</option>
                 <?php foreach($hotels as $h){ ?>
-                <option value="<?php echo $h->hotel_id;?>" <?php if($h->hotel_id == @$rdata[0]->room_hotel){echo "selected";} ?>> <?php echo $h->hotel_title;?> </option>
+                <option value="<?php echo $h->hotel_id;?>" <?php if($h->hotel_id == @$rdata[0]->room_hotel || (isset($room_hotel) && $room_hotel == $h->hotel_id)) { echo "selected"; } ?>> <?php echo $h->hotel_title;?> </option>
                 <?php } ?>
               </select>
             </div>

@@ -50,6 +50,7 @@
 
         <ul class="nav nav-tabs nav-justified" role="tablist">
             <li class="active"><a href="#GENERAL" data-toggle="tab">Thông tin chung</a></li>
+            <li><a href="#DK" data-toggle="tab">Điều kiện</a></li>
             <li class=""><a href="#TRANSLATE" data-toggle="tab">Dịch</a></li>
         </ul>
 
@@ -94,21 +95,30 @@
                             <input name="offertitle" type="text" placeholder="" class="form-control" value="<?php echo @$offerdata[0]->offer_title; ?>" />
                         </div>
                     </div>
-<!--
                     <div class="row form-group">
-                        <label class="col-md-2 control-label text-left">Điện thoại</label>
-                        <div class="col-md-4">
-                            <input name="offerphone" type="numbers" placeholder="" class="form-control" value="<?php echo @$offerdata[0]->offer_phone; ?>" />
+                        <label class="col-md-2 control-label text-left">Khách sạn</label>
+                        <div class="col-md-8">
+                            <select multiple class="chosen-multi-select" name="relatedhotels[]">
+                                <?php foreach ($hotels as $hotel) { ?>
+                                    <option value="<?php echo $hotel->hotel_id; ?>" <?php if (in_array($hotel->hotel_id, @$hrelated)) {
+                                    echo 'selected';
+                                } ?>  >
+    <?php echo $hotel->hotel_title; ?>
+                                    </option>
+<?php } ?>
+                            </select>
                         </div>
                     </div>
-
                     <div class="row form-group">
-                        <label class="col-md-2 control-label text-left">Email</label>
-                        <div class="col-md-4">
-                            <input name="offeremail" type="numbers" placeholder="" class="form-control" value="<?php echo @$offerdata[0]->offer_email; ?>" />
+                        <label class="col-md-2 control-label text-left">Số đêm nhỏ nhất</label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="min_nights">
+                                <?php for($i = 1; $i<=10; $i ++){ ?>
+                                <option  value="<?php echo $i; ?>" <?php echo @$offerdata[0]->min_nights == $i ? "selected" : ""; ?>><?php echo $i; ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
-                    -->
                     <div class="row form-group">
                         <label class="col-md-2 control-label text-left">Giá combo</label>
                         <div class="col-md-2">
@@ -132,23 +142,23 @@
                             <?php $this->ckeditor->editor('offerdesc', @$offerdata[0]->offer_desc, $ckconfig, 'offerdesc'); ?>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <label class="col-md-2 control-label text-left">Khách sạn</label>
-                        <div class="col-md-8">
-                            <select multiple class="chosen-multi-select" name="relatedhotels[]">
-                                <?php foreach ($hotels as $hotel) { ?>
-                                    <option value="<?php echo $hotel->hotel_id; ?>" <?php if (in_array($hotel->hotel_id, @$hrelated)) {
-                                    echo 'selected';
-                                } ?>  >
-    <?php echo $hotel->hotel_title; ?>
-                                    </option>
-<?php } ?>
-                            </select>
-                        </div>
-                    </div>
+                    
 
                 </div>
-
+                <div class="tab-pane wow fadeIn animated in" id="DK">
+                    <div class="row form-group">
+                        <label class="col-md-2 control-label text-left">Điều kiện sử dụng</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="use_condition" rows="10"><?php echo @$offerdata[0]->cancel_condition; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-md-2 control-label text-left">Điều kiện hủy</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="cancel_condition" rows="10"><?php echo @$offerdata[0]->cancel_condition; ?></textarea>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="tab-pane wow fadeIn animated in" id="TRANSLATE">
 
