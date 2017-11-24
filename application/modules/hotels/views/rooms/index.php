@@ -3,7 +3,7 @@
   <div class="panel-heading"><?php echo $header_title; ?></div>
   <div class="clearfix"></div>
   <?php if(@$addpermission && !empty($add_link)){ ?>
-   <a style="margin-left:15px;margin-top:10px;" href="<?php echo $add_link; ?>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Thêm mới</a>
+   <a style="margin-left:15px;margin-top:10px;" href="<?php echo $add_link; ?>?<?php if($params['room_hotel']) echo "room_hotel=".$params['room_hotel']; ?>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Thêm mới</a>
   <?php } ?>
   <div style="clear:both"></div>
    <div class="panel-body" style="padding-top:5px;">
@@ -35,8 +35,9 @@
         </div>
       </div>
      <div class="box">       
+      <form class="form-inline" id="searchForm" role="form" method="POST" action="<?php echo base_url() .'admin/hotels/rooms/updateorder'; ?>">
      <div class="btn-group pull-right">
-                <a style="margin-bottom: 5px;" href="javascript: multiDelfunc('<?php echo  base_url(); ?>admin/hotelajaxcalls/delMultipleRooms', 'checkboxcls')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Xóa mục đã chọn</a> 
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Cập nhật thứ tự</button><a style="margin-bottom: 5px;" href="javascript: multiDelfunc('<?php echo  base_url(); ?>admin/hotelajaxcalls/delMultipleRooms', 'checkboxcls')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Xóa mục đã chọn</a> 
                 </div>
                 <div class="clearfix"></div>
         <!-- /.box-header -->
@@ -53,7 +54,11 @@
               </th>
               <th style="width: 1%">
               	#
-              </th>                   
+              </th>    
+              <?php if($params['room_hotel']){ ?>      
+              <input type="hidden" name="room_hotel" value="<?php echo $params['room_hotel']; ?>">         
+              <th>Thứ tự</th>
+              <?php } ?>
               <th>Loại phòng</th>      
               <th>Khách sạn</th>                              
               <th>Người tạo</th>
@@ -73,7 +78,13 @@
               	<td>
               		<input type="checkbox" name="" class="checkboxcls" value="<?php echo $item->room_id; ?>">
               	</td>
-                <td class="text-center"><span class="order"><?php echo $i; ?></span></td>               
+                
+                <td class="text-center"><span class="order"><?php echo $i; ?></span></td> 
+                <?php if($params['room_hotel']){ ?>                  
+                <td>
+                  <input type="text" name="room_order[<?php echo $item->room_id; ?>]" class="order form-control" style="width:50px" value="<?php echo $item->room_order; ?>">
+                </td>
+                <?php } ?>              
                 <td>                  
                   <a href="<?php echo base_url() . 'admin/hotels/rooms/manage/'.$item->room_id; ?>" target="_self"><?php echo $item->room_title; ?></a>
                 
@@ -141,7 +152,8 @@
                 <?php echo $links ?>
             <?php } ?>
           </div>  
-        </div>        
+        </div>     
+        </form>   
       </div>
    </div>
  </div>

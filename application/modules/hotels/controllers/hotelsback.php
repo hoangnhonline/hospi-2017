@@ -487,10 +487,21 @@ class hotelsback extends MX_Controller
 			backError_404($this->data);
 		}
 		else {
+			
 			$this->load->model('admin/uploads_model');
+			if($args == "updateorder"){
+				$room_orderArr = $this->input->post('room_order');
+				if(!empty($room_orderArr)){
+					foreach($room_orderArr as $room_id => $room_order){
+						$this->rooms_model->update_room_order_new($room_id, $room_order, $this->data['userloggedin']);
+					}
+				}
+				redirect(base_url().'admin/hotels/rooms?room_hotel='.$this->input->post('room_hotel'));
+			}
 			if ($args == 'add') {
 				$this->data['submittype'] = "add";
 				$addroom = $this->input->post('submittype');
+
 				if (!empty($addroom)) {
 
 					// $this->form_validation->set_rules('basicprice', 'Room Basic Price', 'trim|required|xss_clean');
@@ -508,7 +519,7 @@ class hotelsback extends MX_Controller
 							$this->session->set_flashdata('flashmsgs', 'Thêm loại phòng thành công');
 						}
 						else {
-							$roomid = $this->rooms_model->add_room();
+							$roomid = $this->rooms_model->add_room($this->data['userloggedin']);
 							$this->rooms_model->add_translation($this->input->post('translated') , $roomid);
 							echo "done";
 							$this->session->set_flashdata('flashmsgs', 'Thêm loại phòng thành công');
@@ -516,6 +527,7 @@ class hotelsback extends MX_Controller
 					}
 				}
 				else {
+					$room_hotel = $this->input->get('room_hotel') ? $this->input->get('room_hotel') : 0;
 					$isadmin = $this->session->userdata('pt_logged_admin');
 					$userid = '';
 					if (empty($isadmin)) {
@@ -527,6 +539,7 @@ class hotelsback extends MX_Controller
 					$this->data['main_content'] = 'hotels/rooms/manage';
 					$this->data['page_title'] = 'Thêm loại phòng';
 					$this->data['headingText'] = 'Thêm loại phòng';
+					$this->data['room_hotel'] = $room_hotel;
 					$this->load->view('admin/template', $this->data);
 				}
 			}
@@ -543,7 +556,7 @@ class hotelsback extends MX_Controller
 						echo '<div class="alert alert-danger">' . validation_errors() . '</div><br />';
 					}
 					else {
-						$this->rooms_model->update_room($room_id);
+						$this->rooms_model->update_room($room_id, $this->data['userloggedin']);
 						$this->rooms_model->update_translation($this->input->post('translated') , $room_id);
 						$this->session->set_flashdata('flashmsgs', 'Room Updated Successfully');
 						echo "done";
@@ -1159,5 +1172,10 @@ class hotelsback extends MX_Controller
 	function reviews()
 	{
 		echo modules::run('admin/reviews/listings', 'hotels');
+	}
+
+	function updateorderroom(){		
+		echo "123";die;
+		
 	}
 }

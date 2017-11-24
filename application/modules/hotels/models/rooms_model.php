@@ -54,6 +54,7 @@ class Rooms_model extends CI_Model
     $this->db->join('pt_hotels', 'pt_hotels.hotel_id = pt_rooms.room_hotel');
     if ($limit) {
       $this->db->join('pt_accounts', 'pt_accounts.accounts_id = pt_rooms.created_user');
+      $this->db->order_by('pt_rooms.room_order');
       $this->db->limit($limit, $start);
       $query = $this->db->get('pt_rooms');
       $data = $query->result();
@@ -212,7 +213,7 @@ class Rooms_model extends CI_Model
 
   // add room data
 
-  function add_room()
+  function add_room($user_id)
   {
     $this->db->where('room_hotel', $this->input->post('hotelid'));
     $nums = $this->db->get('pt_rooms')->num_rows();
@@ -287,11 +288,11 @@ class Rooms_model extends CI_Model
       'room_quantity' => $quantity,
       'room_order' => $roomorder,
       'room_added_on' => time() ,
-      'created_user' => $this->data['userloggedin'],
-      'updated_user' => $this->data['userloggedin'],
+      'created_user' => $user_id,
+      'updated_user' => $user_id,
       'created_at' => date('Y-m-d H:i:s'),
       'updated_at' => date('Y-m-d H:i:s')
-    );
+    );    
     $this->db->insert('pt_rooms', $data);
     $roomid = $this->db->insert_id();
     if ($roomid > 0) {
@@ -307,7 +308,7 @@ class Rooms_model extends CI_Model
   }
   // update room data
 
-  function update_room($roomid)
+  function update_room($roomid, $user_id)
   {
     $ramts = $this->input->post('roomamenities');
     if (!empty($ramts)) {
@@ -347,7 +348,7 @@ class Rooms_model extends CI_Model
       'extra_bed_charges' => floatval($this->input->post('bedcharges')) ,
       'extra_bed' => intval($this->input->post('extrabeds')) ,
       'room_quantity' => $quantity,
-      'updated_user' => $this->data['userloggedin']
+      'updated_user' => $user_id
     );
     $this->db->where('room_id', $roomid);
     $this->db->update('pt_rooms', $data);
@@ -355,6 +356,16 @@ class Rooms_model extends CI_Model
     if ($oldquantity != $quantity) {
       $this->updateRoomAvailability($roomid, $quantity);
     }
+  }
+  function update_room_order_new($room_id, $room_order, $user_id)
+  {
+    
+    $data = array(
+      'room_order' => $room_order,
+      'updated_user' => $user_id
+    );
+    $this->db->where('room_id', $room_id);
+    $this->db->update('pt_rooms', $data);
   }
 
   function updateRoomType($roomid, $params)

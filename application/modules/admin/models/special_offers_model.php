@@ -105,6 +105,9 @@ class Special_offers_model extends CI_Model
 			'offer_status' => $this->input->post('offerstatus') ,
 			'offer_city' => $this->input->post('offercity') ,
 			'offer_type' => $this->input->post('offer_type') ,
+			'min_nights' => $this->input->post('min_nights') ,
+			'use_condition' => $this->input->post('use_condition') ,
+			'cancel_condition' => $this->input->post('cancel_condition') ,
 			'hotel_related' => $relatedhotels,
 			'offers_created_at' => time() ,
 		);
@@ -141,6 +144,9 @@ class Special_offers_model extends CI_Model
 			'offer_status' => $this->input->post('offerstatus') ,
 			'offer_city' => $this->input->post('offercity') ,
 			'offer_type' => $this->input->post('offer_type') ,
+			'min_nights' => $this->input->post('min_nights') ,
+			'use_condition' => $this->input->post('use_condition') ,
+			'cancel_condition' => $this->input->post('cancel_condition') ,
 			'hotel_related' => $relatedhotels
 		);
 		$this->db->where('offer_id', $id);
