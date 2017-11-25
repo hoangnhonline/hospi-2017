@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class breadcrumbcomponent {
  private $breadcrumbs = array();
- private $separator = '  /  ';
- private $start = '<div id="breadcrumb">';
- private $end = '</div>';
+ private $separator = '';
+ private $start = '<ol id="breadcrumb" class="breadcrumb">';
+ private $end = '</ol>';
 
  public function __construct($params = array()){
   if (count($params) > 0){
@@ -38,9 +38,9 @@ class breadcrumbcomponent {
     }
 
     if (end(array_keys($this->breadcrumbs)) == $key) {
-     $output .= '<span>' . $crumb['title'] . '</span>';   
+     $output .= '<li class="active"><span>' . $crumb['title'] . '</span></li>';   
     } else {
-     $output .= '<a href="' . $crumb['href'] . '">' . $crumb['title'] . '</a>';
+     $output .= '<li><a href="' . $crumb['href'] . '">' . $crumb['title'] . '</a></li>';
     }
    }
   
