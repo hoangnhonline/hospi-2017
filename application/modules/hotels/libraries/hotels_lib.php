@@ -1097,7 +1097,7 @@ class Hotels_lib
         $this->db->where('room_id', $id);
         $details = $this->db->get('pt_rooms')->result();
         //$this->roomtitle = $this->get_room_title($details[0]->room_title, $id);
-        $this->roomtitle = $this->getRoomType($details[0]->room_type);
+        $this->roomtitle = $details[0]->room_title;
         $this->roomdesc = $this->get_room_description($details[0]->room_desc, $id);
         $roomAmenities = explode(",", $details[0]->room_amenities);
 
@@ -1796,6 +1796,7 @@ class Hotels_lib
         return $result;
     }
 
+    
     //make a result object of Rooms Array
     function getRoomsResultObject($rooms, $checkin = null, $checkout = null)
     {
@@ -1814,35 +1815,11 @@ class Hotels_lib
 
         foreach ($rooms as $room) {
             $details = $this->room_short_details($room->id);
-            $extrabeds = $details[0]->extra_bed;
+            //var_dump("<pre>", $details);die;           
 
             $images = $this->roomImages($room->id, 4);
-            $roomprice = $this->ci->rooms_model->getRoomPrice($room->id, $checkin, $checkout);
-            $bookedRooms = pt_is_room_booked($room->id, $checkin, $checkout);
-            $checkAvail = ptRoomAvailability($room->id, $checkin, $checkout);
-            $chkArray = $checkAvail->dateByDate;
-            if ($checkAvail->isAvailable) {
-                if (!empty($chkArray)) {
+            $roomprice = $this->ci->rooms_model->getRoomPriceNew($room->id, $checkin, $checkout);
 
-                    if ($chkArray[0] > 0 && $chkArray[0] != $details[0]->room_quantity) {
-                        $availQuantity = $chkArray[0] - $bookedRooms;
-
-                    } else {
-
-                        $availQuantity = $details[0]->room_quantity - $bookedRooms;
-
-                    }
-
-                } else {
-
-                    $availQuantity = $details[0]->room_quantity - $bookedRooms;
-
-                }
-
-
-            } else {
-                $availQuantity = 0;
-            }
 
             $breakfast = $details[0]->breakfast;
 
@@ -1868,13 +1845,13 @@ class Hotels_lib
             //if($roomprice['maxAdults'] >= $this->adults && $roomprice['maxChild'] >= $this->children){
             $Roomresult[] = (object)array(
                 'id' => $room->id,
-                'title' => $this->roomtitle,
+                'title' => $details[0]->room_title,
                 'desc' => $this->roomdesc,
                 'maxAdults' => $details[0]->room_adults,
                 'maxChild' => $details[0]->room_children,
                 'breakfast' => $breakfast,
                 'onsale' => $onsale,
-                'maxQuantity' => $availQuantity,
+                'maxQuantity' => $details[0]->room_quantity,
                 'thumbnail' => PT_ROOMS_THUMBS . $details[0]->thumbnail_image,
                 'fullimage' => PT_ROOMS_IMAGES . $details[0]->thumbnail_image,
                 'Images' => $images,
@@ -1889,19 +1866,18 @@ class Hotels_lib
                 'currCode' => $curr->code,
                 'currSymbol' => $curr->symbol,
                 'Info' => $roomprice,
-                'extraBeds' => $extrabeds,
-                'extrabedCharges' => $bedcharges,
-                'honeymoon' => $details[0]->honey_moon,
-                'room_title' => $details[0]->room_title,
-                'hfrom' => $details[0]->honey_moon_from,
-                'hto' => $details[0]->honey_moon_to
+                'extraBeds' => $details[0]->extra_bed,
+                'extrabedCharges' => $bedcharges,             
+                'room_title' => $details[0]->room_title,             
+                'room_adults' => $details[0]->room_adults,
+                'room_children' => $details[0]->room_children,
+                'price' => $roomprice
             );
             // }
 
         }
         return $Roomresult;
     }
-
     //make a result object of Rooms Array
     function getBookResultObject($hotelid, $roomid, $roomscount, $extrabeds = 0, $checkin = null, $checkout = null, $ishoney = null)
     {

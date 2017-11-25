@@ -737,63 +737,284 @@ class Rooms_model extends CI_Model
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     $datefrom = databaseDate($this->input->post('fromdate'));
     $dateto = databaseDate($this->input->post('todate'));
+    $mon = floatval($this->replaceCommas($this->input->post('mon')));
+    $tue = floatval($this->replaceCommas($this->input->post('tue')));
+    $wed = floatval($this->replaceCommas($this->input->post('wed')));
+    $thu = floatval($this->replaceCommas($this->input->post('thu')));
+    $fri = floatval($this->replaceCommas($this->input->post('fri')));
+    $sat = floatval($this->replaceCommas($this->input->post('sat')));
+    $sun = floatval($this->replaceCommas($this->input->post('sun')));
+    $type = $this->input->post('type');
+    $bed_price = floatval($this->replaceCommas($this->input->post('bedcharges')));
     $data = array(
       'room_id' => $roomid,
       'date_from' => $datefrom,
       'date_to' => $dateto,
-      'type' => $this->input->post('type'),
+      'type' => $type,
       'type_apply' => $this->input->post('type_apply'),
       'adults' => intval($this->input->post('adult')) ,
       'children' => intval($this->input->post('child')) ,
-      'extra_bed_charge' => floatval($this->replaceCommas($this->input->post('bedcharges'))) ,
-      'mon' => floatval($this->replaceCommas($this->input->post('mon'))) ,
-      'tue' => floatval($this->replaceCommas($this->input->post('tue'))) ,
-      'wed' => floatval($this->replaceCommas($this->input->post('wed'))) ,
-      'thu' => floatval($this->replaceCommas($this->input->post('thu'))) ,
-      'fri' => floatval($this->replaceCommas($this->input->post('fri'))) ,
-      'sat' => floatval($this->replaceCommas($this->input->post('sat'))) ,
-      'sun' => floatval($this->replaceCommas($this->input->post('sun'))),
+      'extra_bed_charge' => $bed_price,
+      'mon' => $mon,
+      'tue' => $tue,
+      'wed' => $wed,
+      'thu' => $thu,
+      'fri' => $fri,
+      'sat' => $sat,
+      'sun' => $sun,
       'created_user' => $this->session->userdata('pt_logged_admin'),
       'updated_user' => $this->session->userdata('pt_logged_admin'),
       'created_at' => date('Y-m-d H:i:s'),
       'updated_at' => date('Y-m-d H:i:s')
     );
+    
+    
     $this->db->insert('pt_rooms_prices', $data);
+    //insert price detail
+    $this->insertPriceDetail($roomid, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $this->input->post('type_apply'), $bed_price);
     $this->session->set_flashdata('flashmsgs', "Thêm giá thành công.");
+  }
+  public function insertPriceDetail($room_id, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $type_apply,$bed_price){    
+    $arrDate = $this->createDateRangeArray($datefrom, $dateto);
+    foreach($arrDate as $date){
+      $thuOfDate = strtolower(date('D', strtotime($date)));
+       switch ($thuOfDate) {
+         case 'mon':
+           $price = $mon;
+           break;
+          case 'tue':
+           $price = $tue;
+           break;
+          case 'wed':
+           $price = $wed;
+           break;
+          case 'thu':
+           $price = $thu;
+           break;
+          case 'fri':
+           $price = $fri;
+           break;
+          case 'sat':
+           $price = $sat;
+           break;
+          case 'sun':
+           $price = $sun;
+           break;
+       }
+       $arrUpdate['room_id'] = $room_id;
+       $arrUpdate['date_use'] = $date;
+       if($type == 1){
+          $arrUpdate['price']  = $price;
+          $arrUpdate['bed_price']  = $bed_price;          
+       }elseif($type == 2){
+          $arrUpdate['sale']  = $price;
+       }elseif($type == 3){
+          $arrUpdate['extra']  = $price;
+       }
+       //check exist
+       $check = $this->db->where('room_id', $room_id)->where('date_use', $date)->get('pt_room_prices_detail')->result();
+       
+       if(empty($check)){
+          if($type == 1){
+            $arrUpdate['total'] = $price;
+            $arrUpdate['bed_total'] = $bed_price;
+          }
+          $this->db->insert('pt_room_prices_detail', $arrUpdate);
+
+       }else{
+          if ($type == 2) { // gia khuyen mai            
+            $price_total = $check[0]->total;
+            $price_current = $check[0]->price;
+            $bed_current = $check[0]->bed_price;
+            if($type_apply == 1){ // khuyen mai %
+              $sale = ($price_current*$price/100);
+              $bed_sale = $bed_current*$bed_price/100;
+            }else{
+              $sale = $price;
+              $bed_sale = $bed_price;
+            }            
+
+            $arrUpdate['sale'] = $sale;
+            $arrUpdate['bed_sale'] = $bed_sale;
+            $arrUpdate['total'] = $price_current - $sale + $check[0]->extra;
+            $arrUpdate['bed_total'] = $bed_current - $bed_sale + $check[0]->bed_extra;
+          }elseif ($type == 3) { // gia phu thu
+            $price_total = $check[0]->total;
+            $price_current = $check[0]->price;
+            $bed_current = $check[0]->bed_price;
+
+            if($type_apply == 1){ // phu thu %
+              $extra = ($price_current*$price/100);
+              $bed_extra = $bed_current*$bed_price/100;
+            }else{
+              $extra = $price;
+              $bed_extra = $bed_extra;
+            }            
+            $arrUpdate['extra'] = $extra;
+            $arrUpdate['bed_extra'] = $bed_extra;
+            $arrUpdate['total'] = $price_current + $extra - $check[0]->sale;
+            $arrUpdate['bed_total'] = $bed_current + $bed_extra - $check[0]->bed_sale;
+          }
+
+          $this->db->where('room_id', $room_id)->where('date_use', $date)->update('pt_room_prices_detail', $arrUpdate);
+       }       
+    }
+   
   }
   public function replaceCommas($number){
     return str_replace(",", "", $number);
-  }
+  }  
+  function createDateRangeArray($strDateFrom,$strDateTo)
+  {
+    // takes two dates formatted as YYYY-MM-DD and creates an
+    // inclusive array of the dates between the from and to dates.
 
+    // could test validity of dates here but I'm already doing
+    // that in the main script
+
+    $aryRange=array();
+
+    $iDateFrom=mktime(1,0,0,substr($strDateFrom,5,2),     substr($strDateFrom,8,2),substr($strDateFrom,0,4));
+    $iDateTo=mktime(1,0,0,substr($strDateTo,5,2),     substr($strDateTo,8,2),substr($strDateTo,0,4));
+
+    if ($iDateTo>=$iDateFrom)
+    {
+        array_push($aryRange,date('Y-m-d',$iDateFrom)); // first entry
+        while ($iDateFrom<$iDateTo)
+        {
+            $iDateFrom+=86400; // add 24 hours
+            array_push($aryRange,date('Y-m-d',$iDateFrom));
+        }
+    }
+    return $aryRange;
+}  
   function updateRoomPrices()
   {
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     $datefrom = databaseDate($this->input->post('fromdate'));
     $dateto = databaseDate($this->input->post('todate'));
+
+    $mon = floatval($this->replaceCommas($this->input->post('mon')));
+    $tue = floatval($this->replaceCommas($this->input->post('tue')));
+    $wed = floatval($this->replaceCommas($this->input->post('wed')));
+    $thu = floatval($this->replaceCommas($this->input->post('thu')));
+    $fri = floatval($this->replaceCommas($this->input->post('fri')));
+    $sat = floatval($this->replaceCommas($this->input->post('sat')));
+    $sun = floatval($this->replaceCommas($this->input->post('sun')));
+    $type = $this->input->post('type');
+    $room_id = $this->input->post('roomid');
+    $type_apply = $this->input->post('type_apply');
+    $bed_price = floatval($this->replaceCommas($this->input->post('bedcharges')));
     $data = array(
-      'room_id' => $this->input->post('roomid'),
+      'room_id' => $room_id,
       'date_from' => $datefrom,
       'type' => $this->input->post('type'),
-      'type_apply' => $this->input->post('type_apply'),
+      'type_apply' => $type_apply,
       'date_to' => $dateto,
       'adults' => intval($this->input->post('adult')) ,
       'children' => intval($this->input->post('child')) ,
-      'extra_bed_charge' => floatval($this->replaceCommas($this->input->post('bedcharges'))) ,
-      'mon' => floatval($this->replaceCommas($this->input->post('mon'))) ,
-      'tue' => floatval($this->replaceCommas($this->input->post('tue'))) ,
-      'wed' => floatval($this->replaceCommas($this->input->post('wed'))) ,
-      'thu' => floatval($this->replaceCommas($this->input->post('thu'))) ,
-      'fri' => floatval($this->replaceCommas($this->input->post('fri'))) ,
-      'sat' => floatval($this->replaceCommas($this->input->post('sat'))) ,
-      'sun' => floatval($this->replaceCommas($this->input->post('sun'))),      
+      'extra_bed_charge' =>  $bed_price,
+      'mon' => $mon ,
+      'tue' => $tue ,
+      'wed' => $wed ,
+      'thu' => $thu ,
+      'fri' => $fri ,
+      'sat' => $sat ,
+      'sun' => $sun ,      
       'updated_user' => $this->session->userdata('pt_logged_admin'),      
       'updated_at' => date('Y-m-d H:i:s')
     );
     $this->db->where('id', $this->input->post('price_id'));
     $this->db->update('pt_rooms_prices', $data);
+    //update price detail
+    $this->updatePriceDetail($room_id, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $type_apply, $bed_price);
+
     $this->session->set_flashdata('flashmsgs', "Cập nhật giá thành công.");
   }
+  public function updatePriceDetail($room_id, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $type_apply, $bed_price){    
+    $arrDate = $this->createDateRangeArray($datefrom, $dateto);
+    foreach($arrDate as $date){
+      $thuOfDate = strtolower(date('D', strtotime($date)));
+       switch ($thuOfDate) {
+         case 'mon':
+           $price = $mon;
+           break;
+          case 'tue':
+           $price = $tue;
+           break;
+          case 'wed':
+           $price = $wed;
+           break;
+          case 'thu':
+           $price = $thu;
+           break;
+          case 'fri':
+           $price = $fri;
+           break;
+          case 'sat':
+           $price = $sat;
+           break;
+          case 'sun':
+           $price = $sun;
+           break;
+       }
+       $arrUpdate['room_id'] = $room_id;
+       $arrUpdate['date_use'] = $date;
+       if($type == 1){
+          $arrUpdate['price']  = $price;  
+          $arrUpdate['bed_price']  = $bed_price;            
+       }elseif($type == 2){
+          $arrUpdate['sale']  = $price;
+       }elseif($type == 3){
+          $arrUpdate['extra']  = $price;
+       }
+       //check exist
+       $check = $this->db->where('room_id', $room_id)->where('date_use', $date)->get('pt_room_prices_detail')->result();
+       
+       if(empty($check)){
+          if($type == 1){
+            $arrUpdate['total'] = $price;
+            $arrUpdate['bed_total'] = $bed_price;
+          }          
+          $this->db->insert('pt_room_prices_detail', $arrUpdate);
 
+       }else{
+          $price_total = $check[0]->total;
+          $price_current = $check[0]->price;
+          $bed_current = $check[0]->bed_price;
+          if ($type == 2) { // gia khuyen mai            
+            if($type_apply == 1){ // khuyen mai %
+              $sale = ($price_current*$price/100);
+              $bed_sale = $bed_current*$bed_price/100;
+            }else{ //thanh tien
+              $sale = $price;
+              $bed_sale = $bed_price;
+            }            
+            $arrUpdate['sale'] = $sale;
+            $arrUpdate['bed_sale'] = $bed_sale;
+            $arrUpdate['total'] = $price_current - $sale + $check[0]->extra;
+            $arrUpdate['bed_total'] = $bed_current - $bed_sale + $check[0]->bed_extra;
+            
+            
+          }elseif ($type == 3) { // gia phu thu            
+            if($type_apply == 1){ // phu thu %
+              $extra = ($price_current*$price/100);
+              $bed_extra = $bed_current*$bed_price/100;
+            }else{ // thanh tien
+              $extra = $price;
+              $bed_extra = $bed_extra;
+            }            
+            $arrUpdate['extra'] = $extra;
+            $arrUpdate['bed_extra'] = $bed_extra;
+            $arrUpdate['total'] = $price_current + $extra - $check[0]->sale;
+            $arrUpdate['bed_total'] = $bed_current + $bed_extra - $check[0]->bed_sale;
+          }
+
+          $this->db->where('room_id', $room_id)->where('date_use', $date)->update('pt_room_prices_detail', $arrUpdate);
+       }       
+    }
+   
+  }
   // get Room advanced prices
 
   function getRoomPrices($roomid)
@@ -1046,7 +1267,24 @@ class Rooms_model extends CI_Model
 
     return $result;
   }
-
+  public function getRoomPriceNew($room_id, $checkin, $checkout){
+    $checkin = databaseDate($checkin);
+    $checkout = databaseDate($checkout);
+    $date_from = $checkin;
+    $date_to = $checkout;
+    $arrDate = $this->createDateRangeArray($date_from, $date_to);
+    $price_total = 0;
+    unset($arrDate[count($arrDate)-1]);
+    foreach($arrDate as $date_use){      
+      $priceTmp = $this->db->query("SELECT * FROM pt_room_prices_detail WHERE date_use = '".$date_use."' AND room_id = $room_id")->row(0);
+      if(!empty($priceTmp)){
+        $price_total+= $priceTmp->total;        
+      }
+      $priceDetail[$date_use] = $priceTmp;
+    }
+    return ['total' => $price_total, 'detail' => $priceDetail];
+    
+  }
   /**
    *  Convert to decimal number with leading zero
    *    @param $number
@@ -1055,5 +1293,17 @@ class Rooms_model extends CI_Model
   function ConvertToDecimal($number)
   {
     return (($number < 0) ? '-' : '') . ((abs($number) < 10) ? '0' : '') . abs($number);
+  }
+
+  public function updateAllPrice(){
+    $allprice = $this->db->query("SELECT * FROM pt_rooms_prices 
+     WHERE room_id IN ( '5679') ORDER BY type ASC ")->result();
+    //var_dump(count($allprice));die;
+    foreach($allprice as $row){      
+     $this->insertPriceDetail($row->room_id, $row->date_from, $row->date_to, $row->mon, $row->tue, $row->wed, $row->thu, $row->fri, $row->sat, $row->sun, $row->type, $row->type_apply, $row->extra_bed_charge);
+     var_dump($row->type);
+      echo $row->room_id;
+      echo "<hr>";
+    }
   }
 }

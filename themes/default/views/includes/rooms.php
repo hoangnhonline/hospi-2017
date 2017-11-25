@@ -73,7 +73,7 @@
                 <div class="col-xs-12 col-sm-2" style="margin-top: 10px;">
                     <label>&nbsp;</label>
                     <?php if (!empty($rooms)) { ?>
-                    <h5 class="text-left size16"><strong><i class="icon_set_1_icon-83"></i> <?php echo $modulelib->stay; ?> <?php echo trans('0122'); ?></strong> </h5>
+                    <h5 class="text-left size16"><strong><i class="icon_set_1_icon-83"></i> <?php echo $modulelib->stay; ?> đêm</strong> </h5>
                     <?php } ?>
                 </div>
                 <div class="col-sm-4 col-xs-12 go-right">
@@ -113,21 +113,26 @@
           </thead>
 
           <tbody>
+            <?php if (!empty($rooms)) { 
+              $i = 0;
+              ?>
+              <?php foreach ($rooms as $r) { 
+                $i++;               
+                ?>
             <tr>
               <td>
                 <div class="zoom-gallery">
-                  <div title="" data-toggle="tooltip" data-placement="left" id="131" data-module="hotels" class="wishlist wishlistcheck hotelswishtext131" data-original-title="Add to wishlist">
-                    <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);"><span class="hotelswishsign131">+</span></a>
+                  <div class="zoom-gallery<?php echo $r->id; ?>">
+                      <a href="<?php echo $r->fullimage; ?>" data-source="<?php echo $r->fullimage; ?>" title="<?php echo $r->title; ?>">
+                          <img class="img-responsive" src="<?php echo $r->thumbnail; ?>">
+                      </a>
                   </div>
-                  <a href="#" data-source="" title="Honeymoon">
-                    <img class="img-responsive" src="assets/img/335887_honeymoon_at_the_beach--hospi.jpg">
-                  </a>
                 </div>
                 <div class="info">
-                  <h4 class="RTL go-text-right"><b class="purple">Ocean Villa 2 phòng ngủ</b></h4>
+                  <h4 class="RTL go-text-right"><b class="purple"><?php echo $r->title; ?></b></h4>
                   <div class="block-people">
-                    <h5>Người lớn: <span>02</span> </h5>
-                    <h5>Trẻ em: <span>01</span></h5>
+                    <h5>Người lớn: <span><?php echo $r->room_adults; ?></span> </h5>
+                    <h5>Trẻ em: <span><?php echo $r->room_children; ?></span></h5>
                   </div>
                   <div class="block-view-detail">
                     <div class="visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
@@ -137,49 +142,42 @@
               </td>
               <td>
                 <div class="item-countroom">
-                  <h5 class="size12"><?php echo trans('0374'); ?></h5>
+                  <h5 class="size12">Số phòng</h5>
                   <select class="form-control" name="roomscount" >
-                    <option value="rooms1">01</option>
-                    <option value="rooms2">02</option>
-                    <option value="rooms3">03</option>
-                    <option value="rooms4">04</option>
-                    <option value="rooms5">05</option>
-                    <option value="rooms6">06</option>
-                    <option value="rooms7">07</option>
-                    <option value="rooms8">08</option>
-                    <option value="rooms9">09</option>
-                    <option value="rooms10">10</option>
+                    <option value="0">0</option>
+                    <?php for($k = 1; $k <= $r->maxQuantity; $k++){ ?>
+                      <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
+                      <?php } ?>
+                    </select>
                   </select>
                 </div>
                 <div class="item-countroom">
-                  <h5 class="size12"><?php echo trans('0428'); ?></h5>
+                  <h5 class="size12">Giường phụ</h5>
                   <select name="extrabeds" class="form-control">
-                    <option value="beds1">01</option>
-                    <option value="beds2">02</option>
-                    <option value="beds3">03</option>
-                    <option value="beds4">04</option>
-                    <option value="beds5">05</option>
-                    <option value="beds6">06</option>
-                    <option value="beds7">07</option>
-                    <option value="beds8">08</option>
-                    <option value="beds9">09</option>
-                    <option value="beds10">10</option>
+                  <option value="0">0</option>
+                  <?php for($j = 1; $j <= $r->extraBeds; $j++){ ?>
+                    <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
               </td>
               <td>
                 <div class="block-price">
-                  <p class="purple size18"><b>8,822,000</b></p>
+                  <p class="purple size18"><b><?php echo number_format($r->price['total']); ?></b></p>
                   <div class="size13 grey">
-                    Giá VND/2 đêm
+                    Giá VND/<?php echo $modulelib->stay; ?> đêm
                     <div class="block-price-info" style="display: inline-block;">
                       <i class="fa fa-question-circle"></i>
                       <div class="block-info-price-rooms">
                         <p>Giá phòng/đêm</p>
-                        <p class="purple size14">Ocean Villa 2 phòng ngủ</p>
-                        <p>Đêm 20/11: 760,000 VND</p>
-                        <p>Đêm 21/11: 1,230,000 VND</p>
-                        <p>Tổng 2 đêm: 1.990,000 VND</p>
+                        <p class="purple size14"><?php echo $r->title; ?></p>
+                        <?php 
+                        if(!empty($r->price['detail'])){                          
+                            foreach($r->price['detail'] as $priceDetail){
+                        ?>
+                        <p>Đêm <?php echo date('d/m', strtotime($priceDetail->date_use)); ?>: <?php echo number_format($priceDetail->total); ?> VND</p>
+                        <?php } } ?>
+                        <p>Tổng <?php echo $modulelib->stay; ?> đêm: <?php echo number_format($r->price['total']); ?> VND</p>
                       </div>
                     </div>
                   </div>
@@ -189,7 +187,8 @@
                   </p>
                 </div>
               </td>
-              <td rowspan="4">
+              <?php if($i == 1){ ?>
+              <td rowspan="<?php echo count($rooms); ?>">
                 <p><button style="margin-bottom:5px" type="submit" class="btn btn-action btn-block chk">Đặt phòng</button></p>
                 <p class="size13">Bạn vui lòng chọn số lượng phòng, Bạn có thể đặt một lúc nhiều loại phòng </p>
                 <hr>
@@ -197,123 +196,10 @@
                 <p class="size13 text-center"><label class="radio-inline"><input type="radio" name="radiobeds" value="1">1 giường</label></p>
                 <p class="size13 text-center"><label class="radio-inline"><input type="radio" name="radiobeds" value="2">2 giường</label></p>
               </td>
-            </tr>
-
-            <tr>
-              <td rowspan="2">
-                <div class="zoom-gallery">
-                  <a href="#" data-source="" title="Honeymoon">
-                  <img class="img-responsive" src="assets/img/335887_honeymoon_at_the_beach--hospi.jpg">
-                  </a>
-                </div>
-                <div class="info">
-                  <h4 class="RTL go-text-right"><b class="purple">Bungalow Ocean View</b></h4>
-                  <div class="block-people">
-                    <h5>Người lớn: <span>02</span> </h5>
-                    <h5>Trẻ em: <span>01</span></h5>
-                  </div>
-                  <div class="block-view-detail">
-                    <div class="visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
-                      <a data-toggle="modal" href="#details4997">Xem chi tiết</a>
-                    </div>
-                  </div>
-              </td>
-              <td>
-                <div class="item-countroom">
-                  <h5 class="size12"><?php echo trans('0374'); ?></h5>
-                  <select class="form-control" name="roomscount" >
-                    <option value="rooms1">01</option>
-                    <option value="rooms2">02</option>
-                    <option value="rooms3">03</option>
-                    <option value="rooms4">04</option>
-                    <option value="rooms5">05</option>
-                    <option value="rooms6">06</option>
-                    <option value="rooms7">07</option>
-                    <option value="rooms8">08</option>
-                    <option value="rooms9">09</option>
-                    <option value="rooms10">10</option>
-                  </select>
-                </div>
-                <div class="item-countroom">
-                  <h5 class="size12"><?php echo trans('0428'); ?></h5>
-                  <select name="extrabeds" class="form-control">
-                    <option value="beds1">01</option>
-                    <option value="beds2">02</option>
-                    <option value="beds3">03</option>
-                    <option value="beds4">04</option>
-                    <option value="beds5">05</option>
-                    <option value="beds6">06</option>
-                    <option value="beds7">07</option>
-                    <option value="beds8">08</option>
-                    <option value="beds9">09</option>
-                    <option value="beds10">10</option>
-                  </select>
-                </div>
-              </td>
-              <td>
-                <div class="block-price">
-                  <div class="sale">
-                    <img src="assets/img/star.png" alt="">
-                    <div class="hover">
-                      <p>Đang khuyến mãi</p>
-                      <p>Từ ngày: 31/05/2017</p>
-                      <p>Đến hết ngày: 30/09/2017</p>
-                    </div>
-                  </div>
-                  <p class="purple size18"><b>8,822,000</b></p>
-                  <p class="size13 grey">Giá VND/2 đêm</p>
-                  <p class="block-price-info">
-                    <span>Bao gồm: Ăn sáng.</span>
-                    <span>Phí dịch vụ 5%, VAT 10%</span>
-                  </p>
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="item-countroom">
-                  <h5 class="size12"><?php echo trans('0374'); ?></h5>
-                  <select class="form-control" name="roomscount" >
-                    <option value="rooms1">01</option>
-                    <option value="rooms2">02</option>
-                    <option value="rooms3">03</option>
-                    <option value="rooms4">04</option>
-                    <option value="rooms5">05</option>
-                    <option value="rooms6">06</option>
-                    <option value="rooms7">07</option>
-                    <option value="rooms8">08</option>
-                    <option value="rooms9">09</option>
-                    <option value="rooms10">10</option>
-                  </select>
-                </div>
-                <div class="item-countroom">
-                  <h5 class="size12"><?php echo trans('0428'); ?></h5>
-                  <select name="extrabeds" class="form-control">
-                    <option value="beds1">01</option>
-                    <option value="beds2">02</option>
-                    <option value="beds3">03</option>
-                    <option value="beds4">04</option>
-                    <option value="beds5">05</option>
-                    <option value="beds6">06</option>
-                    <option value="beds7">07</option>
-                    <option value="beds8">08</option>
-                    <option value="beds9">09</option>
-                    <option value="beds10">10</option>
-                  </select>
-                </div>
-              </td>
-              <td>
-                <div class="block-price">
-                  <p class="purple size18"><b>8,822,000</b></p>
-                  <p class="size13 grey">Giá VND/2 đêm</p>
-                  <p class="block-price-info">
-                    <span>Bao gồm: Ăn sáng.</span>
-                    <span>Phí dịch vụ 5%, VAT 10%</span>
-                  </p>
-                </div>
-              </td>
-            </tr>
+              <?php } ?>
+            </tr>    
+            <?php } ?>
+            <?php } ?>        
           </tbody>
         </table>
       </div>
