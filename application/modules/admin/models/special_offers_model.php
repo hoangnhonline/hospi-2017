@@ -36,7 +36,7 @@ class Special_offers_model extends CI_Model
 	// Search hotels from home page
 
 	function search($params, $limit = null, $start = null)
-	{
+	{		
 		$data = array();
 		foreach($params as $key => $value) {
 			if ($key == 'offer_title') {
@@ -107,12 +107,24 @@ class Special_offers_model extends CI_Model
 			'offer_type' => $this->input->post('offer_type') ,
 			'min_nights' => $this->input->post('min_nights') ,
 			'use_condition' => $this->input->post('use_condition') ,
+			'so_khach' => (int) $this->input->post('so_khach') ,
+			'show_price' => $this->input->post('show_price') == 1 ? 1 : 0 ,
+
 			'cancel_condition' => $this->input->post('cancel_condition') ,
 			'hotel_related' => $relatedhotels,
 			'offers_created_at' => time() ,
 		);
 		$this->db->insert('pt_special_offers', $data);
 		$offerid = $this->db->insert_id();
+		// hotel_offers
+		$relatedhotelsArr =  $this->input->post('relatedhotels');
+
+		if(!empty($relatedhotelsArr)){
+			foreach($relatedhotelsArr as $hotel_id){
+				$this->db->insert('hotel_offers', ['hotel_id' => $hotel_id, 'type' => $this->input->post('offer_type'), 'offer_id' => $offerid]);
+			}
+		}
+
 		$this->update_translation($this->input->post('translated') , $offerid);
 	}
 
@@ -129,7 +141,7 @@ class Special_offers_model extends CI_Model
 		else {
 			$isforever = 'forever';
 		}
-
+		
 		$relatedhotels = @implode(",", $this->input->post('relatedhotels'));
 		$data = array(
 			'offer_title' => $this->input->post('offertitle') ,
@@ -145,12 +157,23 @@ class Special_offers_model extends CI_Model
 			'offer_city' => $this->input->post('offercity') ,
 			'offer_type' => $this->input->post('offer_type') ,
 			'min_nights' => $this->input->post('min_nights') ,
+			'show_price' => $this->input->post('show_price') == 1 ? 1 : 0 ,
 			'use_condition' => $this->input->post('use_condition') ,
+			'so_khach' => (int) $this->input->post('so_khach') ,
 			'cancel_condition' => $this->input->post('cancel_condition') ,
 			'hotel_related' => $relatedhotels
 		);
 		$this->db->where('offer_id', $id);
 		$this->db->update('pt_special_offers', $data);
+
+		// hotel_offers
+		$relatedhotelsArr =  $this->input->post('relatedhotels');
+		$this->db->where('hotel_offers.offer_id', $id)->delete('hotel_offers');
+		if(!empty($relatedhotelsArr)){
+			foreach($relatedhotelsArr as $hotel_id){
+				$this->db->insert('hotel_offers', ['hotel_id' => $hotel_id, 'offer_id' => $id]);
+			}
+		}
 		$this->update_translation($this->input->post('translated') , $id);
 
 		//

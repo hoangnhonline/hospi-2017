@@ -40,6 +40,8 @@ class Combo extends MX_Controller
 		$this->load->model('special_offers_model');
 		$this->load->helper('settings');
 		$this->load->model('locations_model');
+		$this->load->model('hotel_offers_model');
+		
 		$this->load->library('ckeditor');
 		$this->data['ckconfig'] = array();
 		$this->data['ckconfig']['toolbar'] = array(

@@ -97,7 +97,7 @@
                     </div>
                     <div class="row form-group">
                         <label class="col-md-2 control-label text-left">Khách sạn</label>
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <select multiple class="chosen-multi-select" name="relatedhotels[]">
                                 <?php foreach ($hotels as $hotel) { ?>
                                     <option value="<?php echo $hotel->hotel_id; ?>" <?php if (in_array($hotel->hotel_id, @$hrelated)) {
@@ -146,10 +146,81 @@
                         <label class="col-md-1 control-label text-left">Số khách</label>
                         <div class="col-md-2">
 
-                            <input name="adults" type="number" placeholder="" class="form-control number" value="<?php echo @$offerdata[0]->adults; ?>" />
+                            <input name="so_khach" type="number" placeholder="" class="form-control number" value="<?php echo @$offerdata[0]->so_khach; ?>" />
                         </div>
                         <label style="margin-top: 6px;"><input type="checkbox" name="show_price" value="1" <?php if(!isset($offerdata) || @$offerdata[0]->show_price == 1) { ?> checked="checked" <?php } ?>> Hiển thị giá</label>
                     </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            
+                        </div>
+                        <div class="col-md-10">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">PHỤ THU</legend>
+                                <div class="row form-group">
+                                    
+                                    <div class="col-md-3">
+                                        <label>Loại phụ thu</label>
+                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Giá</label>
+                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
+                                    </div>                         
+                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
+                                </div>
+                                <div class="row form-group">
+                                    
+                                    <div class="col-md-3">
+                                        <label>Loại phụ thu</label>
+                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Giá</label>
+                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
+                                    </div>                         
+                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
+                                </div>
+                                <div class="row form-group">
+                                    
+                                    <div class="col-md-3">
+                                        <label>Loại phụ thu</label>
+                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Giá</label>
+                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
+                                    </div>                         
+                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
+                                </div>
+                                <div class="row form-group">
+                                    
+                                    <div class="col-md-3">
+                                        <label>Loại phụ thu</label>
+                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Giá</label>
+                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
+                                    </div>                         
+                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
+                                </div>
+                                <div class="row form-group">
+                                    
+                                    <div class="col-md-3">
+                                        <label>Loại phụ thu</label>
+                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Giá</label>
+                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
+                                    </div>                         
+                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    
                     
                 </div>
                 <div class="tab-pane wow fadeIn animated in" id="DK">
@@ -208,3 +279,19 @@
         </div>
     </div>
 </form>
+<style type="text/css">
+    fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+
+}
+</style>
