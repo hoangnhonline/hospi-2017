@@ -73,7 +73,7 @@
               	</td>
                 <td><span class="order"><?php echo $i; ?></span></td>                               
                 <td class="zoom_img">
-                  <!--<img class="img-thumbnail" width="120" src="<?php echo '../../'.PT_OFFERS_THUMBS_UPLOAD.$item->offer_thumb; ?>" alt="<?php echo $item->offer_title; ?>" title="<?php echo $item->offer_title; ?>" />-->
+                  <img class="img-thumbnail" width="120" src="<?php echo '../../'.PT_OFFERS_THUMBS_UPLOAD.$item->offer_thumb; ?>" alt="<?php echo $item->offer_title; ?>" title="<?php echo $item->offer_title; ?>" />
                 </td>
                 <td>                  
                   <a href="<?php echo base_url() . 'admin/hotels/manage/'.$item->offer_slug; ?>" target="_self"><?php echo $item->offer_title; ?></a>
