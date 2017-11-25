@@ -7,7 +7,7 @@
     <?php }
     ?>
   </div>
-  <div class="panel-body panel-collapse collapse" id="collapse2">
+  <div class="panel-body panel-collapse collapse <?php if(!empty($priceKmDetail)){ ?> in <?php } ?>" id="collapse2">
   <form action="" method="POST" >
     <div class="col-md-2">
         <div class="form-group">
