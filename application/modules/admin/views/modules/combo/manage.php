@@ -179,7 +179,8 @@
                                 </div>
                                 <?php } ?>
                                 <?php 
-                                for($i = 0; $i<= (5-count($phuthuArr)); $i++){
+                                $max = !empty($phuthuArr) ? 5 : 4;
+                                for($i = 0; $i<= ($max-count($phuthuArr)); $i++){
                                 ?>
                                 <div class="row form-group">
                                      <input type="hidden" name="phu_thu_id[]" value="">
