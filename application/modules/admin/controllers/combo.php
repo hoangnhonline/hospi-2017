@@ -235,6 +235,7 @@ class Combo extends MX_Controller
 			$this->data['main_content'] = 'modules/combo/manage';
 			$this->data['header_title'] = 'Quản lý combo';
 			$this->data['headingText'] = 'Thêm mới combo';
+			$this->data['phuthu'] = [];
 			$this->load->model('admin/locations_model');
 			$this->data['locations'] = $this->locations_model->getLocationsBackend();
 			$this->data['hotels'] = $this->locations_model->getRelatedhotels();
@@ -273,8 +274,10 @@ class Combo extends MX_Controller
 			$this->data['header_title'] = 'Quản lý combo';
 			$this->data['hrelated'] = explode(",", $this->data['offerdata'][0]->hotel_related);
 			$this->load->model('admin/locations_model');
+			$this->load->model('phuthucombo_model');
 			$this->data['locations'] = $this->locations_model->getLocationsBackend();
 			$this->data['hotels'] = $this->locations_model->getRelatedhotels();
+			$this->data['phuthu'] = $this->phuthucombo_model->search(['offer_id' => $this->data['offerdata'][0]->offer_id], 1000, 0);			
 			$this->load->view('template', $this->data);
 		}
 	}

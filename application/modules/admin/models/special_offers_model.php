@@ -124,7 +124,21 @@ class Special_offers_model extends CI_Model
 				$this->db->insert('hotel_offers', ['hotel_id' => $hotel_id, 'type' => $this->input->post('offer_type'), 'offer_id' => $offerid]);
 			}
 		}
-
+		//phu thu combo
+		if($this->input->post('offer_type') == 2){
+			$phuthuArr = $this->input->post('phu_thu');
+			$phuthugiaArr = $this->input->post('phu_thu_gia');
+			$phuthushowArr = $this->input->post('phu_thu_show');
+			if(!empty($phuthuArr)){
+				foreach($phuthuArr as $key => $loaiphuthu){
+					if($loaiphuthu != ""){
+						$phuthugia = isset($phuthugiaArr[$key]) ? $phuthugiaArr[$key] : 0;
+						$phuthushow = isset($phuthushowArr[$key]) ? 1 : 0;
+						$this->db->insert('phuthucombo', ['offer_id' => $offerid, 'name' => $loaiphuthu, 'price' => $phuthugia, 'show_price' => $phuthushow]);
+					}
+				}
+			}
+		}
 		$this->update_translation($this->input->post('translated') , $offerid);
 	}
 
@@ -174,6 +188,37 @@ class Special_offers_model extends CI_Model
 				$this->db->insert('hotel_offers', ['hotel_id' => $hotel_id, 'offer_id' => $id]);
 			}
 		}
+
+		//phu thu combo
+		if($this->input->post('offer_type') == 2){			
+			$phuthuArr = $this->input->post('phu_thu');
+			$phuthugiaArr = $this->input->post('phu_thu_gia');
+			$phuthushowArr = $this->input->post('phu_thu_show');
+
+			$phuthuidArr = $this->input->post('phu_thu_id');
+			if(!empty($phuthuArr)){
+				foreach($phuthuArr as $key => $loaiphuthu){
+					if($loaiphuthu != ""){
+						$phuthugia = isset($phuthugiaArr[$key]) ? $phuthugiaArr[$key] : 0;
+						$phuthushow = isset($phuthushowArr[$key]) ? $phuthushowArr[$key] : 0;
+						
+						if($phuthuidArr[$key] > 0){								
+							$this->db->where('phuthucombo.id', $phuthuidArr[$key]);
+							$this->db->update('phuthucombo', ['offer_id' => $id, 'name' => $loaiphuthu, 'price' => $phuthugia, 'show_price' => $phuthushow]);
+						}else{
+							$this->db->insert('phuthucombo', ['offer_id' => $id, 'name' => $loaiphuthu, 'price' => $phuthugia, 'show_price' => $phuthushow]);	
+						}
+						
+					}else{
+						if($phuthuidArr[$key] > 0){								
+							$this->db->where('phuthucombo.id', $phuthuidArr[$key]);
+							$this->db->delete('phuthucombo');
+						}
+					}
+				}
+			}
+		}
+		die;
 		$this->update_translation($this->input->post('translated') , $id);
 
 		//

@@ -154,11 +154,35 @@
                         <div class="col-md-2">
                             
                         </div>
+                        <?php 
+                        $phuthuArr = $phuthu;
+                        ?>
                         <div class="col-md-10">
                             <fieldset class="scheduler-border">
                                 <legend class="scheduler-border">PHỤ THU</legend>
+                                <?php 
+                                for($i = 0; $i < (count($phuthuArr)-1); $i++){
+                                ?>
                                 <div class="row form-group">
-                                    
+                                    <input type="hidden" name="phu_thu_id[]" value="<?php echo $phuthuArr[$i]->id; ?>">
+                                    <div class="col-md-3">
+                                        <label>Loại phụ thu</label>
+                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="<?php echo $phuthuArr[$i]->name; ?>" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Giá</label>
+                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="<?php echo $phuthuArr[$i]->price; ?>" />
+                                    </div>                         
+                                    <label style="margin-top: 30px;"><input type="checkbox" <?php echo $phuthuArr[$i]->show_price == 1 ? "checked" : ""; ?> value="1" class="phu_thu_show"> Hiển thị giá
+                                    <input type="hidden" class="value_show" value="<?php echo $phuthuArr[$i]->show_price == 1 ? "1" : "0"; ?>" name="phu_thu_show[]">
+                                    </label>
+                                </div>
+                                <?php } ?>
+                                <?php 
+                                for($i = 0; $i<= (5-count($phuthuArr)); $i++){
+                                ?>
+                                <div class="row form-group">
+                                     <input type="hidden" name="phu_thu_id[]" value="">
                                     <div class="col-md-3">
                                         <label>Loại phụ thu</label>
                                         <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
@@ -167,56 +191,11 @@
                                         <label>Giá</label>
                                         <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
                                     </div>                         
-                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
+                                    <label style="margin-top: 30px;"><input type="checkbox" class="phu_thu_show" value="1"> Hiển thị giá
+                                    <input type="hidden" class="value_show"  value="0" name="phu_thu_show[]">
+                                    </label>
                                 </div>
-                                <div class="row form-group">
-                                    
-                                    <div class="col-md-3">
-                                        <label>Loại phụ thu</label>
-                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Giá</label>
-                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
-                                    </div>                         
-                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
-                                </div>
-                                <div class="row form-group">
-                                    
-                                    <div class="col-md-3">
-                                        <label>Loại phụ thu</label>
-                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Giá</label>
-                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
-                                    </div>                         
-                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
-                                </div>
-                                <div class="row form-group">
-                                    
-                                    <div class="col-md-3">
-                                        <label>Loại phụ thu</label>
-                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Giá</label>
-                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
-                                    </div>                         
-                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
-                                </div>
-                                <div class="row form-group">
-                                    
-                                    <div class="col-md-3">
-                                        <label>Loại phụ thu</label>
-                                        <input name="phu_thu[]" type="text" placeholder="" class="form-control" value="" />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label>Giá</label>
-                                        <input name="phu_thu_gia[]" type="text" placeholder="" class="form-control number" value="" />
-                                    </div>                         
-                                    <label style="margin-top: 30px;"><input type="checkbox" name="phu_thu_show" value="1"> Hiển thị giá</label>
-                                </div>
+                                <?php } ?>                               
                             </fieldset>
                         </div>
                     </div>
@@ -295,3 +274,14 @@ legend.scheduler-border {
 
 }
 </style>
+<script type="text/javascript">
+    $(document).ready(function(){        
+        $('.phu_thu_show').on('ifChecked', function (event){        
+             $(this).parents('label').find('.value_show').val(1);   
+        });
+        $('.phu_thu_show').on('ifUnchecked', function (event) {
+           $(this).parents('label').find('.value_show').val(0);   
+        });        
+    });
+
+</script>
