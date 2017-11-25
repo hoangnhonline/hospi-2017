@@ -430,7 +430,7 @@ class Hotels_lib
         $this->db->where('room_hotel', $hotelid);
         $this->db->where('room_status', 'Yes');
         //$this->db->where('room_min_stay <=', $this->stay);
-        $this->db->order_by('room_id', 'desc');
+        $this->db->order_by('room_order', 'asc');
         $q = $this->db->get('pt_rooms');
         $data = $q->result();
         return $this->getRoomsResultObject($data, $checkin, $checkout);

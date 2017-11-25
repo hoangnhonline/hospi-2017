@@ -1296,14 +1296,14 @@ class Rooms_model extends CI_Model
   }
 
   public function updateAllPrice(){
+    set_time_limit(0);
     $allprice = $this->db->query("SELECT * FROM pt_rooms_prices 
-     WHERE room_id IN ( '5679') ORDER BY type ASC ")->result();
-    //var_dump(count($allprice));die;
+     ORDER BY type ASC ")->result();
+    $i = 0;
     foreach($allprice as $row){      
+      $i++;
      $this->insertPriceDetail($row->room_id, $row->date_from, $row->date_to, $row->mon, $row->tue, $row->wed, $row->thu, $row->fri, $row->sat, $row->sun, $row->type, $row->type_apply, $row->extra_bed_charge);
-     var_dump($row->type);
-      echo $row->room_id;
-      echo "<hr>";
+      echo $i."--".$row->room_id;      
     }
   }
 }
