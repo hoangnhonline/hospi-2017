@@ -1,5 +1,5 @@
 <div class="panel panel-default" id="p-main">
-  <div class="panel-heading">
+  <div class="panel-heading" data-toggle="collapse" href="#collapse1">
   <?php if(empty($priceMainDetail)){ ?>
   Thêm giá phòng
   <?php }else{ ?>
@@ -7,7 +7,7 @@
     <?php }
     ?>
   </div>
-  <div class="panel-body">
+  <div class="panel-body panel-collapse in" id="collapse1">
   <form action="" method="POST" >  
     <div class="col-md-3">
       <div class="form-group">
