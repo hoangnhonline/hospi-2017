@@ -404,6 +404,30 @@ img.fullwidth {
     color: #2E2E2E;
     font-family: "OpenSansBold", sans-serif;
 }
+
+/*Add news*/
+.mb0 {
+  margin-bottom: 0;
+}
+.w40 {
+  width: 40%;
+}
+.w45 {
+  width: 45%;
+}
+.w50 {
+  width: 50%;
+}
+.table.table-no-border > thead > tr > th,
+.table.table-no-border > tbody > tr > th,
+.table.table-no-border > tfoot > tr > th,
+.table.table-no-border > thead > tr > td,
+.table.table-no-border > tbody > tr > td,
+.table.table-no-border > tfoot > tr > td {
+  border: none;
+  padding: 0;
+}
+
 /*anchors*/
 
 a.dark {
