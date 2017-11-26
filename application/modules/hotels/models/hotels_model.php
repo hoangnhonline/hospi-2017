@@ -33,7 +33,9 @@ class Hotels_model extends CI_Model
         
         return $result;
     }
-    
+    public function getDetail($id){
+        return $detail = $this->db->where('hotel_id', $id)->get('pt_hotels')->row(0);
+    }
     
     // Get all hotels id and names only
     function all_hotels_names($id = null)

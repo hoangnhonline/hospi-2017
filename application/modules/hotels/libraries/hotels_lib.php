@@ -1878,8 +1878,9 @@ class Hotels_lib
         }
         return $Roomresult;
     }
+
     //make a result object of Rooms Array
-    function getBookResultObject($hotelid, $roomid, $roomscount, $extrabeds = 0, $checkin = null, $checkout = null, $ishoney = null)
+    function getBookResultObject($hotelid, $roomid, $roomscount, $extrabeds = 0, $checkin = null, $checkout = null)
     {
         if (empty($checkin)) {
             $checkin = $this->checkin;
@@ -1897,8 +1898,8 @@ class Hotels_lib
         $this->ci->load->model('hotels/rooms_model');
         //room details for booking page
         $details = $this->room_short_details($roomid);
-        $roomprice = $this->ci->rooms_model->getRoomPrice($roomid, $checkin, $checkout);
-        $perNight = $curr->convertPrice($roomprice['perNight']);
+        $roomprice = $this->ci->rooms_model->getRoomPrice($roomid, $checkin, $checkout);        
+     
 
         //hotel details for booking page
         $this->set_id($hotelid);
@@ -1907,10 +1908,8 @@ class Hotels_lib
         $extras = $this->hotelExtras();
         $extrabedcharges = $roomprice['extrabed'] * $extrabeds;
 
-        if ($ishoney == 1) {
-            $totalSum = (($roomprice['totalPrice'] / 2) * $roomscount) + $extrabedcharges;
-        } else
-            $totalSum = ($roomprice['totalPrice'] * $roomscount) + $extrabedcharges;
+        
+        $totalSum = ($roomprice['totalPrice'] * $roomscount) + $extrabedcharges;
 
         $this->setTax($totalSum);
         $this->setServicefee($totalSum);

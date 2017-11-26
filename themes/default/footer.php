@@ -205,5 +205,10 @@
 </div>
 <?php include 'scripts.php'; ?>
 <?php echo $app_settings[0]->google; ?>
+<style type="text/css">
+  .block-panel-info{
+    line-height: 25px;
+  }
+</style>
 </body>
 </html>
