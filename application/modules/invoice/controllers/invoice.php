@@ -221,15 +221,15 @@ $this->session->set_userdata('checkout_total', $this->data['invoice'][0]->bookin
 			$this->load->helper('invoice');
 
 			if ($this->input->is_ajax_request()){
-			if(!empty($_POST)){
+				//var_dump($_REQUEST);die;
 				$invoicdata = invoiceDetails($bookingid,$bookingref);
 				$this->load->model('admin/payments_model');
-				$gateway = $this->input->post('gateway');
+				$gateway = $this->input->get('gateway');				
 				echo $this->payments_model->getGatewayMsg($gateway,$invoicdata);
 
-			}
+			
 
-		}
+			}
 			
 		}
 

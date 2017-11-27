@@ -1,953 +1,288 @@
-<?php if($result == "success" && $appModule == "ean"){ ?>
-<!-- Start Result of Expedia booking for submit -->
-<style>
-  .btn-circle {
-  border-radius: 50%;
-  font-size: 54px;
-  padding: 10px 20px;
-  }
-</style>
-<div class="modal-dialog modal-lg" style="z-index: 10;">
-  <div class="modal-content">
-    <div class="modal-body">
-      <br><br>
-      <div class="center-block">aaaaaaaaaaa
-        <center>aaaaaaaaaaaaaa
-          <button class="btn btn-circle block-center btn-lg btn-success"><i class="fa fa-check"></i></button>
-          <h3 class="text-center"><?php echo trans('0409');?> <b class="text-success wow flash animted animated"><?php echo trans('0135');?></b></h3>
-          <p class="text-center"><?php echo $msg;?></p>
-          <p><?php echo trans('0540'); ?>: <?php echo $itineraryID; ?></p>
-          <p><?php echo trans('0539'); ?>: <?php echo $confirmationNumber; ?></p>
-          <?php if(!empty($nightlyRateTotal)){ ?>
-          <p><strong>Total Nightly Rate: <?php echo $currency." ".$nightlyRateTotal; ?></strong></p>
-          <?php } ?>
-          <?php if(!empty($SalesTax)){ ?>
-          <p><strong>Sales Tax: <?php echo $currency." ".$SalesTax; ?></strong></p>
-          <?php } ?>
-          <?php if(!empty($HotelOccupancyTax)){ ?>
-          <p>><strong>Hotel Occupancy Tax: <?php echo $currency." ".$HotelOccupancyTax; ?></strong></p>
-          <?php } ?>
-          <?php if(!empty($TaxAndServiceFee)){ ?>
-          <p><strong>Tax and Service Fee: <?php echo $currency." ".$TaxAndServiceFee; ?></strong></p>
-          <?php } ?>
-          <p><b>  <?php echo trans('0124');?> :</b> <?php echo $currency.$grandTotal;?> (<?php echo trans('0538'); ?>) </p>
-          <p><?php echo trans('0537'); ?> </p>
-          <?php if(!empty($checkInInstructions)){ ?>
-          <p><strong><?php echo trans('0458'); ?></strong> : <?php echo strip_tags($checkInInstructions); ?></p>
-          <?php } ?>
-          <?php if(!empty($nonRefundable)){ ?>
-          <p><strong><?php echo trans('0309'); ?></strong> : <?php echo $cancellationPolicy; ?></p>
-          <?php } ?>
-        </center>
-      </div>
-      <div class="clearfix"></div>
+<div class="block-breadcrumb">
+    <div class="container">
+        <?php echo $breadcrumb;?>
     </div>
-  </div>
 </div>
-<!-- End Result of Expedia booking for submit -->
-<?php  }else { ?>
-<div class="container">
-  <!-- Start Fail Result of Expedia booking for submit -->
-  <?php if($result == "fail" && $appModule == "ean"){ ?>
-  <div class="alert alert-danger wow bounce" role="alert">
-    <p><?php echo $msg;?></p>
-  </div>
-  <?php } ?>
-  <!-- End Fail Result of Expedia booking for submit -->
-  <div class="container mt25 offset-0">
-    <div class="loadinvoice">
-      <div class="acc_section">
-        <div class="col-md-8 offset-0 go-right" style="margin-bottom:50px;">
-          <div class="clearfix"></div>
-          <div class="">
-            <div class="result"></div>
-            <?php if(!empty($error)){ ?>
-            <h1 class="text-center strong"><?php echo trans('0432');?></h1>
-            <h3 class="text-center"><?php echo trans('0431');?></h3>
-            <?php }else{ ?>
-            <!-- Start Other Modules Booking left section -->
-            <?php if($appModule != "ean"){ ?>
-            <?php include $themeurl.'views/includes/booking/profile.php'; ?>
-            <!--<form id="bookingdetails" class="hidden-xs hidden-sm" action="" onsubmit="return false">-->
-            <form id="bookingdetails" action="" onsubmit="return false">
-              <?php if(!empty($module->extras)){ ?>
-              <div class="clearfix"></div>
-              <div class="panel panel-default">
-                <div class="panel-heading go-text-right"><?php echo trans('001');?> <?php echo trans('0156');?></div>
-                <script>
-                  //Incrementer
-                  $(function () {
-                    "use strict";
-                      $(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>');
-                      $(".button_inc").on("click", function () {
+<div class="container pagecontainer offset-0">
+    <div class="offer-page rightcontent col-md-12 offset-0">
+        <div class="itemscontainer offset-1">
+            <div class="page-info-user">
+                <form class="row block-panel-info">
+                    <div class="col-sm-8 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                Thông tin cá nhân
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group col-md-6">
+                                    <label class="title" for="">Họ tên khách <span class="requirement">*</span></label>
+                                    <input type="text" class="form-control" id="" placeholder="">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <br>
+                                    <div class="">
+                                        
+                                        <label class="checkbox-inline checkbox-style2">
+                                            <input type="checkbox" name=""> 
+                                            <span></span>
+                                            Đặt cho người khác
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="form-group col-md-6">
+                                    <label class="title" for="">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="" placeholder="">
+                                </div>
+                                <div class="form-group  col-md-6">
+                                    <label class="title" for="">Email*</label>
+                                    <input type="emai" class="form-control" id="" placeholder="">
+                                </div>
+                                   
+                                <div class="form-group col-md-12">
+                                    <p class="label-style">
+                                        <label class="checkbox-inline checkbox-style2">
+                                            <input type="checkbox" name="">
+                                            <span></span>
+                                            Bạn cần xuất hóa đơn
+                                        </label>
+                                    </p>
+                                    <p class="label-style">
+                                        <label class="checkbox-inline checkbox-style2">
+                                            <input type="checkbox" name="" checked="checked">
+                                            <span></span>
+                                            Bạn có yêu cầu khác
+                                        </label>
+                                    </p>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <textarea name="" value="" class="form-control" rowspan="10" placeholder="Nhập yêu cầu của bạn"></textarea>
+                                </div>
+                            </div>
+                        </div>
 
-                          var $button = $(this);
-                          var oldValue = $button.parent().find("input").val();
-
-                          if ($button.text() == "+") {
-                              var newVal = parseFloat(oldValue) + 1;
-                          } else {
-                              // Don't allow decrementing below zero
-                              if (oldValue > 1) {
-                                  var newVal = parseFloat(oldValue) - 1;
-                              } else {
-                                  newVal = 1;
-                              }
-                          }
-                          $button.parent().find("input").val(newVal);
-                      });
-                  });
-
-                </script>
-                <!-- Carousel -->
-
-                <table class="table table-striped cart-list add_bottom_30">
-                  <thead>
-                    <tr>
-                      <th><?php echo trans('0376');?></th>
-                      <th><?php echo trans('077');?></th>
-                      <th><?php echo trans('070');?></th>
-                      <th class="text-center"><?php echo trans('0399');?></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php foreach($module->extras as $extra){ ?>
-                    <?php include $themeurl.'views/includes/booking/extras.php'; ?>
-                    <?php } ?>
-                  </tbody>
-                </table>
-              </div>
-              <!--End step -->
-              <?php } ?>
-              <script type="text/javascript">
-                $(function(){
-                $('.popz').popover({ trigger: "hover" });
-                });
-              </script>
-              <!-- Complete This booking button only starting -->
-              <div class="panel panel-default btn_section" style="display:none;">
-                <div class="panel-body">
-                  <center>
-                </div>
-              </div>
-              <!-- End Complete This booking button only -->
-              <input type="hidden" id="itemid" name="itemid" value="<?php echo $module->id;?>" />
-              <input type="hidden" name="checkout" value="<?php echo $module->checkout;?>" />
-              <input type="hidden" name="adults" value="<?php echo $module->adults;?>" />
-              <input type="hidden" id="couponid" name="couponid" value="" />
-              <input type="hidden" id="btype" name="btype" value="<?php echo $appModule;?>" />
-              <?php if($appModule == "hotels"){ ?>
-              <input type="hidden" name="subitemid" value="<?php echo $room->id;?>" />
-              <input type="hidden" name="roomscount" value="<?php echo $room->roomscount;?>" />
-              <input type="hidden" name="bedscount" value="<?php echo $room->extraBedsCount;?>" />
-              <input type="hidden" name="checkin" value="<?php echo $module->checkin;?>" />
-              <?php if(isset($_GET['honeymoon'])) { ?>
-                <input type="hidden" name="honeymoon" value="<?php echo $_GET['honeymoon']; ?>" />
-              <?php } ?>
-              <?php } ?>
-              <?php if($appModule == "tours"){ ?>
-              <input type="hidden" name="subitemid" value="<?php echo $module->id;?>" />
-              <input type="hidden" name="children" value="<?php echo $module->children;?>" />
-              <input type="hidden" name="checkin" value="<?php echo $module->date;?>" />
-              <input type="hidden" name="infant" value="<?php echo $module->infants;?>" />
-              <?php } ?>
-              <?php if($appModule == "cars"){ ?>
-              <input type="hidden" name="pickuplocation" value="<?php echo $module->pickupLocation;?>" />
-              <input type="hidden" name="dropofflocation" value="<?php echo $module->dropoffLocation;?>" />
-              <input type="hidden" name="pickupDate" value="<?php echo $module->pickupDate;?>" />
-              <input type="hidden" name="pickupTime" value="<?php echo $module->pickupTime;?>" />
-              <input type="hidden" name="dropoffDate" value="<?php echo $module->dropoffDate;?>" />
-              <input type="hidden" name="dropoffTime" value="<?php echo $module->dropoffTime;?>" />
-              <input type="hidden" name="totalDays" value="<?php echo $module->totalDays;?>" />
-              <?php } ?>
-              <?php  include $themeurl.'views/coupon.php';  ?>
-
-            <div class="clearfix"></div>
-            <!-- Start Tour Travellers data fields -->
-            <?php if($appModule == "tours"){ ?>
-            <div class="panel panel-default">
-              <div class="panel-heading"><?php echo trans('0521');?></div>
-              <div class="panel-body">
-                <div class="form-horizontal">
-                  <?php for($i = 1; $i <= $totalGuests;$i++){ ?>
-                  <div class="form-group">
-                    <div class="col-md-4">
-                      <label><?php echo trans('0522');?> <?php echo $i;?> <?php echo trans('0350');?></label>
-                      <input type="" name="passport[<?php echo $i;?>][name]" class="form-control" placeholder="Name"/>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                Thông tin chuyển khoản
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    Để thuận tiện cho việc thanh toán khách vui lòng chọn 1 trong những hình thức thanh toán dưới đây
+                                </div>
+                                <ul class="list-inline form-group">
+                                    <li class="label-style">
+                                        <label class="checkbox-inline checkbox-style3">
+                                            <input type="checkbox" value="banktransfer" name="" class="payment_method">
+                                            <span></span>
+                                            <strong>Chuyển khoản ngân hàng</strong>
+                                        </label>
+                                    </li>
+                                    <li class="label-style">
+                                        <label class="checkbox-inline checkbox-style3">
+                                            <input type="checkbox" value="cod" name="" class="payment_method">
+                                            <span></span>
+                                            <strong>Thanh toán tại Vp HOSPI</strong>
+                                        </label>
+                                    </li>
+                                    <li class="label-style">
+                                        <label class="checkbox-inline checkbox-style3">
+                                            <input type="checkbox" value="payatoffice" name="" class="payment_method">
+                                            <span></span>
+                                            <strong>Thanh toán tại nhà</strong>
+                                        </label>
+                                    </li>
+                                </ul>
+                                <div id="response">
+                                  
+                                </div>
+                                <p>Quý khách vui lòng chọn ngân hàng</p>
+                                <ul class="form-group no-style">
+                                    <li>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="bank" value="1"> Ngân hàng Quân Đội
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="bank" value="2"> Ngân hàng Đông Á
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="bank" value="3"> Ngân hàng Vietin Bank
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="bank" value="4"> Agribank
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="bank" value="5"> Ngân hàng VCB
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="bank" value="5"> Ngân hàng HSBC
+                                        </label>
+                                    </li>
+                                </ul>
+                                <ul class="no-style bank-account">
+                                    <li>
+                                        <strong>Ngân Hàng:</strong>
+                                        <span>Ngân Hàng Quân Đội (MBBank)</span>
+                                    </li>
+                                    <li>
+                                        <strong>Chi Nhánh:</strong>
+                                        <span>Bến Thành, Tp. Hồ Chí Minh</span>
+                                    </li>
+                                    <li>
+                                        <strong>Tên Tài Khoản:</strong>
+                                        <span>VÕ ĐÌNH CHÍ</span>
+                                    </li>
+                                    <li>
+                                        <strong>Số Tài Khoản:</strong>
+                                        <span>1460103608001</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                      <label><?php echo trans('0522');?> <?php echo $i;?> <?php echo trans('0523');?></label>
-                      <input type="" name="passport[<?php echo $i;?>][passportnumber]" class="form-control" placeholder="Passport"/>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center">
+                                Thông tin combo
+                            </div>
+                            <div class="panel-body">
+                                <p><strong>Combo 3N2Đ cho 2 khách tại Imperial Vũng Tàu</strong></p>
+                                <dl class="cb-img-name">
+                                    <dt>
+                                        <img src="assets/img/cb01.png" alt="">
+                                    </dt>
+                                    <dd>
+                                        <h1>SIX SENSES CÔN ĐẢO</h1>
+                                        <div class="clearfix">
+                                            <span class="go-right RTL"><i style="margin-left:-5px" class="icon-location-6"></i> <small class="adddress">Novotel Phu Quoc Resort, Phu Quoc, Vietnam</small></span>
+                                        </div>
+                                        <div class="clearfix">
+                                            <small class="go-right"><i class="star text-warning fa fa-star voted"></i><i class="star text-warning fa fa-star voted"></i><i class="star text-warning fa fa-star voted"></i><i class="star text-warning fa fa-star voted"></i><i class="star text-warning fa fa-star voted"></i></small>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <table class="table table-no-border mb0">
+                                    <tr>
+                                        <td>
+                                            Ngày đi:
+                                            <strong class="purple">10/10/2017</strong>
+                                        </td>
+                                        <td>
+                                            Ngày về:
+                                            <strong class="purple">10/10/2017</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            Số lượng:
+                                            <strong class="purple">01 Combo</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            Đã bao gồm phụ thu
+                                            <strong class="purple">01</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <strong class="purple">Trẻ em (6-8 tuổi) - Số lượng:</strong>
+                                            <strong class="purple">01</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="box_body">
+                                <div class="order-items">
+                                    <div><strong>Giá trọn gói:</strong> 6,449,000 x 01 = 6,449,000 VND</div>
+                                    <div><strong>Trẻ em</strong> (6-8 tuổi): 300,000 x 01 = 1,010,000 VND</div>
+                                </div>
+                                <ul class="order-summary">
+                                    <li>
+                                        <span class="k">Thành tiền:</span>
+                                        <strong class="v">7,459,000 VND</strong>
+                                    </li>
+                                    <li>
+                                        <span class="k">Chi phí khác:</span>
+                                        <span class="v">0 VND</span>
+                                    </li>
+                                    <li>
+                                        <span class="k">Phí VAT:</span>
+                                        <span class="v">0 VND</span>
+                                    </li>
+                                    <li>
+                                        <span class="k">Phí dịch vụ:</span>
+                                        <span class="v">0 VND</span>
+                                    </li>
+                                    <li>
+                                        <strong class="k">Thanh toán</strong>
+                                        <strong class="v">7,459,000 VND</strong>
+                                    </li>
+                                    <li style="border: none;">
+                                        <strong class="clearfix" style="margin-bottom: 3px; display: block;">Nhập mã giảm giá</strong>
+                                        <div class="k">
+                                            <input type="input" name="" class="form-control" placeholder="HP2017">
+                                            <i style="color: #999999; display:block; font-size: 12px; margin-top: 3px;">Mã: HP2017 được giảm giá: 360,000đ </i>
+                                        </div>
+                                        <div class="v">
+                                            <button style="margin-left:0; margin-bottom: 0; padding: 5px 16px;" type="submit" class="btn btn-action btn-block chk">ÁP DỤNG</button>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </li>
+                                    <li style="border: none;">
+                                        <span class="k">Giảm giá: </span>
+                                        <span class="v purple">360,000 VND</span>
+                                    </li>
+                                    <li style="border: none;">
+                                        <strong class="k">
+                                            Tổng thanh toán
+                                            <span style="color: #999999; display:block; font-size: 12px;">(Giá đã bao gồm VAT và phí dịch vụ)</span>
+                                        </strong>
+                                        <strong class="v purple">360,000 VND</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="box_body">
+                                <div style="padding: 10px;">
+                                    Điều kiện hủy
+                                    <div class="block-question-info" style="display: inline-block;">
+                                        <i class="fa fa-question-circle"></i>
+                                        <div class="block-info">
+                                            <p>Nếu bạn chưa xác định được ngày đi. Bạn có thể mua trước đi sau ....</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-center" style="margin-bottom:10px">
+                            Tôi đa đọc và chấp nhận điều kiện, chính sách khách sạn,<br><a class="text-link" href="#" title="chính sách bảo mật" target="_blank">Điều khoản sử dụng</a> và <a class="text-link" href="#" title="chính sách bảo mật" target="_blank">chính sách bảo mật</a> của HOSPI
+                        </p>
+                        <p class="text-center">
+                            <button type="submit" class="btn btn-action2">Hoàn Thành</button>
+                        </p>
                     </div>
-                    <div class="col-md-2">
-                      <label><?php echo trans('0524');?></label>
-                      <input type="" name="passport[<?php echo $i;?>][age]" class="form-control" placeholder="Age"/>
-                    </div>
-                  </div>
-                  <hr>
-                  <?php } ?>
-                </div>
-              </div>
+                </form>
             </div>
-            <?php } ?>
-            <!-- End Tour Travellers data fields -->
-
-            <div class="panel panel-default">
-              <div class="panel-heading no-padding"><div class="hospi-heading"><?php echo trans('0602');?></div></div>
-              <div class="panel-body">
-
-                    <p class="opensans smalltext"><?php echo trans('0617');?></p>
-                    <br>
-
-                    <nav id="tab" class="segmented btn-group checkout-group-tab">
-                        <?php foreach ($paymentGateways as $pay) { if($pay['name'] != "payonarrival"){ ?>
-                        <input class="opensans checkout-tab nexttab <?php if($pay['name']=="banktransfer") echo "active"; ?>" type="radio" name="checkout-type" value="<?php echo $pay['name']; ?>" id="<?php echo $pay['name']; ?>" <?php if($pay['name']=="banktransfer") echo "checked"; ?>>
-                        <label for="<?php echo $pay['name']; ?>" class="<?php echo $pay['name']; ?> border-tab  ">
-                        <?php echo $pay['gatewayValues'][$pay['name']]['name']; ?></label>
-                        <?php } } ?>
-
-                      </nav>
-
-
-			<div id="tab-content" class="tab-content checkout-group-content opensans">
-                           <div id="response"><?php echo trans('0684');?></div>
-
-
-			</div>
-                  </div>
-              </div>
-            <div class="clearfix"></div>
-            <hr>
-            </form>
-
-            <?php /*if(!empty($module->policy)){ ?>
-            <br>
-            <div class="alert alert-info">
-              <strong class="RTL go-right"><?php echo trans('045');?></strong><br>
-              <p class="RTL" style="font-size:12px"><?php echo $module->policy;?></p>
-            </div>
-            <?php }*/ ?>
-
-
-            <p class="RTL"><?php echo trans('0416');?></p>
-            <div class="form-group">
-
-              <button type="submit" class="btn btn-action btn-lg btn-block completebook" style="font-size:18px" name="<?php if(empty($usersession)){ echo "guest";}else{ echo "logged"; } ?>"  onclick="return completebook('<?php echo base_url();?>','<?php echo trans('0159')?>');"><?php echo trans('0306');?></button>
-            </div>
-            <!-- End Other Modules Booking left section -->
-            <?php }else{ if($nonRefundable){ ?>
-            <div class="alert alert-danger"> This rate is non-refundable and cannot be changed or cancelled - if you do choose to change or cancel this booking you will not be refunded any of the payment. </div>
-            <?php } ?>
-            <!-- Start Expedia Booking Form -->
-
-            <div class="panel panel-default">
-              <div class="panel-heading hospi-heading"><?php echo trans('088');?></div>
-              <div class="panel-body">
-
-            <form role="form" action="" method="POST">
-              <div class="step">
-                  <div class="col-md-6  go-right">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('0171');?></label>
-                      <input class="form-control form" id="card-holder-firstname" type="text" placeholder="<?php echo trans('0171');?>" name="firstName"  value="<?php echo @@$profile[0]->ai_first_name?>">
-                    </div>
-                  </div>
-                  <div class="col-md-6  go-left">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('0172');?></label>
-                      <input class="form-control form" id="card-holder-lastname" type="text" placeholder="<?php echo trans('0172');?>" name="lastName"  value="<?php echo @$profile[0]->ai_last_name?>">
-                    </div>
-                  </div>
-                  <div class="col-md-6 go-right">
-                    <div class="form-group ">
-                      <label  class="required  go-right"><?php echo trans('094');?></label>
-                      <input class="form-control form" id="card-holder-email" type="text" placeholder="<?php echo trans('094');?>" name="email"  value="<?php echo @$profile[0]->accounts_email; ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-6 go-right">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('0173');?></label>
-                      <input class="form-control form" id="card-holder-phone" type="text" placeholder="<?php echo trans('0414');?>" name="phone"  value="<?php echo @$profile[0]->ai_mobile; ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-6  go-right">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('0105');?></label>
-                      <select data-placeholder="Select" id="country" name="country" class="form-control">
-                        <option value=""> <?php echo trans('0158');?> <?php echo trans('0105');?> </option>
-                        <?php foreach($allcountries as $c){ ?>
-                        <option value="<?php echo $c->iso2;?>" <?php makeSelected($c->iso2, @$profile[0]->ai_country); ?> ><?php echo $c->short_name;?></option>
-                        <?php }  ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6  go-left">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('0101');?></label>
-                      <input id="card-holder-state" class="form-control form" type="text" placeholder="<?php echo trans('0101');?>" name="province"  value="<?php if(!empty($profile[0]->ai_state)){ echo @$profile[0]->ai_state; } ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-6 go-right">
-                    <div class="form-group ">
-                      <label  class="required  go-right"><?php echo trans('0100');?></label>
-                      <input id="card-holder-city" class="form-control form" type="text" placeholder="<?php echo trans('0100');?>" name="city"  value="<?php echo @$profile[0]->ai_mobile; ?>">
-                    </div>
-                  </div>
-                  <div class="col-md-6 go-left">
-                    <div class="form-group">
-                      <label  class="required go-right"><?php echo trans('0103');?></label>
-                      <input id="card-holder-postalcode" class="form-control form" type="text" placeholder="<?php echo trans('0104');?>" name="postalcode"  value="<?php if(!empty($profile[0]->ai_postal_code)){ echo @$profile[0]->ai_postal_code; } ?>">
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="col-md-12  go-right">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('098');?></label>
-                      <textarea class="form-control form" placeholder="<?php echo trans('098');?>" rows="4"  name="address"><?php echo @$profile[0]->ai_address_1; ?></textarea>
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-              </div>
-              <!--End step -->
-              <script type="text/javascript">
-                $(function(){
-                $('.popz').popover({ trigger: "hover" });
-                });
-              </script>
-              <!-- Complete This booking button only starting -->
-              <div class="panel panel-default btn_section" style="display:none;">
-                <div class="panel-body">
-                  <center>
-                </div>
-              </div>
-              <!-- End Complete This booking button only -->
-              <input type="hidden" name="pay" value="1" />
-              <input type="hidden" name="adults" value="<?php echo $_GET['adults'];?>" />
-              <input type="hidden" name="sessionid" value="<?php echo $_GET['sessionid']; ?>" />
-              <input type="hidden" name="hotel" value="<?php echo $_GET['hotel']; ?>" />
-              <input type="hidden" name="hotelname" value="<?php echo $HotelSummary['name'];?>" />
-              <input type="hidden" name="hotelstars" value="<?php echo $hotelStars;?>" />
-              <input type="hidden" name="location" value="<?php echo $HotelSummary['city'];?>" />
-              <input type="hidden" name="thumbnail" value="<?php echo $HotelImages['HotelImage'][0]['url']; ?>" />
-              <input type="hidden" name="roomname" value="<?php echo $roomname; ?>" />
-              <input type="hidden" name="roomtotal" value="<?php echo $roomtotal; ?>" />
-              <input type="hidden" name="checkin" value="<?php echo $_GET['checkin']; ?>" />
-              <input type="hidden" name="checkout" value="<?php echo $_GET['checkout']; ?>" />
-              <input type="hidden" name="roomtype" value="<?php echo $_GET['roomtype']; ?>" />
-              <input type="hidden" name="ratecode" value="<?php echo $_GET['ratecode']; ?>" />
-              <input type="hidden" name="currency" value="<?php echo $currency; ?>" />
-              <input type="hidden" name="affiliateConfirmationId" value="<?php echo $eanlib->cid.$affiliateConfirmationId; ?>" />
-              <input type="hidden" name="total" value="<?php echo $total; ?>" />
-              <input type="hidden" name="tax" value="<?php echo $tax; ?>" />
-              <input type="hidden" name="nights" value="<?php echo $nights; ?>" />
-
-              <div class="clearfix"></div>
-              <div class="panel">
-                <div class="col-md-6  go-right">
-                  <div class="form-group ">
-                    <label  class="required go-right"><?php echo trans('0330');?></label>
-                    <select class="form-control" name="cardtype" id="cardtype">
-                      <option value="">Select Card</option>
-                      <?php foreach($payment as $pay){ ?>
-                      <option value="<?php echo $pay['code'];?>"> <?php echo $pay['name'];?> </option>
-                      <?php  } ?>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6  go-left">
-                  <div class="form-group ">
-                    <label  class="required go-right"><?php echo trans('0316');?></label>
-                    <input type="text" class="form-control" name="cardno" id="card-number" pattern=".{12,}" required title="12 characters minimum" placeholder="Credit Card Number" onkeypress="return isNumeric(event)" value="<?php echo set_value('cardno');?>" >
-                  </div>
-                </div>
-                <div class="col-md-3 go-right">
-                  <div class="form-group ">
-                    <label  class="required  go-right"><?php echo trans('0329');?></label>
-                    <select class="form-control" name="expMonth" id="expiry-month">
-                      <option value="01"><?php echo trans('0317');?> (01)</option>
-                      <option value="02"><?php echo trans('0318');?> (02)</option>
-                      <option value="03"><?php echo trans('0319');?> (03)</option>
-                      <option value="04"><?php echo trans('0320');?> (04)</option>
-                      <option value="05"><?php echo trans('0321');?> (05)</option>
-                      <option value="06"><?php echo trans('0322');?> (06)</option>
-                      <option value="07"><?php echo trans('0323');?> (07)</option>
-                      <option value="08"><?php echo trans('0324');?> (08)</option>
-                      <option value="09"><?php echo trans('0325');?> (09)</option>
-                      <option value="10"><?php echo trans('0326');?> (10)</option>
-                      <option value="11"><?php echo trans('0327');?> (11)</option>
-                      <option value="12"><?php echo trans('0328');?> (12)</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3 go-left">
-                  <div class="form-group">
-                    <label  class="required go-right">&nbsp;</label>
-                    <select class="form-control" name="expYear" id="expiry-year">
-                      <?php for($y = date("Y");$y <= date("Y") + 10;$y++){?>
-                      <option value="<?php echo $y?>"><?php echo $y; ?></option>
-                      <?php } ?>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-3 go-left">
-                  <div class="form-group">
-                    <label  class="required go-right"><?php echo trans('0331');?></label>
-                    <input type="text" class="form-control" name="cvv" id="cvv" placeholder="<?php echo trans('0331');?>" value="<?php echo set_value('cvv');?>">
-                  </div>
-                </div>
-                <div class="col-md-3 go-left">
-                  <label  class="required go-right">&nbsp;</label>
-                  <img src="<?php echo base_url(); ?>assets/img/cc.png" class="img-responsive" />
-                </div>
-                <!--<div class="clearfix"></div>
-                  <div class="col-md-6 go-right">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('0173');?></label>
-                      <input class="form-control form" type="text" placeholder="<?php echo trans('0414');?>" name="phone"  value="<?php echo set_value('phone');?>">
-                    </div>
-                  </div>
-                  <div class="col-md-6 go-right">
-                    <div class="form-group ">
-                      <label  class="required go-right"><?php echo trans('098');?></label>
-                      <input class="form-control form" type="text" placeholder="<?php echo trans('098');?>" name="address"  value="<?php echo set_value('address');?>">
-                    </div>
-                  </div>-->
-                <div class="clearfix"></div>
-                <hr>
-                <div class="row">
-                  <div class="col-md-12">
-                    <p style="padding:10px;"><input type="checkbox" name="" id="policy" value="1">
-                      <?php echo trans('0416');?>  <br>
-                      <a href="http://travel.ian.com/index.jsp?pageName=userAgreement&locale=en_US&cid=<?php echo $eanlib->cid; ?>" target="_blank"><?php echo trans('057'); ?></a>
-                    </p>
-
-                    <div class="form-group">
-                      <div class="alert alert-danger submitresult"></div>
-
-                      <div class="col-md-12"><button type="submit" class="btn btn-success btn-lg btn-block paynowbtn" style="font-size:18px" onclick="return expcheck();" name="<?php if(empty($usersession)){ echo "guest";}else{ echo "logged"; } ?>" ><?php echo trans('0306');?></button></div>
-                      <div class="clearfix"></div>
-                      <hr>
-                      <div class="panel-body">
-                        <p style="font-size:12px" class="go-right RTL"> <?php echo $checkInInstructions; ?></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-            </div>
-            </div>
-            <!-- End Expedia Booking Form -->
-            <?php } ?>
-          </div>
         </div>
-      </div>
-      <!-- Booking Final Starting -->
-      <div class="col-md-8 offset-0 final_section go-right"  style="display:none;">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="step-pane" id="step4">
-              <div id="rotatingDiv" class="show"></div>
-              <h2 class="text-center"><?php echo trans('0179');?></h2>
-              <p class="text-center"><?php echo trans('0180');?></p>
-            </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-      <!-- Booking Final Ending -->
-      <!-- END OF LEFT CONTENT -->
-      <!-- RIGHT CONTENT -->
-      <div class="col-md-4 go-left">
-        <div class="pagecontainer2 paymentbox">
-          <div class="filtertip">
-            <div class="padding15">
-              <div class="text-center"><i class="icon_set_1_icon-87 go-right"></i><span><?php if($appModule == "hotels"){ ?><?php echo trans('0726');?><?php } else { ?><?php echo trans('0411');?><?php } ?></span> <span class="countprice"></span></div>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <div class="hpadding30">
-            <div >
-            <div class="row">
-            <div class="clearfix form-group"></div>
-            <img class="img-responsive" src="<?php echo $module->thumbnail;?>" alt="<?php echo $module->title;?>" />
-                  <div style="margin-top:5px" class="size16 dark bold RTL go-right"><?php echo $module->title;?></div>
-                  <div class="clearfix"></div>
-                  <div class="size13 grey RTL go-right"><i class="fa fa-map-marker RTL"></i> <?php echo $module->mapAddress;?></div>
-                  <div class="clearfix"></div>
-                  <div style="margin-bottom:5px" class="go-right RTL"><?php echo $module->stars;?></div>
-            </div>
-
-              <div class="row">
-
-
-
-
-                <!-- Start Hotels right side section -->
-                <?php if($appModule == "hotels"){ ?>
-                <table style="margin-bottom:0px;" class="table table_summary">
-                  <tbody>
-                    <tr>
-                      <td class="go-right">
-                        <strong> <?php echo trans('07');?></strong> <br> <?php echo $module->checkin;?>
-                      </td>
-                      <td class="go-left">
-                        <strong> <?php echo trans('09');?></strong> <br> <?php echo $module->checkout;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <?php echo trans('060');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $room->stay;?>
-                      </td>
-                    </tr>
-                    <?php if(isset($_GET['honeymoon'])) { ?>
-                    <tr><td colspan="2">
-                        <?php echo trans('0567');?>
-                        </td></tr>
-                    <?php } else { ?>
-                    <tr>
-                      <td>
-                        <?php echo $room->title;?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $room->roomscount;?>
-                      </td>
-                    </tr>
-                    <?php if ($module->price_status == 'Yes') { ?>
-                    <tr>
-                      <td>
-                        <?php echo trans('0412');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $room->perNight;?> <?php echo $room->currSymbol;?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php } ?>
-                    <?php if($room->extraBedsCount > 0){ ?>
-                    <tr>
-                      <td>
-                        <?php echo trans('0429');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $room->currCode;?> <?php echo $room->currSymbol;?><?php echo $room->extraBedCharges; ?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php if($module->taxAmount > 0) { ?>
-                    <tr class="beforeExtraspanel">
-                      <td>
-                        <?php echo trans('0153');?>
-                      </td>
-                      <td class="text-right">
-                        <span id="displaytax"><?php echo $module->taxAmount;?></span> <?php echo $room->currSymbol;?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php if($module->serviceAmount > 0) { ?>
-                    <tr class="beforeExtraspanel">
-                      <td>
-                        <?php echo trans('0699');?>
-                      </td>
-                      <td class="text-right">
-                        <span id="displayservice"><?php echo $module->serviceAmount;?></span> <?php echo $room->currSymbol;?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php if($module->depositAmount > 0) { ?>
-                    <div class="booking-deposit">
-                      <tr>
-                        <td class="booking-deposit-font">
-                          <strong><?php echo trans('0126');?></strong>
-                        </td>
-                        <td class="text-right">
-                          <strong><span class="booking-deposit-font go-left"><span id="displaydeposit"><?php echo $module->depositAmount?></span> <?php echo $room->currSymbol;?></span></strong>
-                        </td>
-                      </tr>
-                    </div> <?php } ?>
-                    <tr>
-                      <td>
-                      </td>
-                      <td >
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="left dark">&nbsp;<?php echo trans('0124');?> :</div>
-                <div style="padding-top:0px;padding-bottom:15px">
-                  <span class="right lred2 bold size30"><strong><span id="displaytotal">
-                              <?php if ($module->price_status == 'Yes') { ?>
-                              <span class="right lred2 bold size30"><strong><span id="displaytotal">
-                              <?php echo $room->price ;?></span></strong> <?php echo $room->currSymbol; ?>
-                              </span>
-                             <?php } else { ?>
-                                 <span class="right lred2 bold size18">
-                               <?php echo trans('0819'); ?>
-                            </span>
-                              <?php  }?>
-
-                  <div class="clearfix"></div>
-                </div>
-                <div style="text-align: center;font-size:12px;clear: both">
-                <?php if($module->taxAmount == 0) { ?> <?php echo trans('0700');?><?php echo trans('0702'); } ?>
-                <?php if($module->serviceAmount == 0) { ?><?php echo " & ".trans('0699'); } ?></div>
-                <?php } ?>
-                <!-- End Hotels right side section -->
-                <!-- start Tours right side section -->
-                <?php if($appModule == "tours"){ ?>
-                <table class="table table_summary">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('0275');?></strong> : <?php echo $module->tourDays;?>
-                      </td>
-                      <td class="text-right">
-                        <strong> <?php echo trans('0122');?></strong> : <?php echo $module->tourNights;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <?php echo trans('08');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->date;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('010');?>  (<?php echo $module->adults;?>)</strong>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->currCode;?> <?php echo $module->currSymbol;?> <?php echo $module->adultprice;?>
-                      </td>
-                    </tr>
-                    <?php if($module->children > 0) { ?>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('011');?>  (<?php echo $module->children;?>)</strong>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->currCode;?> <?php echo $module->currSymbol;?> <?php echo $module->childprice;?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php if($module->infants > 0) { ?>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('0282');?>  (<?php echo $module->infants;?>)</strong>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->currCode;?> <?php echo $module->currSymbol;?> <?php echo $module->infantprice;?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('0408');?> </strong>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->currCode;?> <?php echo $module->currSymbol;?> <?php echo $module->subTotal;?>
-                      </td>
-                    </tr>
-                    <tr class="beforeExtraspanel">
-                      <td>
-                        <?php echo trans('0153');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span id="displaytax"><?php echo $module->taxAmount;?></span>
-                      </td>
-                    </tr>
-                    <div class="booking-deposit">
-                      <tr>
-                        <td class="booking-deposit-font">
-                          <strong><?php echo trans('0126');?></strong>
-                        </td>
-                        <td class="text-right">
-                          <strong><span class="booking-deposit-font go-left"><?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span id="displaydeposit"><?php echo $module->depositAmount?></span></span></strong>
-                        </td>
-                      </tr>
-                    </div>
-                    <tr class="total">
-                      <td>
-                      </td>
-                      <td class="text-right">
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="padding30" style="padding-top:0px">
-                  <span class="left size20 dark"><strong><?php echo trans('0124');?></strong> :</span>
-                  <span class="right lred2 bold size18">                         <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span id="displaytotal"><?php echo $module->price;?></span></span>
-                  <div class="clearfix"></div>
-                </div>
-
-                <?php } ?>
-                <!-- End Tours right side section -->
-                <!-- Start Cars right side section -->
-                <?php if($appModule == "cars"){ ?>
-                <table class="table table_summary">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <?php echo trans('0275');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->totalDays;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('0210');?> <?php echo trans('032');?> </strong>
-                      </td>
-                      <td class="text-right">
-                        <strong>  <?php echo $modulelib->pickupLocationName;?> </strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <?php echo trans('0210');?> <?php echo trans('08');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->pickupDate;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <?php echo trans('0210');?> <?php echo trans('0259');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->pickupTime;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>  <?php echo trans('0211');?> <?php echo trans('032');?> </strong>
-                      </td>
-                      <td class="text-right">
-                        <strong>  <?php echo $modulelib->dropoffLocationName;?> </strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <?php echo trans('0211');?> <?php echo trans('08');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->dropoffDate;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <?php echo trans('0211');?> <?php echo trans('0259');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->dropoffTime;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('0408');?> </strong>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->currCode;?> <?php echo $module->currSymbol;?> <?php echo $module->subTotal;?>
-                      </td>
-                    </tr>
-                    <tr class="beforeExtraspanel">
-                      <td>
-                        <?php echo trans('0153');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span id="displaytax"><?php echo $module->taxAmount;?></span>
-                      </td>
-                    </tr>
-                    <div class="booking-deposit">
-                      <tr>
-                        <td class="booking-deposit-font">
-                          <strong><?php echo trans('0126');?></strong>
-                        </td>
-                        <td class="text-right">
-                          <strong><span class="booking-deposit-font go-left"><?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span id="displaydeposit"><?php echo $module->depositAmount?></span></span></strong>
-                        </td>
-                      </tr>
-                      <tr class="total">
-                        <td>
-                        </td>
-                        <td class="text-right">
-                        </td>
-                      </tr>
-                    </div>
-                  </tbody>
-                </table>
-                <div class="padding30" style="padding-top:0px">
-                  <span class="left size20 dark"><strong><?php echo trans('0124');?></strong> :</span>
-                  <span class="right lred2 bold size18">
-                  <?php echo $module->currCode;?> <?php echo $module->currSymbol;?><span id="displaytotal"><?php echo $module->price;?></span></span>
-                  <div class="clearfix"></div>
-                </div>
-                <?php } ?>
-                <!-- End Cars right side section -->
-                <!-- Start EAN right side section -->
-                <?php if($appModule == "ean"){ ?>
-                <table class="table table_summary">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('016');?></strong> : <?php echo $roomsCount;?>
-                      </td>
-                      <td class="text-right">
-                       <strong> <?php echo trans('010');?></strong> : <?php echo $adultCount;?>
-                      <?php if($childCount > 0){ ?> <strong> <?php echo trans('011');?></strong> : <?php echo $childCount;  ?> <strong> Age(s): </strong> <?php if(is_array($childAges)){ echo implode(',',$childAges); }else{ echo $childAges; } } ?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong> <?php echo trans('07');?></strong> : <?php echo $checkin;?>
-                      </td>
-                      <td class="text-right">
-                        <strong> <?php echo trans('09');?></strong> : <?php echo $checkout;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <?php echo trans('060');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $nights;?>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong> <?php echo $roomname; ?> </strong>
-                      </td>
-                      <td class="text-right">
-                        <?php echo @$roomscount;?>
-                      </td>
-                    </tr>
-                   <?php if(!empty($pricesNightByNight)){ foreach($pricesNightByNight as $key => $val){ ?>
-                    <tr>
-                      <td>
-                        <?php echo $key;?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $currency." ".$val; ?>
-                      </td>
-                    </tr>
-                    <?php } } ?>
-                    <?php if(!empty($ExtraPersonFee)){ ?>
-                    <tr>
-                      <td>
-                        <strong>Extra Person Fee</strong>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $currency." ".$ExtraPersonFee; ?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <tr>
-                      <td>
-                        <?php echo trans('0541');?>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $currency." ".$tax; ?>
-                      </td>
-                    </tr>
-                    <?php if(!empty($SalesTax)){ ?>
-                    <tr>
-                      <td>
-                        <small>Sales Tax</small>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $currency." ".$SalesTax; ?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <?php if(!empty($HotelOccupancyTax)){ ?>
-                    <tr>
-                      <td>
-                        <small>Hotel Occupancy Tax</small>
-                      </td>
-                      <td class="text-right">
-                        <?php echo $currency." ".$HotelOccupancyTax; ?>
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    <tr>
-                      <td>
-                      </td>
-                      <td >
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="padding30" style="padding-top:0px">
-                  <span class="left size20 dark"><strong><?php echo trans('0124');?></strong> :</span>
-                  <span class="right lred2 bold size18">  <?php echo $currency." ".$total; ?>
-
-                  <br><span class="right" style="font-size: 9px !important; color: #000 !important;"> (Including Taxes and Fees) </span>
-                  <span class="left" style="font-size: 12px">
-                  <?php if(!empty($hotelTaxes)){ ?>
-                  <br><strong> Taxes to be paid at hotel: </strong> <br>
-                  <?php foreach($hotelTaxes as $key => $val){ ?>
-                  <?php echo $key; ?> : <?php echo $currency." ".$val; ?> <br>
-                  <?php } } ?>
-                  </span>
-
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="panel-footer row text-danger go-right RTL">
-                  <?php echo trans('0212');?>
-                </div>
-                <div class="panel-footer row" style="background: #E6EDF7;font-size:12px">
-                  <div class="clearfix"></div>
-                  <br>
-                  <h4>Cancellation Policy</h4>
-                  <p class="go-right RTL"><?php echo $cancelpolicy;?></p>
-                </div>
-                <br>
-              </div>
-              <?php } ?>
-              <!-- End EAN Right Side Section -->
-            </div>
-            <div class="row">
-              <?php if($appModule != "ean"){ ?>
-                <?php if($appModule == "hotels") { ?>
-                <div class="panel-footer row" style="background: #DDD;font-size:15px">
-                    <!--<a id="popoverData" href="javascript:void(0);" data-content="<?php echo trans('0734');?>" rel="popover" data-placement="top" data-original-title="<?php echo trans('0733');?>" data-trigger="hover"><strong><?php echo trans('0733');?></strong></a>-->
-                    <a href="#policy" data-toggle="modal"><strong><?php echo trans('0733');?></strong></a>
-                </div>
-                        <?php } else { ?>
-              <div class="panel-footer row" style="background: #DDD;font-size:15px">
-                <p><?php echo trans('0461');?></p>
-              </div>
-              <?php } ?>
-                    <?php } ?>
-              <?php if(!empty($phone)){ ?>
-              <div class="panel-body">
-                <h4 class="opensans purple text-center"><i class="icon_set_1_icon-57"></i><?php echo trans('061');?></h4>
-                <p class="opensans size30 purple xslim text-center" style="margin-bottom: 0;"><?php echo $phone; ?></p>
-                <div class="text-center" style="font-size: 12px;">(T2-CN: 8:00 - 21:00)</div>
-                <p class="opensans size30 purple xslim text-center" style="margin-bottom: 0;">09 6868 0106</p>
-                <div class="text-center" style="font-size: 12px;">(Hotline 24/7)</div>
-              </div>
-              <?php } ?>
-              <br>
-            </div>
-          </div>
-          <?php } ?>
-        </div>
-      </div>
-      <br/>
     </div>
-    <!-- END OF RIGHT CONTENT -->
-  </div>
 </div>
-</div>
+
 <!-- END OF CONTENT -->
-<?php } ?>
+
 <div id="waiting"></div>
 <?php if($appModule == "ean"){ ?>
 <!-- Start JS for Expedia -->
@@ -1165,71 +500,41 @@
 <div class="clearfix"></div>
 <script type='text/javascript'>
 $(window).load(function(){
-$(".nexttab").click(function () {
-    $('.completebook').show();
-    var gateway = "";
-    $(".tab-content .tab-pane").removeClass("active");
-    if($('#banktransfer').is(':checked')) {
-        $(".tab-content #banktransfer").addClass("active");
-        gateway = "banktransfer";
-    }
-    if($('#cod').is(':checked')) {
-        $(".tab-content #cod").addClass("active");
-        gateway = "cod";
-    }
-    if($('#payatoffice').is(':checked')) {
-        $(".tab-content #payatoffice").addClass("active");
-        gateway = "payatoffice";
-    }
+$(".payment_method").click(function () {
+
+    //$('.completebook').show();
+    var gateway = $(this).val();
     $("#response").html("<div id='rotatingDiv'></div>");
-    $.post("<?php echo base_url();?>invoice/getGatewaylink/<?php echo $invoice->id?>/<?php echo $invoice->code;?>", {gateway: gateway}, function(resp){
-       var response = $.parseJSON(resp);
-       console.log(response);
-       if(response.iscreditcard == "1"){
-        $(".creditcardform").fadeIn("slow");
-        $("#creditcardgateway").val(response.gateway);
-        $("#response").html("");
-       }else{
-       $(".creditcardform").hide();
-       $("#response").html(response.htmldata);
+    $.ajax({
+      url : "<?php echo base_url();?>invoice/getGatewaylink/<?php echo $invoice->id?>/<?php echo $invoice->code;?>",
+      type : "GET",
+      data : {
+        gateway : gateway
+      },
+      success : function(resp){        
+         var response = $.parseJSON(resp);        
+         if(response.iscreditcard == "1"){
+          $(".creditcardform").fadeIn("slow");
+          $("#creditcardgateway").val(response.gateway);
+          $("#response").html("");
+         }else{
+         $(".creditcardform").hide();
+         $("#response").html(response.htmldata);
 
-        $('#response input').on('change', function() {
-            //alert($('input[name=bank]:checked', '#response').val());
-            var name = $('input[name=bank]:checked', '#response').val();
-            $("#divBankDetails").children().hide();
-            $('#span'+name).show();
+          $('#response input').on('change', function() {
+              //alert($('input[name=bank]:checked', '#response').val());
+              var name = $('input[name=bank]:checked', '#response').val();
+              $("#divBankDetails").children().hide();
+              $('#span'+name).show();
 
-        });
+          });
 
-       }
-
-      });
+         }
+      }
+    });
+    
 
 });
 });
 
 </script>
-
-<div id="policy" class="modal fade email-me-modal" tabindex="-1" data-focus-on="input:first" style="display: none;">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <div class="hotel-name">
-        <?php echo trans('0148');?><?php echo trans('0696');?><?php echo $module->title; ?>
-                                        </div>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="panel-body">
-
-                                            <div class="col-md-12 col-sm-12 col-xs-12 go-right" style="font-weight: normal;">
-                                                <?php echo nl2br($module->hotel_policy); ?>
-                                            </div>
-
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>

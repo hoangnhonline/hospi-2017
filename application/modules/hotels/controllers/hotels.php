@@ -564,14 +564,24 @@ class Hotels extends MX_Controller {
                       $this->data['error'] = "";
                       $this->hotels_lib->set_hotelid($hotelname);
                       $hotelID = $this->hotels_lib->get_id();
-                      $roomID = $this->input->get('roomid');
-                      $ishoney = $this->input->get('honeymoon');
-                      $roomsCount = $this->input->get('roomscount');
+                      $detailHotel = $this->hotels_model->getDetail($hotelID);
+                      //var_dump($detailHotel);die;
+                      $roomIdArr = $this->input->get('room_id');
+                      
+                      $roomsCountArr = $this->input->get('room_quantity');
                       $extrabeds = $this->input->get('extrabeds');
-                      $bookInfo = $this->hotels_lib->getBookResultObject($hotelID,$roomID,$roomsCount,$extrabeds,'','',$ishoney);
-                      $this->data['module'] = $bookInfo['hotel'];
+                      foreach($roomIdArr as $roomID){
+                      	$roomsCount = $roomsCountArr[$roomID];
+                      	
+                      	if($roomsCount > 0){
+                      		 $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotelID,$roomID,$roomsCount,$extrabeds,'','');
+
+                      	}                      	
+                      }                      
+                      $this->data['module'] = $detailHotel;
                       $this->data['extraChkUrl'] = $bookInfo['hotel']->extraChkUrl;
-                      $this->data['room'] = $bookInfo['room'];
+                      $this->data['room'] = $bookInfo;
+
                       if($this->data['room']->price < 1 ||  $this->data['room']->stay < 1){
                         $this->data['error'] = "error";
                       }
@@ -593,6 +603,13 @@ class Hotels extends MX_Controller {
                       $this->data['page_title'] = $this->data['module']->title;
 					  $this->data['metakey'] = $this->data['module']->keywords;
 					  $this->data['metadesc'] = $this->data['module']->metadesc;
+					 // var_dump($detailHotel->hotel_title);die;
+					    $this->breadcrumbcomponent->add('Trang chủ', base_url());
+					   
+                          $this->breadcrumbcomponent->add($detailHotel->hotel_title, base_url()."hotels/".$detailHotel->hotel_slug);
+                          $this->breadcrumbcomponent->add('Thông tin thanh toán', '#');
+                          
+                          $this->data['breadcrumb'] = $this->breadcrumbcomponent->output();
 					  $this->theme->view('booking', $this->data);
 				}else{
                    redirect("hotels");

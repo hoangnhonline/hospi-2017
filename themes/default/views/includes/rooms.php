@@ -102,6 +102,11 @@
 
     <div class="clearfix block-rooms">
       <div class="tabble-responsive">
+        <form action="<?php echo base_url() . $appModule; ?>/book/<?php echo $module->bookingSlug; ?>" method="GET">
+        <input type="hidden" name="adults" value="<?php echo $modulelib->adults; ?>" />
+        <input type="hidden" name="child" value="<?php echo $modulelib->children; ?>" />
+        <input type="hidden" name="checkin" value="<?php echo $modulelib->checkin; ?>" />
+        <input type="hidden" name="checkout" value="<?php echo $modulelib->checkout; ?>" />
         <table class="table table-customize">
           <thead>
             <tr>
@@ -119,6 +124,7 @@
               <?php foreach ($rooms as $r) { 
                 $i++;               
                 ?>
+                <input type="hidden" name="room_id[]" value="<?php echo $r->id; ?>" />
             <tr>
               <td>
                 <div class="zoom-gallery">
@@ -129,7 +135,7 @@
                   </div>
                 </div>
                 <div class="info">
-                  <h4 class="RTL go-text-right"><b class="purple"><?php echo $r->title; ?></b></h4>
+                  <h4 class="RTL go-text-right"><b class="purple"><?php echo $r->title; ?>-<?php echo $r->id; ?></b></h4>
                   <div class="block-people">
                     <h5>Người lớn: <span><?php echo $r->room_adults; ?></span> </h5>
                     <h5>Trẻ em: <span><?php echo $r->room_children; ?></span></h5>
@@ -143,7 +149,7 @@
               <td>
                 <div class="item-countroom">
                   <h5 class="size12">Số phòng</h5>
-                  <select class="form-control" name="roomscount" >
+                  <select class="form-control" name="room_quantity[<?php echo $r->id; ?>]" >
                     <option value="0">0</option>
                     <?php for($k = 1; $k <= $r->maxQuantity; $k++){ ?>
                       <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
@@ -153,7 +159,7 @@
                 </div>
                 <div class="item-countroom">
                   <h5 class="size12">Giường phụ</h5>
-                  <select name="extrabeds" class="form-control">
+                  <select name="extra_beds[<?php echo $r->id; ?>]" class="form-control">
                   <option value="0">0</option>
                   <?php for($j = 1; $j <= $r->extraBeds; $j++){ ?>
                     <option value="<?php echo $j; ?>"><?php echo $j; ?></option>
@@ -202,6 +208,7 @@
             <?php } ?>        
           </tbody>
         </table>
+        </form>
       </div>
     </div>
 </section>
