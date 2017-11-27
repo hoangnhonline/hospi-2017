@@ -711,7 +711,6 @@
                     <div class="wow fadeInUp col-md-9 offset-0">
                         <div class="itemlabel3 itemlabel3-cus">
                             <div class="labelright go-left" style="min-width:105px;margin-left:5px">
-                                <br/>
                                 <div class="purple size18 text-center">
                                     <?php if ($item->price > 0) {
                                         if ($item->price_status == 'Yes') {
@@ -754,7 +753,7 @@
                                     <?php } else { ?>
                                     <a href="<?php echo $item->slug; ?>">
                                     <?php } ?>
-                                    <button type="submit" class="btn btn-action"><?php echo trans('0177'); ?></button>
+                                    <button type="submit" class="btn btn-action2"><?php echo trans('0177'); ?></button>
                                     </a>
                                 </div>
                             </div>
