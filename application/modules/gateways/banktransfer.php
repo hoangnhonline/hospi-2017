@@ -52,22 +52,22 @@ function banktransfer_link($params) {
                 <div><label for="hsbc"><input id="hsbc" type="radio" name="bank" value="hsbc"> Ngân hàng HSBC</label></div>';
         $code .= '<div id="divBankDetails" class="col-xs-12">';
         
-        $code .= '<span id="spanmbbank" style="display:block;">';
+        $code .= '<span id="spanmbbank" class="bank-account" style="display:block;">';
         $code .= $params['mbbank'];
         $code .= '<textarea class="textbank" style="display:none;" name="mbbank" rows="2" cols="20">'.$params['mbbank'].'</textarea>';
-        $code .= '</span><span id="spandongabank" style="display:none;">';
+        $code .= '</span><span id="spandongabank" class="bank-account" style="display:none;">';
         $code .= $params['dongabank'];
         $code .= '<textarea class="textbank" style="display:none;" name="dongabank" rows="2" cols="20">'.$params['dongabank'].'</textarea>';
-        $code .= '</span><span id="spanviettinbank" style="display:none;">';
+        $code .= '</span><span id="spanviettinbank" class="bank-account" style="display:none;">';
         $code .= $params['viettinbank'];
         $code .= '<textarea class="textbank" style="display:none;" name="viettinbank" rows="2" cols="20">'.$params['viettinbank'].'</textarea>';
-        $code .= '</span><span id="spanagribank" style="display:none;">';
+        $code .= '</span><span id="spanagribank" class="bank-account" style="display:none;">';
         $code .= $params['agribank'];
         $code .= '<textarea class="textbank" style="display:none;" name="agribank" rows="2" cols="20">'.$params['agribank'].'</textarea>';
-        $code .= '</span><span id="spanvcb" style="display:none;">';
+        $code .= '</span><span id="spanvcb" class="bank-account" style="display:none;">';
         $code .= $params['vcb'];
         $code .= '<textarea class="textbank" style="display:none;" name="vcb" rows="2" cols="20">'.$params['vcb'].'</textarea>';
-        $code .= '</span><span id="spanhsbc" style="display:none;">';
+        $code .= '</span><span id="spanhsbc" class="bank-account" style="display:none;">';
         $code .= $params['hsbc'];
         $code .= '<textarea class="textbank" style="display:none;" name="hsbc" rows="2" cols="20">'.$params['hsbc'].'</textarea>';
         $code .= '</span>';

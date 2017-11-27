@@ -72,21 +72,21 @@
                                 <ul class="list-inline form-group">
                                     <li class="label-style">
                                         <label class="checkbox-inline checkbox-style3">
-                                            <input type="checkbox" value="banktransfer" name="" class="payment_method">
+                                            <input type="radio" value="banktransfer" name="payment_method" class="payment_method">
                                             <span></span>
                                             <strong>Chuyển khoản ngân hàng</strong>
                                         </label>
                                     </li>
                                     <li class="label-style">
                                         <label class="checkbox-inline checkbox-style3">
-                                            <input type="checkbox" value="cod" name="" class="payment_method">
+                                            <input type="radio" value="cod" name="payment_method" class="payment_method">
                                             <span></span>
                                             <strong>Thanh toán tại Vp HOSPI</strong>
                                         </label>
                                     </li>
                                     <li class="label-style">
                                         <label class="checkbox-inline checkbox-style3">
-                                            <input type="checkbox" value="payatoffice" name="" class="payment_method">
+                                            <input type="radio" value="payatoffice" name="payment_method" class="payment_method">
                                             <span></span>
                                             <strong>Thanh toán tại nhà</strong>
                                         </label>
@@ -94,58 +94,7 @@
                                 </ul>
                                 <div id="response">
                                   
-                                </div>
-                                <p>Quý khách vui lòng chọn ngân hàng</p>
-                                <ul class="form-group no-style">
-                                    <li>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="bank" value="1"> Ngân hàng Quân Đội
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="bank" value="2"> Ngân hàng Đông Á
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="bank" value="3"> Ngân hàng Vietin Bank
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="bank" value="4"> Agribank
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="bank" value="5"> Ngân hàng VCB
-                                        </label>
-                                    </li>
-                                    <li>
-                                        <label class="radio-inline">
-                                            <input type="radio" name="bank" value="5"> Ngân hàng HSBC
-                                        </label>
-                                    </li>
-                                </ul>
-                                <ul class="no-style bank-account">
-                                    <li>
-                                        <strong>Ngân Hàng:</strong>
-                                        <span>Ngân Hàng Quân Đội (MBBank)</span>
-                                    </li>
-                                    <li>
-                                        <strong>Chi Nhánh:</strong>
-                                        <span>Bến Thành, Tp. Hồ Chí Minh</span>
-                                    </li>
-                                    <li>
-                                        <strong>Tên Tài Khoản:</strong>
-                                        <span>VÕ ĐÌNH CHÍ</span>
-                                    </li>
-                                    <li>
-                                        <strong>Số Tài Khoản:</strong>
-                                        <span>1460103608001</span>
-                                    </li>
-                                </ul>
+                                </div>                               
                             </div>
                         </div>
                     </div>
