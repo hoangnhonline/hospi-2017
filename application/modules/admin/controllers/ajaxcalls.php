@@ -577,12 +577,11 @@ class Ajaxcalls extends MX_Controller {
 		function processBookingguest() {
 				$this->load->model('admin/bookings_model');
 				$this->form_validation->set_message('matches', trans("0310"));
-				$this->form_validation->set_message('valid_email', trans("0311"));
-				$this->form_validation->set_message('required', "%s " . trans("0312"));
+				$this->form_validation->set_message('valid_email', " không hợp lệ");
+				$this->form_validation->set_message('required', "%s " . " không được bỏ trống");
 				//$this->form_validation->set_rules('email', trans("094"), 'required|valid_email|matches[confirmemail]');
-                                $this->form_validation->set_rules('email', trans("094"), 'required|valid_email');
-				$this->form_validation->set_rules('firstname', trans("0171"), 'trim|required');
-				$this->form_validation->set_rules('lastname', trans("0172"), 'trim|required');
+                                $this->form_validation->set_rules('email', trans("094"), 'required|valid_email');				
+				$this->form_validation->set_rules('lastname', "Họ tên", 'trim|required');
 				if ($this->form_validation->run() == FALSE) {
 					
 					$bookingResult = array("error" => "yes", 'msg' => validation_errors());
@@ -1193,7 +1192,7 @@ class Ajaxcalls extends MX_Controller {
        	$couponcode = $this->input->post('coupon');
        	$module = $this->input->post('module');
        	$itemid = $this->input->post('itemid');
-
+       	
        	echo pt_couponVerify($couponcode, $module, $itemid);
 
        }

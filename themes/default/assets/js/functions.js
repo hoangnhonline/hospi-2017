@@ -82,11 +82,11 @@ jQuery(document).ready(function(jQuery){
 	});
 
 	$('form').submit(function() {
-    $('#wait').show();
+    //$('#wait').show();
   });
-	$('a,button').click(function() {
-    $('#wait').show();
-  });
+	// $('a,button').click(function() {
+ //    $('#wait').show();
+ //  });
 	$('.modal').on('shown.bs.modal', function (e) {
 	  $('#wait').hide();
 	})

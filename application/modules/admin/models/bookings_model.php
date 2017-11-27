@@ -252,8 +252,6 @@
 
           }
 
-
-
           function do_booking($userid) {
               $error = true;
               $this->load->library('currconverter');
@@ -285,7 +283,7 @@
               $passportInfo = "";
               $refno = random_string('numeric', 7);
               if ($bookingtype == "hotels") {
-                  $refno = "HHP".random_string('numeric', 7);
+                  $refno = "HP".random_string('numeric', 7);
                   $this->load->library('hotels/hotels_lib');
                   $bookingData = json_decode($this->hotels_lib->getUpdatedDataBookResultObject($itemid, $roomid, $checkin, $checkout, $roomscount, $extras, $extrabeds));
                   if ($bookingData->stay < 1) {
@@ -294,68 +292,9 @@
                   else {
                       $error = false;
                   }
-              }elseif($bookingtype == "tours"){
-                  $refno = "THP".random_string('numeric', 5);
-                $passportInfo = json_encode($this->input->post('passport'));
-                $adults = $this->input->post('adults');
-                $child = $this->input->post('children');
-                $infant = $this->input->post('infant');
+              } // add code desktop
 
-                $apiDate = $this->input->post('tdate');
-                if(empty($apiDate)){
-                  $checkin = $this->input->post('date');
-                  $checkout = $this->input->post('date');
-
-                  if(empty($checkin)){
-                   $checkin = $this->input->post('checkin');
-                   $checkout = $this->input->post('checkin');
-                  }
-
-                }else{
-                  $checkin = date($this->data['app_settings'][0]->date_f, strtotime($apiDate));
-                  $checkout = date($this->data['app_settings'][0]->date_f, strtotime($apiDate));
-
-
-                }
-
-
-
-                  $this->load->library('tours/tours_lib');
-                  $bookingData = json_decode($this->tours_lib->getUpdatedDataBookResultObject($itemid, $adults,$child,$infant,$extras));
-                  $error = false;
-
-              }elseif($bookingtype == "cars"){
-
-                 $apiDate = $this->input->post('cdate');
-                if(empty($apiDate)){
-
-                  $checkin =  $this->input->post('pickupDate');
-                  $checkout =  $this->input->post('dropoffDate');
-
-
-                }else{
-                  $checkin = date($this->data['app_settings'][0]->date_f, strtotime($apiDate));
-                  $checkout = date($this->data['app_settings'][0]->date_f, strtotime($apiDate));
-
-
-                }
-
-                $pickup = $this->input->post('pickuplocation');
-                $drop = $this->input->post('dropofflocation');
-                $pickuptime = $this->input->post('pickupTime');
-                $pickupdate = $this->input->post('pickupDate');
-                $dropdate = $this->input->post('dropoffDate');
-                $droptime = $this->input->post('dropoffTime');
-
-
-                  $this->load->library('cars/cars_lib');
-                  $bookingData = json_decode($this->cars_lib->getUpdatedDataBookResultObject($itemid,$extras,$pickup,$drop,$pickupdate,$dropdate));
-                  $error = false;
-              }
-
-
-
-             // $grandtotal = $this->currconverter->convertPriceFloat($bookingData->grandTotal);
+              // $grandtotal = $this->currconverter->convertPriceFloat($bookingData->grandTotal);
               $grandtotal = $this->currconverter->removeComma($bookingData->grandTotal);
               $checkin = databaseDate($checkin);
               $checkout = databaseDate($checkout);
@@ -363,7 +302,7 @@
               $deposit = $this->currconverter->removeComma($bookingData->depositAmount);
               $tax = $this->currconverter->removeComma($bookingData->taxAmount);
               $paymethodfee = 0;
-      //$this->currconverter->convertPriceFloat($bookingData->paymethodFee);
+              //$this->currconverter->convertPriceFloat($bookingData->paymethodFee);
               $extrasTotalFee = $this->currconverter->removeComma($bookingData->extrasInfo->extrasTotalFee);
               $currCode = $bookingData->currCode;
               $currSymbol = $bookingData->currSymbol;
@@ -393,37 +332,91 @@
                 $deposit = $cResultDeposit->amount;
                 $tax = $cResultTax->amount;
 
-
                 $this->updateCoupon($coupon);
 
               }
 
               if (!$error) {
-                  $data = array('booking_ref_no' => $refno, 'booking_type' => $bookingtype, 'booking_item' => $itemid, 'booking_subitem' => $subitem, 'booking_extras' => $extras, 'booking_date' => time(), 'booking_expiry' => time() + $expiry, 'booking_user' => $userid, 'booking_status' => 'unpaid', 'booking_additional_notes' => $this->input->post('additionalnotes'), 'booking_total' => $grandtotal, 'booking_remaining' => $grandtotal, 'booking_checkin' => $checkin, 'booking_checkout' => $checkout, 'booking_nights' => $stay, 'booking_adults' => $adults, 'booking_child' => $child,
-          'booking_payment_type' => $paymethod,'booking_payment_info' => $payinfo,'honeymoon' => $honeymoon,'nguoikhac' => $nguoikhac,'sent_invoice' => $sent_invoice, 'company' => $company, 'mst' => $mst,'companyadd' => $companyadd,'guest' => $guest, 'sentto' => $sentto,
-                  'booking_deposit' => $deposit, 'booking_tax' => $tax, 'booking_paymethod_tax' => $paymethodfee, 'booking_extras_total_fee' => $extrasTotalFee, 'booking_curr_code' => $currCode, 'booking_curr_symbol' => $currSymbol, 'booking_extra_beds' => $extrabeds, 'booking_extra_beds_charges' => $extrabedscharges, 'booking_coupon_rate' => $couponRate, 'booking_coupon' => $couponCode, 'booking_guest_info' => $passportInfo);
+                  $data = array(
+                    'booking_ref_no' => $refno,
+                    'booking_type' => $bookingtype,
+                    'booking_item' => $itemid,
+                    'booking_subitem' => $subitem,
+                    'booking_extras' => $extras,
+                    'booking_date' => time() ,
+                    'booking_expiry' => time() + $expiry,
+                    'booking_user' => $userid,
+                    'booking_status' => 'unpaid',
+                    'booking_additional_notes' => $this->input->post('additionalnotes') ,
+                    'booking_total' => $grandtotal,
+                    'booking_remaining' => $grandtotal,
+                    'booking_checkin' => $checkin,
+                    'booking_checkout' => $checkout,
+                    'booking_nights' => $stay,
+                    'booking_adults' => $adults,
+                    'booking_child' => $child,
+                    'booking_payment_type' => $paymethod,
+                    'booking_payment_info' => $payinfo,
+                    'honeymoon' => $honeymoon,
+                    'nguoikhac' => $nguoikhac,
+                    'sent_invoice' => $sent_invoice,
+                    'company' => $company,
+                    'mst' => $mst,
+                    'companyadd' => $companyadd,
+                    'guest' => $guest,
+                    'sentto' => $sentto,
+                    'booking_deposit' => $deposit,
+                    'booking_tax' => $tax,
+                    'booking_paymethod_tax' => $paymethodfee,
+                    'booking_extras_total_fee' => $extrasTotalFee,
+                    'booking_curr_code' => $currCode,
+                    'booking_curr_symbol' => $currSymbol,
+                    'booking_extra_beds' => $extrabeds,
+                    'booking_extra_beds_charges' => $extrabedscharges,
+                    'booking_coupon_rate' => $couponRate,
+                    'booking_coupon' => $couponCode,
+                    'booking_guest_info' => $passportInfo
+                  );
                   $this->db->insert('pt_bookings', $data);
                   $bookid = $this->db->insert_id();
                   $this->session->set_userdata("BOOKING_ID", $bookid);
                   $this->session->set_userdata("REF_NO", $refno);
 
                   if ($bookingtype == "hotels") {
-                      $rdata = array('booked_booking_id' => $bookid, 'booked_room_id' => $bookingData->subitem->id, 'booked_room_count' => $bookingData->subitem->count, 'booked_checkin' => $checkin, 'booked_checkout' => $checkout, 'booked_booking_status' => 'unpaid');
+                      $rdata = array(
+                        'booked_booking_id' => $bookid,
+                        'booked_room_id' => $bookingData->subitem->id,
+                        'booked_room_count' => $bookingData->subitem->count,
+                        'booked_checkin' => $checkin,
+                        'booked_checkout' => $checkout,
+                        'booked_booking_status' => 'unpaid'
+                      );
+
                       $this->db->insert('pt_booked_rooms', $rdata);
                   }
                   elseif ($bookingtype == "cars") {
-                      $cdata = array('booked_booking_id' => $bookid, 'booked_car_id' =>  $itemid, 'booked_pickupdate' => $checkin, 'booked_pickuptime' => $pickuptime, 'booked_pickuplocation' => $pickup, 'booked_dropofflocation' => $drop,'booked_dropoffDate' => databaseDate($dropdate), 'booked_dropoffTime' => $droptime, 'booked_booking_status' => 'unpaid');
+                      $cdata = array(
+                        'booked_booking_id' => $bookid,
+                        'booked_car_id' => $itemid,
+                        'booked_pickupdate' => $checkin,
+                        'booked_pickuptime' => $pickuptime,
+                        'booked_pickuplocation' => $pickup,
+                        'booked_dropofflocation' => $drop,
+                        'booked_dropoffDate' => databaseDate($dropdate) ,
+                        'booked_dropoffTime' => $droptime,
+                        'booked_booking_status' => 'unpaid'
+                      );
                       $this->db->insert('pt_booked_cars', $cdata);
                   }
 
                   $url = base_url() . 'invoice?id=' . $bookid . '&sessid=' . $refno;
                   $bookingResult = array("error" => "no", 'msg' => '', 'url' => $url);
-      $invoicedetails = invoiceDetails($bookid,$refno);
+                  $invoicedetails = invoiceDetails($bookid,$refno);
 
-      $this->emails_model->sendEmail_customer($invoicedetails,$this->data['app_settings'][0]->site_title);
-      $this->emails_model->sendEmail_admin($invoicedetails,$this->data['app_settings'][0]->site_title);
-      //$this->emails_model->sendEmail_owner($invoicedetails,$this->data['app_settings'][0]->site_title);
-      //$this->emails_model->sendEmail_supplier($invoicedetails,$this->data['app_settings'][0]->site_title);
+                  $this->emails_model->sendEmail_customer($invoicedetails,$this->data['app_settings'][0]->site_title);
+                  $this->emails_model->sendEmail_admin($invoicedetails,$this->data['app_settings'][0]->site_title);
+                  //$this->emails_model->sendEmail_owner($invoicedetails,$this->data['app_settings'][0]->site_title);
+                  //$this->emails_model->sendEmail_supplier($invoicedetails,$this->data['app_settings'][0]->site_title);
 
               }
               else {
@@ -434,7 +427,7 @@
           }
 
 
-//Do quick booking by admin
+          //Do quick booking by admin
           function doQuickBooking($userid){
 
 

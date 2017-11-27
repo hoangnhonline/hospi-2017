@@ -23,33 +23,7 @@
 </div>
 <script type="text/javascript">
   $(function(){
-    $(".applycoupon").on("click",function(){
-      var module = $("#btype").val();
-      var itemid = $("#itemid").val();
-      var coupon = $(".coupon").val();
-      $.post("<?php echo base_url();?>admin/ajaxcalls/checkCoupon",{coupon: coupon, module: module, itemid: itemid},function(response){
-       var resp = $.parseJSON(response);
-       if(resp.status == "success"){
-        $("#couponid").val(resp.couponid);
-        $(".couponmsg").html(" <div class='alert alert-success'><?php echo trans('0512'); ?><strong> "+coupon+" </strong><?php echo trans('0821'); ?> <strong> "+resp.value+resp.type+" </strong><?php echo trans('0822'); ?></div>");
-        $(".coupon").prop("readonly","readonly");
-        $(".applycoupon").hide();
-       }else{
-        $("#couponid").val("");
-        $(".couponmsg").html("");
-        if(resp.status == "irrelevant"){
-
-          alert("<?php echo trans('0520'); ?>");
-
-        }else{
-
-          alert("<?php echo trans('0513'); ?>");
-        }
-
-       }
-       console.log(resp);
-      })
-    })
+    
   })
 </script>
 <?php } ?>

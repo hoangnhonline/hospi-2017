@@ -1898,12 +1898,12 @@ class Hotels_lib
         $this->ci->load->model('hotels/rooms_model');
         //room details for booking page
         $details = $this->room_short_details($roomid);
-        $roomprice = $this->ci->rooms_model->getRoomPrice($roomid, $checkin, $checkout);        
+        $roomprice = $this->ci->rooms_model->getRoomPriceNew($roomid, $checkin, $checkout);        
      
 
         //hotel details for booking page
-        $this->set_id($hotelid);
-        $this->hotel_short_details();
+        //$this->set_id($hotelid);
+        //$this->hotel_short_details();
 
         $extras = $this->hotelExtras();
         $extrabedcharges = $roomprice['extrabed'] * $extrabeds;
@@ -1925,7 +1925,7 @@ class Hotels_lib
 
         $depositAmount = $curr->convertPrice($this->deposit);
 
-        $result["room"] = (object)array(
+        $result = (object)array(
             'id' => $roomid,
             'title' => $this->roomtitle,
             'desc' => $this->roomdesc,
@@ -1946,7 +1946,7 @@ class Hotels_lib
             'extraBedsCount' => $extrabeds
         );
         //end room details for booking page
-
+        /*
 
         $result["hotel"] = (object)array(
             'id' => $this->hotelid,
@@ -1974,7 +1974,7 @@ class Hotels_lib
             'price_status' => $this->price_status,
             'hotel_policy' => $this->hotel_policy
         );
-
+*/
         //end hotel details for booking page
         return $result;
 
