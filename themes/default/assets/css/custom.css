@@ -9834,53 +9834,76 @@ content: url(../../assets/img/collapsearrow.png);
 //   background: #fff;
 // }*/
 
-.rooms-update {
-  width: 100%;
-  float: left;
-  margin-bottom: 0 !important;
-}
+
 .rooms-update.rooms-update-bg {
-  background: url(../../assets/img/Untitled-3.png);
-  padding: 7px;
+  background: #e3e3e3;
   margin-top: 0;
+  background-repeat-y: no-repeat;
+  margin-bottom: 15px;
 }
 
-.room-package h4 {
-  font-size: 14px;
-}
-.rooms-update.room-package {
-  padding: 7px;
-  position: relative;
+/* Package */
+.block-package {
   overflow: hidden;
-  margin-bottom: 0;
-  margin-top: 10px;
+  position: relative;
+  margin-bottom: 15px;
 }
-.rooms-update.room-package h4:before {
+.block-package .package-info {
+  border: 1px solid #cccccc;
+  position: relative;
+  list-style-type: none;
+  padding: 20px 15px;
+  margin-bottom: 10px;
+}
+.block-package .package-info:last-child {
+  margin-bottom: 0;
+}
+.block-package .package-info:before {
   content: url(../../assets/img/triangle_right.png);
   position: absolute;
+  top: 50%;
   left: 0;
-  top: 45%;
-  transform: translate(0, -45%);
-  -ms-transform: translate(0, -45%);
-  -webkit-transform: translate(0, -45%);
-  -o-transform: translate(0, -45%);
+  -webkit-transform: translate(0,-50%);
+  -ms-transform: translate(0,-50%);
+  transform: translate(0,-50%);
 }
-.block-people h5 {
-  color: #8A8A8A;
+.block-package .package-info .package-name {
   font-size: 14px;
-}
-.block-people h5 span {
   color: #660033;
-  font-size: 16px;
+  font-family: "AndesRoundedBold";
+  display: inline-block;
+  margin-right: 10px;
+}
+.block-package .package-info .package-des,
+.block-package .package-info .package-price {
+  font-size: 14px;
+  color: #666666;
+  font-family: 'Arial';
+  margin-top: -5px;
+}
+.block-package .package-info .package-price span {
+  color: #660033;
+  font-size: 20px;
+  font-family: "AndesRoundedBold";
+}
+.block-package .package-info .package-view {
+  font-size: 12px;
+  color: #666666;
+  text-decoration: underline;
+}
+
+.block-people h5 {
+  color: #666666;
+  font-size: 14px;
 }
 .block-view-detail a {
   display: inline-block;
   position: relative;
-  color: #660033;
+  color: #666666;
   padding-left: 15px;
 }
 .block-view-detail a:before {
-  content: url(../../assets/img/collapsearrow.png);
+  content: url(../../assets/img/arrow_grey.png);
   position: absolute;
   left: 0;
 }
@@ -9891,6 +9914,20 @@ content: url(../../assets/img/collapsearrow.png);
   display: block;
   font-size: 13px;
   color: #999;
+}
+.tooltip.in {
+    opacity: 1;
+}
+.tooltip-inner {
+  background: #f0f0f0;
+  color: #333;
+  max-width: 200px;
+  width: 190px;
+  text-align: left;
+}
+.tooltip-inner {
+    margin: 5px 0;
+    font-size: 13px;
 }
 .room-package .des-package {}
 .view-more-package {
@@ -9944,6 +9981,239 @@ select:focus {
 }
 h4.hotel-name{
     font-size: 16px;
+}
+
+/* Process Evaluate */
+.block-process-evaluate .panel-body {
+  padding: 0;
+}
+.block-process-evaluate .panel-body .block-content {
+  padding: 15px;
+}
+.block-process-evaluate .block-title {
+  font-family: "AndesRounded", sans-serif;
+  width: 100%;
+  height: 43px;
+  line-height: 43px;
+  border-top: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
+  border-bottom: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #660033;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+  background: url(../../assets/img/backgound-pos2.jpg);
+}
+.block-process-evaluate .circle-evaluate {
+  background: #ccc;
+  margin-left: 25%;
+}
+.block-process-evaluate .circle-evaluate:after {
+  top: .04em;
+  left: .04em;
+  width: .92em;
+  height: .92em;
+  background-color: #660033;
+}
+.block-process-evaluate .circle-evaluate>span {
+  color: #fff;
+  line-height: normal;
+  margin-top: 22px;
+}
+.block-process-evaluate .circle-evaluate>span small {
+  display: block;
+}
+.block-process-evaluate .circle-evaluate>span small:first-child {
+  font-size: 45px;
+  line-height: 1;
+}
+.block-process-evaluate .circle-evaluate>span small:last-child {
+  font-size: 30px;
+  line-height: 1;
+}
+.block-process-evaluate .circle-evaluate>span hr {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border: 0;
+  width: 60px;
+  border-top: 1px solid #eee;
+}
+.block-process-evaluate .circle-evaluate:hover>span {
+  width: 100%;
+  line-height: normal;
+  font-size: .2em;
+  color: #fff;
+}
+
+.block-process-evaluate label.text-left {
+  font-family: 'Arial';
+  font-size: 14px;
+  color: #333333;
+  font-weight: normal;
+}
+.block-process-evaluate .progress {
+  height: 17px;
+  margin-bottom: 15px;
+  margin-top: 0;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 0;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  margin-left: 0;
+}
+.block-process-evaluate .progress .progress-bar {
+  background-color: #cccccc;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.block-process-evaluate .group-btn .btn {
+  display: block;
+  width: 135px;
+  margin: 0 auto;
+}
+.block-process-evaluate .group-btn .btn-write-evu {
+  color: #fff;
+  background-color: #660033;
+  border-color: #660033;
+  margin-bottom: 15px;
+}
+.block-process-evaluate .group-btn .btn-view-evu {
+  color: #333333;
+  background-color: #cccccc;
+  border-color: #cccccc;
+}
+
+/* Block Table Rooms */
+.block-rooms .table-customize {
+  border: 1px solid #ddd;
+  background-color: transparent;
+}
+.table > thead > tr > th, .table > tbody > tr > th,
+.table > tfoot > tr > th, .table > thead > tr > td,
+.table > tbody > tr > td, .table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+  position: relative;
+}
+.table-customize > thead > tr > th,
+.table-customize > tbody > tr > th,
+.table-customize > tfoot > tr > th,
+.table-customize > thead > tr > td,
+.table-customize > tbody > tr > td,
+.table-customize > tfoot > tr > td {
+  border: 1px solid #ddd;
+}
+.table-customize > thead > tr > th {
+  background: #e1e1e1;
+}
+.block-rooms .zoom-gallery img {
+  width: 135px;
+  height: auto;
+}
+.block-rooms .zoom-gallery,
+.block-rooms .info {
+  display: inline-block;
+  vertical-align: baseline;
+  position: relative;
+}
+.block-rooms .zoom-gallery .wishlist {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  z-index: 2;
+  line-height: 30px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  color: #fff!important;
+}
+.block-rooms .zoom-gallery .wishlistt a {
+  color: #fff;
+  cursor: pointer;
+  display: block;
+}
+.block-rooms .zoom-gallery .wishlist:before {
+  font-style: normal;
+  font-weight: normal;
+  font-family: "icon_set_1";
+  font-size: 20px;
+  content: "\72";
+  color: #fff;
+  position: absolute;
+  left: 5px;
+  top: 2px;
+}
+.block-rooms .info {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.block-rooms .info > * {
+  margin-top: 5px;
+}
+.block-rooms .info .block-people h5:first-child {
+  margin-top: 5px;
+}
+.block-rooms .item-countroom h5,
+.block-rooms .item-countroom select {
+  display: inline-block;
+  width: 48%;
+}
+.block-rooms .item-countroom select {
+    color: #660033;
+}
+.block-rooms .item-countroom:first-child {
+  margin-bottom: 10px;
+}
+.block-rooms .block-price {
+  padding-left: 30px;
+}
+.block-rooms .block-price .sale {
+  width: 39px;
+  height: 38px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.block-rooms .block-price .sale .hover {
+  width: 175px;
+  border: 1px solid #ff0101;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 50px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.block-rooms .block-price .sale .hover p {
+  font-size: 12px;
+  color: #666;
+}
+.block-rooms .block-price .sale .hover p:first-child {
+  color: #ff0101;
+  font-size: 13px;
+}
+.block-rooms .block-price .sale:hover .hover {
+  left: 30px;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
 }
 
 
