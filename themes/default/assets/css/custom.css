@@ -10287,6 +10287,8 @@ h4.hotel-name{
 .btn-combo22 {
   background: #666666;
 }
+
+/* Checkbox style */
 .checkbox-style2 input[type='checkbox'],
 .checkbox-style3 input[type='checkbox'] {
   display: none;
@@ -10308,6 +10310,22 @@ h4.hotel-name{
 }
 .checkbox-style3 input[type='checkbox']:checked + span {
   background: url(../../assets/img/checked3.png) no-repeat;
+}
+
+/* Radio style */
+.raido-style1 input[type='radio'] {
+  display: none;
+  margin: 0;
+}
+.raido-style1 input[type='radio'] + span {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(../../assets/img/check3.png) no-repeat center left;
+}
+.raido-style1 input[type='radio']:checked + span {
+  background: url(../../assets/img/checked3.png) no-repeat center left;
 }
 .block-question-info {
   position: relative;
