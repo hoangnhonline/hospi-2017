@@ -25,6 +25,7 @@
             }
 
             $.post(url, $(".offer-form").serialize(), function(response) {
+                window.location.reload();
                 if ($.trim(response) != "done") {
                     $(".output").html(response);
                 } else {
@@ -156,12 +157,13 @@
                         </div>
                         <?php 
                         $phuthuArr = $phuthu;
+                        //var_dump($phuthuArr);die;
                         ?>
                         <div class="col-md-10">
                             <fieldset class="scheduler-border">
                                 <legend class="scheduler-border">PHỤ THU</legend>
                                 <?php 
-                                for($i = 0; $i < (count($phuthuArr)-1); $i++){
+                                for($i = 0; $i <= (count($phuthuArr)-1); $i++){
                                 ?>
                                 <div class="row form-group">
                                     <input type="hidden" name="phu_thu_id[]" value="<?php echo $phuthuArr[$i]->id; ?>">
@@ -178,9 +180,8 @@
                                     </label>
                                 </div>
                                 <?php } ?>
-                                <?php 
-                                $max = !empty($phuthuArr) ? 5 : 4;
-                                for($i = 0; $i<= ($max-count($phuthuArr)); $i++){
+                                <?php                                 
+                                for($i = 0; $i< (5-count($phuthuArr)); $i++){
                                 ?>
                                 <div class="row form-group">
                                      <input type="hidden" name="phu_thu_id[]" value="">

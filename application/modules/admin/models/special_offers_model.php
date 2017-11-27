@@ -128,12 +128,15 @@ class Special_offers_model extends CI_Model
 		if($this->input->post('offer_type') == 2){
 			$phuthuArr = $this->input->post('phu_thu');
 			$phuthugiaArr = $this->input->post('phu_thu_gia');
-			$phuthushowArr = $this->input->post('phu_thu_show');
+			$phuthushowArr = $this->input->post('phu_thu_show');		
+			//var_dump($phuthuArr, $phuthugiaArr, $phuthushowArr);die;
+
 			if(!empty($phuthuArr)){
 				foreach($phuthuArr as $key => $loaiphuthu){
 					if($loaiphuthu != ""){
 						$phuthugia = isset($phuthugiaArr[$key]) ? $phuthugiaArr[$key] : 0;
 						$phuthushow = isset($phuthushowArr[$key]) ? 1 : 0;
+						
 						$this->db->insert('phuthucombo', ['offer_id' => $offerid, 'name' => $loaiphuthu, 'price' => $phuthugia, 'show_price' => $phuthushow]);
 					}
 				}
