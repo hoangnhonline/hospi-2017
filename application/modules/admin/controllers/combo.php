@@ -278,6 +278,7 @@ class Combo extends MX_Controller
 			$this->data['locations'] = $this->locations_model->getLocationsBackend();
 			$this->data['hotels'] = $this->locations_model->getRelatedhotels();
 			$this->data['phuthu'] = $this->phuthucombo_model->search(['offer_id' => $this->data['offerdata'][0]->offer_id], 1000, 0);			
+			//var_dump($this->data['phuthu']);die;
 			$this->load->view('template', $this->data);
 		}
 	}
