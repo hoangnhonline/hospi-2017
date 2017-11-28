@@ -9915,16 +9915,43 @@ content: url(../../assets/img/collapsearrow.png);
   font-size: 13px;
   color: #999;
 }
-.tooltip.in {
-    opacity: 1;
+.block-price .block-price-info {
+  position: relative;
 }
-.tooltip-inner {
+.block-price .block-price-info .block-info-price-rooms {
+  position: absolute;
+  top: -100px;
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
   background: #f0f0f0;
   color: #333;
   max-width: 200px;
   width: 190px;
-  text-align: left;
+  z-index: 9;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
 }
+.block-price .block-price-info .block-info-price-rooms {
+  margin: 5px 0;
+  font-size: 13px;
+}
+.block-price .block-price-info:hover .block-info-price-rooms {
+  top: 10px;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+.room-package .des-package {}
+.view-more-package {
+  font-size: 13px;
+  color: #666666;
+  text-decoration: underline;
+}
+
 .tooltip-inner {
     margin: 5px 0;
     font-size: 13px;
