@@ -338,27 +338,43 @@
     </div>
     <!-- END OF LIST CONTENT-->
 <script type="text/javascript">
-    $('ul.pagination li a').attr('href', 'javascript:;');
-    $(document).on('click', 'ul.pagination li a', function(){
-        var page = parseInt($(this).html()); 
-        ajaxSearchPagination(page);
-    });
-    function ajaxSearchPagination(page){ // hoangnh
-    
-    $.ajax({
-        url : $('#ajaxurl').val() + '/' + page,
-        type : "GET",       
-        beforeSend : function(){
+    $('ul.pagination li a').each(function() {
+        $(this)
+            .attr('href', 'javascript:;')
+            .on('click', function(evt) {
+                evt.preventDefault();
 
-            $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
-            $('html, body').animate({
-                scrollTop: $("#right-content").offset().top
-            }, 500);
-        },
-        data : $('formSearchAjax').serialize(),
-        success : function(data){
-            $('#right-content').html(data);           
-        }
+                var page = $(this).html();
+
+                if (isNaN(page)) {
+                    if (page == '«') {
+                        page = parseInt($('ul.pagination li.active a').html()) - 1;
+                    } else {
+                        page = parseInt($('ul.pagination li.active a').html()) + 1;
+                    }
+                }
+
+                ajaxSearchPagination(parseInt(page));
+            });
     });
-}    
+
+    function ajaxSearchPagination(page){ // hoangnh
+        var link = window.location.href;
+        link = link.replace('/hotels/search', '/hotels/searchajax');
+        link = link + '&per_page=' + page;
+
+        $.ajax({
+            url : link,
+            type : "get",
+            beforeSend : function(){
+                $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+                $('html, body').animate({
+                    scrollTop: $("#right-content").offset().top
+                }, 500);
+            },
+            success : function(data){
+                $('#right-content').html(data);
+            }
+        });
+    }
 </script>
