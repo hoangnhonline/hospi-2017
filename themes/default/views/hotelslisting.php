@@ -1087,135 +1087,137 @@
         ajaxSearch(obj);
     });
 </script>
-<script type='text/javascript'>//<![CDATA[
+<script type='text/javascript'>
     $(window).load(function(){
-    var tally = new Object();
-    var idx;
-    
-    $.widget("custom.catcomplete", $.ui.autocomplete, {
-        _renderMenu: function(ul, items) {
-            var self = this,currentCategory = "";
-            $.each(items, function(index, item) {
-                if (item.category != currentCategory) {
-                    /*ul.append("<li class='ui-autocomplete-category'>" + item.category + "(<span id='autocomplete_"+item.category+"'></span>)</li>");*/
-                    ul.append("<li class='ui-autocomplete-category'>" + item.category + "</li>");
-                    currentCategory = item.category;
-                }
-                if(currentCategory!=''){
-                    tally[currentCategory] = (tally[currentCategory]==undefined) ? 1 : tally[currentCategory]+1;}
-                self._renderItem(ul, item);
-                $(ul).append("<span title='" + item.address + "' class='desc'>" + item.desc + " <i class='fa fa-map-marker' aria-hidden='true'></i></span><div style='clearfix'></div>");
-    
-            });
-            for(category in tally){
-                $('#autocomplete_'+category).html(tally[category]);
-            };
-        }
-    
-    });
-    
-    
-    var data = [
-    
-                <?php $locationlistings = getLocations();
-        foreach($locationlistings as $list){
-            echo '{ label: "'.$list->location.'", category: "Bạn muốn đặt khách sạn ở đâu", modType: "location", id: "'.$list->id.'", desc: "Tỉnh thành", address: ""},';
-        } ?>
-                <?php $hotellistings = getHotels();
-        foreach($hotellistings->locations as $hotel){
-        echo '{ label: "'.$hotel->hotel_title.'", category: "Khách sạn", modType: "hotel", id: "'.$hotel->hotel_id.'", desc: "'.$hotel->city.'", address: "'.$hotel->address.' - '.$hotel->near.'"},';
-        } ?>
-    ];
-    
-    $( "#search" ).catcomplete({
-        source: data,
-        appendTo: "#autocomlete-container",
-        select: function(event, ui) {
-                $('#search').val(ui.item.label);
-                // and place the item.id into the hidden textfield called 'searching'.
-                $('#searching').val(ui.item.id);
-                $('#modType').val(ui.item.modType);
-                    return false;
-            }
-    });    
-    $('input.filter').on('change', function (event) { //hoangnh                
-        ajaxSearch($(this));
-    });  
-    $('input.filter-price').on('change', function (event) { //hoangnh
-        var obj = $(this);        
-        if( obj.prop('checked') == true ){
-            $('.filter-price').prop('checked', false);
-            obj.prop('checked', true);
-        }else{
-            $('.filter-price').prop('checked', false);
-        }
-        ajaxSearch($(this));
-    });  
-    $('input.filter-near').on('change', function (event) { //hoangnh
-        var obj = $(this);        
-        if( obj.prop('checked') == true ){
-            $('.filter-near').prop('checked', false);
-            obj.prop('checked', true);
-        }else{
-            $('.filter-near').prop('checked', false);
-        }
-        ajaxSearch($(this));
-    });
-    $('ul.pagination li a').each(function() {
-        $(this)
-            .attr('href', 'javascript:;')
-            .on('click', function(evt) {
-                evt.preventDefault();
+        var tally = new Object();
+        var idx;
 
-                var page = $(this).html();
-
-                if (isNaN(page)) {
-                    if (page == '«') {
-                        page = parseInt($('ul.pagination li.active a').html()) - 1;
-                    } else {
-                        page = parseInt($('ul.pagination li.active a').html()) + 1;
+        $.widget("custom.catcomplete", $.ui.autocomplete, {
+            _renderMenu: function(ul, items) {
+                var self = this,currentCategory = "";
+                $.each(items, function(index, item) {
+                    if (item.category != currentCategory) {
+                        /*ul.append("<li class='ui-autocomplete-category'>" + item.category + "(<span id='autocomplete_"+item.category+"'></span>)</li>");*/
+                        ul.append("<li class='ui-autocomplete-category'>" + item.category + "</li>");
+                        currentCategory = item.category;
                     }
+                    if(currentCategory!=''){
+                        tally[currentCategory] = (tally[currentCategory]==undefined) ? 1 : tally[currentCategory]+1;}
+                    self._renderItem(ul, item);
+                    $(ul).append("<span title='" + item.address + "' class='desc'>" + item.desc + " <i class='fa fa-map-marker' aria-hidden='true'></i></span><div style='clearfix'></div>");
+
+                });
+                for(category in tally){
+                    $('#autocomplete_'+category).html(tally[category]);
+                };
+            }
+
+        });
+
+
+        var data = [
+
+                    <?php $locationlistings = getLocations();
+            foreach($locationlistings as $list){
+                echo '{ label: "'.$list->location.'", category: "Bạn muốn đặt khách sạn ở đâu", modType: "location", id: "'.$list->id.'", desc: "Tỉnh thành", address: ""},';
+            } ?>
+                    <?php $hotellistings = getHotels();
+            foreach($hotellistings->locations as $hotel){
+            echo '{ label: "'.$hotel->hotel_title.'", category: "Khách sạn", modType: "hotel", id: "'.$hotel->hotel_id.'", desc: "'.$hotel->city.'", address: "'.$hotel->address.' - '.$hotel->near.'"},';
+            } ?>
+        ];
+
+        $( "#search" ).catcomplete({
+            source: data,
+            appendTo: "#autocomlete-container",
+            select: function(event, ui) {
+                    $('#search').val(ui.item.label);
+                    // and place the item.id into the hidden textfield called 'searching'.
+                    $('#searching').val(ui.item.id);
+                    $('#modType').val(ui.item.modType);
+                        return false;
                 }
+        });
+        $('input.filter').on('change', function (event) { //hoangnh
+            ajaxSearch($(this));
+        });
+        $('input.filter-price').on('change', function (event) { //hoangnh
+            var obj = $(this);
+            if( obj.prop('checked') == true ){
+                $('.filter-price').prop('checked', false);
+                obj.prop('checked', true);
+            }else{
+                $('.filter-price').prop('checked', false);
+            }
+            ajaxSearch($(this));
+        });
+        $('input.filter-near').on('change', function (event) { //hoangnh
+            var obj = $(this);
+            if( obj.prop('checked') == true ){
+                $('.filter-near').prop('checked', false);
+                obj.prop('checked', true);
+            }else{
+                $('.filter-near').prop('checked', false);
+            }
+            ajaxSearch($(this));
+        });
+        $('ul.pagination li a').each(function() {
+            $(this)
+                .attr('href', 'javascript:;')
+                .on('click', function(evt) {
+                    evt.preventDefault();
 
-                ajaxSearchPagination(parseInt(page));
-            });
-    });
-});//]]>
-function ajaxSearch(obj){ // hoangnh
-    var form = obj.parents('form');
-    $.ajax({
-        url : $('#ajaxurl').val(),
-        type : "GET",       
-        beforeSend : function(){
+                    var page = $(this).html();
 
-            $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
-            $('html, body').animate({
-                scrollTop: $("#right-content").offset().top
-            }, 500);
-        },
-        data : form.serialize(),
-        success : function(data){
-            $('#right-content').html(data);           
-        }
-    });
-}  
-function ajaxSearchPagination(page){ // hoangnh
-    var link = window.location.href;
-    link = link.replace('/hotels/search', '/hotels/searchajax');
-    link = link + '&per_page=' + page;
+                    if (isNaN(page)) {
+                        if (page == '«') {
+                            page = parseInt($('ul.pagination li.active a').html()) - 1;
+                        } else {
+                            page = parseInt($('ul.pagination li.active a').html()) + 1;
+                        }
+                    }
 
-    $.ajax({
-        url : link,
-        type : "get",
-        beforeSend : function(){
-            $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
-            $('html, body').animate({
-                scrollTop: $("#right-content").offset().top
-            }, 500);
-        },
-        success : function(data){
-            $('#right-content').html(data);
-        }
+                    ajaxSearchPagination(parseInt(page));
+                });
+        });
     });
-}    
+
+    function ajaxSearch(obj){ // hoangnh
+        var form = obj.parents('form');
+        $.ajax({
+            url : $('#ajaxurl').val(),
+            type : "GET",
+            beforeSend : function(){
+
+                $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+                $('html, body').animate({
+                    scrollTop: $("#right-content").offset().top
+                }, 500);
+            },
+            data : form.serialize(),
+            success : function(data){
+                $('#right-content').html(data);
+            }
+        });
+    }
+
+    function ajaxSearchPagination(page){ // hoangnh
+        var link = window.location.href;
+        link = link.replace('/hotels/search', '/hotels/searchajax');
+        link = link + '&per_page=' + page;
+
+        $.ajax({
+            url : link,
+            type : "get",
+            beforeSend : function(){
+                $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');
+                $('html, body').animate({
+                    scrollTop: $("#right-content").offset().top
+                }, 500);
+            },
+            success : function(data){
+                $('#right-content').html(data);
+            }
+        });
+    }
 </script>

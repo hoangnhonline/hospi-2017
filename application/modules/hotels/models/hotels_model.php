@@ -1102,6 +1102,12 @@ class Hotels_model extends CI_Model
             $where = "((pt_hotels.hotel_sale_from < " . time() . " AND pt_hotels.hotel_sale_to > " . time() . ") OR pt_hotels.hotel_sale_forever = 'forever')";
             $this->db->where($where);
         }
+        /*if (!empty($uudai)) {
+            $this->db->where("exists(select hotel_offers.offer_id from hotel_offers join pt_special_offers on hotel_offers.offer_id = pt_special_offers.offer_id join pt_hotels on hotel_offers.hotel_id = pt_hotels.hotel_id where pt_special_offers.offer_status = 'Yes' and pt_special_offers.offer_type = 1)");
+        }
+        if (!empty($honeymoon)) {
+            $this->db->where("exists(select hotel_offers.offer_id from hotel_offers join pt_special_offers on hotel_offers.offer_id = pt_special_offers.offer_id join pt_hotels on hotel_offers.hotel_id = pt_hotels.hotel_id where pt_special_offers.offer_status = 'Yes' and pt_special_offers.offer_type = 3)");
+        }*/
         if (!empty($pickup)) {
             $this->db->where('pt_hotels.hotel_pickup', 'Yes');
         }
@@ -1109,7 +1115,6 @@ class Hotels_model extends CI_Model
             $near = str_replace("+", ' ', $near);
             $this->db->like('pt_hotels.near', $near);
         }
-
         //$where  = $this->db->escape(" FIND_IN_SET(pt_hotels.hotel_id,pt_special_offers.hotel_related) <> 0 ");
         //$this->db->join('pt_special_offers', 'pt_hotels.hotel_id = pt_special_offers.related_hotels', false);
 
@@ -1118,9 +1123,11 @@ class Hotels_model extends CI_Model
         } else {
             $query = $this->db->get('pt_hotels');
         }
+        //var_dump('<pre>', $this->db->last_query());die;
         //   $this->db->db_debug = TRUE;
         $data['all'] = $query->result();
         $data['rows'] = $query->num_rows();
+
         return $data;
 
     }
