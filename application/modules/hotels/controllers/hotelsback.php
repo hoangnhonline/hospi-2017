@@ -837,7 +837,7 @@ class hotelsback extends MX_Controller
 					$detailPrice = $this->rooms_model->getDetailPrice($price_id);
 					//var_dump($detailPrice);die;
 				}
-				//$this->rooms_model->updateAllPrice();
+				//$this->rooms_model->updateAllRooms();die;
 				//die('123');
 				$this->data['prices'] = $this->rooms_model->getRoomPrices($editroom);
 				$this->data['room'] = $this->rooms_model->getRoomData($editroom);

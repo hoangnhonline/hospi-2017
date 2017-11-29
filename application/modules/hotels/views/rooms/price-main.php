@@ -6,9 +6,10 @@
     Cập nhật giá phòng
     <?php }
     ?>
-  </div>
+  </div>  
   <div class="panel-body panel-collapse <?php if(empty($priceExtraDetail) && empty($priceKmDetail)){ ?> in <?php }else{ echo "collapse"; } ?>" id="collapse1">
   <form action="" method="POST" >  
+    <input type="hidden" name="hotel_id" value="<?php echo $roomDetail->hotel_id; ?>">
     <div class="col-md-3">
       <div class="form-group">
         <label class="required">Từ ngày</label>
