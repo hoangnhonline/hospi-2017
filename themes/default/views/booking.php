@@ -25,7 +25,7 @@
                                     <div class="">
                                         
                                         <label class="checkbox-inline checkbox-style2" for="nguoikhac">
-                                            <input type="checkbox" value="Yes" name="nguoikhac"> 
+                                            <input type="checkbox" value="Yes" id="nguoikhac" name="nguoikhac"> 
                                             <span></span>
                                             Đặt cho người khác
                                         </label>
@@ -43,9 +43,9 @@
                                    
                                 <div class="form-group col-md-12">
                                     <p class="label-style">
-                                        <label class="checkbox-inline checkbox-style2" for="nguoikhac">
+                                        <label class="checkbox-inline checkbox-style2" for="sent_invoice">
 
-                                            <input type="checkbox" name="sent_invoice" value="Yes" class="check_ShowInput">
+                                            <input type="checkbox" name="sent_invoice" id="sent_invoice" value="Yes" class="check_ShowInput">
                                             <span></span>
                                             Bạn cần xuất hóa đơn
                                         </label>
@@ -226,7 +226,7 @@
                                     $room_quantity = json_decode($room_quantity, true);
                                     $extra_beds = json_decode($extra_beds, true);                                    
                                    
-                                        $priceTotal = 0;
+                                        $priceTotal = $so_giuong_phu = 0;
                                     if(!empty($room)){
 
                                         $priceExtraBedTotal = 0;
@@ -239,7 +239,7 @@
                                         }
                                         $priceOne = $priceOne/count($rDetail->Info['detail']);
                                         $priceExtraBedTotal+= $priceExtraBed*$extra_beds[$roomId];
-
+                                        $so_giuong_phu += $extra_beds[$roomId];
                                         
                                         
                                         $quantity = $room_quantity[$roomId];
@@ -261,6 +261,8 @@
                                     <li>
                                         <span class="k">Giường phụ:</span>
                                         <span class="v"><?php echo number_format($priceExtraBedTotal); ?></span>
+                                        <input type="hidden" name="so_giuong_phu" value="<?php echo ($so_giuong_phu); ?>">
+                                        <input type="hidden" name="phi_giuong_phu" value="<?php echo ($priceExtraBedTotal); ?>">
                                     </li>
                                     <li>
                                         <span class="k">Chi phí khác:</span>
@@ -282,7 +284,7 @@
                                     <li style="border: none;">
                                         <strong class="clearfix" style="margin-bottom: 3px; display: block;">Nhập mã giảm giá</strong>
                                         <div class="k">
-                                            <input type="input" name="" class="form-control coupon" placeholder="">
+                                            <input type="input" name="coupon_code" class="form-control coupon" placeholder="">
                                             <i id="result_copoun" style="color: #999999; display:block; font-size: 12px; margin-top: 3px;"></i>
                                         </div>
                                         <div class="v">
@@ -336,9 +338,9 @@
                       <input type="hidden" id="couponid" name="couponid" value="" />
                       <input type="hidden" id="btype" name="btype" value="<?php echo $appModule;?>" />
                       <?php if($appModule == "hotels"){ ?>
-                      <input type="hidden" name="subitemid" value="<?php echo $room_id;?>" />
-                      <input type="hidden" name="roomscount" value="<?php echo $room_quantity;?>" />
-                      <input type="hidden" name="bedscount" value="<?php echo $extra_beds;?>" />
+                      <input type="hidden" name="subitemid" value="<?php echo json_encode($room_id);?>" />
+                      <input type="hidden" name="roomscount" value="<?php echo json_encode($room_quantity);?>" />
+                      <input type="hidden" name="bedscount" value="<?php echo json_encode($extra_beds);?>" />
                       <input type="hidden" name="checkin" value="<?php echo $checkin;?>" />                  
                       <?php } ?>
                 </form>
@@ -650,8 +652,7 @@ $(".applycoupon").on("click",function(){
           $(".applycoupon").hide();
           if(resp.type == '%'){
             var tong_chua_giam = $('#tong_chua_giam').val();
-            var giam_gia = tong_chua_giam*resp.value/100;
-            alert(giam_gia);
+            var giam_gia = tong_chua_giam*resp.value/100;            
             $('#giam_gia').val(giam_gia);
             $('#giam_gia_span').html(addCommas(giam_gia) + ' VND');
             $('#tong_thanh_toan').val(tong_chua_giam-giam_gia);

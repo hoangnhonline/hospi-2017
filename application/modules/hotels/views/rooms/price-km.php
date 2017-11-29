@@ -9,6 +9,7 @@
   </div>
   <div class="panel-body panel-collapse collapse <?php if(!empty($priceKmDetail)){ ?> in <?php } ?>" id="collapse2">
   <form action="" method="POST" >
+    <input type="hidden" name="hotel_id" value="<?php echo $roomDetail->hotel_id; ?>">
     <div class="col-md-2">
         <div class="form-group">
           <label class="required">Kiểu khuyến mãi</label>

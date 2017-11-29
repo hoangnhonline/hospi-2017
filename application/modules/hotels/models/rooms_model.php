@@ -745,6 +745,7 @@ class Rooms_model extends CI_Model
     $sat = floatval($this->replaceCommas($this->input->post('sat')));
     $sun = floatval($this->replaceCommas($this->input->post('sun')));
     $type = $this->input->post('type');
+    $hotel_id = $this->input->post('hotel_id');
     $bed_price = floatval($this->replaceCommas($this->input->post('bedcharges')));
     $data = array(
       'room_id' => $roomid,
@@ -771,10 +772,10 @@ class Rooms_model extends CI_Model
     
     $this->db->insert('pt_rooms_prices', $data);
     //insert price detail
-    $this->insertPriceDetail($roomid, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $this->input->post('type_apply'), $bed_price);
+    $this->insertPriceDetail($hotel_id,$roomid, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $this->input->post('type_apply'), $bed_price);
     $this->session->set_flashdata('flashmsgs', "Thêm giá thành công.");
   }
-  public function insertPriceDetail($room_id, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $type_apply,$bed_price){    
+  public function insertPriceDetail($hotel_id,$room_id, $datefrom, $dateto, $mon, $tue, $wed, $thu, $fri, $sat, $sun, $type, $type_apply,$bed_price){    
     $arrDate = $this->createDateRangeArray($datefrom, $dateto);
     foreach($arrDate as $date){
       $thuOfDate = strtolower(date('D', strtotime($date)));
@@ -802,6 +803,7 @@ class Rooms_model extends CI_Model
            break;
        }
        $arrUpdate['room_id'] = $room_id;
+       $arrUpdate['hotel_id'] = $hotel_id;
        $arrUpdate['date_use'] = $date;
        if($type == 1){
           $arrUpdate['price']  = $price;
@@ -1302,8 +1304,27 @@ class Rooms_model extends CI_Model
     $i = 0;
     foreach($allprice as $row){      
       $i++;
-     $this->insertPriceDetail($row->room_id, $row->date_from, $row->date_to, $row->mon, $row->tue, $row->wed, $row->thu, $row->fri, $row->sat, $row->sun, $row->type, $row->type_apply, $row->extra_bed_charge);
+     $this->insertPriceDetail($hotel_id, $row->room_id, $row->date_from, $row->date_to, $row->mon, $row->tue, $row->wed, $row->thu, $row->fri, $row->sat, $row->sun, $row->type, $row->type_apply, $row->extra_bed_charge);
       echo $i."--".$row->room_id;      
     }
   }
+  public function updateAllRooms(){
+    set_time_limit(0);
+    $allprice = $this->db->query("SELECT pt_room_prices_detail.room_id from pt_room_prices_detail GROUP by room_id")->result();
+    $i = 0;
+    foreach($allprice as $row){      
+      $i++;
+      echo $i . "---" .$row->room_id;
+      echo "<hr>";
+      $detail = $this->db->query("SELECT room_hotel FROM pt_rooms WHERE room_id= ".$row->room_id)->row(0);
+      $hotel_id = $detail->room_hotel;
+
+      $this->db->where('room_id', $row->room_id);
+      $this->db->update('pt_room_prices_detail', ['hotel_id' => $hotel_id]);
+
+
+      
+    }
+  }
+
 }

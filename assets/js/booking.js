@@ -99,9 +99,9 @@
      $('html, body').animate({
          scrollTop: $('body').offset().top - 100
      }, 'slow');
-     $(".completebook").fadeOut("fast");
+     //$(".completebook").fadeOut("fast");
      //$("#waiting").html("Please Wait...");
-     $('.container').css('opacity', '0.5');
+     //$('.container').css('opacity', '0.5');
     // $("#wait").show();
      $.ajax({
       url : url + "admin/ajaxcalls/processBooking" + formname,

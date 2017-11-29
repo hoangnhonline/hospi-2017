@@ -253,6 +253,8 @@
           }
 
           function do_booking($userid) {
+              echo "<pre>";
+              print_r($this->input->post());die;
               $error = true;
               $this->load->library('currconverter');
               $itemid = $this->input->post('itemid');
@@ -261,7 +263,7 @@
               $checkout = $this->input->post('checkout');
               $roomscount = $this->input->post('roomscount');
               $bookingtype = $this->input->post('btype');
-              $extras = $this->input->post('extras');
+              
               $extrabeds = $this->input->post('bedscount');
               $paymethod = $this->input->post('checkout-type');
               $honeymoon = $this->input->post('honeymoon');
@@ -284,34 +286,14 @@
               $refno = random_string('numeric', 7);
               if ($bookingtype == "hotels") {
                   $refno = "HP".random_string('numeric', 7);
-                  $this->load->library('hotels/hotels_lib');
-                  $bookingData = json_decode($this->hotels_lib->getUpdatedDataBookResultObject($itemid, $roomid, $checkin, $checkout, $roomscount, $extras, $extrabeds));
-                  if ($bookingData->stay < 1) {
-                      $error = true;
-                  }
-                  else {
-                      $error = false;
-                  }
+                  $this->load->library('hotels/hotels_lib');                  
               } // add code desktop
 
-              // $grandtotal = $this->currconverter->convertPriceFloat($bookingData->grandTotal);
-              $grandtotal = $this->currconverter->removeComma($bookingData->grandTotal);
               $checkin = databaseDate($checkin);
               $checkout = databaseDate($checkout);
-              //$deposit = $this->currconverter->convertPriceFloat($bookingData->depositAmount);
-              $deposit = $this->currconverter->removeComma($bookingData->depositAmount);
-              $tax = $this->currconverter->removeComma($bookingData->taxAmount);
-              $paymethodfee = 0;
-              //$this->currconverter->convertPriceFloat($bookingData->paymethodFee);
-              $extrasTotalFee = $this->currconverter->removeComma($bookingData->extrasInfo->extrasTotalFee);
-              $currCode = $bookingData->currCode;
-              $currSymbol = $bookingData->currSymbol;
-              $subitem = json_encode($bookingData->subitem);
-              $extras = json_encode($bookingData->extrasInfo->extrasIndividualFee);
+
               $adults = $this->input->post('adults');
-              $child = $this->input->post('children');
-              $stay = $bookingData->stay;
-              $extrabedscharges = $this->currconverter->removeComma($bookingData->extraBedCharges);
+              $child = $this->input->post('children');            
 
               $expiry = $this->data['app_settings'][0]->booking_expiry * 86400;
 
@@ -319,21 +301,10 @@
               $couponCode = 0;
 
               $coupon = $this->input->post('couponid');
+              $coupon_code = "";
               if($coupon > 0){
-
-                $cResult = pt_applyCouponDiscount($coupon, $grandtotal);
-                $cResultDeposit = pt_applyCouponDiscount($coupon, $deposit);
-                $cResultTax = pt_applyCouponDiscount($coupon, $tax);
-
-                $couponRate = $cResult->value;
-                $couponCode = $cResult->code;
-
-                $grandtotal = $cResult->amount;
-                $deposit = $cResultDeposit->amount;
-                $tax = $cResultTax->amount;
-
                 $this->updateCoupon($coupon);
-
+                $coupon_code = $this->input->post('coupon_code');                
               }
 
               if (!$error) {
@@ -341,8 +312,7 @@
                     'booking_ref_no' => $refno,
                     'booking_type' => $bookingtype,
                     'booking_item' => $itemid,
-                    'booking_subitem' => $subitem,
-                    'booking_extras' => $extras,
+                    'booking_subitem' => $subitem,                    
                     'booking_date' => time() ,
                     'booking_expiry' => time() + $expiry,
                     'booking_user' => $userid,
@@ -367,14 +337,13 @@
                     'sentto' => $sentto,
                     'booking_deposit' => $deposit,
                     'booking_tax' => $tax,
-                    'booking_paymethod_tax' => $paymethodfee,
-                    'booking_extras_total_fee' => $extrasTotalFee,
-                    'booking_curr_code' => $currCode,
-                    'booking_curr_symbol' => $currSymbol,
-                    'booking_extra_beds' => $extrabeds,
-                    'booking_extra_beds_charges' => $extrabedscharges,
-                    'booking_coupon_rate' => $couponRate,
-                    'booking_coupon' => $couponCode,
+                    'booking_paymethod_tax' => 0,                    
+                    'booking_curr_code' => 'VND',
+                    'booking_curr_symbol' => 'vnd',
+                    'booking_extra_beds' => $this->input->post('so_giuong_phu'),
+                    'booking_extra_beds_charges' => $this->input->post('phi_giuong_phu'),
+                    'booking_coupon_rate' => $this->input->post('giam_gia'),
+                    'booking_coupon' => $coupon_code,
                     'booking_guest_info' => $passportInfo
                   );
                   $this->db->insert('pt_bookings', $data);
