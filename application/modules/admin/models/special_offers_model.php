@@ -354,9 +354,9 @@ class Special_offers_model extends CI_Model
 
 	// / List all offers on front listings page
 
-	function list_specialOffers_front($perpage = null, $offset = null, $orderby = null, $loc = null)
+	function list_specialOffers_front($perpage = null, $offset = null, $orderby = null, $loc = null, $type = 1)
 	{
-		$data = array();
+	    $data = array();
 
 		// $hotelslist = $lists['hotels'];
 
@@ -375,6 +375,7 @@ class Special_offers_model extends CI_Model
 		$where = "((pt_special_offers.offer_from < " . time() . " AND pt_special_offers.offer_to > " . time() . ") OR pt_special_offers.offer_forever = 'forever')";
 		$this->db->where($where);
 		$this->db->where('pt_special_offers.offer_status', 'Yes');
+        $this->db->where('pt_special_offers.offer_type = ', $type);
 		$this->db->order_by('pt_special_offers.offer_id', 'desc');
 		$query = $this->db->get('pt_special_offers', $perpage, $offset);
 		$data['all'] = $query->result();

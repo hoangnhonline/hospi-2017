@@ -359,8 +359,8 @@ class Hotels_lib
         }
 
         // $hotelslist = $this->hotelswithrooms();
+        $rh = $this->ci->hotels_model->search_hotels_by_text($cityid);
         $hotels = $this->ci->hotels_model->search_hotels_by_text($cityid, $perpage, $offset, $orderby, '', '', $checkin, $checkout);
-        $rh = $this->ci->hotels_model->search_hotels_by_text($cityid, '', '', '', '', '');
 
         $tmp = $this->getResultObject($hotels['all'], null, $orderby, $checkin, $checkout);
 
@@ -1627,7 +1627,7 @@ class Hotels_lib
                 'location' => $this->location,
                 'mapAddress' => $this->mapAddress,
                 'desc' => strip_tags($this->desc),
-                'price' => $h->price,
+                'price' => $curr->convertPrice($h->price, 0),
                 'currCode' => $curr->code,
                 'currSymbol' => $curr->symbol,
                 'price_status' => $h->price_status,

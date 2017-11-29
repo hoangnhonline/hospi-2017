@@ -853,4 +853,11 @@ $L1["0830"]  = "Like để cập nhật cẩm nang du lịch";
 $L1["0831"]  = "Hỗ trợ bạn đọc, khách hàng";
 $L1["0832"]  = "Đăng ký nhận tin  ưu đãi để không bỏ lỡ những ưu đãi lên tới 79% từ HOSPI";
 $L1["0833"]  = "Bản quyền của © Hospi Travel Co.,Ltd";
+$L1["0834"]  = "Ngày bắt đầu";
+$L1["0835"]  = "Ngày kết thúc";
+$L1["0836"]  = "Chương trình chi tiết";
+$L1["0837"]  = "Điều kiện hủy";
+$L1["0838"]  = "Điều kiện sử dụng";
+$L1["0839"]  = "Phụ thu";
+$L1["0840"]  = "Lưu ý";
 

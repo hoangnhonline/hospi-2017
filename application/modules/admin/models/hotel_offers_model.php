@@ -1,5 +1,5 @@
 <?php
-class Hotel_offers_model extends CI_Model {
+class hotel_offers_model extends CI_Model {
 
     function __construct()
     {
