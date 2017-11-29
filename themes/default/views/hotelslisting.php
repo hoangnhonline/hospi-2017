@@ -576,8 +576,8 @@
                         } else {
                         echo $selectedCity;
                         } ?>">
-                    <input type="hidden" name="checkIn" value="<?php echo $checkin; ?>">
-                    <input type="hidden" name="checkOut" value="<?php echo $checkout; ?>">
+                    <input type="hidden" name="checkin" value="<?php echo $checkin; ?>">
+                    <input type="hidden" name="checkout" value="<?php echo $checkout; ?>">
                     <input type="hidden" name="childages" value="<?php echo $childAges; ?>">
                     <input type="hidden" name="adults" value="<?php echo $adults; ?>">
                     <input type="hidden" name="searching" value="<?php echo $selectedLocation; ?>">
@@ -632,11 +632,11 @@
                             } else {
                             echo $selectedCity;
                             } ?>">
-                        <input type="hidden" name="checkIn" value="<?php if (!empty($_GET['checkIn'])) {
-                            echo $_GET['checkIn'];
+                        <input type="hidden" name="checkin" value="<?php if (!empty($_GET['checkin'])) {
+                            echo $_GET['checkin'];
                             } ?>">
-                        <input type="hidden" name="checkOut" value="<?php if (!empty($_GET['checkOut'])) {
-                            echo $_GET['checkOut'];
+                        <input type="hidden" name="checkout" value="<?php if (!empty($_GET['checkout'])) {
+                            echo $_GET['checkout'];
                             } ?>">
                         <input type="hidden" name="childages" value="<?php if (!empty($_GET['childages'])) {
                             echo $_GET['childages'];
@@ -714,23 +714,25 @@
                                 <div class="purple size18 text-center">
                                     <?php if ($item->price > 0) {
                                         if ($item->price_status == 'Yes') {
-                                            ?>
-                                    <b>
-                                        <?php echo $item->price; ?>
-                                        <div class="smalltext">(<?php echo $item->currSymbol; ?>)</div>
-                                    </b>
-                                    <div class="clearfix"></div>
-                                    <hr>
-                                    <?php } else { ?>
-                                    <div class='click-2get-price'>
-                                        <a id="popoverData" href="#emailme<?php echo $item->id; ?>" data-toggle="modal" data-content="<?php echo trans('0800'); ?>" rel="popover" data-placement="top" data-original-title="<?php echo $item->title; ?>" data-trigger="hover">
-                                            <div class="click-a"><?php echo trans('0799'); ?></div>
-                                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <hr>
-                                    <?php } ?>
+                                        ?>
+                                            <b>
+                                                <?php echo $item->price; ?>
+                                                <div class="smalltext">(<?php echo $item->currSymbol; ?>)</div>
+                                            </b>
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <div class='click-2get-price'>
+                                                <a id="popoverData" href="#emailme<?php echo $item->id; ?>" data-toggle="modal" data-content="<?php echo trans('0800'); ?>" rel="popover" data-placement="top" data-original-title="<?php echo $item->title; ?>" data-trigger="hover">
+                                                    <div class="click-a"><?php echo trans('0799'); ?></div>
+                                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <hr>
+                                        <?php } ?>
                                     <?php } ?>
                                    <?php if (pt_is_module_enabled('reviews')) { ?>
                                         <?php if ($item->avgReviews->overall > 0) { ?>
@@ -781,19 +783,19 @@
                                 <?php } ?>
                                 <p class="grey RTL des"><?php echo character_limiter($item->desc, 100); ?></p>
                                 <?php if ($appModule == "hotels") { ?>
-                                <ul class="hotelpreferences go-right hidden-xs">
-                                    <?php $cnt = 0;
-                                        foreach ($item->amenities as $amt) {
-                                            $cnt++;
-                                            if ($cnt <= 10) {
-                                                if (!empty($amt->name)) { ?>
-                                    <img title="<?php echo $amt->name; ?>" data-toggle="tooltip" data-placement="top" style="height:25px;" src="<?php echo $amt->icon; ?>" alt="<?php echo $amt->name; ?>" />
-                                    <?php }
-                                        }
-                                        } ?>
-                                </ul>
-                                <br>
-                                <?php
+                                    <ul class="hotelpreferences go-right hidden-xs">
+                                        <?php $cnt = 0;
+                                            foreach ($item->amenities as $amt) {
+                                                $cnt++;
+                                                if ($cnt <= 10) {
+                                                    if (!empty($amt->name)) { ?>
+                                        <img title="<?php echo $amt->name; ?>" data-toggle="tooltip" data-placement="top" style="height:25px;" src="<?php echo $amt->icon; ?>" alt="<?php echo $amt->name; ?>" />
+                                        <?php }
+                                            }
+                                            } ?>
+                                    </ul>
+                                    <br>
+                                    <?php
                                     if ($item->vatvalue == 0 || $item->servicevalue == 0) {
                                         echo "<div class='price-include'>";
                                         echo trans('0700');
@@ -804,8 +806,8 @@
                                             echo "- " . trans('0703') . " 5%";
                                         echo "</div>";
                                     }
-                                    }
-                                    ?>
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

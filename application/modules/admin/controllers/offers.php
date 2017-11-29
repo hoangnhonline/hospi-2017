@@ -313,7 +313,7 @@ class Offers extends MX_Controller
 		if (!empty($_FILES)) {
 			$tempFile = $_FILES['file']['tmp_name'];
 			$fileName = $_FILES['file']['name'];
-			$fileName = str_replace(" ", "-", $_FILES['file']['name']);
+			$fileName = str_replace(" ", "-", $fileName);
 			$fig = rand(1, 999999);
 			$saveFile = $fig . '_' . $fileName;
 			$targetPath = PT_OFFERS_IMAGES_UPLOAD;

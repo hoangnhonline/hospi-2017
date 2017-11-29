@@ -38,11 +38,11 @@
                         } else {
                         echo $selectedCity;
                         } ?>">
-                    <input type="hidden" name="checkIn" value="<?php if (!empty($_GET['checkIn'])) {
-                        echo $_GET['checkIn'];
+                    <input type="hidden" name="checkin" value="<?php if (!empty($_GET['checkin'])) {
+                        echo $_GET['checkin'];
                         } ?>">
-                    <input type="hidden" name="checkOut" value="<?php if (!empty($_GET['checkOut'])) {
-                        echo $_GET['checkOut'];
+                    <input type="hidden" name="checkout" value="<?php if (!empty($_GET['checkout'])) {
+                        echo $_GET['checkout'];
                         } ?>">
                     <input type="hidden" name="childages" value="<?php if (!empty($_GET['childages'])) {
                         echo $_GET['childages'];

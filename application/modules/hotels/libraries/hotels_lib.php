@@ -347,7 +347,6 @@ class Hotels_lib
 
     function search_hotels_by_text($cityid, $offset = null, $checkin = null, $checkout = null, $honeymoon = null)
     {
-
         $this->ci->load->library('bootpagination');
         $data = array();
         $settings = $this->settings();
@@ -358,15 +357,15 @@ class Hotels_lib
         } else {
             $orderby = $settings[0]->front_search_order;
         }
-        // $hotelslist = $this->hotelswithrooms();
-        $rh = $this->ci->hotels_model->search_hotels_by_text($cityid, '', '', '', '', '');
-        $hotels = $this->ci->hotels_model->search_hotels_by_text($cityid, $perpage, $offset, $orderby, $checkin, $checkout);
 
-        $tmp = $this->getResultObject($hotels['all'], null, $orderby);
+        // $hotelslist = $this->hotelswithrooms();
+        $hotels = $this->ci->hotels_model->search_hotels_by_text($cityid, $perpage, $offset, $orderby, '', '', $checkin, $checkout);
+        $rh = $this->ci->hotels_model->search_hotels_by_text($cityid, '', '', '', '', '');
+
+        $tmp = $this->getResultObject($hotels['all'], null, $orderby, $checkin, $checkout);
 
         $resultSort = $tmp['resultSort'];
         $data['all'] = $tmp['result'];
-
 
         if ($honeymoon != null) {
             $data['all'] = $this->getHoneyObject($hotels['all']);
@@ -1464,27 +1463,24 @@ class Hotels_lib
         if (empty($hotelid)) {
             $hotelid = $this->hotelid;
         }
-        $result = array();
-        $this->ci->load->model('hotels/rooms_model');
-        $this->db->select('room_id');
-        $this->db->where('room_hotel', $hotelid);
-        $res = $this->db->get('pt_rooms')->result();
-        foreach ($res as $r) {
-            if ((!empty($checkin)) && (!empty($checkout))) {
-                $p = $this->ci->rooms_model->getRoomPrice($r->room_id, $checkin, $checkout);
-            } else {
-                $p = $this->ci->rooms_model->getRoomPrice($r->room_id, $this->checkin, $this->checkout);
-            }
-            if ($p['perNight'] > 0)
-                $result[] = $p['perNight'];
-        }
 
-        if (!empty($result)) {
-            if ($list == 'yes') {
-                return min($result);
-            } else {
-                return $curr->convertPrice(min($result));
-            }
+        $result = array();
+        //$this->ci->load->model('hotels/rooms_model');
+        $this->db->select('min(total) as price');
+        $this->db->where('hotel_id', $hotelid);
+        if (!empty($checkin)) {
+            $checkin = explode('/', $checkin);
+            $this->db->where('date_use >= ', $checkin[2] . '-' . $checkin[1] . '-' . $checkin[0]);
+        }
+        if (!empty($checkout)) {
+            $checkout = explode('/', $checkout);
+            $this->db->where('date_use <= ', $checkout[2] . '-' . $checkout[1] . '-' . $checkout[0]);
+        }
+        $this->db->limit(1);
+        $res = $this->db->get('pt_room_prices_detail')->result();
+
+        if (!empty($res)) {
+            return $res[0]->price;
         }
 
         return 0;
@@ -1607,99 +1603,48 @@ class Hotels_lib
     }
 
     //make a result object all data of hotels array
-    function getResultObject($hotels, $honeymoon = null, $orderby = null)
+    function getResultObject($hotels, $honeymoon = null, $orderby = null, $checkin = null, $checkout = null)
     {
         $this->ci->load->library('currconverter');
-        $result = array();
+        $result = $arrPriceSort = array();
         $curr = $this->ci->currconverter;
 
         foreach ($hotels as $h) {
             $this->set_id($h->hotel_id);
             $this->hotel_short_details();
-            $bestprice = $this->bestPrice();
-            $price = $bestprice;
-            //$arrPriceSort = [];
 
             $avgReviews = $this->hotelReviewsAvg();
 
-            if (!empty($_GET['price'])) {
-                $priceRange = $this->priceRange($_GET['price']);
-                $price_int = (int)str_replace(",", "", $price);
-                if (($price_int >= $priceRange->minprice) && ($price_int <= $priceRange->maxprice)) {
-                    $arrPriceSort[$this->hotelid] = str_replace(",", "", $price);
-                    $result[] = (object)array(
-                        'id' => $this->hotelid,
-                        'title' => $this->title,
-                        'slug' => base_url() . 'hotels/' . $this->slug,
-                        'thumbnail' => $this->thumbnail,
-                        'roomid' => $h->room_id,
-                        'stars' => pt_create_stars($this->stars),
-                        'starsCount' => $this->stars,
-                        'location' => $this->location,
-                        'mapAddress' => $this->mapAddress,
-                        'desc' => strip_tags($this->desc),
-                        'price' => $price,
-                        'currCode' => $curr->code,
-                        'currSymbol' => $curr->symbol,
-                        'price_status' => $h->price_status,
-                        'amenities' => $this->amenities,
-                        'vatvalue' => $this->taxvalue,
-                        'servicevalue' => $this->servicevalue,
-                        'avgReviews' => $avgReviews,
-                        'latitude' => $this->latitude,
-                        'longitude' => $this->longitude,
-                        'featuredfrom' => $h->hotel_featured_from,
-                        'featuredto' => $h->hotel_featured_to,
-                        'salefrom' => $h->hotel_sale_from,
-                        'saleto' => $h->hotel_sale_to,
-                        'honeymoon' => $h->honeymoon,
-                        'salepercent' => $h->hotel_is_sale_percent,
-                        'offer_title' => $h->offer_title
-                    );
-
-                }
-
-            } else { //hoangnh            	
-                $arrPriceSort[$this->hotelid] = str_replace(",", "", $price);
-                $result[] = (object)array(
-                    'id' => $this->hotelid,
-                    'title' => $this->title,
-                    'slug' => base_url() . 'hotels/' . $this->slug,
-                    'thumbnail' => $this->thumbnail,
-                    'roomid' => $h->room_id,
-                    'stars' => pt_create_stars($this->stars),
-                    'starsCount' => $this->stars,
-                    'location' => $this->location,
-                    'mapAddress' => $this->mapAddress,
-                    'desc' => strip_tags($this->desc),
-                    'price' => $price,
-                    'currCode' => $curr->code,
-                    'currSymbol' => $curr->symbol,
-                    'price_status' => $h->price_status,
-                    'amenities' => $this->amenities,
-                    'vatvalue' => $this->taxvalue,
-                    'servicevalue' => $this->servicevalue,
-                    'avgReviews' => $avgReviews,
-                    'latitude' => $this->latitude,
-                    'longitude' => $this->longitude,
-                    'featuredfrom' => $h->hotel_featured_from,
-                    'featuredto' => $h->hotel_featured_to,
-                    'salefrom' => $h->hotel_sale_from,
-                    'saleto' => $h->hotel_sale_to,
-                    'salepercent' => $h->hotel_is_sale_percent,
-                    'honeymoon' => $h->honeymoon,
-                    'offer_title' => $h->offer_title
-                );
-
-            } //hoangnh            
-
-        }
-
-        if ($orderby == 'p_lh') {
-            asort($arrPriceSort);
-        }
-        if ($orderby == 'p_hl') {
-            arsort($arrPriceSort);
+            $arrPriceSort[$this->hotelid] = str_replace(",", "", $h->price);
+            $result[] = (object)array(
+                'id' => $this->hotelid,
+                'title' => $this->title,
+                'slug' => base_url() . 'hotels/' . $this->slug,
+                'thumbnail' => $this->thumbnail,
+                'roomid' => $h->room_id,
+                'stars' => pt_create_stars($this->stars),
+                'starsCount' => $this->stars,
+                'location' => $this->location,
+                'mapAddress' => $this->mapAddress,
+                'desc' => strip_tags($this->desc),
+                'price' => $h->price,
+                'currCode' => $curr->code,
+                'currSymbol' => $curr->symbol,
+                'price_status' => $h->price_status,
+                'amenities' => $this->amenities,
+                'vatvalue' => $this->taxvalue,
+                'servicevalue' => $this->servicevalue,
+                'avgReviews' => $avgReviews,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude,
+                'featuredfrom' => $h->hotel_featured_from,
+                'featuredto' => $h->hotel_featured_to,
+                'salefrom' => $h->hotel_sale_from,
+                'saleto' => $h->hotel_sale_to,
+                'salepercent' => $h->hotel_is_sale_percent,
+                'honeymoon' => $h->honeymoon,
+                'offer_title' => $h->offer_title
+            );
         }
 
         $this->currencycode = $curr->code;
@@ -1796,7 +1741,7 @@ class Hotels_lib
         return $result;
     }
 
-    
+
     //make a result object of Rooms Array
     function getRoomsResultObject($rooms, $checkin = null, $checkout = null)
     {
@@ -1867,8 +1812,8 @@ class Hotels_lib
                 'currSymbol' => $curr->symbol,
                 'Info' => $roomprice,
                 'extraBeds' => $details[0]->extra_bed,
-                'extrabedCharges' => $bedcharges,             
-                'room_title' => $details[0]->room_title,             
+                'extrabedCharges' => $bedcharges,
+                'room_title' => $details[0]->room_title,
                 'room_adults' => $details[0]->room_adults,
                 'room_children' => $details[0]->room_children,
                 'price' => $roomprice
@@ -1898,8 +1843,8 @@ class Hotels_lib
         $this->ci->load->model('hotels/rooms_model');
         //room details for booking page
         $details = $this->room_short_details($roomid);
-        $roomprice = $this->ci->rooms_model->getRoomPriceNew($roomid, $checkin, $checkout);        
-     
+        $roomprice = $this->ci->rooms_model->getRoomPriceNew($roomid, $checkin, $checkout);
+
 
         //hotel details for booking page
         //$this->set_id($hotelid);
@@ -1908,7 +1853,7 @@ class Hotels_lib
         $extras = $this->hotelExtras();
         $extrabedcharges = $roomprice['extrabed'] * $extrabeds;
 
-        
+
         $totalSum = ($roomprice['totalPrice'] * $roomscount) + $extrabedcharges;
 
         $this->setTax($totalSum);
@@ -2072,8 +2017,6 @@ class Hotels_lib
         $result->maxprice = $sprice[1];
 
         return $result;
-
-
     }
 
     public function siteMapData()
