@@ -145,10 +145,9 @@ class Offers extends MX_Controller
         $this->data['sorturl'] = base_url() . 'offers/sales/listings?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
+
         $this->load->library('hotels/hotels_lib');
         $this->data['salesoffHotels'] = $this->hotels_lib->getSalesoffHotels($loc);
-        $this->data['info'] = $alloffers['paginationinfo'];
-        $this->data['plinks2'] = $alloffers['plinks2'];
         $this->data['page_title'] = $settings[0]->header_title;
         $this->data['langurl'] = base_url() . "offers/sales/{langid}";
         $this->theme->view('sales', $this->data);

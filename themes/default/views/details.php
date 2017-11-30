@@ -125,6 +125,40 @@
                     </div>
                 </div>
             </div>
+            <!-- offers -->
+            <?php if (!empty($offers)) { ?>
+                <div class="block-package hidden-xs">
+                    <ul>
+                        <?php foreach ($offers as $offer) { ?>
+                            <li class="package-info clearfix">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <h4 class="package-name purple andes-bold"><?php echo $offer->type == 1 ? 'Deals - Giảm giá' : ($offer->type == 2 ? 'Combo' : 'Gói honeymoon'); ?></h4>
+                                        <span class="package-des">
+                                            <?php if (!$offer->offerForever) { ?>
+                                                Áp dụng từ ngày: <?php echo date('d/m/Y', $offer->from) ?> đến hết ngày: <?php echo date('d/m/Y', $offer->to) ?>
+                                            <?php } else { ?>
+                                                Không có thời hạn.
+                                            <?php } ?>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <p class="package-price">Giá: <span class="package-price"><?php echo $offer->price; ?> <?php echo $offer->currSymbol; ?></span></p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a href="<?php echo $offer->slug; ?>" title="Xem chi tiết" class="package-view">Xem chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+                <!-- offers -->
+            <?php } ?>
             <!-- rooms -->
             <?php if($hasRooms > 0){ if($appModule == "hotels"){ include 'includes/rooms.php'; }else if($appModule == "ean"){ include 'includes/expedia_rooms.php'; include 'integrations/ean/ages.php'; } }  ?>
             <!-- rooms -->

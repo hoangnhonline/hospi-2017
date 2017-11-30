@@ -241,7 +241,7 @@ foreach($honeymoonLocation->locations as $honeymoon){
           <?php } ?>
           <!-- Add to whishlist -->
           <div class="img_list" style="min-height:160px;">
-            <a href="<?php echo $item->slug;?>/?details=<?php echo $item->roomid;?>">
+            <a href="<?php echo $item->slug;?>">
               <img src="<?php echo $item->thumbnail;?>" alt="<?php echo $item->title;?>">
               <div class="short_info"></div>
             </a>
@@ -249,55 +249,29 @@ foreach($honeymoonLocation->locations as $honeymoon){
         </div>
         <div class="wow fadeInUp col-md-9 offset-0">
             <div class="itemlabel3" style="height:160px">
-            <div class="honeymoon labelright go-left" style="min-width:105px;margin-left:5px">
-              <br/>
-              <div class="purple size18 text-center">
-              <?php  if($item->price > 0){ ?>
-              <b>
-              <?php echo $item->price;?><div class="smalltext">(<?php echo $item->currSymbol; ?>)</div>
-              </b></div>
-              <div class="clearfix"></div>
-              <hr>
-              <?php } ?>
-              
-
-              <?php if($appModule == "ean"){ if($item->tripAdvisorRating > 0){ ?>
-              <div class="review text-center size18"><i class="icon-thumbs-up-4"></i><?php echo $item->tripAdvisorRating;?> </div>
-              <div class="clearfix"></div>
-              <hr>
-              <?php } } ?>
-              <a href="<?php echo $item->slug;?>/?details=<?php echo $item->roomid;?>">
-              <button type="submit" class="btn btn-action"><?php echo trans('0177');?></button>
-              </a>
+                <div class="honeymoon labelright go-left" style="min-width:105px;margin-left:5px">
+                    <br>
+                    <?php  if($item->show_price){ ?>
+                        <div class="purple size18 text-center">
+                            <b>
+                                <?php echo $item->price;?>
+                                <div class="smalltext">(<?php echo $item->currSymbol; ?>)</div>
+                            </b>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                    <?php } ?>
+                      <a href="<?php echo $item->slug;?>">
+                        <button type="button" class="btn btn-action"><?php echo trans('0177');?></button>
+                      </a>
+                </div>
+                <div class="labelleft2 rtl_title_home">
+                    <h4 class="mtb0 RTL go-text-right">
+                        <a href="<?php echo $item->slug;?>"><b><?php echo $item->title;?></b></a>
+                    </h4>
+                    <span><i style="margin-left: -3px;" class="purple icon-location-6 go-right"></i> <?php echo $item->city;?></span>
+                </div>
             </div>
-            <div class="labelleft2 rtl_title_home">
-              <h4 class="mtb0 RTL go-text-right">
-                <a href="<?php echo $item->slug;?>/?details=<?php echo $item->roomid;?>"><b><?php echo $item->title;?></b></a> <span class="go-right"><?php echo $item->stars;?></span>
-                
-                <!-- Cars airport pickup -->  <?php if($appModule == "cars"){ if($item->airportPickup == "yes"){ ?> <button class="btn btn-success btn-xs"><i class="icon-paper-plane-2"></i> <?php echo trans('0207');?></button> <?php } } ?> <!-- Cars airport pickup -->
-              </h4>
-               <?php echo $item->mapAddress;?>
-              <br><br>
-              <?php if(pt_is_module_enabled('reviews')){ ?>
-              <?php  if($item->avgReviews->overall > 0){ ?>
-              <i class="icon-thumbs-up-4"></i><?php echo $item->avgReviews->overall; ?>
-              <!--<?php echo $item->avgReviews->totalReviews; ?>-->
-              
-              <?php } ?>
-              <?php } ?>
-              <?php if($appModule != "offers"){ ?> &nbsp;(<a class="go-right" href="javascript:void(0);" onclick="showMap('<?php echo base_url();?>home/maps/<?php echo $item->latitude; ?>/<?php echo $item->longitude; ?>/<?php echo $appModule; ?>/<?php echo $item->id;?>','modal');" title="<?php echo $item->mapAddress;?>"><i style="margin-left: -3px;" class="purple icon-location-6 go-right"></i><?php echo trans('067');?></a>  <?php } ?>)
-              <br>
-              <p class="grey RTL"><span class="purple room-honey-icon <?php echo getRoomsID($item->id);?>">&nbsp;<a href="<?php echo $item->slug;?>/?details=<?php echo $item->roomid;?>"><?php echo trans('0567');?></a></span><?php //echo character_limiter($item->desc,190);?></p>
-              
-              <?php if($appModule == "hotels"){ ?>
-              <ul class="pre-honeymoon hotelpreferences go-right hidden-xs">
-                <?php $cnt = 0; foreach($item->amenities as $amt){ $cnt++; if($cnt <= 10){ if(!empty($amt->name)){ ?>
-                <img title="<?php echo $amt->name;?>" data-toggle="tooltip" data-placement="top" style="height:25px;" src="<?php echo $amt->icon;?>" alt="<?php echo $amt->name;?>" />
-                <?php } } } ?>
-              </ul>
-              <?php } ?>
-            </div>
-          </div>
         </div>
       </div>
       <div class="clearfix"></div>

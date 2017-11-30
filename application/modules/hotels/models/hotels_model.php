@@ -1102,12 +1102,17 @@ class Hotels_model extends CI_Model
             $where = "((pt_hotels.hotel_sale_from < " . time() . " AND pt_hotels.hotel_sale_to > " . time() . ") OR pt_hotels.hotel_sale_forever = 'forever')";
             $this->db->where($where);
         }
-        /*if (!empty($uudai)) {
-            $this->db->where("exists(select hotel_offers.offer_id from hotel_offers join pt_special_offers on hotel_offers.offer_id = pt_special_offers.offer_id join pt_hotels on hotel_offers.hotel_id = pt_hotels.hotel_id where pt_special_offers.offer_status = 'Yes' and pt_special_offers.offer_type = 1)");
+        if (!empty($uudai) && !empty($honeymoon)) {
+            $where = "((exists(select hotel_offers.offer_id from hotel_offers where hotel_offers.hotel_id = pt_hotels.hotel_id and hotel_offers.type = 1) = 1) OR (exists(select hotel_offers.offer_id from hotel_offers where hotel_offers.hotel_id = pt_hotels.hotel_id and hotel_offers.type = 3) = 1))";
+            $this->db->where($where);
+        } else {
+            if (!empty($uudai)) {
+                $this->db->where("exists(select hotel_offers.offer_id from hotel_offers where hotel_offers.hotel_id = pt_hotels.hotel_id and hotel_offers.type = 1) = ", 1);
+            }
+            if (!empty($honeymoon)) {
+                $this->db->where("exists(select hotel_offers.offer_id from hotel_offers where hotel_offers.hotel_id = pt_hotels.hotel_id and hotel_offers.type = 3) = ", 1);
+            }
         }
-        if (!empty($honeymoon)) {
-            $this->db->where("exists(select hotel_offers.offer_id from hotel_offers join pt_special_offers on hotel_offers.offer_id = pt_special_offers.offer_id join pt_hotels on hotel_offers.hotel_id = pt_hotels.hotel_id where pt_special_offers.offer_status = 'Yes' and pt_special_offers.offer_type = 3)");
-        }*/
         if (!empty($pickup)) {
             $this->db->where('pt_hotels.hotel_pickup', 'Yes');
         }

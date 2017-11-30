@@ -139,7 +139,24 @@ class Hotels extends MX_Controller
             ));
             $recentlyViewed = array_filter($recentlyViewed);
 
-            // var_dump($recentlyViewed);
+            //get offer
+            $this->load->library('offers_lib');
+
+            $offers = $this->offers_lib->showOffers(null, null, $type = 1, $hotelid = $this->data['module']->id);
+            $combos = $this->offers_lib->showOffers(null, null, $type = 2, $hotelid = $this->data['module']->id);
+            $honeymoons = $this->offers_lib->showOffers(null, null, $type = 3, $hotelid = $this->data['module']->id);
+            $this->data['offers'] = [];
+            if ($offers['allOffers']['count'] > 0) {
+                $this->data['offers'][] = $offers['allOffers']['offers'][0];
+            }
+            if ($combos['allOffers']['count'] > 0) {
+                $this->data['offers'][] = $combos['allOffers']['offers'][0];
+            }
+            if ($honeymoons['allOffers']['count'] > 0) {
+                $this->data['offers'][] = $honeymoons['allOffers']['offers'][0];
+            }
+
+            //var_dump('<pre>',  $this->data['offers']);die;
 
             $this->data['recents'] = $recentlyViewed;
             /* Bread crum */
@@ -216,10 +233,6 @@ class Hotels extends MX_Controller
         $settings = $this->settings_model->get_front_settings('hotels');
         $this->data['minprice'] = $this->hotels_lib->convertAmount($settings[0]->front_search_min_price);
         $this->data['maxprice'] = $this->hotels_lib->convertAmount($settings[0]->front_search_max_price);
-
-        // $this->data['popular_hotels'] = $this->hotels_model->popular_hotels_front();
-
-        $allhotels = $this->hotels_lib->show_honeymoons($offset, 1);
         $this->data['moduleTypes'] = $this->hotels_lib->getHotelTypes();
         $this->data['amenities'] = $this->hotels_lib->getHotelAmenities();
         $this->data['checkin'] = @$_GET['checkin'];
@@ -241,9 +254,12 @@ class Hotels extends MX_Controller
         }
 
         $this->data['selectedLocation'] = $this->hotels_lib->selectedLocation;
-        $this->data['module'] = $allhotels['all_hotels'];
-        $this->data['info'] = $allhotels['paginationinfo'];
-        $this->data['plinks2'] = $allhotels['plinks2'];
+
+        $this->load->library('offers_lib');
+        $alloffers = $this->offers_lib->showOffers($offset, null, 3);
+        $this->data['module'] = $alloffers['allOffers']['offers'];
+        $this->data['info'] = $alloffers['paginationinfo'];
+        $this->data['plinks2'] = $alloffers['plinks2'];
         $this->data['currCode'] = $this->hotels_lib->currencycode;
         $this->data['currSign'] = $this->hotels_lib->currencysign;
         $this->data['page_title'] = $settings[0]->header_title;

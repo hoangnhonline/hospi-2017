@@ -241,7 +241,7 @@ class Offers_lib
         return $result;
     }
 
-    function showOffers($offset = null, $loc = null, $type = 1)
+    function showOffers($offset = null, $loc = null, $type = 1, $hotelid = null)
     {
         $this->ci->load->library('bootpagination');
         $data = array();
@@ -254,8 +254,9 @@ class Offers_lib
             $orderby = "newf";//$settings[0]->front_listings_order;
         }
         $this->ci->load->model('admin/special_offers_model');
-        $rh = $this->ci->special_offers_model->list_specialOffers_front('', '', '', $loc, $type);
-        $offers = $this->ci->special_offers_model->list_specialOffers_front($perpage, $offset, $orderby, $loc, $type);
+        //$rh = $this->ci->special_offers_model->list_specialOffers_front('', '', '', $loc, $type, $hotelid);
+        $offers = $this->ci->special_offers_model->list_specialOffers_front($perpage, $offset, $orderby, $loc, $type, $hotelid);
+
         $data['allOffers'] = $this->getResultObject($offers['all']);
         $data['paginationinfo'] = array('base' => 'offers/listing', 'totalrows' => $rh['rows'], 'perpage' => $perpage);
 
@@ -291,15 +292,14 @@ class Offers_lib
         $this->ci->load->library('currconverter');
         $result = array();
         $curr = $this->ci->currconverter;
+        $result['offers'] = [];
 
         foreach ($offers as $o) {
             $details = $this->offerShortDetails($o->offer_id);
             if ($details[0]->offer_forever == "forever") {
                 $offerForever = true;
-                $offerEnded = false;
             } else {
                 $offerForever = false;
-                $offerEnded = true;
             }
 
             $fullExpiry = date('F j Y', $details[0]->offer_to);
