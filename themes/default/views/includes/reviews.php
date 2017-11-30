@@ -110,80 +110,118 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane active" id="tab-newtopic">
-                <div class="table-responsive">
-                    <div class="fixedtopic">
-                            <?php if(!empty($reviews) && pt_is_module_enabled('reviews')){ foreach($reviews as $rev){ ?>
-                            <div class="RTL">
-                                <div class="customer <?php echo $rev->review_id;?>" style="width: 100px;vertical-align: middle;">
-                                    <div class="c100 p<?php echo $rev->review_overall * 10;?>" style="margin-top:10px;margin-left: 20%;">
-                                        <span><strong><?php echo $rev->review_overall;?> </strong>/<small>10</small></span>
-                                        <div class="slice">
-                                            <div class="bar"></div>
-                                            <div class="fill"></div>
-                                        </div>
+            </div><!-- panel-body -->
+            <?php if(!empty($reviews) && pt_is_module_enabled('reviews')){ foreach($reviews as $rev){ ?>
+            <div class="item-review clearfix">
+                <div class="clearfix">
+                    <div class="lft">
+                        <div class="cell">
+                            <div class="customer <?php echo $rev->review_id;?>">
+                                <div class="circle-evaluate c100 p<?php echo $rev->review_overall * 10;?>">
+                                    <span>
+                                        <small><?php echo $rev->review_overall;?> </small>
+                                        <hr>
+                                        <small>10</small>
+                                    </span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
                                     </div>
                                 </div>
-                                <div style="width: 200px;vertical-align: middle;">
-                                    <span class="dark"><strong class="go-right"><?php echo $rev->review_name;?> &nbsp;</strong></span><br><span class="text-muted"><small><?php echo pt_show_date_php($rev->review_date);?></small></span> <br/>
-                                </div>
-                                <div><?php echo character_limiter($rev->review_comment,1000);?></div>
-                            </div>
-                            <?php } ?>
-                        <div class="line3"></div>
-                        <?php } ?>
+                            </div><!-- customer -->
+                            <div class="item-review-info">
+                                <p class="andes purple size25">&ldquo;Rất tốt&rdquo;</p>
+                                <p class="grey"><strong class="go-right"><?php echo $rev->review_name;?> &nbsp;</strong></p>
+                                <p class="text-muted"><small><?php echo pt_show_date_php($rev->review_date);?></small></p>
+                            </div><!-- item-review-info -->
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-sm-12">
-                        <label class="text-left andes"><?php echo trans('033');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->facilities * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div><!-- progress -->
-                        <label class="text-left andes"><?php echo trans('0722');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->comfort * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div><!-- progress -->
-                        <label class="text-left andes"><?php echo trans('0720');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews ->anuong * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div><!-- progress -->
-                    </div><!-- col-sm-6 col-sm-12 -->
-                    <div class="col-sm-6 col-sm-12">
-                        <label class="text-left andes"><?php echo trans('034');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="80"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->staff * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div><!-- progress -->
-                        <label class="text-left andes"><?php echo trans('032');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->location * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div><!-- progress -->
-                        <label class="text-left andes"><?php echo trans('030');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews->clean * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div><!-- progress -->
-                    </div><!-- col-sm-6 col-sm-12 -->
-                </div>
-            </div>
+                    <div class="rgt">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-12">
+                                <div class="block-progress block-progress2">
+                                    <label class="text-left andes"><?php echo trans('033');?></label>
+                                    <div class="progress-inner">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->facilities * 10;?>%">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div><!-- progress -->
+                                        <span class="txt txt2">7.9</span>
+                                    </div>
+                                </div>
+                                <div class="block-progress block-progress2">
+                                    <label class="text-left andes"><?php echo trans('0722');?></label>
+                                    <div class="progress-inner">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->comfort * 10;?>%">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div><!-- progress -->
+                                        <span class="txt txt2">7.9</span>
+                                    </div>
+                                </div>
+                                <div class="block-progress block-progress2">
+                                    <label class="text-left andes"><?php echo trans('0720');?></label>
+                                    <div class="progress-inner">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews ->anuong * 10;?>%">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div><!-- progress -->
+                                        <span class="txt txt2">7.9</span>
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 col-sm-12 -->
+                            <div class="col-sm-6 col-sm-12">
+                                <div class="block-progress block-progress2">
+                                    <label class="text-left andes"><?php echo trans('034');?></label>
+                                    <div class="progress-inner">
+                                        <div class="progress">
+                                           <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="80"
+                                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->staff * 10;?>%">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div><!-- progress -->
+                                        <span class="txt txt2">7.9</span>
+                                    </div>
+                                </div>
+                                <div class="block-progress block-progress2">
+                                    <label class="text-left andes"><?php echo trans('032');?></label>
+                                    <div class="progress-inner">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->location * 10;?>%">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div><!-- progress -->
+                                        <span class="txt txt2">7.9</span>
+                                    </div>
+                                </div>
+                                <div class="block-progress block-progress2">
+                                    <label class="text-left andes"><?php echo trans('030');?></label>
+                                    <div class="progress-inner">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
+                                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews->clean * 10;?>%">
+                                                <span class="sr-only"></span>
+                                            </div>
+                                        </div><!-- progress -->
+                                        <span class="txt txt2">7.9</span>
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 col-sm-12 -->
+                        </div>
+                    </div>
+                </div><!-- panel-body -->
+                <div class="comment">"<?php echo character_limiter($rev->review_comment,1000);?>"</div>
+            </div><!-- panel-body -->
+            <?php } ?>
+            <?php } ?>
+            <button  data-toggle="collapse" data-parent="#accordion" class="writeReview btn btn-write-evu" href="#ADDREVIEW"> <?php echo trans('083');?></button>
         </div>
     </div>
 </div>

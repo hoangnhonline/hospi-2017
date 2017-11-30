@@ -6326,6 +6326,10 @@ input[type=checkbox]:checked+label:before {
 .purple a {
     color: #660033;
 }
+.grey,
+.grey a {
+    color: #666666;
+}
 .red,
 .red a {
     color: red;
@@ -10135,20 +10139,123 @@ h4.hotel-name{
 .block-process-evaluate.block-process-evaluate2 .progress {
   margin-bottom: 5px;
 }
-.block-process-evaluate2 .block-progress .progress,
-.block-process-evaluate2 .block-progress .txt {
+.block-progress .progress,
+.block-progress .txt {
   display: inline-block;
   vertical-align: middle;
-  display: inline-block;
 }
-.block-process-evaluate2 .block-progress .progress {
+.block-progress .progress {
   width: 70%;
 }
-.block-process-evaluate2 .block-progress .txt {
+.block-progress .txt {
   margin-top: -6px;
 }
 .block-process-evaluate.block-process-evaluate2 .progress .progress-bar {
   background-color: #660033;
+}
+
+.item-review {
+  margin: 0 25px 25px;
+  padding: 15px 8px;
+  border: 1px solid #ccc;
+}
+.item-review .lft {
+  float: left;
+  width: 280px;
+  margin-right: 20px;
+}
+.item-review .customer .c100 {
+  background-color: #ccc;
+  width: 110px;
+  height: 110px;
+}
+.item-review .customer .c100:after {
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: 100px;
+  height: 100px;
+  background-color: #999999;
+}
+.item-review .circle-evaluate>span {
+  color: #fff;
+  line-height: normal;
+  margin-top: 20px;
+  width: 100%;
+}
+.item-review .circle-evaluate>span small {
+  display: block;
+}
+.item-review .circle-evaluate>span hr {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  border: 0;
+  width: 60px;
+  border-top: 1px solid #eee;
+}
+.item-review .circle-evaluate>span small:first-child {
+  font-size: 37px;
+  line-height: 1;
+}
+.item-review .circle-evaluate>span small:last-child {
+  font-size: 25px;
+  line-height: 1;
+}
+.item-review .circle-evaluate:hover>span {
+  width: 100%;
+  line-height: normal;
+  font-size: .2em;
+  color: #fff;
+}
+.item-review .cell {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+.item-review .customer,
+.item-review .item-review-info {
+  display: table-cell;
+  vertical-align: middle;
+}
+.item-review .customer {
+  width: 110px;
+}
+.item-review .rgt {
+  float: left;
+  width: calc(100% - 300px);
+}
+.block-progress2 .progress {
+  width: 85%;
+}
+.block-progress .txt2 {
+  margin-top: -3px;
+  margin-left: 5px;
+}
+.block-progress2 label {
+  margin-bottom: 0;
+}
+.block-progress2 .progress {
+  height: 17px;
+  margin-bottom: 5px;
+  margin-top: 0;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 0;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  margin-left: 0;
+}
+.block-progress2 .progress .progress-bar {
+  background-color: #cccccc;
+}
+.item-review .comment {
+  margin-top: 10px;
+}
+
+.pie, .c100 .bar, .c100.p51 .fill, .c100.p52 .fill, .c100.p53 .fill, .c100.p54 .fill, .c100.p55 .fill, .c100.p56 .fill, .c100.p57 .fill, .c100.p58 .fill, .c100.p59 .fill, .c100.p60 .fill, .c100.p61 .fill, .c100.p62 .fill, .c100.p63 .fill, .c100.p64 .fill, .c100.p65 .fill, .c100.p66 .fill, .c100.p67 .fill, .c100.p68 .fill, .c100.p69 .fill, .c100.p70 .fill, .c100.p71 .fill, .c100.p72 .fill, .c100.p73 .fill, .c100.p74 .fill, .c100.p75 .fill, .c100.p76 .fill, .c100.p77 .fill, .c100.p78 .fill, .c100.p79 .fill, .c100.p80 .fill, .c100.p81 .fill, .c100.p82 .fill, .c100.p83 .fill, .c100.p84 .fill, .c100.p85 .fill, .c100.p86 .fill, .c100.p87 .fill, .c100.p88 .fill, .c100.p89 .fill, .c100.p90 .fill, .c100.p91 .fill, .c100.p92 .fill, .c100.p93 .fill, .c100.p94 .fill, .c100.p95 .fill, .c100.p96 .fill, .c100.p97 .fill, .c100.p98 .fill, .c100.p99 .fill, .c100.p100 .fill {
+  border: none !important;
 }
 
 /* Block Table Rooms */
