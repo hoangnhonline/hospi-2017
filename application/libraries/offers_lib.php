@@ -106,12 +106,12 @@ class Offers_lib
 
         $fullExpiry = date('F j Y', $details[0]->offer_to);
 
-        $phuthuInfo = [];
+        $surchargeInfo = [];
         if ($details[0]->offer_type == 2) {
             $this->db->where('offer_id', $offerid);
             $result = $this->db->get('phuthucombo')->result();
             foreach ($result as $item) {
-                $phuthuInfo[] = (object)[
+                $surchargeInfo[] = (object)[
                     'name' => $item->name,
                     'price' => $curr->convertPrice($item->price, 0),
                     'show_price' => $item->show_price
@@ -143,7 +143,7 @@ class Offers_lib
             'show_price' => $details[0]->show_price,
             'so_khach' => $details[0]->so_khach,
             'phu_thu' => $details[0]->phu_thu,
-            'phuthuInfo' => $phuthuInfo
+            'surchargeInfo' => $surchargeInfo
         ];
 
         return $detailResults;

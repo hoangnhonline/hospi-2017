@@ -18,6 +18,7 @@ class Offers extends MX_Controller
 
         modules:: load('home');
         $this->load->library('offers_lib');
+        $this->load->library('breadcrumbcomponent');
         $this->data['app_settings'] = $this->settings_model->get_settings_data();
         $this->data['lang_set'] = $this->session->userdata('set_lang');
         $this->data['usersession'] = $this->session->userdata('pt_logged_customer');
@@ -96,6 +97,9 @@ class Offers extends MX_Controller
                     break;
                 case "sales":
                     $this->sales();
+                    break;
+                case "book":
+                    $this->book();
                     break;
                 default:
                     $this->listing();
@@ -179,5 +183,62 @@ class Offers extends MX_Controller
         $this->theme->view('listing', $this->data);
     }
 
+    function book()
+    {
+        $this->load->model('admin/countries_model');
+        $this->data['allcountries'] = $this->countries_model->get_all_countries();
+        $this->load->library("paymentgateways");
+        $this->data['hideHeader'] = "1";
 
+        if ($this->validlang) {
+            $offername = $this->uri->segment(4);
+        } else {
+            $offername = $this->uri->segment(3);
+        }
+        $check = $this->special_offers_model->offerExists($offername);
+
+        $checkin = $this->input->get('checkin');
+        $quantity = $this->input->get('quantity');
+        $note = $this->input->get('note');
+        $surchargeid = $this->input->get('surchargeid');
+        $squantity = $this->input->get('squantity');
+
+        if ($check && !empty($offername)) {
+            $this->load->model('admin/payments_model');
+            $this->data['error'] = "";
+
+            $this->offers_lib->set_offerid($offername);
+            $detailOffer = $this->offers_lib->offer_details();
+
+            //var_dump('<pre>', $detailOffer);die;
+            $this->data['module'] = $detailOffer;
+
+            $this->load->model('admin/accounts_model');
+            $loggedin = $this->loggedin = $this->session->userdata('pt_logged_customer');
+            $this->lang->load("front", $this->data['lang_set']);
+            $this->load->helper('invoice');
+            $this->load->model('payments_model');
+            $paygateways = $this->payments_model->getAllPaymentsBack();
+            $this->data['paymentGateways'] = $paygateways['activeGateways'];
+            usort($this->data['paymentGateways'], function ($a, $b) {
+                return $a['order'] - $b['order'];
+            });
+            $this->data['profile'] = $this->accounts_model->get_profile_details($loggedin);
+            $this->data['page_title'] = $this->data['module']->title;
+            $this->data['metakey'] = $this->data['module']->keywords;
+            $this->data['metadesc'] = $this->data['module']->metadesc;
+            $this->data['checkin'] = $checkin;
+            $this->data['quantity'] = $quantity;
+            $this->data['note'] = $note;
+            $this->data['surchargeid'] = $surchargeid;
+            $this->data['squantity'] = $squantity;
+            $this->breadcrumbcomponent->add('Trang chủ', base_url());
+            $this->breadcrumbcomponent->add($detailOffer->title, base_url() . "offers/" . $detailOffer->slug);
+            $this->breadcrumbcomponent->add('Thông tin thanh toán', '#');
+            $this->data['breadcrumb'] = $this->breadcrumbcomponent->output();
+            $this->theme->view('booking_offer', $this->data);
+        } else {
+            redirect("offers");
+        }
+    }
 }

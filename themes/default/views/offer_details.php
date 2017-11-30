@@ -84,8 +84,8 @@
                                     <div class="detail">
                                         <p><strong>Phụ thu</strong></p>
                                         <ul>
-                                            <?php if (!empty($module->phuthuInfo)) {
-                                                foreach ($module->phuthuInfo as $item) {
+                                            <?php if (!empty($module->surchargeInfo)) {
+                                                foreach ($module->surchargeInfo as $item) {
                                                 ?>
                                                     <li>
                                                         <p><?php echo $item->name; ?></p>
@@ -118,14 +118,15 @@
                     <h4 class="modal-title" id="myModalLabel">Xác nhận thông tin</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="<?php echo base_url() . $appModule;?>/book/<?php echo $module->slug; ?>" method="get" role="search">
                         <div class="form-inline">
                             <div class="form-group">
-                                <input type="text" placeholder="Ngày đi" name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo date(strtotime(), 'd/m/Y') ?>" required >
+                                <p class="title">Ngày đi</p>
+                                <input type="text" placeholder="Ngày đi" name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo date('d/m/Y', $module->from) ?>" required >
                             </div>
                             <div class="form-group">
                                 <label class="checkbox-inline checkbox-style2">
-                                    <input type="checkbox" name="">
+                                    <input type="checkbox" name="note">
                                     <span></span>
                                     Bạn mua trước đi sau
                                     <div class="block-question-info" style="display: inline-block;">
@@ -143,9 +144,8 @@
                                 <p class="price-sm"><strong><?php echo $module->price; ?> <?php echo $module->currSymbol; ?></strong></p>
                             </div>
                             <div class="form-group">
-                                Số lượng
-                                <select name="">
-                                    <option value="0">0</option>
+                                <p class="title">Số lượng</p>
+                                <select class="form-control" name="quantity">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -159,8 +159,8 @@
                                 </select>
                             </div>
                         </div>
-                        <?php if (!empty($module->phuthuInfo)) {
-                            foreach ($module->phuthuInfo as $item) {
+                        <?php if (!empty($module->surchargeInfo)) {
+                            foreach ($module->surchargeInfo as $item) {
                             ?>
                                 <div class="form-inline">
                                     <div class="form-group">
@@ -168,8 +168,9 @@
                                         <p class="price-sm"><strong><?php echo $item->price; ?> <?php echo $module->currSymbol; ?></strong></p>
                                     </div>
                                     <div class="form-group">
-                                        Số lượng
-                                        <select name="">
+                                        <p class="title">Số lượng</p>
+                                        <input type="hidden" name="surchargeid[]" value="<?php echo $item->id; ?>">
+                                        <select class="form-control" name="squantity[<?php echo $item->id; ?>]">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -189,7 +190,7 @@
                         }
                         ?>
                         <div class="form-inline text-center">
-                            <button type="button" class="btn btn-combo2 btn-combo22" data-toggle="modal" data-target="#book-combo">Xác nhận</button>
+                            <button type="submit" class="btn btn-combo2 btn-combo22">Xác nhận</button>
                         </div>
                     </form>
                 </div>
