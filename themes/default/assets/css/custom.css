@@ -10115,6 +10115,42 @@ h4.hotel-name{
   border-color: #cccccc;
 }
 
+.block-process-evaluate2 .lft {
+  width: 130px;
+  float: left;
+  margin-right: 30px;
+  text-align: center;
+}
+.block-process-evaluate.block-process-evaluate2 .circle-evaluate {
+  margin: 0 auto;
+  float: none
+}
+.block-process-evaluate2 .rgt {
+  float: left;
+  width: calc(100% - 160px);
+}
+.block-process-evaluate.block-process-evaluate2 .label.text-left {
+  margin-bottom: 0;
+}
+.block-process-evaluate.block-process-evaluate2 .progress {
+  margin-bottom: 5px;
+}
+.block-process-evaluate2 .block-progress .progress,
+.block-process-evaluate2 .block-progress .txt {
+  display: inline-block;
+  vertical-align: middle;
+  display: inline-block;
+}
+.block-process-evaluate2 .block-progress .progress {
+  width: 70%;
+}
+.block-process-evaluate2 .block-progress .txt {
+  margin-top: -6px;
+}
+.block-process-evaluate.block-process-evaluate2 .progress .progress-bar {
+  background-color: #660033;
+}
+
 /* Block Table Rooms */
 .block-rooms .table-customize {
   border: 1px solid #ddd;
