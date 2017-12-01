@@ -282,162 +282,176 @@
             <div class="block-process-evaluate">
                 <div class="panel-body panel panel-default">
                     <!-- Start Offers Contact Form -->
-                    <?php if($appModule == "offers"){ ?> 
-                    <div class="panel-heading"><?php echo trans('0439');?></div>
-                    <h3 class="inner"></h3>
-                    <?php if(!empty($module->email)){ ?>
-                    <form action="" method="POST">
-                        <fieldset>
-                            <?php if(!empty($success)){ ?>
-                            <div class="alert alert-success successMsg"><?php echo trans('0479');?></div>
-                            <?php } ?>
-                            <div class="col-md-6 go-right">
-                                <label class="go-right"><?php echo trans('0350');?></label>
-                                <input class="form-control" placeholder="<?php echo trans('0350');?>" type="text" name="name" value="" required>
-                            </div>
-                            <div class="col-md-6 go-left">
-                                <label class="go-right"><?php echo trans('092');?></label>
-                                <input class="form-control" placeholder="<?php echo trans('092');?>" type="text" name="phone" value="" required><br>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-12">
-                                <label class="go-right"><?php echo trans('0262');?></label>
-                                <textarea class="form-control" placeholder="<?php echo trans('0262');?>" name="message" rows="4" cols="25" required></textarea><br>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-md-12">
-                                <input type="hidden" name="toemail" value="<?php echo $module->email;?>">
-                                <input type="hidden" name="sendmsg" value="1">
-                                <input class="btn btn-success btn-success btn-block btn-lg" type="submit" name="" value="<?php echo trans('0439');?>">
-                            </div>
-                            <br>
-                            <!-- END CONTACT FORM -->
-                        </fieldset>
-                    </form>
-                    <?php } if(!$module->offerForever){ ?>
-                    <!-- Start Offers countdown -->
-                    <i class="fa fa-clock-o go-right"></i>
-                    <h4><?php echo trans('0269');?></h4>
-                    <p href="#" class="phone"><span class="wow fadeInLeft animated" id="countdown"></span></p>
-                    <!-- End Offers countdown -->
-                    <?php } ?>
-                    <div class="clearfix"></div>
-                    <script type="text/javascript">
-                        // set the date we're counting down to
-                        var target_date = new Date('<?php echo $module->fullExpiryDate; ?>').getTime();
-                        
-                        // variables for time units
-                        var days, hours, minutes, seconds;
-                        
-                        // get tag element
-                        var countdown = document.getElementById('countdown');
-                        
-                        // update the tag with id "countdown" every 1 second
-                        setInterval(function () {
-                        
-                        // find the amount of "seconds" between now and target
-                        var current_date = new Date().getTime();
-                        var seconds_left = (target_date - current_date) / 1000;
-                        
-                        // do some time calculations
-                        days = parseInt(seconds_left / 86400);
-                        seconds_left = seconds_left % 86400;
-                        
-                        hours = parseInt(seconds_left / 3600);
-                        seconds_left = seconds_left % 3600;
-                        
-                        minutes = parseInt(seconds_left / 60);
-                        seconds = parseInt(seconds_left % 60);
-                        
-                        // format countdown string + set tag value
-                        countdown.innerHTML = '<span class="days">' + days +  ' <b><?php echo trans("0440");?></b></span> <span class="hours">' + hours + ' <b><?php echo trans("0441");?></b></span> <span class="minutes">'
-                        + minutes + ' <b><?php echo trans("0442");?></b></span> <span class="seconds">' + seconds + ' <b><?php echo trans("0443");?></b></span>';
-                        
-                        }, 1000);
-                        
-                        $(function(){
-                            setTimeout(function(){
-                        $(".successMsg").fadeOut("slow");
-                        }, 7000);
-                        
-                        });
-                        
-                    </script>
+                    <?php if($appModule == "offers"){ ?>
+                        <div class="panel-heading"><?php echo trans('0439');?></div>
+                        <h3 class="inner"></h3>
+                        <?php if(!empty($module->email)){ ?>
+                            <form action="" method="POST">
+                                <fieldset>
+                                    <?php if(!empty($success)){ ?>
+                                    <div class="alert alert-success successMsg"><?php echo trans('0479');?></div>
+                                    <?php } ?>
+                                    <div class="col-md-6 go-right">
+                                        <label class="go-right"><?php echo trans('0350');?></label>
+                                        <input class="form-control" placeholder="<?php echo trans('0350');?>" type="text" name="name" value="" required>
+                                    </div>
+                                    <div class="col-md-6 go-left">
+                                        <label class="go-right"><?php echo trans('092');?></label>
+                                        <input class="form-control" placeholder="<?php echo trans('092');?>" type="text" name="phone" value="" required><br>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12">
+                                        <label class="go-right"><?php echo trans('0262');?></label>
+                                        <textarea class="form-control" placeholder="<?php echo trans('0262');?>" name="message" rows="4" cols="25" required></textarea><br>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12">
+                                        <input type="hidden" name="toemail" value="<?php echo $module->email;?>">
+                                        <input type="hidden" name="sendmsg" value="1">
+                                        <input class="btn btn-success btn-success btn-block btn-lg" type="submit" name="" value="<?php echo trans('0439');?>">
+                                    </div>
+                                    <br>
+                                    <!-- END CONTACT FORM -->
+                                </fieldset>
+                            </form>
+                        <?php } if(!$module->offerForever){ ?>
+                            <!-- Start Offers countdown -->
+                            <i class="fa fa-clock-o go-right"></i>
+                            <h4><?php echo trans('0269');?></h4>
+                            <p href="#" class="phone"><span class="wow fadeInLeft animated" id="countdown"></span></p>
+                            <!-- End Offers countdown -->
+                        <?php } ?>
+                        <div class="clearfix"></div>
+                        <script type="text/javascript">
+                            // set the date we're counting down to
+                            var target_date = new Date('<?php echo $module->fullExpiryDate; ?>').getTime();
+
+                            // variables for time units
+                            var days, hours, minutes, seconds;
+
+                            // get tag element
+                            var countdown = document.getElementById('countdown');
+
+                            // update the tag with id "countdown" every 1 second
+                            setInterval(function () {
+
+                            // find the amount of "seconds" between now and target
+                            var current_date = new Date().getTime();
+                            var seconds_left = (target_date - current_date) / 1000;
+
+                            // do some time calculations
+                            days = parseInt(seconds_left / 86400);
+                            seconds_left = seconds_left % 86400;
+
+                            hours = parseInt(seconds_left / 3600);
+                            seconds_left = seconds_left % 3600;
+
+                            minutes = parseInt(seconds_left / 60);
+                            seconds = parseInt(seconds_left % 60);
+
+                            // format countdown string + set tag value
+                            countdown.innerHTML = '<span class="days">' + days +  ' <b><?php echo trans("0440");?></b></span> <span class="hours">' + hours + ' <b><?php echo trans("0441");?></b></span> <span class="minutes">'
+                            + minutes + ' <b><?php echo trans("0442");?></b></span> <span class="seconds">' + seconds + ' <b><?php echo trans("0443");?></b></span>';
+
+                            }, 1000);
+
+                            $(function(){
+                                setTimeout(function(){
+                            $(".successMsg").fadeOut("slow");
+                            }, 7000);
+
+                            });
+
+                        </script>
                     <?php } ?>
                     <!-- End Offers Contact Form -->
-                    <?php if($appModule != "cars" && $appModule != "offers"){ ?>
-                    <!-- Start Review Total -->
-                    <center>
-                        <h4 class="block-title"><?php echo trans('042');?> <span>(<?php echo $avgReviews->totalReviews; ?>)</span></h4>
-                        <div class="block-content">
-                            <div class="circle-evaluate c100 p<?php echo $avgReviews->overall * 10;?>">
-                                <span>
-                                    <small><?php echo $avgReviews->overall;?></small>
-                                    <hr>
-                                    <small>10</small>
-                                </span>
-                                <div class="slice">
-                                    <div class="bar"></div>
-                                    <div class="fill"></div>
+                    <?php if (pt_is_module_enabled('reviews')) { ?>
+                        <?php if ($appModule != "cars" && $appModule != "offers") { ?>
+                            <!-- Start Review Total -->
+                            <h4 class="block-title"><?php echo trans('042'); ?>
+                                <span>(<?php echo $avgReviews->totalReviews; ?>)</span></h4>
+                            <div class="block-content">
+                                <div class="circle-evaluate c100 p<?php echo $avgReviews->overall * 10; ?>">
+                                    <span>
+                                        <small><?php echo $avgReviews->overall; ?></small>
+                                        <hr>
+                                        <small>10</small>
+                                    </span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <p class="andes purple size25" style="margin-top: 10px;">&ldquo;<?php echo $avgOverall[review_overall_level($avgReviews->overall)][0]; ?>&rdquo;</p>
+                            </div>
+                            <!-- End Review Total -->
+                        <?php } ?>
+                        <?php if ($appModule == "hotels") { ?>
+                            <div class="block-content">
+                                <!-- Start Hotel Reviews bars -->
+                                <label class="text-left andes"><?php echo trans('033'); ?></label>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary go-right" role="progressbar"
+                                         aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100"
+                                         style="width: <?php echo $avgReviews->facilities * 10; ?>%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                                <label class="text-left andes"><?php echo trans('034'); ?></label>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary go-right" role="progressbar"
+                                         aria-valuenow="80"
+                                         aria-valuemin="0" aria-valuemax="100"
+                                         style="width: <?php echo $avgReviews->staff * 10; ?>%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                                <label class="text-left andes"><?php echo trans('0722'); ?></label>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary go-right" role="progressbar"
+                                         aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100"
+                                         style="width: <?php echo $avgReviews->comfort * 10; ?>%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                                <label class="text-left andes"><?php echo trans('032'); ?></label>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary go-right" role="progressbar"
+                                         aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100"
+                                         style="width: <?php echo $avgReviews->location * 10; ?>%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                                <label class="text-left andes"><?php echo trans('0720'); ?></label>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary go-right" role="progressbar"
+                                         aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="10"
+                                         style="width: <?php echo $avgReviews->anuong * 10; ?>%">
+                                        <span class="sr-only"></span>
+                                    </div>
+                                </div>
+                                <label class="text-left andes"><?php echo trans('030'); ?></label>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-primary go-right" role="progressbar"
+                                         aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="10"
+                                         style="width: <?php echo $avgReviews->clean * 10; ?>%">
+                                        <span class="sr-only"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
-                            <p class="andes purple size25" style="margin-top: 10px;">&ldquo;Rất tốt&rdquo;</p>
-                        </div>
-                    </center>
-                    <div class="block-content">
-                        <!-- End Review Total -->
-                        <?php } ?>
-                        <!-- Start Hotel Reviews bars -->
-                        <?php if($appModule == "hotels"){ ?>
-                        <label class="text-left andes"><?php echo trans('033');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->facilities * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <label class="text-left andes"><?php echo trans('034');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="80"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->staff * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <label class="text-left andes"><?php echo trans('0722');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->comfort * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <label class="text-left andes"><?php echo trans('032');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $avgReviews->location * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <label class="text-left andes"><?php echo trans('0720');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews ->anuong * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <label class="text-left andes"><?php echo trans('030');?></label>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-primary go-right" role="progressbar" aria-valuenow="20"
-                                aria-valuemin="0" aria-valuemax="10" style="width: <?php echo $avgReviews->clean * 10;?>%">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <?php } ?>
-                        <!-- End Hotel Reviews bars -->
-                        <?php include 'tripadvisor.php';?>
-                        <!-- End aside Short Description -->
-                        <!-- Start Tour Form aside -->
-                        <?php if($appModule == "tours"){ ?>
+                            <!-- End Hotel Reviews bars -->
+                        <?php }
+                    } ?>
+                    <?php include 'tripadvisor.php';?>
+                    <!-- End aside Short Description -->
+                    <!-- Start Tour Form aside -->
+                    <?php if($appModule == "tours"){ ?>
                         <form action="" method="GET" >
                             <div class="panel panel-default">
                                 <div class="panel-heading"><?php echo trans('0158');?> <?php echo trans('08');?></div>
@@ -516,10 +530,10 @@
                                 </div>
                             </div>
                         </form>
-                        <?php } ?>
-                        <!-- End Tour Form aside -->
-                        <!-- Start Car From aside -->
-                        <?php if($appModule == "cars"){ ?>
+                    <?php } ?>
+                    <!-- End Tour Form aside -->
+                    <!-- Start Car From aside -->
+                    <?php if($appModule == "cars"){ ?>
                         <form class="form-horizontal" action="<?php echo base_url().$appModule;?>/book/<?php echo $module->bookingSlug;?>" method="GET" role="search">
                             <div class="row form-group">
                                 <div class="col-xs-12">
@@ -602,25 +616,27 @@
                             <hr style="margin-top: 5px; margin-bottom: 12px;">
                             <button type="submit" class="btn btn-block btn-action btn-lg"><?php echo trans('0142');?></button>
                         </form>
-                        <?php } ?>
-                        <!-- End  Car From aside -->
-                        <input type="hidden" id="loggedin" value="<?php echo $usersession;?>" />
-                        <input type="hidden" id="itemid" value="<?php echo $module->id; ?>" />
-                        <input type="hidden" id="module" value="<?php echo $appModule;?>" />
-                        <input type="hidden" id="addtxt" value="<?php echo trans('029');?>" />
-                        <input type="hidden" id="removetxt" value="<?php echo trans('028');?>" />
-                        <!-- Start Add/Remove Wish list Review Section -->
+                    <?php } ?>
+                    <!-- End  Car From aside -->
+                    <!-- Start Add/Remove Wish list Review Section -->
+                    <input type="hidden" id="loggedin" value="<?php echo $usersession;?>" />
+                    <input type="hidden" id="itemid" value="<?php echo $module->id; ?>" />
+                    <input type="hidden" id="module" value="<?php echo $appModule;?>" />
+                    <input type="hidden" id="addtxt" value="<?php echo trans('029');?>" />
+                    <input type="hidden" id="removetxt" value="<?php echo trans('028');?>" />
+                    <!-- End Add/Remove Wish list Review Section -->
+                    <?php if (pt_is_module_enabled('reviews')) { ?>
                         <div class="group-btn">
                             <?php if($appModule != "cars" && $appModule != "ean" && $appModule != "offers"){ ?>
-                            <button  data-toggle="collapse" data-parent="#accordion" class="writeReview btn btn-write-evu" href="#ADDREVIEW"> <?php echo trans('083');?></button>
-                            <?php if(!empty($reviews) > 0){ ?>
-                            <a href="#REVIEWS" class="tabsBtn btn btn-view-evu"> <?php echo trans('0394');?></a>
-                            <?php } } ?>
+                                <button  data-toggle="collapse" data-parent="#accordion" class="writeReview btn btn-write-evu" href="#ADDREVIEW"> <?php echo trans('083');?></button>
+                                <?php if(!empty($reviews) > 0){ ?>
+                                    <a href="#REVIEWS" class="tabsBtn btn btn-view-evu"> <?php echo trans('0394');?></a>
+                                <?php }
+                            } ?>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
-            <!-- End Add/Remove Wish list Review Section -->
             <script>
                 $(function(){
                 
@@ -718,62 +734,61 @@
             <br>    
             <!------------------------  Related Listings   ------------------------------>
             <?php if(!empty($module->relatedItems)){ ?> 
-            <div class="list-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading go-text-right"><?php if($appModule == "hotels" || $appModule == "ean"){ echo trans('0290'); }else if($appModule == "tours"){ echo trans('0453'); }else if($appModule == "cars"){ echo trans('0493'); } ?></div>
-                    <?php
-                        foreach($module->relatedItems as $item): ?>
-                    <div class="featured">
-                        <a href="<?php echo $item->slug;?>" class="col-md-12 col-sm-12 col-xs-12 go-right" >
-                        <img class="img-responsive post-img img-fade" src="<?php echo $item->thumbnail;?>" alt="<?php echo character_limiter($item->title,15);?>" />
-                        </a>
-                        <div class="desc col-md-12 col-sm-12 col-xs-12 go-left">
-                            <h4 style="margin-top: 0px;" class="go-text-right purple"><a href="<?php echo $item->slug;?>" ><?php echo character_limiter($item->title,15);?></a></h4>
-                            <div><?php echo $item->location;?> <?php echo $item->stars;?></div>
-                            <span class="pull-right">
-                            <?php  if($item->price > 0){ ?>
-                            <?php echo trans('0561');?><?php echo $item->price;?><?php echo $item->currSymbol; ?>
-                            <?php } ?>
-                            </span>
-                        </div>
-                        <!--//desc-->
+                <div class="list-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading go-text-right"><?php if($appModule == "hotels" || $appModule == "ean"){ echo trans('0290'); }else if($appModule == "tours"){ echo trans('0453'); }else if($appModule == "cars"){ echo trans('0493'); } ?></div>
+                        <?php foreach($module->relatedItems as $item) { ?>
+                            <div class="featured">
+                                <a href="<?php echo $item->slug;?>" class="col-md-12 col-sm-12 col-xs-12 go-right" >
+                                <img class="img-responsive post-img img-fade" src="<?php echo $item->thumbnail;?>" alt="<?php echo character_limiter($item->title,15);?>" />
+                                </a>
+                                <div class="desc col-md-12 col-sm-12 col-xs-12 go-left">
+                                    <h4 style="margin-top: 0px;" class="go-text-right purple"><a href="<?php echo $item->slug;?>" ><?php echo character_limiter($item->title,15);?></a></h4>
+                                    <div><?php echo $item->location;?> <?php echo $item->stars;?></div>
+                                    <span class="pull-right">
+                                    <?php  if($item->price > 0){ ?>
+                                    <?php echo trans('0561');?><?php echo $item->price;?><?php echo $item->currSymbol; ?>
+                                    <?php } ?>
+                                    </span>
+                                </div>
+                                <!--//desc-->
+                            </div>
+                        <!--//item-->
+                        <hr style="margin-top:10px;margin-bottom:10px">
+                        <?php } ?>
                     </div>
-                    <!--//item-->
-                    <hr style="margin-top:10px;margin-bottom:10px">
-                    <?php endforeach; ?>
                 </div>
-            </div>
             <?php } ?>
             <!------------------------  Related Listings   ------------------------------>
             <!------------------------  REcntly Viewed Listings   ------------------------------>
             <?php if(!empty($recents)){ ?>
-            <div class="list-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading go-text-right"><?php echo trans('0798');?></div>
-                    <?php foreach($recents as $recent) { ?>
-                    <div class="featured">
-                        <div class="desc col-md-12 col-sm-12 col-xs-12 go-left">
-                            <?php
-                                $results = recentlyViewed($recent);
-                                foreach ($results as $row) {
-                                    $locationInfoUrl = pt_LocationsInfo($row->hotel_city);
-                                
-                                    $countryName = url_title($locationInfoUrl->country, 'dash', true);
-                                    $cityName = url_title($locationInfoUrl->city, 'dash', true);
-                                
-                                    $slug = $countryName.'/'.$cityName.'/'.$row->hotel_slug;
-                                    echo "<div><a href='".base_url()."hotels/".$slug."'>" . $row->hotel_title . "</a></div>" .pt_create_stars($row->hotel_stars);
-                                    
-                                }
-                                ?>
+                <div class="list-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading go-text-right"><?php echo trans('0798');?></div>
+                        <?php foreach($recents as $recent) { ?>
+                        <div class="featured">
+                            <div class="desc col-md-12 col-sm-12 col-xs-12 go-left">
+                                <?php
+                                    $results = recentlyViewed($recent);
+                                    foreach ($results as $row) {
+                                        $locationInfoUrl = pt_LocationsInfo($row->hotel_city);
+
+                                        $countryName = url_title($locationInfoUrl->country, 'dash', true);
+                                        $cityName = url_title($locationInfoUrl->city, 'dash', true);
+
+                                        $slug = $countryName.'/'.$cityName.'/'.$row->hotel_slug;
+                                        echo "<div><a href='".base_url()."hotels/".$slug."'>" . $row->hotel_title . "</a></div>" .pt_create_stars($row->hotel_stars);
+
+                                    }
+                                    ?>
+                            </div>
                         </div>
+                        <hr style="margin-top:10px;margin-bottom:10px">
+                        <?php
+                            }
+                            ?>
                     </div>
-                    <hr style="margin-top:10px;margin-bottom:10px">
-                    <?php
-                        }
-                        ?>
                 </div>
-            </div>
             <?php } ?>    
             <!------------------------  REcntly Viewed Listings   ------------------------------>
         </div>

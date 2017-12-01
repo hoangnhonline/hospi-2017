@@ -92,8 +92,15 @@ class Hotels extends MX_Controller
             if (pt_is_module_enabled('reviews')) {
                 $this->data['reviews'] = $this->hotels_lib->hotelReviews($this->data['module']->id);
                 $this->data['avgReviews'] = $this->hotels_lib->hotelReviewsAvg($this->data['module']->id);
+                $this->data['avgOverall'] = [
+                    'veryhigh' => ['Tuyệt vời', '9+'],
+                    'high' => ['Rất tốt', '8 - 9'],
+                    'medium' => ['Tốt', '6 - 8'],
+                    'normal' => ['Tạm được', '5 - 6'],
+                    'low' => ['Kém', '3 - 5'],
+                    'verylow' => ['Rất tệ', '1 - 3']
+                ];
             }
-
             // Split date for new date desing on hotel single page
 
             $checkin = explode("/", $this->hotels_lib->checkin);

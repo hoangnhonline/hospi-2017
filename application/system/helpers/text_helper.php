@@ -531,5 +531,31 @@ if ( ! function_exists('ellipsize'))
 	}
 }
 
+// ------------------------------------------------------------------------
+if ( ! function_exists('review_overall_level'))
+{
+    function review_overall_level($overall)
+    {
+        $arrPoint = [
+            [9.1, 10, 'veryhigh'],
+            [8.1, 9, 'high'],
+            [6.1, 8, 'medium'],
+            [5.1, 6, 'normal'],
+            [3.1, 5, 'low'],
+            [1, 3, 'verylow']
+        ];
+
+        $level = '';
+        foreach ($arrPoint as $point) {
+            if ($point[0] <= $overall && $overall <= $point[1]) {
+                $level = $point[2];
+                break;
+            }
+        }
+
+        return $level;
+    }
+}
+
 /* End of file text_helper.php */
 /* Location: ./system/helpers/text_helper.php */

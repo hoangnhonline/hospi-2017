@@ -997,9 +997,11 @@ class Hotels_lib
     // hotel Reviews Averages
     function hotelReviewsAvg($hotelid = null)
     {
+        //var_dump('<pre>', $hotelid);die;
         if (empty($hotelid)) {
             $hotelid = $this->hotelid;
         }
+
         $this->db->select("COUNT(*) AS totalreviews");
         $this->db->select_avg('review_overall', 'overall');
         $this->db->select_avg('review_clean', 'clean');
@@ -1020,6 +1022,28 @@ class Hotels_lib
         $an_uong = round($res[0]->an_uong, 1);
         $totalreviews = $res[0]->totalreviews;
         $overall = round($res[0]->overall, 1);
+
+        $arrPoint = [
+            [9.1, 10, 'veryhigh'],
+            [8.1, 9, 'high'],
+            [6.1, 8, 'medium'],
+            [5.1, 6, 'normal'],
+            [3.1, 5, 'low'],
+            [1, 3, 'verylow']
+        ];
+        $arrAvgMark = [];
+        foreach ($arrPoint as $point) {
+            $this->db->select("COUNT(*) AS total");
+            $this->db->where('review_status', 'Yes');
+            $this->db->where('review_module', 'hotels');
+            $this->db->where('review_itemid', $hotelid);
+            $this->db->where('review_overall >= ', $point[0]);
+            $this->db->where('review_overall <= ', $point[1]);
+            $res = $this->db->get('pt_reviews')->result();
+
+            $arrAvgMark[$point[2]] = $res[0]->total;
+        }
+
         $result = (object)array(
             'clean' => $clean,
             'comfort' => $comfort,
@@ -1028,8 +1052,10 @@ class Hotels_lib
             'staff' => $staff,
             'anuong' => $an_uong,
             'totalReviews' => $totalreviews,
-            'overall' => $overall
+            'overall' => $overall,
+            'avgMark' => $arrAvgMark
         );
+
         return $result;
     }
 
