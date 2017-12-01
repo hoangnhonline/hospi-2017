@@ -110,7 +110,7 @@
                         <div class="itemlabel_hospi">
                           <div class="rtl_title_home">
                             <h4><a href="<?php echo $item->slug; ?>"><?php echo $item->title; ?></a></h4>
-                            <p class="sub_rtl_title_home"><?php echo $item->desc; ?></p>
+                            <p class="sub_rtl_title_home"><?php echo character_limiter($item->desc,120);?></p>
                             <p class="view_more_db"><a href="<?php echo $item->slug; ?>"><?php echo trans('0569'); ?></a></p>
                             <div class="cb_price">
                                 <?php if ($item->show_price == 1) { ?>
