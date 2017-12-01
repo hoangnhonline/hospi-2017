@@ -390,8 +390,8 @@ class Bookings_model extends CI_Model
             $bookingResult = array("error" => "no", 'msg' => '', 'url' => $url);
             $invoicedetails = invoiceDetails($bookid, $refno);
 
-            //$this->emails_model->sendEmail_customer($invoicedetails, $this->data['app_settings'][0]->site_title);
-            //$this->emails_model->sendEmail_admin($invoicedetails, $this->data['app_settings'][0]->site_title);
+            $this->emails_model->sendEmail_customer($invoicedetails, $this->data['app_settings'][0]->site_title);
+            $this->emails_model->sendEmail_admin($invoicedetails, $this->data['app_settings'][0]->site_title);
             //$this->emails_model->sendEmail_owner($invoicedetails,$this->data['app_settings'][0]->site_title);
             //$this->emails_model->sendEmail_supplier($invoicedetails,$this->data['app_settings'][0]->site_title);
         } catch (Exception $e) {
@@ -768,11 +768,21 @@ class Bookings_model extends CI_Model
         }
 
         $res = $this->db->get('pt_bookings')->result();
-        $originalDate = $res[0]->booking_checkin;
-        $newDate = date("d/m/Y", strtotime($originalDate));
-        if ($res[0]->booking_user > 0)
-            $result[] = (object)array('booking_user' => $res[0]->booking_user, 'ai_first_name' => $res[0]->ai_first_name, 'ai_last_name' => $res[0]->ai_last_name, 'accounts_email' => $res[0]->accounts_email, 'booking_nights' => $res[0]->booking_nights, 'booking_checkin' => $newDate);
-        else $result = "";
+        if ($res[0]->booking_user > 0) {
+            $originalDate = $res[0]->booking_checkin;
+            $newDate = date("d/m/Y", strtotime($originalDate));
+
+            $result[] = (object)[
+                'booking_user' => $res[0]->booking_user,
+                'ai_first_name' => $res[0]->ai_first_name,
+                'ai_last_name' => $res[0]->ai_last_name,
+                'accounts_email' => $res[0]->accounts_email,
+                'booking_nights' => $res[0]->booking_nights,
+                'booking_checkin' => $newDate
+            ];
+        } else {
+            $result = "";
+        }
         return $result;
     }
 }

@@ -383,7 +383,7 @@
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-                                <p class="andes purple size25" style="margin-top: 10px;">&ldquo;<?php echo $avgOverall[review_overall_level($avgReviews->overall)][0]; ?>&rdquo;</p>
+                                <p class="andes purple size25 text-center" style="margin-top: 10px;">&ldquo;<?php echo $avgOverall[review_overall_level($avgReviews->overall)][0]; ?>&rdquo;</p>
                             </div>
                             <!-- End Review Total -->
                         <?php } ?>
@@ -798,86 +798,109 @@
     //------------------------------
     // Write Reviews
     //------------------------------
-      $(function(){
-      $('.reviewscore').change(function(){
-      var sum = 0;
-      var avg = 0;
-      var id = $(this).attr("id");
-      $('.reviewscore_'+id+' :selected').each(function() {
-      sum += Number($(this).val());
-      });
-      avg = sum/5;
-      $("#avgall_"+id).html(avg);
-      $("#overall_"+id).val(avg);
-      });
-    
-      //submit review
-      $(".addreview").on("click",function(){
-      var id = $(this).prop("id");
-      $.post("<?php echo base_url();?>admin/ajaxcalls/postreview", $("#reviews-form-"+id).serialize(), function(resp){
-      var response = $.parseJSON(resp);
-      // alert(response.msg);
-      $("#review_result"+id).html("<div class='alert "+response.divclass+"'>"+response.msg+"</div>").fadeIn("slow");
-      if(response.divclass == "alert-success"){
-      setTimeout(function(){
-      $("#ADDREVIEW").removeClass('in');
-      $("#ADDREVIEW").slideUp();
-      }, 5000);
-      }
-      });
-      setTimeout(function(){
-      $("#review_result"+id).fadeOut("slow");
-      }, 3000);
-      });
-      })
-    
+    $(function () {
+        $('.reviewscore').change(function () {
+            var sum = 0;
+            var avg = 0;
+            var id = $(this).attr("id");
+            $('.reviewscore_' + id + ' :selected').each(function () {
+                sum += Number($(this).val());
+            });
+            avg = sum / 5;
+            $("#avgall_" + id).html(avg);
+            $("#overall_" + id).val(avg);
+        });
+
+        //submit review
+        $(".addreview").on("click", function () {
+            var id = $(this).prop("id");
+            $.post("<?php echo base_url();?>admin/ajaxcalls/postreview", $("#reviews-form-" + id).serialize(), function (resp) {
+                var response = $.parseJSON(resp);
+                // alert(response.msg);
+                $("#review_result" + id).html("<div class='alert " + response.divclass + "'>" + response.msg + "</div>").fadeIn("slow");
+                if (response.divclass == "alert-success") {
+                    setTimeout(function () {
+                        $("#ADDREVIEW").removeClass('in');
+                        $("#ADDREVIEW").slideUp();
+                    }, 5000);
+                }
+            });
+            setTimeout(function () {
+                $("#review_result" + id).fadeOut("slow");
+            }, 3000);
+        });
+    })
+
     //------------------------------
     // Add to Wishlist
     //------------------------------
-      $(function(){
-      // Add/remove wishlist
-      $(".wish").on('click',function(){
-      var loggedin = $("#loggedin").val();
-      var removelisttxt = $("#removetxt").val();
-      var addlisttxt = $("#addtxt").val();
-      var title = $("#itemid").val();
-      var module = $("#module").val();
-      if(loggedin > 0){ if($(this).hasClass('addwishlist')){
-       var confirm1 = confirm("<?php echo trans('0437');?>");
-       if(confirm1){
-      $(".wish").removeClass('addwishlist btn-primary');
-      $(".wish").addClass('removewishlist btn-warning');
-      $(".wishtext").html(removelisttxt);
-      $.post("<?php echo base_url();?>account/wishlist/add", { loggedin: loggedin, itemid: title,module: module }, function(theResponse){ });
-       }
-       return false;
-      }else if($(this).hasClass('removewishlist')){
-      var confirm2 = confirm("<?php echo trans('0436');?>");
-      if(confirm2){
-      $(".wish").addClass('addwishlist btn-primary'); $(".wish").removeClass('removewishlist btn-warning');
-      $(".wishtext").html(addlisttxt);
-      $.post("<?php echo base_url();?>account/wishlist/remove", { loggedin: loggedin, itemid: title,module: module }, function(theResponse){
-      });
-      }
-      return false;
-      } }else{ alert("<?php echo trans('0482');?>"); } });
-      // End Add/remove wishlist
-      })
-    
+    $(function () {
+        // Add/remove wishlist
+        $(".wish").on('click', function () {
+            var loggedin = $("#loggedin").val();
+            var removelisttxt = $("#removetxt").val();
+            var addlisttxt = $("#addtxt").val();
+            var title = $("#itemid").val();
+            var module = $("#module").val();
+            if (loggedin > 0) {
+                if ($(this).hasClass('addwishlist')) {
+                    var confirm1 = confirm("<?php echo trans('0437');?>");
+                    if (confirm1) {
+                        $(".wish").removeClass('addwishlist btn-primary');
+                        $(".wish").addClass('removewishlist btn-warning');
+                        $(".wishtext").html(removelisttxt);
+                        $.post("<?php echo base_url();?>account/wishlist/add", {
+                            loggedin: loggedin,
+                            itemid: title,
+                            module: module
+                        }, function (theResponse) {
+                        });
+                    }
+                    return false;
+                } else if ($(this).hasClass('removewishlist')) {
+                    var confirm2 = confirm("<?php echo trans('0436');?>");
+                    if (confirm2) {
+                        $(".wish").addClass('addwishlist btn-primary');
+                        $(".wish").removeClass('removewishlist btn-warning');
+                        $(".wishtext").html(addlisttxt);
+                        $.post("<?php echo base_url();?>account/wishlist/remove", {
+                            loggedin: loggedin,
+                            itemid: title,
+                            module: module
+                        }, function (theResponse) {
+                        });
+                    }
+                    return false;
+                }
+            } else {
+                alert("<?php echo trans('0482');?>");
+            }
+        });
+        // End Add/remove wishlist
+    })
+
     //------------------------------
     // Rooms
     //------------------------------
-    
-      $('.collapse').on('show.bs.collapse', function () {
-      $('.collapse.in').collapse('hide');  });
-      <?php if($appModule == "hotels"){ ?>
-      jQuery(document).ready(function($) {
-      $('.showcalendar').on('change',function(){
-      var roomid = $(this).prop('id');
-      var monthdata = $(this).val();
-      $("#roomcalendar"+roomid).html("<br><br><div id='rotatingDiv'></div>");
-      $.post("<?php echo base_url();?>hotels/roomcalendar", { roomid: roomid, monthyear: monthdata}, function(theResponse){ console.log(theResponse);
-      $("#roomcalendar"+roomid).html(theResponse);  }); }); });
-      <?php } ?>
+
+    $('.collapse').on('show.bs.collapse', function () {
+        $('.collapse.in').collapse('hide');
+    });
+    <?php if($appModule == "hotels"){ ?>
+        jQuery(document).ready(function ($) {
+            $('.showcalendar').on('change', function () {
+                var roomid = $(this).prop('id');
+                var monthdata = $(this).val();
+                $("#roomcalendar" + roomid).html("<br><br><div id='rotatingDiv'></div>");
+                $.post("<?php echo base_url();?>hotels/roomcalendar", {
+                    roomid: roomid,
+                    monthyear: monthdata
+                }, function (theResponse) {
+                    console.log(theResponse);
+                    $("#roomcalendar" + roomid).html(theResponse);
+                });
+            });
+        });
+    <?php } ?>
     
 </script>
