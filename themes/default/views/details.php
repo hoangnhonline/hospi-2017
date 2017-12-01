@@ -393,7 +393,7 @@
                                 <label class="text-left andes"><?php echo trans('033'); ?></label>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary go-right" role="progressbar"
-                                         aria-valuenow="20"
+                                         aria-valuenow="<?php echo $avgReviews->facilities; ?>"
                                          aria-valuemin="0" aria-valuemax="100"
                                          style="width: <?php echo $avgReviews->facilities * 10; ?>%">
                                         <span class="sr-only"></span>
@@ -402,7 +402,7 @@
                                 <label class="text-left andes"><?php echo trans('034'); ?></label>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary go-right" role="progressbar"
-                                         aria-valuenow="80"
+                                         aria-valuenow="<?php echo $avgReviews->staff; ?>"
                                          aria-valuemin="0" aria-valuemax="100"
                                          style="width: <?php echo $avgReviews->staff * 10; ?>%">
                                         <span class="sr-only"></span>
@@ -411,7 +411,7 @@
                                 <label class="text-left andes"><?php echo trans('0722'); ?></label>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary go-right" role="progressbar"
-                                         aria-valuenow="20"
+                                         aria-valuenow="<?php echo $avgReviews->comfort; ?>"
                                          aria-valuemin="0" aria-valuemax="100"
                                          style="width: <?php echo $avgReviews->comfort * 10; ?>%">
                                         <span class="sr-only"></span>
@@ -420,7 +420,7 @@
                                 <label class="text-left andes"><?php echo trans('032'); ?></label>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary go-right" role="progressbar"
-                                         aria-valuenow="20"
+                                         aria-valuenow="<?php echo $avgReviews->location; ?>"
                                          aria-valuemin="0" aria-valuemax="100"
                                          style="width: <?php echo $avgReviews->location * 10; ?>%">
                                         <span class="sr-only"></span>
@@ -429,7 +429,7 @@
                                 <label class="text-left andes"><?php echo trans('0720'); ?></label>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary go-right" role="progressbar"
-                                         aria-valuenow="20"
+                                         aria-valuenow="<?php echo $avgReviews->anuong; ?>"
                                          aria-valuemin="0" aria-valuemax="10"
                                          style="width: <?php echo $avgReviews->anuong * 10; ?>%">
                                         <span class="sr-only"></span>
@@ -438,7 +438,7 @@
                                 <label class="text-left andes"><?php echo trans('030'); ?></label>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-primary go-right" role="progressbar"
-                                         aria-valuenow="20"
+                                         aria-valuenow="<?php echo $avgReviews->clean; ?>"
                                          aria-valuemin="0" aria-valuemax="10"
                                          style="width: <?php echo $avgReviews->clean * 10; ?>%">
                                         <span class="sr-only"></span>
