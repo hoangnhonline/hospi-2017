@@ -112,12 +112,12 @@
                             <h4><a href="<?php echo $item->slug; ?>"><?php echo $item->title; ?></a></h4>
                             <p class="sub_rtl_title_home"><?php echo character_limiter($item->desc,120);?></p>
                             <p class="view_more_db"><a href="<?php echo $item->slug; ?>"><?php echo trans('0569'); ?></a></p>
-                            <div class="cb_price">
-                                <?php if ($item->show_price == 1) { ?>
+                            <?php if ($item->show_price == 1) { ?>
+                              <div class="cb_price">
                                   <span><?php echo $item->price; ?></span>
                                   <span><?php echo $item->currSymbol; ?></span>
-                                <?php } ?>
-                            </div>
+                              </div>
+                            <?php } ?>
                           </div>
                         </div>
                       </div>
