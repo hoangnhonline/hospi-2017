@@ -8009,8 +8009,15 @@ ul.ui-autocomplete.ui-menu.ui-widget.ui-widget-content.ui-corner-all {
     float: right;
 }
 #ADDREVIEW .control-label {
-    font-size: 12px;
-    white-space: nowrap;
+  font-size: 12px;
+  white-space: nowrap;
+  display: block;
+  text-align: left;
+  font-weight: normal;
+}
+#ADDREVIEW .slider.slider-horizontal .slider-track {
+  height: 17px;
+  border-radius: 0;
 }
 .panel-heading.no-padding {
     padding: 0;
@@ -8251,32 +8258,33 @@ nput[type=checkbox]:checked+label.label-ckb:before {
     margin-left: 0;
 }
 .form-group .slider-handle {
-    background: transparent none;
-    height: 5px;
-    /* You can customize the handle and set a background image */
+  background: transparent none;
+  height: 17px;
+  /* You can customize the handle and set a background image */
 }
 .form-group .slider.slider-horizontal .slider-selection {
-    height: 5px;
+  height: 17px;
+  border-radius: 0;
 }
 /* Or display content like unicode characters or fontawesome icons */
 
 .form-group .slider-handle::before {
-    line-height: 20px;
-    font-size: 20px;
-    content: '\2605';
-    /*unicode star character*/
-    
-    color: #660033;
-    position: absolute;
-    top: -6px;
+  line-height: 20px;
+  font-size: 20px;
+  content: '\2605';
+  color: #660033;
+  position: absolute;
+  top: -3px;
+  background: #603;
 }
 .form-group .slider-selection {
-    background-image: -webkit-linear-gradient(top, #660033 0%, #f5f5f5 100%);
-    background-image: -o-linear-gradient(top, #660033 0%, #f5f5f5 100%);
-    background-image: linear-gradient(to bottom, #660033 0%, #f5f5f5 100%);
+  height: 17px;
+  // background-image: -webkit-linear-gradient(top, #660033 0%, #f5f5f5 100%);
+  // background-image: -o-linear-gradient(top, #660033 0%, #f5f5f5 100%);
+  // background-image: linear-gradient(to bottom, #660033 0%, #f5f5f5 100%);
 }
 #ADDREVIEW .form-group {
-    margin-bottom: 0;
+  margin: 0;
 }
 #Carousel .slider {
     display: block;
