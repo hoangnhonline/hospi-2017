@@ -519,7 +519,6 @@ class Hotels extends MX_Controller
         $stay = $date2->diff($date1)->format("%a");
         $adults = (int)$this->input->get('adults');
         $child = (int)$this->input->get('child');
-        $room_id = $this->input->get('room_id');
         $room_quantity = $this->input->get('room_quantity');
         $extra_beds = $this->input->get('extra_beds');
         $totalRooms = 0;
@@ -535,8 +534,6 @@ class Hotels extends MX_Controller
             $hotelID = $this->hotels_lib->get_id();
             $detailHotel = $this->hotels_model->getDetail($hotelID);
 
-            // var_dump($detailHotel);die;
-
             $roomIdArr = $this->input->get('room_id');
             $roomsCountArr = $this->input->get('room_quantity');
             $extrabeds = $this->input->get('extrabeds');
@@ -546,8 +543,7 @@ class Hotels extends MX_Controller
                     $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotelID, $roomID, $roomsCount, $extrabeds, '', '');
                 }
             }
-            // echo "<pre>";
-            // print_r($bookInfo);die;
+
             $this->data['module'] = $detailHotel;
             $this->data['stay'] = $stay;
             //var_dump("<pre>", $detailHotel);die;
@@ -580,7 +576,7 @@ class Hotels extends MX_Controller
             $this->data['child'] = $child;
             $this->data['totalRooms'] = $totalRooms;
 
-            $this->data['room_id'] = json_encode($room_id);
+            $this->data['room_id'] = json_encode(array_keys($bookInfo));
             $this->data['room_quantity'] = json_encode($room_quantity);
             $this->data['extra_beds'] = json_encode($extra_beds);
 

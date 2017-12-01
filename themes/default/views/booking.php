@@ -212,7 +212,7 @@
                                         </div>
                                     </div>
                                 </div><!-- row -->
-                                <p class="row" style="padding: 15px 15px 0; border-top: 1px solid #cccccc">Loại phòng: <strong class="purple">01 giường lớn, 02 giường nhỏ</strong></p>
+                                <!--<p class="row" style="padding: 15px 15px 0; border-top: 1px solid #cccccc">Loại phòng: <strong class="purple">01 giường lớn, 02 giường nhỏ</strong></p>-->
                             </div>
                         </div>
                         <div class="box">
@@ -269,17 +269,32 @@
                                         <span class="v">0 VND</span>
                                     </li>
                                     <li>
+                                        <?php
+                                        $phi_vat = $phi_dich_vu = 0;
+                                        if ($module->hotel_tax_fixed > 0) {
+                                            $phi_vat = $module->hotel_tax_fixed;
+                                        } elseif ($module->hotel_tax_percentage > 0) {
+                                            $phi_vat = $priceTotal * ($module->hotel_tax_percentage / 100);
+                                        }
+                                        if ($module->hotel_service_fixed > 0) {
+                                            $phi_dich_vu = $module->hotel_service_fixed;
+                                        } elseif ($module->hotel_service_percentage > 0) {
+                                            $phi_dich_vu = $priceTotal * ($module->hotel_service_percentage / 100);
+                                        }
+                                        ?>
                                         <span class="k">Phí VAT:</span>
-                                        <span class="v">0 VND</span>
+                                        <span class="v"><?php echo number_format($phi_vat); ?> VND</span>
+                                        <input type="hidden" name="phi_vat" value="<?php echo $phi_vat; ?>">
                                     </li>
                                     <li>
                                         <span class="k">Phí dịch vụ:</span>
-                                        <span class="v">0 VND</span>
+                                        <span class="v"><?php echo number_format($phi_dich_vu); ?> VND</span>
+                                        <input type="hidden" name="phi_dich_vu" value="<?php echo $phi_dich_vu; ?>">
                                     </li>
                                     <li>
                                         <strong class="k">Thanh toán</strong>
-                                        <strong class="v"><?php echo number_format($priceTotal + $priceExtraBedTotal); ?> VND</strong>
-                                        <input type="hidden" name="tong_chua_giam" id="tong_chua_giam" value="<?php echo $priceTotal + $priceExtraBedTotal; ?>">
+                                        <strong class="v"><?php echo number_format($priceTotal + $priceExtraBedTotal + $phi_vat + $phi_dich_vu); ?> VND</strong>
+                                        <input type="hidden" name="tong_chua_giam" id="tong_chua_giam" value="<?php echo $priceTotal + $priceExtraBedTotal + $phi_vat + $phi_dich_vu; ?>">
                                     </li>
                                     <li style="border: none;">
                                         <strong class="clearfix" style="margin-bottom: 3px; display: block;">Nhập mã giảm giá</strong>
@@ -335,13 +350,14 @@
                       <input type="hidden" name="checkout" value="<?php echo $checkout;?>" />
                       <input type="hidden" name="adults" value="<?php echo $adults;?>" />
                       <input type="hidden" name="child" value="<?php echo $child;?>" />
+                      <input type="hidden" name="nights" value="<?php echo $stay;?>" />
                       <input type="hidden" id="couponid" name="couponid" value="" />
                       <input type="hidden" id="btype" name="btype" value="<?php echo $appModule;?>" />
                       <?php if($appModule == "hotels"){ ?>
-                      <input type="hidden" name="subitemid" value="<?php echo json_encode($room_id);?>" />
-                      <input type="hidden" name="roomscount" value="<?php echo json_encode($room_quantity);?>" />
-                      <input type="hidden" name="bedscount" value="<?php echo json_encode($extra_beds);?>" />
-                      <input type="hidden" name="checkin" value="<?php echo $checkin;?>" />                  
+                          <input type="hidden" name="subitemid" value="<?php echo $room_id;?>" />
+                          <input type="hidden" name="roomscount" value="<?php echo json_encode($room_quantity);?>" />
+                          <input type="hidden" name="bedscount" value="<?php echo json_encode($extra_beds);?>" />
+                          <input type="hidden" name="checkin" value="<?php echo $checkin;?>" />
                       <?php } ?>
                 </form>
             </div>
@@ -630,9 +646,6 @@ $(".applycoupon").on("click",function(){
       var module = $("#btype").val();
       var itemid = $("#itemid").val();
       var coupon = $(".coupon").val();
-      console.log(module);
-      console.log(itemid);
-      console.log(coupon);
       $.ajax({
         url : "<?php echo base_url();?>admin/ajaxcalls/checkCoupon",
         type : 'POST',

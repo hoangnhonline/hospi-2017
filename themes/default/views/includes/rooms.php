@@ -83,7 +83,7 @@
                   </div>
                   <div class="block-view-detail">
                     <div class="visible-lg visible-md go-right" id="accordion" style="margin-top: 0px;">
-                      <a data-toggle="modal" href="#details4997">Xem chi tiết</a>
+                      <a data-toggle="modal" href="#details<?php echo $r->id; ?>">Xem chi tiết</a>
                     </div>
                   </div>
               </td>

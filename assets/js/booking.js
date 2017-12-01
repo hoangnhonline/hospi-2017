@@ -106,7 +106,7 @@
      $.ajax({
       url : url + "admin/ajaxcalls/processBooking" + formname,
       type : 'POST',      
-      data : $("#bookingdetails, #" + formname + "form").serialize(),
+      data : $("#bookingdetails").serialize(),
       success : function(response){
          var resp = $.parseJSON(response);
          //console.log(resp);
