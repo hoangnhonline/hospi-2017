@@ -164,11 +164,11 @@
             <!-- rooms -->
             <br>
             <div class="panel panel-default">
-                <button type="button" class="collapsebtn last go-text-right" data-toggle="collapse" data-target="#collapse1" aria-expanded="true">
+                <button type="button" class="collapsebtn last go-text-right collapsed" data-toggle="collapse" data-target="#collapse1" aria-expanded="false">
                 <?php echo trans('0642');?><?php echo trans('0641'); ?><?php echo $module->title; ?><span class="collapsearrow"></span>
                 </button>
                 <!--<div class="panel-heading go-text-right"><?php echo trans('046');?><?php echo trans('0641'); ?><?php echo $module->title; ?></div>-->
-                <div id="collapse1" class="collapse" aria-expanded="true">
+                <div id="collapse1" class="collapse" aria-expanded="false">
                     <div class="panel-body wrapper-class border-bottom">
                         <div class="col-md-2 align-center andes"><?php echo trans('046');?></div>
                         <div class="col-md-10  border-left"><?php echo $module->desc; ?></div>
@@ -181,10 +181,10 @@
             </div>
             <?php if($appModule != "offers"){ ?>
             <div class="panel panel-default">
-                <button type="button" class="collapsebtn last go-text-right" data-toggle="collapse" data-target="#collapse2" aria-expanded="true">
+                <button type="button" class="collapsebtn last go-text-right collapsed" data-toggle="collapse" data-target="#collapse2" aria-expanded="false">
                 <?php echo trans('0148');?><?php echo trans('0696');?><?php echo $module->title; ?><span class="collapsearrow"></span>
                 </button>
-                <div id="collapse2" class="collapse" aria-expanded="true">
+                <div id="collapse2" class="collapse" aria-expanded="false">
                     <div class="panel-body">
                         <span class="RTL">
                             <p><?php echo nl2br($module->policy); ?></p>
@@ -252,10 +252,10 @@
             </div>
             <?php if($appModule == "hotels"){ ?>
             <div class="panel panel-default">
-                <button type="button" class="collapsebtn last go-text-right" data-toggle="collapse" data-target="#collapse3" aria-expanded="true">
+                <button type="button" class="collapsebtn last go-text-right collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false">
                 <?php echo trans('0758');?><span class="collapsearrow"></span>
                 </button>
-                <div id="collapse3" class="collapse" aria-expanded="true">
+                <div id="collapse3" class="collapse" aria-expanded="false">
                     <div class="panel-body">
                         <p class="RTL">
                             <i class="fa fa-clock-o text-success"></i> <strong> <?php echo trans('0697');?> </strong> :   <?php echo $module->defcheckin;?>

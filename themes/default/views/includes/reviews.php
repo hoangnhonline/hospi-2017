@@ -1,11 +1,11 @@
 <?php if(!empty($reviews) > 0){ ?>
 <div id="REVIEWS">
     <div class="panel panel-default">
-        <button type="button" class="collapsebtn last go-text-right" data-toggle="collapse" data-target="#collapse4" aria-expanded="true">
+        <button type="button" class="collapsebtn last go-text-right collapsed" data-toggle="collapse" data-target="#collapse4" aria-expanded="false">
            <?php echo trans('0396');?><span class="collapsearrow"></span>
-           <a  data-toggle="collapse" data-parent="#accordion" class="text-link pull-right" style="margin-right: 30px;" href="#ADDREVIEW"> <?php echo trans('083');?></a>
+           <a data-toggle="collapse" data-parent="#accordion" class="text-link pull-right" style="margin-right: 30px;" href="#ADDREVIEW"> <?php echo trans('083');?></a>
         </button>
-        <div id="collapse4" class="collapse in" aria-expanded="true">
+        <div id="collapse4" class="collapse in" aria-expanded="false">
             <div class="panel-body">
                 <div class="block-process-evaluate block-process-evaluate2">
                     <div class="clearfix">
