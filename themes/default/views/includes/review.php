@@ -157,7 +157,7 @@
         .on('slide', ScoreChange)
         .data('slider');
     
-    // $("#reviewform").hide();
+    $("#reviewform").hide();
     $("#write").click(function() {
     var input = $("#bookingcode").val();
     $("#info").html("<div id='rotatingDiv'></div>");
