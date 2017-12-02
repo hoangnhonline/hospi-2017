@@ -89,6 +89,7 @@
                 </div>
                 <div style="margin-top:30px"></div>
             </div><!-- offset-2 -->
+            <div class="list-item">
             <?php
             if(!empty($module)){
                 foreach($module as $item){
@@ -124,7 +125,8 @@
                     </div>
                   </div>
                 </div><!-- featured-item col-sm-6 -->
-                <?php } ?>
+            <?php } ?>
+            </div>
             <div class="clearfix"></div>
             <div class="col-md-12 pull-right go-right"><?php echo createPagination($info);?></div>
             <div class="pull-right">
