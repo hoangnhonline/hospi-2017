@@ -7465,6 +7465,9 @@ ul.footerlist.go-right.go-text-right,
   height: 100%;
   padding: 10px 0 10px 10px;
 }
+.offer-page .featured-item:nth-child(2n+1) {
+    clear: both
+}
 .featured-item-content .itemlabel_hospi h4 {
   margin-bottom: 20px;
   height: 48px;
@@ -7479,6 +7482,8 @@ ul.footerlist.go-right.go-text-right,
   color: #666;
   font-size: 16px;
   margin-bottom: 25px;
+  height: 40px;
+  overflow: hidden;
 }
 .view_more_db {
   line-height: 1;
