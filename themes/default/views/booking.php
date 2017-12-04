@@ -468,8 +468,7 @@
                                 ?>
                                 <li>
                                     <span class="k"><?php echo $item->name; ?></span>
-                                    <span class="v"><?php echo $surcharge[$item->id] . ' x ' . number_format($price_surcharge); ?>
-                                        = <?php echo number_format($price_surcharge); ?> <?php echo $module->currSymbol; ?></span>
+                                    <span class="v"><?php echo number_format($price_surcharge); ?> <?php echo $module->currSymbol; ?></span>
                                 </li>
                                 <?php
                             }

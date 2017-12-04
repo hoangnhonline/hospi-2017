@@ -123,7 +123,7 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <p class="title">Ngày đi</p>
-                                <input type="text" placeholder="Ngày đi" name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo date('d/m/Y', $module->from) ?>" required >
+                                <input type="text" placeholder="Ngày đi" name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo date('d/m/Y', $module->to) ?>" required >
                             </div>
                             <div class="form-group">
                                 <label class="checkbox-inline checkbox-style2">

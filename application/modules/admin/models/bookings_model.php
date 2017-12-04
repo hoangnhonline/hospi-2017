@@ -408,6 +408,7 @@ class Bookings_model extends CI_Model
                     'booking_total' => $this->input->post('tong_thanh_toan'),
                     'booking_remaining' => $this->input->post('tong_chua_giam'),
                     'booking_checkin' => $checkin,
+                    'booking_checkout' => $checkin,
                     'booking_nights' => $this->input->post('nights'),
                     'booking_payment_type' => $paymethod,
                     'booking_payment_info' => $payinfo,
