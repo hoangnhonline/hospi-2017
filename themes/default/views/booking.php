@@ -107,14 +107,14 @@
                     </li>
                     <li class="label-style" style="padding-left: 0px">
                         <label class="radio-inline raido-style1">
-                            <input type="radio" value="cod" name="checkout-type" class="payment_method">
+                            <input type="radio" value="payatoffice" name="checkout-type" class="payment_method">
                             <span></span>
                             <strong>Thanh toán tại Vp HOSPI</strong>
                         </label>
                     </li>
                     <li class="label-style" style="padding-left: 0px">
                         <label class="radio-inline raido-style1">
-                            <input type="radio" value="payatoffice" name="checkout-type" class="payment_method">
+                            <input type="radio" value="cod" name="checkout-type" class="payment_method">
                             <span></span>
                             <strong>Thanh toán tại nhà</strong>
                         </label>
