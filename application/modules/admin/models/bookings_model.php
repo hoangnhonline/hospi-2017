@@ -451,8 +451,8 @@ class Bookings_model extends CI_Model
             $bookingResult = array("error" => "no", 'msg' => '', 'url' => $url);
             $invoicedetails = invoiceDetails($book_id, $refno);
 
-            //$this->emails_model->sendEmail_customer($invoicedetails, $this->data['app_settings'][0]->site_title);
-            //$this->emails_model->sendEmail_admin($invoicedetails, $this->data['app_settings'][0]->site_title);
+            $this->emails_model->sendEmail_customer($invoicedetails, $this->data['app_settings'][0]->site_title);
+            $this->emails_model->sendEmail_admin($invoicedetails, $this->data['app_settings'][0]->site_title);
             //$this->emails_model->sendEmail_owner($invoicedetails,$this->data['app_settings'][0]->site_title);
             //$this->emails_model->sendEmail_supplier($invoicedetails,$this->data['app_settings'][0]->site_title);
         } catch (Exception $e) {
