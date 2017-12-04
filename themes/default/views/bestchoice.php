@@ -100,8 +100,7 @@
                       <div class="col-sm-6 col-sm-push-6 col-xs-12 go-right">
                         <div class="hospi_img_list">
                           <a href="<?php echo $item->slug;?>">
-                            <!-- <img src="<?php echo $item->thumbnail;?>" class="img-responsive" alt="<?php echo character_limiter($item->title,20);?>"> -->
-                            <img src="assets/img/Untitled-1.jpg" alt="">
+                            <img src="<?php echo $item->thumbnail;?>" class="img-responsive" alt="<?php echo character_limiter($item->title,20);?>">
                             <div class="short_info"></div>
                           </a>
                         </div>
