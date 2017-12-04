@@ -441,6 +441,7 @@ class Bookings_model extends CI_Model
                         'booked_room_id' => $id,
                         'booked_room_count' => $value,
                         'booked_checkin' => $checkin,
+                        'booking_checkout' => $checkin,
                         'booked_booking_status' => 'unpaid'
                     );
 
