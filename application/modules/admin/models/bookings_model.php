@@ -344,12 +344,12 @@ class Bookings_model extends CI_Model
                     'sentto' => $sentto,
                     'booking_extra_beds' => $extrabeds,
                     'booking_extra_beds_charges' => $extrabedscharges,
-                    'booking_deposit' => empty($phi_dich_vu) ? 0 : $phi_dich_vu,
+                    'booking_deposit' => 0,
                     'booking_tax' => empty($phi_vat) ? 0 : $phi_vat,
-                    'booking_paymethod_tax' => 0,
+                    'booking_paymethod_tax' => empty($phi_dich_vu) ? 0 : $phi_dich_vu,
                     'booking_curr_code' => 'VND',
                     'booking_curr_symbol' => 'vnd',
-                    'booking_coupon_rate' => $this->input->post('giam_gia'),
+                    'booking_coupon_rate' => 0,
                     'booking_coupon' => $coupon_code,
                     'booking_guest_info' => $passportInfo
                 );
@@ -424,7 +424,7 @@ class Bookings_model extends CI_Model
                     'booking_paymethod_tax' => 0,
                     'booking_curr_code' => 'VND',
                     'booking_curr_symbol' => 'vnd',
-                    'booking_coupon_rate' => $this->input->post('giam_gia'),
+                    'booking_coupon_rate' => 0,
                     'booking_coupon' => $coupon_code,
                     'booking_guest_info' => $passportInfo
                 );
