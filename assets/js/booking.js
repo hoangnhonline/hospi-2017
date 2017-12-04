@@ -1,192 +1,120 @@
- var grandtotal = 0;
- var newsupPrice = 0;
- $(function() {
-     $("#guesttab").on('click', function() {
+var grandtotal = 0;
+var newsupPrice = 0;
 
-         $(".completebook").prop('name', 'guest');
+$(function () {
+    $("#guesttab").on('click', function () {
+        $(".completebook").prop('name', 'guest');
+    });
 
-     })
+    $("#signintab").on('click', function () {
+        $(".completebook").prop('name', 'login');
+    });
 
-     $("#signintab").on('click', function() {
+    $("#signuptab").on('click', function () {
+        $(".completebook").prop('name', 'signup');
+    });
+});
 
-         $(".completebook").prop('name', 'login');
+function select_tour_sup(price, title, supid, currency) {
 
+    var commissiontype = $("#commission").attr('class');
+    var commissionvalue = parseFloat($("#commission").val());
+    var taxtype = $("#tax").attr('class');
+    var taxvalue = parseFloat($("#tax").val());
 
-     })
+    if (newsupPrice < 0) {
+        newsupPrice = 0;
+    }
+    var countsupp = $('div[id^=supp_' + supid + ']').length;
+    if (countsupp < 1) {
 
-     $("#signuptab").on('click', function() {
+        add_sup_to_right_div(supid, title, price, currency);
+    }
 
-         $(".completebook").prop('name', 'signup');
-
-     })
-
- });
-
- function select_tour_sup(price, title, supid, currency) {
-
-     var commissiontype = $("#commission").attr('class');
-     var commissionvalue = parseFloat($("#commission").val());
-     var taxtype = $("#tax").attr('class');
-     var taxvalue = parseFloat($("#tax").val());
-
-     if (newsupPrice < 0) {
-         newsupPrice = 0;
-     }
-     var countsupp = $('div[id^=supp_' + supid + ']').length;
-     if (countsupp < 1) {
-
-         add_sup_to_right_div(supid, title, price, currency);
-     }
-
-     if (!$("#supplements_" + supid).prop('checked')) {
-         $('.rightpanel').find('#supp_' + supid).remove();
-         newsupPrice -= price;
-     } else {
-         newsupPrice += price;
-     }
+    if (!$("#supplements_" + supid).prop('checked')) {
+        $('.rightpanel').find('#supp_' + supid).remove();
+        newsupPrice -= price;
+    } else {
+        newsupPrice += price;
+    }
 
 
+    $("#totalsupamount").val(newsupPrice);
 
-     $("#totalsupamount").val(newsupPrice);
+    var tts = parseFloat($("#totaltouramount").val()) + parseFloat($("#totalsupamount").val());
+    if (taxtype == 'fixed') {
 
-     var tts = parseFloat($("#totaltouramount").val()) + parseFloat($("#totalsupamount").val());
-     if (taxtype == 'fixed') {
+        $("#taxamount").val(taxvalue);
+        $("#displaytax").html(currency + taxvalue);
+    } else {
+        var taxper = parseFloat(parseFloat(tts) * parseFloat(taxvalue) / 100).toFixed(2);
 
-         $("#taxamount").val(taxvalue);
-         $("#displaytax").html(currency + taxvalue);
-     } else {
-         var taxper = parseFloat(parseFloat(tts) * parseFloat(taxvalue) / 100).toFixed(2);
+        $("#taxamount").val(taxper);
+        $("#displaytax").html(currency + taxper);
+    }
 
-         $("#taxamount").val(taxper);
-         $("#displaytax").html(currency + taxper);
-     }
+    var totalaftertax = parseFloat($("#taxamount").val()) + tts;
+    var paymetodfee = parseFloat($(".paymethod option:selected").data('fee')) || 0;
+    var payfeeamount = parseFloat(tts) * parseFloat(paymetodfee) / 100;
 
-     var totalaftertax = parseFloat($("#taxamount").val()) + tts;
-     var paymetodfee = parseFloat($(".paymethod option:selected").data('fee')) || 0;
-     var payfeeamount = parseFloat(tts) * parseFloat(paymetodfee) / 100;
+    var totalafterpaytax = parseFloat(parseFloat(payfeeamount) + totalaftertax).toFixed(2);
 
-     var totalafterpaytax = parseFloat(parseFloat(payfeeamount) + totalaftertax).toFixed(2);
-
-     if (commissiontype == 'percentage') {
-
-         var totaldeposit = parseFloat(totalafterpaytax) * parseFloat(commissionvalue) / 100;
+    if (commissiontype == 'percentage') {
+        var totaldeposit = parseFloat(totalafterpaytax) * parseFloat(commissionvalue) / 100;
 
 
-         $("#topaytotal").html(currency + parseFloat(totaldeposit).toFixed(2));
+        $("#topaytotal").html(currency + parseFloat(totaldeposit).toFixed(2));
 
-         $("#totaltopay").val(parseFloat(totaldeposit).toFixed(2));
+        $("#totaltopay").val(parseFloat(totaldeposit).toFixed(2));
+    } else {
+        commissionvalue = parseFloat($("#commission").val()).toFixed(2);
 
-     } else {
+        $("#topaytotal").html(currency + commissionvalue);
 
-         commissionvalue = parseFloat($("#commission").val()).toFixed(2);
+        $("#totaltopay").val(parseFloat(commissionvalue).toFixed(2));
+    }
 
-         $("#topaytotal").html(currency + commissionvalue);
+    $("#grandtotal").html(currency + totalafterpaytax);
+    $("#paymethodfee").val(payfeeamount);
+}
 
-         $("#totaltopay").val(parseFloat(commissionvalue).toFixed(2));
+function completebook(url, msg) {
+    var formname = $(".completebook").prop('name');
 
-     }
+    $('html, body').animate({
+        scrollTop: $('body').offset().top - 100
+    }, 'slow');
 
+    $.ajax({
+        url: url + "admin/ajaxcalls/processBooking" + formname,
+        type: 'POST',
+        data: $("#bookingdetails").serialize(),
+        beforeSend: function() {
+            $('.result').html('<div id="rotatingDiv"></div>');
+        },
+        success: function (response) {
+            var resp = $.parseJSON(response);
 
-     $("#grandtotal").html(currency + totalafterpaytax);
-     $("#paymethodfee").val(payfeeamount);
+            if (resp.error == "yes") {
+                $(".result").html("<div class='alert alert-danger'>" + resp.msg + "</div>");
+                $(".completebook").fadeIn("fast");
+                $('.container').css('opacity', '1');
+            } else {
+                window.location.replace(resp.url);
+            }
+        }
+    });
+}
 
+function updateBookingData(url) {
+    $.post(url, $("#bookingdetails").serialize(), function (response) {
+        var resp = $.parseJSON(response);
 
- }
-
- function completebook(url, msg) {
-     var formname = $(".completebook").prop('name');
-
-     $('html, body').animate({
-         scrollTop: $('body').offset().top - 100
-     }, 'slow');
-     //$(".completebook").fadeOut("fast");
-     //$("#waiting").html("Please Wait...");
-     //$('.container').css('opacity', '0.5');
-    // $("#wait").show();
-     $.ajax({
-      url : url + "admin/ajaxcalls/processBooking" + formname,
-      type : 'POST',      
-      data : $("#bookingdetails").serialize(),
-      success : function(response){
-         var resp = $.parseJSON(response);
-         //console.log(resp);
-         if (resp.error == "yes") {
-             $(".result").html("<div class='alert alert-danger'>" + resp.msg + "</div>");
-             $(".completebook").fadeIn("fast");
-             //$("#waiting").html("");
-             $('.container').css('opacity', '1');
-            // $("#wait").hide();
-
-         } else {
-             $(".bdetails").addClass("complete");
-             $(".bdetails").removeClass("active");
-             $(".bsuccess").removeClass("disabled");
-             $(".bsuccess").addClass("active");
-             $(".bsuccess").addClass("complete");
-             $(".acc_section").hide();
-             $(".extrasection").hide();
-             $(".final_section").fadeIn("fast");
-             $(".result").html("");
-
-
-             setTimeout(function() {
-                 window.location.replace(resp.url);
-             }, 2000);
-
-
-         }
-      }
-     });
-     /*$.post(, $("#bookingdetails, #" + formname + "form").serialize(), function(response) {
-         var resp = $.parseJSON(response);
-         //console.log(resp);
-         if (resp.error == "yes") {
-             $(".result").html("<div class='alert alert-danger'>" + resp.msg + "</div>");
-             $(".completebook").fadeIn("fast");
-             //$("#waiting").html("");
-             $('.container').css('opacity', '1');
-             $("#wait").hide();
-
-         } else {
-             $(".bdetails").addClass("complete");
-             $(".bdetails").removeClass("active");
-             $(".bsuccess").removeClass("disabled");
-             $(".bsuccess").addClass("active");
-             $(".bsuccess").addClass("complete");
-             $(".acc_section").hide();
-             $(".extrasection").hide();
-             $(".final_section").fadeIn("fast");
-             $(".result").html("");
-
-
-             setTimeout(function() {
-                 window.location.replace(resp.url);
-             }, 2000);
-
-
-         }
-
-
-     });
-    */
-
-
- }
-
- function updateBookingData(url) {
-     //var formname = $(".completebook").prop('name');
-     $.post(url, $("#bookingdetails").serialize(), function(response) {
-         var resp = $.parseJSON(response);
-
-         $("#displaytotal").html(resp.grandTotal);
-         $("#displaytax").html(resp.taxAmount);
-         $("#displaydeposit").html(resp.depositAmount);
-         $("#displaypmethod").html(resp.paymethodFee);
-         $(".allextras").remove();
-         $(".beforeExtraspanel").after(resp.extrashtml);
-         console.log(resp);
-
-
-     });
-
- }
+        $("#displaytotal").html(resp.grandTotal);
+        $("#displaytax").html(resp.taxAmount);
+        $("#displaydeposit").html(resp.depositAmount);
+        $("#displaypmethod").html(resp.paymethodFee);
+        $(".allextras").remove();
+        $(".beforeExtraspanel").after(resp.extrashtml);
+    });
+}

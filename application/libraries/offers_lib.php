@@ -112,6 +112,7 @@ class Offers_lib
             $result = $this->db->get('phuthucombo')->result();
             foreach ($result as $item) {
                 $surchargeInfo[] = (object)[
+                    'id' => $item->id,
                     'name' => $item->name,
                     'price' => $curr->convertPrice($item->price, 0),
                     'show_price' => $item->show_price
@@ -142,6 +143,7 @@ class Offers_lib
             'use_condition' => $details[0]->use_condition,
             'show_price' => $details[0]->show_price,
             'so_khach' => $details[0]->so_khach,
+            'min_nights' => $details[0]->min_nights,
             'phu_thu' => $details[0]->phu_thu,
             'surchargeInfo' => $surchargeInfo
         ];
@@ -326,6 +328,7 @@ class Offers_lib
                 'use_condition' => $o->use_condition,
                 'show_price' => $o->show_price,
                 'so_khach' => $o->so_khach,
+                'min_nights' => $o->min_nights,
                 'phu_thu' => $o->phu_thu,
                 'city' => $city->city,
                 'cityid' => $cityid,

@@ -98,7 +98,7 @@
                 <div class="home col-sm-2 col-xs-6 go-right">
                   <div class="form-group">
                     <select class="form-control-cus selectx" name="adults">
-                      <option selected><?php echo trans('010');?></option>
+                      <option value="0" selected><?php echo trans('010');?></option>
                       <?php for($i=1;$i<=20;$i++) {
                         echo '<option value="'.$i.'">';
                         echo $i .'</option>';}?>
@@ -108,7 +108,7 @@
                 <div class="home col-sm-2 col-xs-6 go-right">
                   <div class="form-group">
                     <select class="form-control-cus selectx" name="child">
-                      <option selected><?php echo trans('011');?></option>
+                      <option value="0" selected><?php echo trans('011');?></option>
                       <?php for($j=0;$j<=10;$j++) {
                         echo '<option value="'.$j.'">';
                         echo $j.'</option>';}?>

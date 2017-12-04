@@ -199,8 +199,7 @@ class Offers extends MX_Controller
         $checkin = $this->input->get('checkin');
         $quantity = $this->input->get('quantity');
         $note = $this->input->get('note');
-        $surchargeid = $this->input->get('surchargeid');
-        $squantity = $this->input->get('squantity');
+        $surcharge = $this->input->get('surcharge');
 
         if ($check && !empty($offername)) {
             $this->load->model('admin/payments_model');
@@ -229,13 +228,12 @@ class Offers extends MX_Controller
             $this->data['checkin'] = $checkin;
             $this->data['quantity'] = $quantity;
             $this->data['note'] = $note;
-            $this->data['surchargeid'] = $surchargeid;
-            $this->data['squantity'] = $squantity;
+            $this->data['surcharge'] = $surcharge;
             $this->breadcrumbcomponent->add('Trang chủ', base_url());
             $this->breadcrumbcomponent->add($detailOffer->title, base_url() . "offers/" . $detailOffer->slug);
             $this->breadcrumbcomponent->add('Thông tin thanh toán', '#');
             $this->data['breadcrumb'] = $this->breadcrumbcomponent->output();
-            $this->theme->view('booking_offer', $this->data);
+            $this->theme->view('booking', $this->data);
         } else {
             redirect("offers");
         }

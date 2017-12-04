@@ -43,9 +43,6 @@
                                                 <p><?php echo trans('0839'); ?>:</p>
                                                 <?php echo $module->phu_thu; ?>
                                             <?php } ?>
-                                            <p><?php echo trans('0840'); ?>:</p>
-                                            <p>- không áp dung cho những booking đã thanh toán.</p>
-                                            <p>- không áp dụng cho các chương trình khuyến mãi khác.</p>
                                         </div>
                                     </div>
                                     <?php if ($module->type == 2) { ?>
@@ -126,7 +123,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="checkbox-inline checkbox-style2">
-                                    <input type="checkbox" name="note">
+                                    <input type="checkbox" name="note" value="Mua trước đi sau">
                                     <span></span>
                                     Bạn mua trước đi sau
                                     <div class="block-question-info" style="display: inline-block;">
@@ -169,8 +166,7 @@
                                     </div>
                                     <div class="form-group">
                                         <p class="title">Số lượng</p>
-                                        <input type="hidden" name="surchargeid[]" value="<?php echo $item->id; ?>">
-                                        <select class="form-control" name="squantity[<?php echo $item->id; ?>]">
+                                        <select class="form-control" name="surcharge[<?php echo $item->id; ?>]">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
