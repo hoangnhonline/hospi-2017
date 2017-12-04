@@ -36,7 +36,7 @@
                                 </li>
                             <?php } ?>
                         </ul>
-                        <div style="margin-top: 20px;border-top: 1px solid #ddd;padding-top: 20px;">
+                        <div style="margin-top: 10px;border-top: 1px solid #ddd;padding-top: 10px;">
                             <div class="content">
                                 <div class="row">
                                     <div class="col-sm-6 col-xs-12">
