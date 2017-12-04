@@ -5,7 +5,11 @@
 <script src="<?php echo $theme_url; ?>assets/js/infobox.js"></script>
 <div class="mtslide2 sliderbg2"></div>
 <!-- map -->
-
+<div class="block-breadcrumb">
+    <div class="container">
+        <?php echo $breadcrumb;?>
+    </div>
+</div>
 <div class="container pagecontainer offset-0">
     <div class="offer-page rightcontent col-md-12 offset-0">
         <div class="itemscontainer offset-1">

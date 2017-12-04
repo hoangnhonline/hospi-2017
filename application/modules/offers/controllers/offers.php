@@ -79,6 +79,23 @@ class Offers extends MX_Controller
             $this->data['metadesc'] = $this->data['hotel']->metadesc;*/
             $this->data['success'] = $this->session->flashdata('flashmsgs');
             $this->data['langurl'] = base_url() . "offers/{langid}/" . $this->data['offer']->slug;
+
+            /* Bread crum */
+            $this->breadcrumbcomponent->add('Trang chủ', base_url());
+            switch ($this->data['module']->type) {
+                case 1:
+                    $this->breadcrumbcomponent->add('Deals - Ưu đãi', base_url() . 'offers');
+                    break;
+                case 2:
+                    $this->breadcrumbcomponent->add('Combo', base_url() . 'offers/bestchoice');
+                    break;
+                default:
+                    $this->breadcrumbcomponent->add('Honeymoon', base_url() . 'hotels/honeymoon');
+                    break;
+            }
+            $this->breadcrumbcomponent->add($this->data['module']->title, base_url() . "offers/" . $this->data['module']->slug);
+            $this->data['breadcrumb'] = $this->breadcrumbcomponent->output();
+
             $this->theme->view('offer_details', $this->data);
             $this->output->cache(20);
         } else {
