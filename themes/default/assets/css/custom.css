@@ -7429,7 +7429,7 @@ ul.footerlist.go-right.go-text-right,
     margin: 0 auto;
 }
 .offer-page .fa {
-    font-size: 10px;
+    font-size: 15px;
 }
 .hospi_img_list {
     background: black;
@@ -10659,22 +10659,29 @@ h4.hotel-name{
 
 
 /* Combo Detail Update 24/11/2016 */
+.page-dt-cb ul.infomation {
+    margin-top: 10px;
+}
 .page-dt-cb ul li {
   list-style-type: none;
   display: inline-block;
-  width: 24%;
+  margin-right: 40px;
   position: relative;
+}
+.page-dt-cb ul li:last-child {
+    margin-right: 0;
 }
 .page-dt-cb ul li.dots {
   padding-left: 15px;
 }
 .page-dt-cb ul li.dots:before {
   content: "•";
-  font-size: 22px;
+  font-size: 30px;
   position: absolute;
-  top: -3px;
+  top: 50%;
   left: 0;
   color: #660033;
+  line-height: 0;
 }
 .block-cb-detail {
   background: #fff;
@@ -11077,4 +11084,12 @@ textarea {
 .table.table-no-border > tfoot > tr > td {
   border: none;
   padding: 0;
+}
+.block-mySelectCalendar {
+    display: inline-block;
+    position: relative;
+}
+.block-mySelectCalendar .datepicker.dropdown-menu {
+    left: 0;
+    top: 110% !important;
 }

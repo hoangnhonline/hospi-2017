@@ -16,7 +16,7 @@
             <div class="page-dt-cb">
                 <div class="row">
                     <div class="col-sm-9 col-xs-12">
-                        <h1><?php echo $module->title; ?></h1>
+                        <h1 class="size30 purple"><?php echo $module->title; ?></h1>
                         <ul class="infomation">
                             <li>
                                 <i style="margin-left:-5px" class="icon-location-6"></i>
@@ -115,7 +115,7 @@
     <div class="modal fade" id="book-combo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="  background: #666;text-align: center;color: #fff;">
                     <h4 class="modal-title" id="myModalLabel">Xác nhận thông tin</h4>
                 </div>
                 <div class="modal-body">
@@ -123,7 +123,9 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <p class="title">Ngày đi</p>
-                                <input type="text" placeholder="Ngày đi" name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo date('d/m/Y', $module->to) ?>" required >
+                                <div class="block-mySelectCalendar">
+                                    <input type="text" placeholder="Ngày đi" name="checkin" class="form-control mySelectCalendar dpd1 go-text-left" value="<?php echo date('d/m/Y', $module->to) ?>" required >
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="checkbox-inline checkbox-style2">
