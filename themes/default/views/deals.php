@@ -81,8 +81,8 @@
                 <div style="margin-top:30px"></div>
             </div>
             <?php if(!empty($module)){ $line=0; foreach($module as $item){
-                if($line==4) echo "<div class='block-news-addon'><div class='col-sm-6 col-xs-6'><ul class='offset-2 offer-page'>";
-                if($line==6) { echo "</ul></div><div class='col-sm-6 col-xs-6'>"; echo run_widget(83);echo "</div>";echo "</div>";}
+                if($line==4) echo "<div class='block-news-addon'><div class='col-sm-6 col-xs-12'><ul class='offset-2 offer-page'>";
+                if($line==6) { echo "</ul></div><div class='col-sm-6 col-xs-12'>"; echo run_widget(83);echo "</div>";echo "</div>";}
                 if($line<4||$line>5) { ?>
             <div class="col-sm-3 col-xs-6">
                 <div class="wow fadeInUp offset-0 go-right">
