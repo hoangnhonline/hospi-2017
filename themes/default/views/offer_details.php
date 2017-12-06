@@ -16,10 +16,12 @@
             <div class="page-dt-cb">
                 <div class="row">
                     <div class="col-sm-9 col-xs-12">
-                        <h1 class="size30 purple"><?php echo $module->title; ?></h1>
-                        <ul class="infomation">
+                        <h1 class="h1-offers"><?php echo $module->title; ?></h1>
+                        <ul class="information">
                             <li>
-                                <i style="margin-left:-5px" class="icon-location-6"></i>
+                                <i style="margin-left:-5px; display: inline-block;">
+                                    <img src="assets/img/location-icon2.png" alt="">
+                                </i>
                                 <small class="address"><?php echo $module->location; ?></small>
                             </li>
                             <?php if (!$module->offerForever) { ?>
@@ -36,42 +38,50 @@
                                 </li>
                             <?php } ?>
                         </ul>
-                        <div style="margin-top: 20px;border-top: 1px solid #ddd;padding-top: 20px;">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-sm-6 col-xs-12">
-                                        <div class="wysiwyg">
-                                            <p><strong class="purple"><?php echo trans('0836'); ?></strong></p>
-                                            <?php echo $module->desc; ?>
-                                            <?php if ($module->type == 2 && !empty($module->phu_thu)) { ?>
-                                                <p><?php echo trans('0839'); ?>:</p>
-                                                <?php echo $module->phu_thu; ?>
-                                            <?php } ?>
-                                        </div>
+                        <!-- /.infomation -->
+                        <div class="block-tabs-2">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#Combo_detail" aria-controls="Combo_detail" role="tab" data-toggle="tab">Combo chi tiết</a></li>
+                                <li role="presentation"><a href="#Rule_cancel" aria-controls="Rule_cancel" role="tab" data-toggle="tab">Điều kiện</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="Combo_detail">
+                                    <div class="wysiwyg">
+                                        <p><strong class="purple"><?php echo trans('0836'); ?></strong></p>
+                                        <?php echo $module->desc; ?>
+                                        <?php if ($module->type == 2 && !empty($module->phu_thu)) { ?>
+                                        <p><?php echo trans('0839'); ?>:</p>
+                                        <?php echo $module->phu_thu; ?>
+                                        <?php } ?>
                                     </div>
-                                    <?php if ($module->type == 2) { ?>
-                                        <div class="col-sm-6 col-xs-12">
-                                            <div class="block-dk-cancel">
-                                                <div class="form-group">
-                                                    <p><strong class="purple"><?php echo trans('0837'); ?></strong></p>
-                                                    <p>
-                                                        <?php echo $module->cancel_condition; ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="block-dk-cancel">
-                                                <div class="form-group">
-                                                    <p><strong class="purple"><?php echo trans('0838'); ?></strong></p>
-                                                    <p>
-                                                        <?php echo $module->use_condition; ?>
-                                                    </p>
-                                                </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="Rule_cancel">
+                                    <div class="wysiwyg">
+                                        <?php if ($module->type == 2) { ?>
+                                        <div class="block-dk-cancel">
+                                            <div class="form-group">
+                                                <p><strong class="purple"><?php echo trans('0837'); ?></strong></p>
+                                                <p>
+                                                    <?php echo $module->cancel_condition; ?>
+                                                </p>
                                             </div>
                                         </div>
-                                    <?php } ?>
+                                        <div class="block-dk-cancel">
+                                            <div class="form-group">
+                                                <p><strong class="purple"><?php echo trans('0838'); ?></strong></p>
+                                                <p>
+                                                    <?php echo $module->use_condition; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.block-tab-2 -->
                     </div>
                     <?php if ($module->type == 2) { ?>
                         <div class="col-sm-3 col-xs-12">

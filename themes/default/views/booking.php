@@ -337,7 +337,7 @@
                                 Tổng thanh toán
                                 <span style="color: #999999; display:block; font-size: 12px;">(Giá đã bao gồm VAT và phí dịch vụ)</span>
                             </strong>
-                            <strong class="v purple"
+                            <strong class="v"
                                     id="tong_thanh_toan_span"><?php echo number_format($priceTotal + $priceExtraBedTotal); ?>
                                 VND</strong>
                             <input type="hidden" name="tong_thanh_toan" id="tong_thanh_toan"
@@ -532,9 +532,7 @@
                 </div>
             </div>
             <p class="text-center" style="margin-bottom:10px">
-                Tôi đã đọc và chấp nhận điều kiện, chính sách khách sạn,<br><a class="text-link" href="#"
-                                                                               title="chính sách bảo mật"
-                                                                               target="_blank">Điều khoản sử dụng</a> và
+                Tôi đã đọc và chấp nhận điều kiện, chính sách khách sạn,<br><a class="text-link" href="#" title="Điều khoản sử dụng" target="_blank">Điều khoản sử dụng</a> và
                 <a class="text-link" href="#" title="chính sách bảo mật" target="_blank">chính sách bảo mật</a> của
                 HOSPI
             </p>

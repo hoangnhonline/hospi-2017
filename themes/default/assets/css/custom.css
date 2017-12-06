@@ -8440,9 +8440,9 @@ li.view {
 h4.tour-ask.purple {
     font-family: "AndesRoundedBold";
 }
-.rightcontent .itemscontainer span.widget-content p {
-    margin: 0 0 30px;
-}
+// .rightcontent .itemscontainer span.widget-content p {
+//     margin: 0 0 30px;
+// }
 .rightcontent .itemscontainer.hotels span.widget-content p {
     margin: 0 15px 15px;
 }
@@ -10592,6 +10592,9 @@ h4.hotel-name{
 
 
 /* Wysiwyg */
+.wysiwyg {
+  font-family: 'Arial';
+}
 .wysiwyg p img {
   display: block;
   margin-left: auto;
@@ -10659,22 +10662,22 @@ h4.hotel-name{
 
 
 /* Combo Detail Update 24/11/2016 */
-.page-dt-cb ul.infomation {
-    margin-top: 10px;
+.information {
+  margin-top: 10px;
 }
-.page-dt-cb ul li {
+.information li {
   list-style-type: none;
   display: inline-block;
   margin-right: 40px;
   position: relative;
 }
-.page-dt-cb ul li:last-child {
-    margin-right: 0;
+.information li:last-child {
+  margin-right: 0;
 }
-.page-dt-cb ul li.dots {
+.information li.dots {
   padding-left: 15px;
 }
-.page-dt-cb ul li.dots:before {
+.information li.dots:before {
   content: "•";
   font-size: 30px;
   position: absolute;
@@ -10979,6 +10982,7 @@ h4.hotel-name{
 .text-link2 {
   color: #666;
   text-decoration: underline;
+  font-family: "AndesRounded";
 }
 .btn-action2 {
   background: #660033;
@@ -11030,25 +11034,25 @@ textarea {
 .box-invoice-head03 {
   border-bottom: 1px solid #cccccc;
 }
-.block-inv-infomation .row-eq-height {
+.block-inv-information .row-eq-height {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-.block-inv-infomation {
+.block-inv-information {
   margin-bottom: 15px;
 }
-.block-inv-infomation .panel {
+.block-inv-information .panel {
   height: 100%;
 }
 .box-invoice-body {
   padding: 20px 10px;
 }
-.panel-infomation .panel-body {
+.panel-information .panel-body {
   padding: 0;
 }
-.panel-infomation ul li {
+.panel-information ul li {
   color: #666666;
   list-style-type: none;
   padding: 10px;
@@ -11086,10 +11090,44 @@ textarea {
   padding: 0;
 }
 .block-mySelectCalendar {
-    display: inline-block;
-    position: relative;
+  display: inline-block;
+  position: relative;
 }
 .block-mySelectCalendar .datepicker.dropdown-menu {
-    left: 0;
-    top: 110% !important;
+  left: 0;
+  top: 110% !important;
+}
+
+.block-news-addon {
+  margin: 35px 0;
+}
+.block-tabs-2 {
+  margin-top: 10px;
+}
+.block-tabs-2 .nav > li {
+  position: relative;
+  width: 50%;
+  text-align: center;
+  margin-bottom: 0;
+}
+.block-tabs-2 .nav-tabs > li {
+  background: url('../../assets/img/bg-2.jpg')
+}
+.block-tabs-2 .nav-tabs > li > a:hover {
+  background-color: #660033;
+  color: #FFFFFF;
+}
+.block-tabs-2 .nav-tabs > li.active > a, .block-tabs-2 .nav-tabs > li.active > a:hover, .block-tabs-2 .nav-tabs > li.active > a:focus {
+  color: #fff;
+  background-color: #660033;
+  border: none;
+}
+.block-tabs-2 .nav-tabs > li > a {
+  margin-right: 0;
+  line-height: 40px;
+  border: none;
+  border-radius: 0;
+  text-transform: none;
+  color: #333;
+  font-size: 16px;
 }
