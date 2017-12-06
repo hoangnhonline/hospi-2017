@@ -149,9 +149,9 @@ class Hotels extends MX_Controller
             //get offer
             $this->load->library('offers_lib');
 
-            $offers = $this->offers_lib->showOffers(null, null, $type = 1, $hotelid = $this->data['module']->id);
-            $combos = $this->offers_lib->showOffers(null, null, $type = 2, $hotelid = $this->data['module']->id);
-            $honeymoons = $this->offers_lib->showOffers(null, null, $type = 3, $hotelid = $this->data['module']->id);
+            $offers = $this->offers_lib->showOffers(null, null, $type = 1, 1, $this->data['module']->id);
+            $combos = $this->offers_lib->showOffers(null, null, $type = 2, 1, $this->data['module']->id);
+            $honeymoons = $this->offers_lib->showOffers(null, null, $type = 3, 1, $this->data['module']->id);
             $this->data['offers'] = [];
             if ($offers['allOffers']['count'] > 0) {
                 $this->data['offers'][] = $offers['allOffers']['offers'][0];

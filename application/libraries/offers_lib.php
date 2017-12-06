@@ -243,26 +243,29 @@ class Offers_lib
         return $result;
     }
 
-    function showOffers($offset = null, $loc = null, $type = 1, $hotelid = null)
+    function showOffers($offset = null, $loc = null, $type = 1, $perpage = null, $hotelid = null)
     {
         $this->ci->load->library('bootpagination');
         $data = array();
         $settings = $this->settings();
         $sortby = $this->ci->input->get('sortby');
-        $perpage = $settings[0]->front_listings;
+        if (empty($perpage)) {
+            $perpage = $settings[0]->front_listings;
+        }
         if (!empty ($sortby)) {
             $orderby = $sortby;
         } else {
             $orderby = "newf";//$settings[0]->front_listings_order;
         }
         $this->ci->load->model('admin/special_offers_model');
-        //$rh = $this->ci->special_offers_model->list_specialOffers_front('', '', '', $loc, $type, $hotelid);
-        $offers = $this->ci->special_offers_model->list_specialOffers_front($perpage, $offset, $orderby, $loc, $type, $hotelid);
+        $rh = $this->ci->special_offers_model->list_specialOffers_front(null, null, $loc, $type, $hotelid);
+        $offers = $this->ci->special_offers_model->list_specialOffers_front($perpage, $offset, $loc, $type, $hotelid);
 
         $data['allOffers'] = $this->getResultObject($offers['all']);
-        $data['paginationinfo'] = array('base' => 'offers/listing', 'totalrows' => $rh['rows'], 'perpage' => $perpage);
+        $data['paginationinfo'] = array('base' => 'offers', 'totalrows' => $rh['rows'], 'perpage' => $perpage);
 
-        $data['plinks2'] = $this->ci->bootpagination->dopagination2('offers/listing', $rh['rows'], $perpage);
+        $data['plinks2'] = $this->ci->bootpagination->dopagination2('offers', $rh['rows'], $perpage);
+
         return $data;
     }
 

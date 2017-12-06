@@ -130,8 +130,8 @@ class Offers extends MX_Controller
         $this->data['sorturl'] = base_url() . 'offers/listings?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
-        $alloffers = $this->offers_lib->showOffers($offset, $loc);
-
+        $alloffers = $this->offers_lib->showOffers($offset, $loc, 1, 14);
+        //var_dump('<pre>', $alloffers);die;
         $this->data['module'] = $alloffers['allOffers']['offers'];
         $this->data['info'] = $alloffers['paginationinfo'];
         $this->data['plinks2'] = $alloffers['plinks2'];
@@ -146,10 +146,10 @@ class Offers extends MX_Controller
         $this->data['sorturl'] = base_url() . 'offers/bestchoice/listings?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
-        $alloffers = $this->offers_lib->showOffers($offset, $loc, 2);
-
+        $alloffers = $this->offers_lib->showOffers($offset, $loc, 2, 8);
         $this->data['module'] = $alloffers['allOffers']['offers'];
         $this->data['info'] = $alloffers['paginationinfo'];
+        $this->data['info']['base'] = 'offers/bestchoice';
         $this->data['plinks2'] = $alloffers['plinks2'];
         $this->data['page_title'] = $settings[0]->header_title;
         $this->data['langurl'] = base_url() . "offers/bestchoice/{langid}";

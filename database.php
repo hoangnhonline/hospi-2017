@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $db['default']['username'] = "root";
-$db['default']['password'] = "";
+$db['default']['password'] = "root";
 $db['default']['database'] = "hospi";
 
 $db['default']['hostname'] = "localhost";

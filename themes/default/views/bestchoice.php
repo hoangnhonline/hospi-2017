@@ -127,7 +127,7 @@
             <?php } ?>
             </div>
             <div class="clearfix"></div>
-            <div class="col-md-12 pull-right go-right"><?php echo createPagination($info);?></div>
+            <div class="col-md-12 text-center go-right"><?php echo createPagination($info);?></div>
             <div class="pull-right">
                 <?php }else{  echo '<h1 class="text-center">' . trans("066") . '</h1>'; } ?>
             </div>

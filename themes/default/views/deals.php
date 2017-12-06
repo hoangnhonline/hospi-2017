@@ -69,88 +69,107 @@
                     <form name="itemlist" id="itemlist" class="itemlist-cus" action="" method="post">
                         <select id="location" name="location" onchange="submitform();">
                             <option value=""><?php echo trans('0690'); ?></option>
-                            <?php $location = getLocations();
-                                $selected = "";
-                                foreach($location as $loc){
-                                    if($_GET['location']==$loc->id) $selected = "selected"; else $selected = "";
-                                    echo "<option value='".$loc->id."' ".$selected.">".$loc->location."</option>";
-                                }?>
+                            <?php
+                            $location = getLocations();
+                            $selected = "";
+                            foreach($location as $loc){
+                                if($_GET['location']==$loc->id) $selected = "selected"; else $selected = "";
+                                echo "<option value='".$loc->id."' ".$selected.">".$loc->location."</option>";
+                            }
+                            ?>
                         </select>
                     </form>
                 </div>
                 <div style="margin-top:30px"></div>
             </div>
-            <?php if(!empty($module)){ $line=0; foreach($module as $item){
-                if($line==4) echo "<div class='block-news-addon'><div class='col-sm-6 col-xs-6'><ul class='offset-2 offer-page'>";
-                if($line==6) { echo "</ul></div><div class='col-sm-6 col-xs-6'>"; echo run_widget(83);echo "</div>";echo "</div>";}
-                if($line<4||$line>5) { ?>
-            <div class="col-sm-3 col-xs-6">
-                <div class="wow fadeInUp offset-0 go-right">
-                    <div class="img_list">
-                        <a href="<?php echo $item->slug;?>">
-                            <img src="<?php echo $item->thumbnail;?>" alt="<?php echo character_limiter($item->title,20);?>">
-                            <div class="short_info"></div>
-                        </a>
-                    </div>
-                    <span class="offer-location"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $item->city;?></span>
-                </div>
-                <div class="wow fadeInUp offset-0 offer-content">
-                    <div class="itemlabel3">
-                        <div class="labelleft2 rtl_title_home">
-                            <h4 class="mtb0 RTL go-text-right offer-title-listing">
-                                <a href="<?php echo $item->slug;?>"><b><?php echo $item->title;?></b></a>
-                            </h4>
-                            <div class="offer-created-at"><?php echo date('d/m/Y', $item->offers_created_at);?></div>
-                            <p class="grey RTL"><?php echo character_limiter($item->desc,120);?></p>
-                            <div class="offer-xemthem"><a href="<?php echo $item->slug;?>">
-                                <i class='fa fa-angle-double-right' aria-hidden='true'></i> <?php echo trans('0177');?>
-                                </a>
+            <?php
+            if (!empty($module)) {
+                $line = 0;
+                foreach ($module as $item) {
+                    if($line==4) echo "<div class='block-news-addon'><div class='col-sm-6 col-xs-6'><ul class='offset-2 offer-page'>";
+                    if($line==6) { echo "</ul></div><div class='col-sm-6 col-xs-6'>"; echo run_widget(83);echo "</div>";echo "</div>";}
+                    if($line<4||$line>5) {
+                    ?>
+                        <div class="col-sm-3 col-xs-6">
+                            <div class="wow fadeInUp offset-0 go-right">
+                                <div class="img_list">
+                                    <a href="<?php echo $item->slug;?>">
+                                        <img src="<?php echo $item->thumbnail;?>" alt="<?php echo character_limiter($item->title,20);?>">
+                                        <div class="short_info"></div>
+                                    </a>
+                                </div>
+                                <span class="offer-location"><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $item->city;?></span>
+                            </div>
+                            <div class="wow fadeInUp offset-0 offer-content">
+                                <div class="itemlabel3">
+                                    <div class="labelleft2 rtl_title_home">
+                                        <h4 class="mtb0 RTL go-text-right offer-title-listing">
+                                            <a href="<?php echo $item->slug;?>"><b><?php echo $item->title;?></b></a>
+                                        </h4>
+                                        <div class="offer-created-at"><?php echo date('d/m/Y', $item->offers_created_at);?></div>
+                                        <p class="grey RTL"><?php echo character_limiter($item->desc,120);?></p>
+                                        <div class="offer-xemthem"><a href="<?php echo $item->slug;?>">
+                                            <i class='fa fa-angle-double-right' aria-hidden='true'></i> <?php echo trans('0177');?>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <?php } else { ?>
-            <!-- News -->
-            <li>
-                <a class="sub-menu-link" href="<?php echo $item->slug; ?>" target="_blank">
-                    <h4 class="offer-3title offer-title-listing"><b><?php echo $item->title; ?></b></h4>
-                    <p class="offer-3content grey RTL"><?php echo character_limiter($item->desc,120);?></p>
-                    <div class="offer-xemthem">
-                        <i class='fa fa-angle-double-right' aria-hidden='true'></i> <?php echo trans('0177');?>
-                    </div>
-                </a>
-            </li>
-            <!-- End New -->
-            <?php } ?>
-            <?php $line++;
-                if($line%4==0) echo "<div style='margin-bottom:10px;'></div>";
-                } ?>
-            <div class="clearfix"></div>
-            <div class="col-md-12 pull-right go-right"><?php echo createPagination($info);?></div>
-            <div class="pull-right">
-                <?php }else{  echo '<h1 class="text-center">' . trans("066") . '</h1>'; } ?>
-            </div>
+                    <?php
+                    } else {
+                    ?>
+                        <!-- News -->
+                        <li>
+                            <a class="sub-menu-link" href="<?php echo $item->slug; ?>" target="_blank">
+                                <h4 class="offer-3title offer-title-listing"><b><?php echo $item->title; ?></b></h4>
+                                <p class="offer-3content grey RTL"><?php echo character_limiter($item->desc,120);?></p>
+                                <div class="offer-xemthem">
+                                    <i class='fa fa-angle-double-right' aria-hidden='true'></i> <?php echo trans('0177');?>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- End New -->
+                    <?php
+                    }
+                    $line++;
+                    if($line%4==0) echo "<div style='margin-bottom:10px;'></div>";
+                }
+                ?>
+                <div class="clearfix"></div>
+                <div class="col-md-12 text-center go-right"><?php echo createPagination($info);?></div>
+            <?php
+            } else {  echo '<div class="pull-right"><h1 class="text-center">' . trans("066") . '</h1></div>'; }
+            ?>
             <!-- End of offset1-->
             <!-- start EAN multiple locations found and load more hotels -->
-            <?php if($appModule == "ean"){ if($multipleLocations > 0){ foreach($locationInfo as $loc){ ?>
-            <p><?php echo $loc->link; ?></p>
-            <?php } } ?>
-            <!--This is for display cache Parameter-->
-            <div id="latest_record_para">
-                <input type="hidden" name="moreResultsAvailable" id="moreResultsAvailable" value="<?php echo $moreResultsAvailable; ?>" />
-                <input type="hidden" name="cacheKey" id="cacheKey" value="<?php echo $cacheKey; ?>" />
-                <input type="hidden" name="cacheLocation" id="cacheLocation" value="<?php echo $cacheLocation; ?>" />
-                <input type="hidden" name="" id="agesappendurl" value="<?php echo $agesApendUrl; ?>" />
-                <input type="hidden" name="" id="adultsCount" value="<?php echo $adults;?>" />
-            </div>
-            <!--This is for display content-->
-            <div id="New_data_load"></div>
-            <!--This is for display Loader Image-->
-            <div id="loader_new"></div>
-            <div id="message_noResult"></div>
-            <!-- END OF LIST CONTENT-->
-            <?php } ?>
+            <?php
+            if ($appModule == "ean") {
+                if ($multipleLocations > 0) {
+                    foreach ($locationInfo as $loc) {
+                    ?>
+                        <p><?php echo $loc->link; ?></p>
+                    <?php
+                    }
+                }
+                ?>
+                <!--This is for display cache Parameter-->
+                <div id="latest_record_para">
+                    <input type="hidden" name="moreResultsAvailable" id="moreResultsAvailable" value="<?php echo $moreResultsAvailable; ?>" />
+                    <input type="hidden" name="cacheKey" id="cacheKey" value="<?php echo $cacheKey; ?>" />
+                    <input type="hidden" name="cacheLocation" id="cacheLocation" value="<?php echo $cacheLocation; ?>" />
+                    <input type="hidden" name="" id="agesappendurl" value="<?php echo $agesApendUrl; ?>" />
+                    <input type="hidden" name="" id="adultsCount" value="<?php echo $adults;?>" />
+                </div>
+                <!--This is for display content-->
+                <div id="New_data_load"></div>
+                <!--This is for display Loader Image-->
+                <div id="loader_new"></div>
+                <div id="message_noResult"></div>
+                <!-- END OF LIST CONTENT-->
+                <?php
+            }
+            ?>
             <!-- End EAN multiple locations found and load more hotels  -->
         </div>
         <!-- END OF LIST CONTENT-->
