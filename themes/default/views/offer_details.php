@@ -19,10 +19,12 @@
                         <h1 class="h1-offers"><?php echo $module->title; ?></h1>
                         <ul class="information">
                             <li>
-                                <i style="margin-left:-5px; display: inline-block;">
-                                    <img src="assets/img/location-icon2.png" alt="">
-                                </i>
-                                <small class="address"><?php echo $module->location; ?></small>
+                                <p class="address">
+                                    <i style="margin-left:-5px; display: inline-block;">
+                                        <img src="assets/img/location-icon2.png" alt="">
+                                    </i>
+                                    <?php echo $module->location; ?>
+                                </p>
                             </li>
                             <?php if (!$module->offerForever) { ?>
                                 <li class="dots">

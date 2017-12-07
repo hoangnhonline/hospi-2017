@@ -7460,6 +7460,9 @@ ul.footerlist.go-right.go-text-right,
   background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
   background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=0 );
+  -webkit-box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
+-moz-box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
+box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
 }
 .featured-item-content .itemlabel_hospi {
   height: 100%;
@@ -7469,7 +7472,7 @@ ul.footerlist.go-right.go-text-right,
     clear: both
 }
 .featured-item-content .itemlabel_hospi h4 {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   height: 48px;
   overflow: hidden;
 }
@@ -7481,13 +7484,14 @@ ul.footerlist.go-right.go-text-right,
 .featured-item-content .itemlabel_hospi .sub_rtl_title_home {
   color: #666;
   font-size: 16px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   height: 40px;
   overflow: hidden;
+  font-family: 'Arial';
 }
 .view_more_db {
   line-height: 1;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
 }
 .view_more_db a {
   color: #660033;
@@ -7504,9 +7508,9 @@ ul.footerlist.go-right.go-text-right,
 .featured-item-content .cb_price {
   background: #6c113e;
   color: #fff;
-  padding: 15px 0;
+  padding: 12px 0;
   text-align: center;
-  font-size: 22px;
+  font-size: 20px;
 }
 .content-bestchoice {
     position: absolute;
