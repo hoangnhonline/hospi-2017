@@ -83,478 +83,473 @@
                         </p>
                     </div>
                     <div class="form-group col-md-12">
-                        <textarea name="additionalnotes" value="" class="form-control" rowspan="10"
-                                  placeholder="Nhập yêu cầu của bạn"></textarea>
+                        <textarea name="additionalnotes" value="" class="form-control" rowspan="10" placeholder="Nhập yêu cầu của bạn"></textarea>
                     </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading text-center">
-                Thông tin chuyển khoản
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    Để thuận tiện cho việc thanh toán khách vui lòng chọn 1 trong những hình thức thanh toán dưới đây
-                </div>
-                <ul class="list-inline form-group">
-                    <li class="label-style" style="padding-left: 0px">
-                        <label class="radio-inline raido-style1">
-                            <input type="radio" value="banktransfer" name="checkout-type" class="payment_method">
-                            <span></span>
-                            <strong>Chuyển khoản ngân hàng</strong>
-                        </label>
-                    </li>
-                    <li class="label-style" style="padding-left: 0px">
-                        <label class="radio-inline raido-style1">
-                            <input type="radio" value="payatoffice" name="checkout-type" class="payment_method">
-                            <span></span>
-                            <strong>Thanh toán tại Vp HOSPI</strong>
-                        </label>
-                    </li>
-                    <li class="label-style" style="padding-left: 0px">
-                        <label class="radio-inline raido-style1">
-                            <input type="radio" value="cod" name="checkout-type" class="payment_method">
-                            <span></span>
-                            <strong>Thanh toán tại nhà</strong>
-                        </label>
-                    </li>
-                </ul>
-                <div id="response">
-
                 </div>
             </div>
-        </div>
-    </div>
-    <?php if ($appModule != "offers") { ?>
-        <div class="col-sm-5 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading text-center">
-                    Thông tin đơn phòng
+                    Thông tin chuyển khoản
                 </div>
                 <div class="panel-body">
-                    <dl class="cb-img-name">
-                        <dt>
-                            <img src="<?php echo '../../' . PT_HOTELS_SLIDER_THUMBS_UPLOAD . $module->thumbnail_image; ?>"
-                                 alt="<?php echo $module->hotel_title; ?>" width="98">
-                        </dt>
-                        <dd>
-                            <h1><?php echo $module->hotel_title; ?></h1>
-                            <div class="clearfix">
-                                <span class="go-right RTL"><i style="margin-left:-5px" class="icon-location-6"></i> <small
-                                            class="adddress"><?php echo $module->hotel_map_city; ?></small></span>
-                            </div>
-                            <div class="clearfix">
-                                <small class="go-right"><?php
-                                    $res = "";
-                                    for ($stars = 1; $stars <= 5; $stars++) {
+                    <div class="form-group">
+                        Để thuận tiện cho việc thanh toán khách vui lòng chọn 1 trong những hình thức thanh toán dưới đây
+                    </div>
+                    <ul class="list-inline form-group">
+                        <li class="label-style" style="padding-left: 0px">
+                            <label class="radio-inline raido-style1">
+                                <input type="radio" value="banktransfer" name="checkout-type" class="payment_method">
+                                <span></span>
+                                <strong>Chuyển khoản ngân hàng</strong>
+                            </label>
+                        </li>
+                        <li class="label-style" style="padding-left: 0px">
+                            <label class="radio-inline raido-style1">
+                                <input type="radio" value="payatoffice" name="checkout-type" class="payment_method">
+                                <span></span>
+                                <strong>Thanh toán tại Vp HOSPI</strong>
+                            </label>
+                        </li>
+                        <li class="label-style" style="padding-left: 0px">
+                            <label class="radio-inline raido-style1">
+                                <input type="radio" value="cod" name="checkout-type" class="payment_method">
+                                <span></span>
+                                <strong>Thanh toán tại nhà</strong>
+                            </label>
+                        </li>
+                    </ul>
+                    <div id="response"></div>
+                </div>
+            </div>
+        </div>
+        <?php if ($appModule != "offers") { ?>
+            <div class="col-sm-5 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        Thông tin đơn phòng
+                    </div>
+                    <div class="panel-body">
+                        <dl class="cb-img-name">
+                            <dt>
+                                <img src="<?php echo '../../' . PT_HOTELS_SLIDER_THUMBS_UPLOAD . $module->thumbnail_image; ?>"
+                                     alt="<?php echo $module->hotel_title; ?>" width="98">
+                            </dt>
+                            <dd>
+                                <h1><?php echo $module->hotel_title; ?></h1>
+                                <div class="clearfix">
+                                    <span class="go-right RTL"><i style="margin-left:-5px" class="icon-location-6"></i> <small
+                                                class="adddress"><?php echo $module->hotel_map_city; ?></small></span>
+                                </div>
+                                <div class="clearfix">
+                                    <small class="go-right"><?php
+                                        $res = "";
+                                        for ($stars = 1; $stars <= 5; $stars++) {
 
-                                        if ($stars <= $module->hotel_stars) {
-                                            $res .= PT_STARS_ICON;
-                                        } else {
-                                            $res .= PT_EMPTY_STARS_ICON;
+                                            if ($stars <= $module->hotel_stars) {
+                                                $res .= PT_STARS_ICON;
+                                            } else {
+                                                $res .= PT_EMPTY_STARS_ICON;
+                                            }
                                         }
 
-                                    }
-
-
-                                    echo $res;
-                                    ?></small>
+                                        echo $res;
+                                        ?>
+                                    </small>
+                                </div>
+                            </dd>
+                        </dl>
+                        <div class="row">
+                            <div class="col-sm-7 col-xs-12">
+                                <div class="table table-responsive">
+                                    <table class="table table-no-border mb0">
+                                        <tr>
+                                            <td>
+                                                Ngày nhận phòng:
+                                            </td>
+                                            <td>
+                                                <strong class="purple"><?php echo $checkin; ?></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Ngày trả phòng:
+                                            </td>
+                                            <td><strong class="purple"><?php echo $checkout; ?></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Số đêm:
+                                            </td>
+                                            <td><strong><?php echo $stay; ?></strong></td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                        </dd>
-                    </dl>
-                    <div class="row">
-                        <div class="col-sm-7 col-xs-12">
-                            <div class="table table-responsive">
-                                <table class="table table-no-border mb0">
-                                    <tr>
-                                        <td>
-                                            Ngày nhận phòng:
-                                        </td>
-                                        <td>
-                                            <strong class="purple"><?php echo $checkin; ?></strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Ngày trả phòng:
-                                        </td>
-                                        <td><strong class="purple"><?php echo $checkout; ?></strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Số đêm:
-                                        </td>
-                                        <td><strong><?php echo $stay; ?></strong></td>
-                                    </tr>
-                                </table>
+                            <div class="col-sm-5 col-xs-12">
+                                <div class="table table-responsive row">
+                                    <table class="table table-no-border mb0">
+                                        <tr>
+                                            <td>
+                                                Người lớn:
+                                            </td>
+                                            <td>
+                                                <strong><?php echo $adults; ?></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Trẻ em:
+                                            </td>
+                                            <td>
+                                                <strong><?php echo $child; ?></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Số lượng phòng:
+                                            </td>
+                                            <td>
+                                                <strong><?php echo $totalRooms; ?></strong>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-5 col-xs-12">
-                            <div class="table table-responsive row">
-                                <table class="table table-no-border mb0">
-                                    <tr>
-                                        <td>
-                                            Người lớn:
-                                        </td>
-                                        <td>
-                                            <strong><?php echo $adults; ?></strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Trẻ em:
-                                        </td>
-                                        <td>
-                                            <strong><?php echo $child; ?></strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Số lượng phòng:
-                                        </td>
-                                        <td>
-                                            <strong><?php echo $totalRooms; ?></strong>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div><!-- row -->
-                    <!--<p class="row" style="padding: 15px 15px 0; border-top: 1px solid #cccccc">Loại phòng: <strong class="purple">01 giường lớn, 02 giường nhỏ</strong></p>-->
+                        </div><!-- row -->
+                        <!--<p class="row" style="padding: 15px 15px 0; border-top: 1px solid #cccccc">Loại phòng: <strong class="purple">01 giường lớn, 02 giường nhỏ</strong></p>-->
+                    </div>
                 </div>
-            </div>
-            <div class="box">
-                <div class="box_body">
-                    <!-- <div class="order-items">
-                        <div><strong>Giá trọn gói:</strong> 6,449,000 x 01 = 6,449,000 VND</div>
-                        <div><strong>Trẻ em</strong> (6-8 tuổi): 300,000 x 01 = 1,010,000 VND</div>
-                    </div> -->
-                    <ul class="order-summary">
-                        <?php
-                        $room_quantity = json_decode($room_quantity, true);
-                        $extra_beds = json_decode($extra_beds, true);
-
-                        $priceTotal = $so_giuong_phu = 0;
-                        if (!empty($room)) {
-
-                            $priceExtraBedTotal = 0;
-                            foreach ($room as $roomId => $rDetail) {
-                                $priceOne = 0;
-                                $priceExtraBed = 0;
-                                foreach ($rDetail->Info['detail'] as $tmp) {
-                                    $priceOne += $tmp->total;
-                                    $priceExtraBed += $tmp->bed_total;
-                                }
-                                $priceOne = $priceOne / count($rDetail->Info['detail']);
-                                $priceExtraBedTotal += $priceExtraBed * $extra_beds[$roomId];
-                                $so_giuong_phu += $extra_beds[$roomId];
-
-
-                                $quantity = $room_quantity[$roomId];
-                                ?>
-                                <li>
-                                    <div class="k">
-                                        <p><strong><?php echo $rDetail->title; ?></strong></p>
-                                        <?php echo number_format($priceOne); ?> x <?php echo $stay; ?> (đêm)
-                                        x <?php echo $quantity; ?> (phòng)
-                                        = <?php echo number_format($rDetail->Info['total'] * $quantity); ?> VND
-                                    </div>
-                                </li>
-                                <?php
-                                $priceTotal += $rDetail->Info['total'] * $quantity;
-                            }
-                        } ?>
-
-                        <li>
-                            <span class="k">Thành tiền:</span>
-                            <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>
-                        </li>
-                        <li>
-                            <span class="k">Giường phụ:</span>
-                            <span class="v"><?php echo number_format($priceExtraBedTotal); ?></span>
-                            <input type="hidden" name="so_giuong_phu" value="<?php echo $so_giuong_phu; ?>">
-                            <input type="hidden" name="phi_giuong_phu" value="<?php echo $priceExtraBedTotal; ?>">
-                        </li>
-                        <li>
-                            <span class="k">Chi phí khác:</span>
-                            <span class="v">0 VND</span>
-                        </li>
-                        <li>
+                <div class="box">
+                    <div class="box_body">
+                        <!-- <div class="order-items">
+                            <div><strong>Giá trọn gói:</strong> 6,449,000 x 01 = 6,449,000 VND</div>
+                            <div><strong>Trẻ em</strong> (6-8 tuổi): 300,000 x 01 = 1,010,000 VND</div>
+                        </div> -->
+                        <ul class="order-summary">
                             <?php
-                            $phi_vat = $phi_dich_vu = 0;
-                            if ($module->hotel_tax_fixed > 0) {
-                                $phi_vat = $module->hotel_tax_fixed;
-                            } elseif ($module->hotel_tax_percentage > 0) {
-                                $phi_vat = $priceTotal * ($module->hotel_tax_percentage / 100);
-                            }
-                            if ($module->hotel_service_fixed > 0) {
-                                $phi_dich_vu = $module->hotel_service_fixed;
-                            } elseif ($module->hotel_service_percentage > 0) {
-                                $phi_dich_vu = $priceTotal * ($module->hotel_service_percentage / 100);
+                            $room_quantity = json_decode($room_quantity, true);
+                            $extra_beds = json_decode($extra_beds, true);
+
+                            $priceTotal = $so_giuong_phu = 0;
+                            if (!empty($room)) {
+
+                                $priceExtraBedTotal = 0;
+                                foreach ($room as $roomId => $rDetail) {
+                                    $priceOne = 0;
+                                    $priceExtraBed = 0;
+                                    foreach ($rDetail->Info['detail'] as $tmp) {
+                                        $priceOne += $tmp->total;
+                                        $priceExtraBed += $tmp->bed_total;
+                                    }
+                                    $priceOne = $priceOne / count($rDetail->Info['detail']);
+                                    $priceExtraBedTotal += $priceExtraBed * $extra_beds[$roomId];
+                                    $so_giuong_phu += $extra_beds[$roomId];
+
+
+                                    $quantity = $room_quantity[$roomId];
+                                    ?>
+                                    <li>
+                                        <div class="k">
+                                            <p><strong><?php echo $rDetail->title; ?></strong></p>
+                                            <?php echo number_format($priceOne); ?> x <?php echo $stay; ?> (đêm)
+                                            x <?php echo $quantity; ?> (phòng)
+                                            = <?php echo number_format($rDetail->Info['total'] * $quantity); ?> VND
+                                        </div>
+                                    </li>
+                                    <?php
+                                    $priceTotal += $rDetail->Info['total'] * $quantity;
+                                }
+                            } ?>
+
+                            <li>
+                                <span class="k">Thành tiền:</span>
+                                <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>
+                            </li>
+                            <li>
+                                <span class="k">Giường phụ:</span>
+                                <span class="v"><?php echo number_format($priceExtraBedTotal); ?></span>
+                                <input type="hidden" name="so_giuong_phu" value="<?php echo $so_giuong_phu; ?>">
+                                <input type="hidden" name="phi_giuong_phu" value="<?php echo $priceExtraBedTotal; ?>">
+                            </li>
+                            <li>
+                                <span class="k">Chi phí khác:</span>
+                                <span class="v">0 VND</span>
+                            </li>
+                            <li>
+                                <?php
+                                $phi_vat = $phi_dich_vu = 0;
+                                if ($module->hotel_tax_fixed > 0) {
+                                    $phi_vat = $module->hotel_tax_fixed;
+                                } elseif ($module->hotel_tax_percentage > 0) {
+                                    $phi_vat = $priceTotal * ($module->hotel_tax_percentage / 100);
+                                }
+                                if ($module->hotel_service_fixed > 0) {
+                                    $phi_dich_vu = $module->hotel_service_fixed;
+                                } elseif ($module->hotel_service_percentage > 0) {
+                                    $phi_dich_vu = $priceTotal * ($module->hotel_service_percentage / 100);
+                                }
+                                ?>
+                                <span class="k">Phí VAT:</span>
+                                <span class="v"><?php echo number_format($phi_vat); ?> VND</span>
+                                <input type="hidden" name="phi_vat" value="<?php echo $phi_vat; ?>">
+                            </li>
+                            <li>
+                                <span class="k">Phí dịch vụ:</span>
+                                <span class="v"><?php echo number_format($phi_dich_vu); ?> VND</span>
+                                <input type="hidden" name="phi_dich_vu" value="<?php echo $phi_dich_vu; ?>">
+                            </li>
+                            <li>
+                                <strong class="k">Thanh toán</strong>
+                                <strong class="v"><?php echo number_format($priceTotal + $priceExtraBedTotal + $phi_vat + $phi_dich_vu); ?>
+                                    VND</strong>
+                                <input type="hidden" name="tong_chua_giam" id="tong_chua_giam"
+                                       value="<?php echo $priceTotal + $priceExtraBedTotal + $phi_vat + $phi_dich_vu; ?>">
+                            </li>
+                            <li style="border: none;">
+                                <strong class="clearfix" style="margin-bottom: 3px; display: block;">Nhập mã giảm
+                                    giá</strong>
+                                <div class="k">
+                                    <input type="input" name="coupon_code" class="form-control coupon" placeholder="">
+                                    <i id="result_copoun"
+                                       style="color: #999999; display:block; font-size: 12px; margin-top: 3px;"></i>
+                                </div>
+                                <div class="v">
+                                    <button style="margin-left:0; margin-bottom: 0; padding: 5px 16px;" type="button"
+                                            class="btn btn-action btn-block chk applycoupon">ÁP DỤNG
+                                    </button>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                                <div class="couponmsg"></div>
+                            </li>
+                            <li style="border: none;">
+                                <span class="k">Giảm giá: </span>
+                                <span class="v purple" id="giam_gia_span">0 VND</span>
+                                <input type="hidden" name="giam_gia" value="0" id="giam_gia">
+                            </li>
+                            <li style="border: none;">
+                                <strong class="k">
+                                    Tổng thanh toán
+                                    <span style="color: #999999; display:block; font-size: 12px;">(Giá đã bao gồm VAT và phí dịch vụ)</span>
+                                </strong>
+                                <strong class="v"
+                                        id="tong_thanh_toan_span"><?php echo number_format($priceTotal + $priceExtraBedTotal); ?>
+                                    VND</strong>
+                                <input type="hidden" name="tong_thanh_toan" id="tong_thanh_toan"
+                                       value="<?php echo($priceTotal + $priceExtraBedTotal); ?>">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_body">
+                        <div style="padding: 10px;">
+                            Điều kiện hủy
+                            <div class="block-question-info" style="display: inline-block;">
+                                <i class="fa fa-question-circle"></i>
+                                <div class="block-info">
+                                    <p>Nếu bạn chưa xác định được ngày đi. Bạn có thể mua trước đi sau ....</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center" style="margin-bottom:10px">
+                    Tôi đã đọc và chấp nhận điều kiện, chính sách khách sạn,<br><a class="text-link" href="#"
+                                                                                   title="chính sách bảo mật"
+                                                                                   target="_blank">Điều khoản sử dụng</a> và
+                    <a class="text-link" href="#" title="chính sách bảo mật" target="_blank">chính sách bảo mật</a> của
+                    HOSPI
+                </p>
+                <p class="text-center">
+                    <button type="submit" class="btn btn-action2 completebook" name="<?php if (empty($usersession)) {
+                        echo "guest";
+                    } else {
+                        echo "logged";
+                    } ?>" onclick="return completebook('<?php echo base_url(); ?>','<?php echo trans('0159') ?>');">Hoàn
+                        Thành
+                    </button>
+                </p>
+            </div>
+            <input type="hidden" name="country" value="VN" id="country"/>
+            <input type="hidden" id="itemid" name="itemid" value="<?php echo $module->hotel_id; ?>"/>
+            <input type="hidden" name="checkout" value="<?php echo $checkout; ?>"/>
+            <input type="hidden" name="adults" value="<?php echo $adults; ?>"/>
+            <input type="hidden" name="child" value="<?php echo $child; ?>"/>
+            <input type="hidden" name="nights" value="<?php echo $stay; ?>"/>
+            <input type="hidden" id="couponid" name="couponid" value=""/>
+            <input type="hidden" id="btype" name="btype" value="<?php echo $appModule; ?>"/>
+            <?php if ($appModule == "hotels") { ?>
+                <input type="hidden" name="subitemid" value="<?php echo $room_id; ?>"/>
+                <input type="hidden" name="roomscount" value='<?php echo json_encode($room_quantity); ?>'/>
+                <input type="hidden" name="bedscount" value='<?php echo json_encode($extra_beds); ?>'/>
+                <input type="hidden" name="checkin" value="<?php echo $checkin; ?>"/>
+            <?php } ?>
+        <?php } else { ?>
+            <div class="col-sm-5 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        Thông tin combo
+                    </div>
+                    <div class="panel-body">
+                        <dl class="cb-img-name">
+                            <dt>
+                                <img src="<?php echo $module->thumbnail; ?>" alt="<?php echo $module->title; ?>" width="98">
+                            </dt>
+                            <dd>
+                                <h1><?php echo $module->title; ?></h1>
+                            </dd>
+                        </dl>
+                        <div class="row">
+                            <div class="col-sm-7 col-xs-12">
+                                <div class="table table-responsive">
+                                    <table class="table table-no-border mb0">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                Ngày đi:
+                                            </td>
+                                            <td>
+                                                <strong class="purple"><?php echo $checkin; ?></strong>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-xs-12">
+                                <div class="table table-responsive row">
+                                    <table class="table table-no-border mb0">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                Số lượng:
+                                            </td>
+                                            <td>
+                                                <strong><?php echo $quantity; ?></strong>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_body">
+                        <ul class="order-summary">
+                            <?php
+                            $price = (int)str_replace(',', '', $module->price);
+                            $priceTotal = $quantity * $price;
+                            $priceSurchargeTotal = 0;
+                            ?>
+                            <li>
+                                <div class="k">
+                                    <p><strong><?php echo $module->title; ?></strong></p>
+                                    <?php echo number_format($price); ?> x <?php echo $quantity; ?>
+                                    = <?php echo number_format($priceTotal); ?> <?php echo $module->currSymbol; ?>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="k">Thành tiền:</span>
+                                <strong class="v"><?php echo number_format($priceTotal); ?><?php echo $module->currSymbol; ?></strong>
+                            </li>
+                            <?php if (!empty($module->surchargeInfo)) {
+                                foreach ($module->surchargeInfo as $item) {
+                                    $price_surcharge = (int)str_replace(',', '', $item->price);
+                                    $price_surcharge = $surcharge[$item->id] * $price_surcharge;
+                                    $priceSurchargeTotal += $price_surcharge;
+                                    ?>
+                                    <li>
+                                        <span class="k"><?php echo $item->name; ?></span>
+                                        <span class="v"><?php echo number_format($price_surcharge); ?> <?php echo $module->currSymbol; ?></span>
+                                    </li>
+                                    <?php
+                                }
                             }
                             ?>
-                            <span class="k">Phí VAT:</span>
-                            <span class="v"><?php echo number_format($phi_vat); ?> VND</span>
-                            <input type="hidden" name="phi_vat" value="<?php echo $phi_vat; ?>">
-                        </li>
-                        <li>
-                            <span class="k">Phí dịch vụ:</span>
-                            <span class="v"><?php echo number_format($phi_dich_vu); ?> VND</span>
-                            <input type="hidden" name="phi_dich_vu" value="<?php echo $phi_dich_vu; ?>">
-                        </li>
-                        <li>
-                            <strong class="k">Thanh toán</strong>
-                            <strong class="v"><?php echo number_format($priceTotal + $priceExtraBedTotal + $phi_vat + $phi_dich_vu); ?>
-                                VND</strong>
-                            <input type="hidden" name="tong_chua_giam" id="tong_chua_giam"
-                                   value="<?php echo $priceTotal + $priceExtraBedTotal + $phi_vat + $phi_dich_vu; ?>">
-                        </li>
-                        <li style="border: none;">
-                            <strong class="clearfix" style="margin-bottom: 3px; display: block;">Nhập mã giảm
-                                giá</strong>
-                            <div class="k">
-                                <input type="input" name="coupon_code" class="form-control coupon" placeholder="">
-                                <i id="result_copoun"
-                                   style="color: #999999; display:block; font-size: 12px; margin-top: 3px;"></i>
-                            </div>
-                            <div class="v">
-                                <button style="margin-left:0; margin-bottom: 0; padding: 5px 16px;" type="button"
-                                        class="btn btn-action btn-block chk applycoupon">ÁP DỤNG
-                                </button>
-                            </div>
-                            <div class="clearfix">
-                            </div>
-                            <div class="couponmsg"></div>
-                        </li>
-                        <li style="border: none;">
-                            <span class="k">Giảm giá: </span>
-                            <span class="v purple" id="giam_gia_span">0 VND</span>
-                            <input type="hidden" name="giam_gia" value="0" id="giam_gia">
-                        </li>
-                        <li style="border: none;">
-                            <strong class="k">
-                                Tổng thanh toán
-                                <span style="color: #999999; display:block; font-size: 12px;">(Giá đã bao gồm VAT và phí dịch vụ)</span>
-                            </strong>
-                            <strong class="v"
-                                    id="tong_thanh_toan_span"><?php echo number_format($priceTotal + $priceExtraBedTotal); ?>
-                                VND</strong>
-                            <input type="hidden" name="tong_thanh_toan" id="tong_thanh_toan"
-                                   value="<?php echo($priceTotal + $priceExtraBedTotal); ?>">
-                        </li>
-                    </ul>
+                            <li>
+                                <strong class="k">Thanh toán</strong>
+                                <strong class="v"><?php echo number_format($priceTotal + $priceSurchargeTotal); ?>
+                                    VND</strong>
+                                <input type="hidden" name="tong_chua_giam" id="tong_chua_giam"
+                                       value="<?php echo $priceTotal + $priceSurchargeTotal; ?>">
+                            </li>
+                            <li style="border: none;">
+                                <strong class="clearfix" style="margin-bottom: 3px; display: block;">Nhập mã giảm
+                                    giá</strong>
+                                <div class="k">
+                                    <input type="input" name="coupon_code" class="form-control coupon">
+                                    <i id="result_copoun"
+                                       style="color: #999999; display:block; font-size: 12px; margin-top: 3px;"></i>
+                                </div>
+                                <div class="v">
+                                    <button style="margin-left:0; margin-bottom: 0; padding: 5px 16px;" type="button"
+                                            class="btn btn-action btn-block chk applycoupon">ÁP DỤNG
+                                    </button>
+                                </div>
+                                <div class="clearfix">
+                                </div>
+                                <div class="couponmsg"></div>
+                            </li>
+                            <li style="border: none;">
+                                <span class="k">Giảm giá: </span>
+                                <span class="v purple" id="giam_gia_span">0 VND</span>
+                                <input type="hidden" name="giam_gia" value="0" id="giam_gia">
+                            </li>
+                            <li style="border: none;">
+                                <strong class="k">
+                                    Tổng thanh toán
+                                    <span style="color: #999999; display:block; font-size: 12px;">(Giá đã bao gồm VAT và phí dịch vụ)</span>
+                                </strong>
+                                <strong class="v purple"
+                                        id="tong_thanh_toan_span"><?php echo number_format($priceTotal + $priceSurchargeTotal); ?>
+                                    VND</strong>
+                                <input type="hidden" name="tong_thanh_toan" id="tong_thanh_toan"
+                                       value="<?php echo($priceTotal + $priceSurchargeTotal); ?>">
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="box">
-                <div class="box_body">
-                    <div style="padding: 10px;">
-                        Điều kiện hủy
-                        <div class="block-question-info" style="display: inline-block;">
-                            <i class="fa fa-question-circle"></i>
-                            <div class="block-info">
-                                <p>Nếu bạn chưa xác định được ngày đi. Bạn có thể mua trước đi sau ....</p>
+                <div class="box">
+                    <div class="box_body">
+                        <div style="padding: 10px;">
+                            Điều kiện hủy
+                            <div class="block-question-info" style="display: inline-block;">
+                                <i class="fa fa-question-circle"></i>
+                                <div class="block-info">
+                                    <p>Nếu bạn chưa xác định được ngày đi. Bạn có thể mua trước đi sau ....</p>
+                                </div>
                             </div>
+                            <p><?php echo $module->cancel_condition; ?></p>
                         </div>
                     </div>
                 </div>
+                <p class="text-center" style="margin-bottom:10px">
+                    Tôi đã đọc và chấp nhận điều kiện, chính sách khách sạn,<br><a class="text-link" href="#" title="Điều khoản sử dụng" target="_blank">Điều khoản sử dụng</a> và
+                    <a class="text-link" href="#" title="chính sách bảo mật" target="_blank">chính sách bảo mật</a> của
+                    HOSPI
+                </p>
+                <p class="text-center">
+                    <button type="submit" class="btn btn-action2 completebook" name="<?php if (empty($usersession)) {
+                        echo "guest";
+                    } else {
+                        echo "logged";
+                    } ?>" onclick="return completebook('<?php echo base_url(); ?>','<?php echo trans('0159') ?>');">Hoàn
+                        Thành
+                    </button>
+                </p>
             </div>
-            <p class="text-center" style="margin-bottom:10px">
-                Tôi đã đọc và chấp nhận điều kiện, chính sách khách sạn,<br><a class="text-link" href="#"
-                                                                               title="chính sách bảo mật"
-                                                                               target="_blank">Điều khoản sử dụng</a> và
-                <a class="text-link" href="#" title="chính sách bảo mật" target="_blank">chính sách bảo mật</a> của
-                HOSPI
-            </p>
-            <p class="text-center">
-                <button type="submit" class="btn btn-action2 completebook" name="<?php if (empty($usersession)) {
-                    echo "guest";
-                } else {
-                    echo "logged";
-                } ?>" onclick="return completebook('<?php echo base_url(); ?>','<?php echo trans('0159') ?>');">Hoàn
-                    Thành
-                </button>
-            </p>
-        </div>
-        <input type="hidden" name="country" value="VN" id="country"/>
-        <input type="hidden" id="itemid" name="itemid" value="<?php echo $module->hotel_id; ?>"/>
-        <input type="hidden" name="checkout" value="<?php echo $checkout; ?>"/>
-        <input type="hidden" name="adults" value="<?php echo $adults; ?>"/>
-        <input type="hidden" name="child" value="<?php echo $child; ?>"/>
-        <input type="hidden" name="nights" value="<?php echo $stay; ?>"/>
-        <input type="hidden" id="couponid" name="couponid" value=""/>
-        <input type="hidden" id="btype" name="btype" value="<?php echo $appModule; ?>"/>
-        <?php if ($appModule == "hotels") { ?>
-            <input type="hidden" name="subitemid" value="<?php echo $room_id; ?>"/>
-            <input type="hidden" name="roomscount" value='<?php echo json_encode($room_quantity); ?>'/>
-            <input type="hidden" name="bedscount" value='<?php echo json_encode($extra_beds); ?>'/>
+            <input type="hidden" name="country" value="VN" id="country"/>
+            <input type="hidden" id="itemid" name="itemid" value="<?php echo $module->id; ?>"/>
+            <input type="hidden" name="quantity" value="<?php echo $quantity; ?>"/>
             <input type="hidden" name="checkin" value="<?php echo $checkin; ?>"/>
+            <input type="hidden" name="nights" value="<?php echo $module->min_nights; ?>"/>
+            <input type="hidden" id="couponid" name="couponid" value=""/>
+            <input type="hidden" id="btype" name="btype" value="<?php echo $appModule; ?>"/>
+            <input type="hidden" name="surcharge" value='<?php echo json_encode($surcharge); ?>'/>
         <?php } ?>
-    <?php } else { ?>
-        <div class="col-sm-5 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading text-center">
-                    Thông tin combo
-                </div>
-                <div class="panel-body">
-                    <dl class="cb-img-name">
-                        <dt>
-                            <img src="<?php echo $module->thumbnail; ?>" alt="<?php echo $module->title; ?>" width="98">
-                        </dt>
-                        <dd>
-                            <h1><?php echo $module->title; ?></h1>
-                        </dd>
-                    </dl>
-                    <div class="row">
-                        <div class="col-sm-7 col-xs-12">
-                            <div class="table table-responsive">
-                                <table class="table table-no-border mb0">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            Ngày đi:
-                                        </td>
-                                        <td>
-                                            <strong class="purple"><?php echo $checkin; ?></strong>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-sm-5 col-xs-12">
-                            <div class="table table-responsive row">
-                                <table class="table table-no-border mb0">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            Số lượng:
-                                        </td>
-                                        <td>
-                                            <strong><?php echo $quantity; ?></strong>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box_body">
-                    <ul class="order-summary">
-                        <?php
-                        $price = (int)str_replace(',', '', $module->price);
-                        $priceTotal = $quantity * $price;
-                        $priceSurchargeTotal = 0;
-                        ?>
-                        <li>
-                            <div class="k">
-                                <p><strong><?php echo $module->title; ?></strong></p>
-                                <?php echo number_format($price); ?> x <?php echo $quantity; ?>
-                                = <?php echo number_format($priceTotal); ?> <?php echo $module->currSymbol; ?>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="k">Thành tiền:</span>
-                            <strong class="v"><?php echo number_format($priceTotal); ?><?php echo $module->currSymbol; ?></strong>
-                        </li>
-                        <?php if (!empty($module->surchargeInfo)) {
-                            foreach ($module->surchargeInfo as $item) {
-                                $price_surcharge = (int)str_replace(',', '', $item->price);
-                                $price_surcharge = $surcharge[$item->id] * $price_surcharge;
-                                $priceSurchargeTotal += $price_surcharge;
-                                ?>
-                                <li>
-                                    <span class="k"><?php echo $item->name; ?></span>
-                                    <span class="v"><?php echo number_format($price_surcharge); ?> <?php echo $module->currSymbol; ?></span>
-                                </li>
-                                <?php
-                            }
-                        }
-                        ?>
-                        <li>
-                            <strong class="k">Thanh toán</strong>
-                            <strong class="v"><?php echo number_format($priceTotal + $priceSurchargeTotal); ?>
-                                VND</strong>
-                            <input type="hidden" name="tong_chua_giam" id="tong_chua_giam"
-                                   value="<?php echo $priceTotal + $priceSurchargeTotal; ?>">
-                        </li>
-                        <li style="border: none;">
-                            <strong class="clearfix" style="margin-bottom: 3px; display: block;">Nhập mã giảm
-                                giá</strong>
-                            <div class="k">
-                                <input type="input" name="coupon_code" class="form-control coupon">
-                                <i id="result_copoun"
-                                   style="color: #999999; display:block; font-size: 12px; margin-top: 3px;"></i>
-                            </div>
-                            <div class="v">
-                                <button style="margin-left:0; margin-bottom: 0; padding: 5px 16px;" type="button"
-                                        class="btn btn-action btn-block chk applycoupon">ÁP DỤNG
-                                </button>
-                            </div>
-                            <div class="clearfix">
-                            </div>
-                            <div class="couponmsg"></div>
-                        </li>
-                        <li style="border: none;">
-                            <span class="k">Giảm giá: </span>
-                            <span class="v purple" id="giam_gia_span">0 VND</span>
-                            <input type="hidden" name="giam_gia" value="0" id="giam_gia">
-                        </li>
-                        <li style="border: none;">
-                            <strong class="k">
-                                Tổng thanh toán
-                                <span style="color: #999999; display:block; font-size: 12px;">(Giá đã bao gồm VAT và phí dịch vụ)</span>
-                            </strong>
-                            <strong class="v purple"
-                                    id="tong_thanh_toan_span"><?php echo number_format($priceTotal + $priceSurchargeTotal); ?>
-                                VND</strong>
-                            <input type="hidden" name="tong_thanh_toan" id="tong_thanh_toan"
-                                   value="<?php echo($priceTotal + $priceSurchargeTotal); ?>">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="box">
-                <div class="box_body">
-                    <div style="padding: 10px;">
-                        Điều kiện hủy
-                        <div class="block-question-info" style="display: inline-block;">
-                            <i class="fa fa-question-circle"></i>
-                            <div class="block-info">
-                                <p>Nếu bạn chưa xác định được ngày đi. Bạn có thể mua trước đi sau ....</p>
-                            </div>
-                        </div>
-                        <p><?php echo $module->cancel_condition; ?></p>
-                    </div>
-                </div>
-            </div>
-            <p class="text-center" style="margin-bottom:10px">
-                Tôi đã đọc và chấp nhận điều kiện, chính sách khách sạn,<br><a class="text-link" href="#" title="Điều khoản sử dụng" target="_blank">Điều khoản sử dụng</a> và
-                <a class="text-link" href="#" title="chính sách bảo mật" target="_blank">chính sách bảo mật</a> của
-                HOSPI
-            </p>
-            <p class="text-center">
-                <button type="submit" class="btn btn-action2 completebook" name="<?php if (empty($usersession)) {
-                    echo "guest";
-                } else {
-                    echo "logged";
-                } ?>" onclick="return completebook('<?php echo base_url(); ?>','<?php echo trans('0159') ?>');">Hoàn
-                    Thành
-                </button>
-            </p>
-        </div>
-        <input type="hidden" name="country" value="VN" id="country"/>
-        <input type="hidden" id="itemid" name="itemid" value="<?php echo $module->id; ?>"/>
-        <input type="hidden" name="quantity" value="<?php echo $quantity; ?>"/>
-        <input type="hidden" name="checkin" value="<?php echo $checkin; ?>"/>
-        <input type="hidden" name="nights" value="<?php echo $module->min_nights; ?>"/>
-        <input type="hidden" id="couponid" name="couponid" value=""/>
-        <input type="hidden" id="btype" name="btype" value="<?php echo $appModule; ?>"/>
-        <input type="hidden" name="surcharge" value='<?php echo json_encode($surcharge); ?>'/>
-    <?php } ?>
     </form>
 </div>
 </div>

@@ -83,7 +83,7 @@
                         </div>
                         <!-- /.block-tab-2 -->
                     </div>
-                    <?php if ($module->type == 2) { ?>
+                    <?php if ($module->type != 1) { ?>
                         <div class="col-sm-3 col-xs-12">
                             <div class="block-content">
                                 <div class="block-cb-detail">
@@ -109,7 +109,7 @@
                                             }
                                             ?>
                                         </ul>
-                                        <button type="button" class="btn btn-combo2" data-toggle="modal" data-target="#book-combo">Đặt combo</button>
+                                        <button type="button" class="btn btn-combo2" data-toggle="modal" data-target="#book-combo"><?php echo $module->type == 2 ? 'Đặt combo' : 'Đặt honeymoon'; ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
         </div>
     </div>
 </div>
-<?php if ($module->type == 2) { ?>
+<?php if ($module->type != 1) { ?>
     <!-- Modal -->
     <div class="modal fade" id="book-combo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
