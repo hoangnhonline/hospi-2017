@@ -208,7 +208,7 @@
                     <div class="row form-group">
                         <label class="col-md-2 control-label text-left">Điều kiện sử dụng</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="use_condition" rows="10"><?php echo @$offerdata[0]->cancel_condition; ?></textarea>
+                            <textarea class="form-control" name="use_condition" rows="10"><?php echo @$offerdata[0]->use_condition; ?></textarea>
                         </div>
                     </div>
                     <div class="row form-group">
