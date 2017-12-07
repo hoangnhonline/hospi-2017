@@ -730,12 +730,13 @@ class Hotels_model extends CI_Model
     }
 
     // List all hotels on front listings page
-    function list_hotels_front($perpage = null, $offset = null, $orderby = null)
+    function list_hotels_front($perpage = null, $page = null, $orderby = null)
     {
         $data = array();
         // $hotelslist = $lists['hotels'];
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if (!empty($page)) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
         $this->db->select('pt_hotels.hotel_id,pt_hotels.hotel_stars,pt_hotels.hotel_title,pt_hotels.hotel_order,pt_hotels.hotel_order,pt_rooms.room_basic_price as price');
         if ($orderby == "za") {
@@ -773,12 +774,13 @@ class Hotels_model extends CI_Model
     }
 
     // List all hotels on front listings page
-    function list_honeymoons_front($perpage = null, $offset = null, $orderby = null)
+    function list_honeymoons_front($perpage = null, $page = null, $orderby = null)
     {
         $data = array();
         // $hotelslist = $lists['hotels'];
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if (!empty($page)) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
         $this->db->select('pt_hotels.hotel_id,pt_hotels.hotel_stars,pt_hotels.hotel_title,pt_hotels.hotel_order,pt_hotels.hotel_order,pt_rooms.room_basic_price as price,pt_rooms.room_id');
         if ($orderby == "za") {
@@ -818,12 +820,13 @@ class Hotels_model extends CI_Model
 
 
     // List all hotels on front listings page based on location
-    function listHotelsByLocation($locs, $perpage = null, $offset = null, $orderby = null)
+    function listHotelsByLocation($locs, $perpage = null, $page = null, $orderby = null)
     {
         $data = array();
         // $hotelslist = $lists['hotels'];
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if (!empty($page)) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
         $this->db->select('pt_hotels.hotel_id,pt_hotels.hotel_stars,pt_hotels.hotel_title,pt_hotels.hotel_order,pt_hotels.hotel_order,pt_rooms.room_basic_price as price');
         if ($orderby == "za") {
@@ -863,7 +866,7 @@ class Hotels_model extends CI_Model
     }
 
     // Search hotels from home page
-    function search_hotels_front($perpage = null, $offset = null, $orderby = null, $cities = null, $lists = null)
+    function search_hotels_front($perpage = null, $page = null, $orderby = null, $cities = null, $lists = null)
     {
         $data = array();
         $stars = $this->input->get('stars');
@@ -874,8 +877,9 @@ class Hotels_model extends CI_Model
         $pickup = $this->input->get('pickup');
         $honeymoon = $this->input->get('honeymoon');
         //$hotelslist = $lists['hotels'];
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if (!empty($page)) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
         $this->db->select('pt_hotels.*,pt_rooms.room_basic_price as price,pt_hotels_translation.trans_title');
         $this->db->select_avg('pt_reviews.review_overall', 'overall');
@@ -1002,7 +1006,7 @@ class Hotels_model extends CI_Model
     }
 
     //search hotels by text
-    function search_hotels_by_text($cityid, $perpage = null, $offset = null, $orderby = null, $cities = null, $lists = null, $checkin = null, $checkout = null)
+    function search_hotels_by_text($cityid, $perpage = null, $page = null, $orderby = null, $cities = null, $lists = null, $checkin = null, $checkout = null)
     {
         $data = array();
 
@@ -1031,8 +1035,9 @@ class Hotels_model extends CI_Model
         $honeymoon = $this->input->get('honeymoon');
         $pickup = $this->input->get('pickup');
         //$hotelslist = $lists['hotels'];
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
         $this->db->select('pt_hotels.*,min(pt_room_prices_detail.total) as price,pt_hotels_translation.trans_title,pt_rooms.honey_moon');
         $this->db->select_avg('pt_reviews.review_overall', 'overall');

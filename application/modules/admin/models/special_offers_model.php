@@ -343,12 +343,13 @@ class Special_offers_model extends CI_Model
 
     // / List all offers on front listings page
 
-    function list_specialOffers_front($perpage = null, $offset = null, $loc = null, $type = 1, $hotelid = null)
+    function list_specialOffers_front($perpage = null, $page = null, $loc = null, $type = 1, $hotelid = null)
     {
         $data = array();
 
-        if (!empty($offset)) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if (!empty($page)) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
 
         if (!empty($loc)) {
@@ -596,15 +597,15 @@ class Special_offers_model extends CI_Model
 
     // search offers by text
 
-    function searchOffers($perpage = null, $offset = null, $dfrom = null, $dto = null)
+    function searchOffers($perpage = null, $page = null, $dfrom = null, $dto = null)
     {
         $data = array();
         $searchtxt = $this->input->get('searching');
 
         // $hotelslist = $lists['hotels'];
-
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if (!empty($page)) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
 
         $this->db->select('pt_special_offers.*,pt_offers_translation.trans_title');

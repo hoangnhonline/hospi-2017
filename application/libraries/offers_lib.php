@@ -243,51 +243,38 @@ class Offers_lib
         return $result;
     }
 
-    function showOffers($offset = null, $loc = null, $type = 1, $perpage = null, $hotelid = null)
+    function showOffers($page = null, $loc = null, $type = 1, $perpage = null, $hotelid = null)
     {
-        $this->ci->load->library('bootpagination');
         $data = array();
         $settings = $this->settings();
-        $sortby = $this->ci->input->get('sortby');
+
         if (empty($perpage)) {
             $perpage = $settings[0]->front_listings;
         }
-        if (!empty ($sortby)) {
-            $orderby = $sortby;
-        } else {
-            $orderby = "newf";//$settings[0]->front_listings_order;
-        }
+
         $this->ci->load->model('admin/special_offers_model');
         $rh = $this->ci->special_offers_model->list_specialOffers_front(null, null, $loc, $type, $hotelid);
-        $offers = $this->ci->special_offers_model->list_specialOffers_front($perpage, $offset, $loc, $type, $hotelid);
+        $offers = $this->ci->special_offers_model->list_specialOffers_front($perpage, $page, $loc, $type, $hotelid);
 
         $data['allOffers'] = $this->getResultObject($offers['all']);
         $data['paginationinfo'] = array('base' => 'offers', 'totalrows' => $rh['rows'], 'perpage' => $perpage);
-
-        $data['plinks2'] = $this->ci->bootpagination->dopagination2('offers', $rh['rows'], $perpage);
 
         return $data;
     }
 
 //search special offers from front end
 
-    function searchOffers($offset = null, $dfrom, $dto)
+    function searchOffers($page = null, $dfrom, $dto)
     {
-        $this->ci->load->library('bootpagination');
         $data = array();
-        $settings = $this->settings();
-        $sortby = $this->ci->input->get('sortby');
-        $perpage = 10;//$settings[0]->front_search;
-        if (!empty ($sortby)) {
-            $orderby = $sortby;
-        } else {
-            $orderby = $settings[0]->front_search_order;
-        }
+        $perpage = 10;
 
-        $rh = $this->ci->special_offers_model->searchOffers('', '');
-        $offers = $this->ci->special_offers_model->searchOffers($perpage, $offset, convert_to_unix($dfrom), convert_to_unix($dto));
+        $rh = $this->ci->special_offers_model->searchOffers(null, null);
+        $offers = $this->ci->special_offers_model->searchOffers($perpage, $page, convert_to_unix($dfrom), convert_to_unix($dto));
+
         $data['allOffers'] = $this->getResultObject($offers['all']);
         $data['paginationinfo'] = array('base' => 'offers/search', 'totalrows' => $rh['rows'], 'perpage' => $perpage);
+
         return $data;
     }
 

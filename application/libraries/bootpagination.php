@@ -20,8 +20,8 @@ class Bootpagination
         $urisegment = $info['urisegment'];
         $totalrows = $info['totalrows'];
         $perpage = $info['perpage'];
-        $config['base_url'] = site_url($base);
-        $config['base_url'] = str_replace('?', '', $config['base_url']);
+        $config['base_url'] = $base;
+        //$config['base_url'] = str_replace('?', '', $config['base_url']);
         $config['page_query_string'] = false;
 
         if (!empty($urisegment)) {
@@ -29,24 +29,23 @@ class Bootpagination
         }
 
         if (count($_GET) > 0) {
-            $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+            $config['suffix'] = http_build_query($_GET, '', "&");
         }
-        $config['first_url'] = $config['base_url'] . '?' . http_build_query($_GET);
+        $config['first_url'] = '';
         $config['total_rows'] = $totalrows;
         $config['per_page'] = $perpage;
 
-
-        $config['num_links'] = 5;
+        $config['num_links'] = 2;
         $config['use_page_numbers'] = TRUE;
 
         $config['full_tag_open'] = '<ul class="pagination">'; // I added class name 'page_test' to used later for jQuery
         $config['full_tag_close'] = '</ul>';
 
-        $config['first_link'] = '&raquo'; // &raquo; &laquo; First
+        $config['first_link'] = '{NUMBER}'; // &raquo; &laquo; First
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
 
-        $config['last_link'] = '&laquo;';
+        $config['last_link'] = '{NUMBER}';
         $config['last_tag_open'] = '<li>';
         $config['last_tag_close'] = '</li>';
 
@@ -58,11 +57,14 @@ class Bootpagination
         $config['prev_tag_open'] = '<li>';
         $config['prev_tag_close'] = '</li>';
 
-        $config['cur_tag_open'] = '<li class="active"><a href="">';
-        $config['cur_tag_close'] = '</a></li>';
+        $config['cur_tag_open'] = '<li class="active"><span>';
+        $config['cur_tag_close'] = '</<span></li>';
 
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
+
+        $config['disabled_tag_open'] = '<li class="disabled"><span>';
+        $config['disabled_tag_close'] = '</span></li>';
 
         $this->CI->pagination->initialize($config);
         $html = $this->CI->pagination->create_links();

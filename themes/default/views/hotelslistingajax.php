@@ -339,32 +339,24 @@
     <!-- END OF LIST CONTENT-->
 <script type="text/javascript">
     $('ul.pagination li a').each(function() {
+        var url = $(this).attr('href');
+
         $(this)
             .attr('href', 'javascript:;')
+            .attr('data-url', url)
+            .data('url', url)
             .on('click', function(evt) {
                 evt.preventDefault();
 
-                var page = $(this).html();
-
-                if (isNaN(page)) {
-                    if (page == '«') {
-                        page = parseInt($('ul.pagination li.active a').html()) - 1;
-                    } else {
-                        page = parseInt($('ul.pagination li.active a').html()) + 1;
-                    }
-                }
-
-                ajaxSearchPagination(parseInt(page));
+                ajaxSearchPagination($(this).data('url'));
             });
     });
 
-    function ajaxSearchPagination(page){ // hoangnh
-        var link = window.location.href;
-        link = link.replace('/hotels/search', '/hotels/searchajax');
-        link = link + '&per_page=' + page;
+    function ajaxSearchPagination(url){ // hoangnh
+        url = url.replace('/search', '/searchajax');
 
         $.ajax({
-            url : link,
+            url : url,
             type : "get",
             beforeSend : function(){
                 $('#right-content').html('<p style="text-align:center;margin-top:100px"><img src="<?php echo $theme_url ?>images/loading.gif"></p>');

@@ -303,7 +303,7 @@ class Hotels_lib
         return $data;
     }
 
-    function search_hotels($offset = null, $honeymoon = null)
+    function search_hotels($page = null, $honeymoon = null)
     {
 
         $this->ci->load->library('bootpagination');
@@ -319,7 +319,7 @@ class Hotels_lib
         // $hotelslist = $this->hotelswithrooms();
 
         $rh = $this->ci->hotels_model->search_hotels_front('', '', '', '', '', '');
-        $hotels = $this->ci->hotels_model->search_hotels_front($perpage, $offset, $orderby);
+        $hotels = $this->ci->hotels_model->search_hotels_front($perpage, $page, $orderby);
         $tmp = $this->getResultObject($hotels['all'], null, $orderby);
         $data['all'] = $tmp['result'];
         $resultSort = $tmp['resultSort'];
@@ -338,14 +338,12 @@ class Hotels_lib
             'perpage' => $perpage,
             'urisegment' => 3
         );
-
-        $data['plinks'] = $this->ci->bootpagination->dopagination('hotels/search', $hotels['rows'], $perpage);
         //}
         $data['resultSort'] = $resultSort;
         return $data;
     }
 
-    function search_hotels_by_text($cityid, $offset = null, $checkin = null, $checkout = null, $honeymoon = null)
+    function search_hotels_by_text($cityid, $page = null, $checkin = null, $checkout = null, $honeymoon = null)
     {
         $this->ci->load->library('bootpagination');
         $data = array();
@@ -360,7 +358,7 @@ class Hotels_lib
 
         // $hotelslist = $this->hotelswithrooms();
         $rh = $this->ci->hotels_model->search_hotels_by_text($cityid);
-        $hotels = $this->ci->hotels_model->search_hotels_by_text($cityid, $perpage, $offset, $orderby, '', '', $checkin, $checkout);
+        $hotels = $this->ci->hotels_model->search_hotels_by_text($cityid, $perpage, $page, $orderby, '', '', $checkin, $checkout);
 
         $tmp = $this->getResultObject($hotels['all'], null, $orderby, $checkin, $checkout);
 
@@ -382,7 +380,6 @@ class Hotels_lib
             'perpage' => $perpage,
             'urisegment' => 6
         );
-        $data['plinks'] = $this->ci->bootpagination->dopagination('hotels/search', $rh['rows'], $perpage);
         $data['resultSort'] = $resultSort;
         //}
         return $data;

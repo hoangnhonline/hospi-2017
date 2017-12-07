@@ -9799,8 +9799,10 @@ content: url(../../assets/img/collapsearrow.png);
   line-height: 0;
   width: 575px;
   margin: 0 auto;
-  background: url(../../assets/img/backgound-pagin.jpg);
   overflow: hidden;
+}
+.block-pagination .pagination {
+    background: url(../../assets/img/backgound-pagin.jpg);
 }
 .pagination > li > a, .pagination > li > span {
   position: relative;
@@ -9843,6 +9845,14 @@ content: url(../../assets/img/collapsearrow.png);
   color: #ffffff;
   background-color: #6a0739;
   border-color: #6a0739;
+}
+
+.pagination > li.disabled > a, .pagination > li.disabled > a:hover, .pagination > li.disabled > span, .pagination > li.disabled > span:hover, .pagination > li.disabled > a:focus, .pagination > li.disabled > span:focus {
+    z-index: 2;
+    color: #333;
+    background: transparent;
+    border: none;
+    cursor: not-allowed;
 }
 /*// .pagination > .active > a i:after,
 // .pagination > .active > span i:after {

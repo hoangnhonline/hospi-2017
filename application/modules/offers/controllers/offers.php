@@ -44,19 +44,13 @@ class Offers extends MX_Controller
 
         $this->lang->load("front", $this->data['lang_set']);
         $this->offers_lib->set_lang($this->data['lang_set']);
-
-
     }
 
     public function index()
     {
-
         if ($this->validlang) {
-
             $offername = $this->uri->segment(3);
-
         } else {
-
             $offername = $this->uri->segment(2);
         }
 
@@ -99,67 +93,65 @@ class Offers extends MX_Controller
             $this->theme->view('offer_details', $this->data);
             $this->output->cache(20);
         } else {
+            $page = $this->input->get('page');
+            if (!$page) {
+                $page = null;
+            }
             if ($this->validlang) {
-
                 $offer = $this->uri->segment(3);
-
             } else {
-
                 $offer = $this->uri->segment(2);
             }
             switch ($offer) {
-
                 case "bestchoice":
-                    $this->bestchoice();
+                    $this->bestchoice($page);
                     break;
                 case "sales":
-                    $this->sales();
+                    $this->sales($page);
                     break;
                 case "book":
                     $this->book();
                     break;
                 default:
-                    $this->listing();
+                    $this->listing($page);
                     break;
             }
         }
     }
 
-    function listing($offset = null)
+    function listing($page = null)
     {
-        $this->data['sorturl'] = base_url() . 'offers/listings?';
+        $this->data['sorturl'] = base_url() . 'offers?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
-        $alloffers = $this->offers_lib->showOffers($offset, $loc, 1, 14);
-        //var_dump('<pre>', $alloffers);die;
+        $alloffers = $this->offers_lib->showOffers($page, $loc, 1, 15);
         $this->data['module'] = $alloffers['allOffers']['offers'];
         $this->data['info'] = $alloffers['paginationinfo'];
-        $this->data['plinks2'] = $alloffers['plinks2'];
+        $this->data['info']['base'] = base_url() . 'offers';
         $this->data['page_title'] = $settings[0]->header_title;
         $this->data['langurl'] = base_url() . "offers/{langid}";
         $this->theme->view('deals', $this->data);
         //$this->output->cache(20) ;
     }
 
-    function bestchoice($offset = null)
+    function bestchoice($page = null)
     {
-        $this->data['sorturl'] = base_url() . 'offers/bestchoice/listings?';
+        $this->data['sorturl'] = base_url() . 'offers/bestchoice?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
-        $alloffers = $this->offers_lib->showOffers($offset, $loc, 2, 8);
+        $alloffers = $this->offers_lib->showOffers($page, $loc, 2, 8);
         $this->data['module'] = $alloffers['allOffers']['offers'];
         $this->data['info'] = $alloffers['paginationinfo'];
-        $this->data['info']['base'] = 'offers/bestchoice';
-        $this->data['plinks2'] = $alloffers['plinks2'];
+        $this->data['info']['base'] = base_url() . 'offers/bestchoice';
         $this->data['page_title'] = $settings[0]->header_title;
         $this->data['langurl'] = base_url() . "offers/bestchoice/{langid}";
         $this->theme->view('bestchoice', $this->data);
         //$this->output->cache(20) ;
     }
 
-    function sales($offset = null)
+    function sales($page = null)
     {
-        $this->data['sorturl'] = base_url() . 'offers/sales/listings?';
+        $this->data['sorturl'] = base_url() . 'offers/sales?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
 
@@ -171,7 +163,7 @@ class Offers extends MX_Controller
         //$this->output->cache(20) ;
     }
 
-    function search($offset = null)
+    function search($page = null)
     {
         $surl = http_build_query($_GET);
         //$this->data['sorturl'] = base_url() . 'offers/search?' . $surl . '&';
@@ -182,13 +174,13 @@ class Offers extends MX_Controller
         $txtsearch = $this->input->get('searching');
 
         if (array_filter($_GET)) {
-            $alloffers = $this->offers_lib->searchOffers($offset, $dfrom, $dto);
+            $alloffers = $this->offers_lib->searchOffers($page, $dfrom, $dto);
             $this->data['module'] = $alloffers['allOffers']['offers'];
             $this->data['info'] = $alloffers['paginationinfo'];
-
         } else {
             $this->listing();
         }
+
         $this->data['dfrom'] = @$_GET['dfrom'];
         $this->data['dto'] = @$_GET['dto'];
 
