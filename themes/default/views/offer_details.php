@@ -66,7 +66,7 @@
                                             <div class="form-group">
                                                 <p><strong class="purple"><?php echo trans('0837'); ?></strong></p>
                                                 <p>
-                                                    <?php echo $module->cancel_condition; ?>
+                                                    <?php echo nl2br($module->cancel_condition); ?>
                                                 </p>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                             <div class="form-group">
                                                 <p><strong class="purple"><?php echo trans('0838'); ?></strong></p>
                                                 <p>
-                                                    <?php echo $module->use_condition; ?>
+                                                    <?php echo nl2br($module->use_condition); ?>
                                                 </p>
                                             </div>
                                         </div>

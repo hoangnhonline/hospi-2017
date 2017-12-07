@@ -522,7 +522,7 @@
                                     <p>Nếu bạn chưa xác định được ngày đi. Bạn có thể mua trước đi sau ....</p>
                                 </div>
                             </div>
-                            <p><?php echo $module->cancel_condition; ?></p>
+                            <p><?php echo nl2br($module->cancel_condition); ?></p>
                         </div>
                     </div>
                 </div>
