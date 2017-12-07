@@ -7372,7 +7372,7 @@ p.offer-3content {
 }
 span.offer-location {
     position: absolute;
-    top: 5px;
+    top: 15px;
     left: 25px;
     color: #fff;
     font-size: 14px;
@@ -7432,24 +7432,25 @@ ul.footerlist.go-right.go-text-right,
     font-size: 15px;
 }
 .hospi_img_list {
-    background: black;
+    /*background: black;*/
     overflow: hidden;
     text-align: center;
     position: relative;
+    padding: 10px 10px 10px 0;
 }
 /*.hospi_img_list img {
-    display: block;
-    -webkit-transition: all 0.5s linear;
-    -moz-transition: all 0.5s linear;
-    -ms-transition: all 0.5s linear;
-    -o-transition: all 0.5s linear;
-    transition: all 0.5s linear;
+  display: block;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -ms-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
 }
 .hospi_img_list a img {
-    -webkit-transform: scale(1.2);
-    transform: scale(1.2);
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }*/
 .featured-item-content  {
   margin-bottom: 40px;background: rgba(255,255,255,1);
@@ -7461,15 +7462,15 @@ ul.footerlist.go-right.go-text-right,
   background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 29%, rgba(242,242,242,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=0 );
   -webkit-box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
--moz-box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
-box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
+  -moz-box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
+  box-shadow: 1px 0px 9px 0px rgba(94,94,94,0.54);
 }
 .featured-item-content .itemlabel_hospi {
   height: 100%;
   padding: 10px 0 10px 10px;
 }
 .offer-page .featured-item:nth-child(2n+1) {
-    clear: both
+  clear: both
 }
 .featured-item-content .itemlabel_hospi h4 {
   margin-bottom: 5px;
