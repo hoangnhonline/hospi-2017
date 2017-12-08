@@ -93,10 +93,6 @@ class Offers extends MX_Controller
             $this->theme->view('offer_details', $this->data);
             $this->output->cache(20);
         } else {
-            $page = $this->input->get('page');
-            if (!$page) {
-                $page = null;
-            }
             if ($this->validlang) {
                 $offer = $this->uri->segment(3);
             } else {
@@ -104,23 +100,28 @@ class Offers extends MX_Controller
             }
             switch ($offer) {
                 case "bestchoice":
-                    $this->bestchoice($page);
+                    $this->bestchoice();
                     break;
                 case "sales":
-                    $this->sales($page);
+                    $this->sales();
                     break;
                 case "book":
                     $this->book();
                     break;
                 default:
-                    $this->listing($page);
+                    $this->listing();
                     break;
             }
         }
     }
 
-    function listing($page = null)
+    function listing()
     {
+        $page = $this->input->get('page');
+        if (!$page) {
+            $page = null;
+        }
+
         $this->data['sorturl'] = base_url() . 'offers?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
@@ -134,8 +135,13 @@ class Offers extends MX_Controller
         //$this->output->cache(20) ;
     }
 
-    function bestchoice($page = null)
+    function bestchoice()
     {
+        $page = $this->input->get('page');
+        if (!$page) {
+            $page = null;
+        }
+
         $this->data['sorturl'] = base_url() . 'offers/bestchoice?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
@@ -149,8 +155,13 @@ class Offers extends MX_Controller
         //$this->output->cache(20) ;
     }
 
-    function sales($page = null)
+    function sales()
     {
+        $page = $this->input->get('page');
+        if (!$page) {
+            $page = null;
+        }
+
         $this->data['sorturl'] = base_url() . 'offers/sales?';
         $settings = $this->settings_model->get_front_settings('offers');
         $loc = $this->input->get('location');
@@ -163,8 +174,13 @@ class Offers extends MX_Controller
         //$this->output->cache(20) ;
     }
 
-    function search($page = null)
+    function search()
     {
+        $page = $this->input->get('page');
+        if (!$page) {
+            $page = null;
+        }
+
         $surl = http_build_query($_GET);
         //$this->data['sorturl'] = base_url() . 'offers/search?' . $surl . '&';
         $dfrom = $this->input->get('dfrom');
