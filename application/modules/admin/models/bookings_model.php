@@ -248,7 +248,35 @@ class Bookings_model extends CI_Model
         $userid = $this->accounts_model->signup_account('customers', '1');
         return $this->do_booking($userid);
     }
+    // Search hotels from home page
+    function search($params, $limit = null, $start = null)
+    {
+        $data = array();
+        //var_dump($params);die;
+        $this->db->join('pt_accounts', 'pt_accounts.accounts_id = pt_bookings.booking_user');
+        foreach ($params as $key => $value) {
+            if ($key == 'ai_last_name' && $value) {
+                $query = $this->db->like('pt_accounts.ai_last_name', $value);
+            } else {
+                if ($value) {
+                    $query = $this->db->where('pt_bookings.' . $key, $value);
+                }
+            }
 
+        }
+        if ($limit) {
+           
+            $this->db->order_by('booking_id', 'desc');
+            $this->db->limit($limit, $start);
+
+            $query = $this->db->get('pt_bookings');
+            $data = $query->result();
+        } else {            
+            $query = $this->db->get('pt_bookings');            
+            $data = $query->num_rows();
+        }
+        return $data;
+    }
     function doGuestBooking($bookquick = null)
     {
         $userid = $this->accounts_model->signup_account('guest', '0');
