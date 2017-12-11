@@ -86,8 +86,8 @@
             if (!empty($module)) {
                 $line = 0;
                 foreach ($module as $item) {
-                    if ($line == 8) echo "<div class='block-news-addon'><div class='col-sm-6 col-xs-6'><ul class='offset-2 offer-page'>";
-                    if ($line == 11) { echo "</ul></div><div class='col-sm-6 col-xs-6'>"; echo run_widget(83);echo "</div>";echo "</div>";}
+                    if ($line == 8) echo "<div class='block-news-addon clearfix'><div class='row'><div class='col-sm-6 col-xs-6'><ul class='offset-2 offer-page'>";
+                    if ($line == 11) { echo "</ul></div><div class='col-sm-6 col-xs-6'>"; echo run_widget(83);echo "</div>";echo "</div></div>";}
                     if ($line < 8 || $line > 10) {
                         ?>
                         <div class="col-sm-3 col-xs-6">
