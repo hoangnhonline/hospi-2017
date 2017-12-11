@@ -394,9 +394,12 @@ class Bookings_model extends CI_Model
                 $quantity = $this->input->post('quantity');
                 $checkin = databaseDate($checkin);
 
+                $this->load->library('offers_lib');
+                $offerDetail = $this->offers_lib->offer_details($itemid);
+
                 $data = array(
                     'booking_ref_no' => $refno,
-                    'booking_type' => $bookingtype,
+                    'booking_type' => $offerDetail->type == 2 ? 'combo' : 'honeymoon',
                     'booking_item' => $itemid,
                     'booking_subitem' => $surcharge,
                     'booking_quantity' => $quantity,
