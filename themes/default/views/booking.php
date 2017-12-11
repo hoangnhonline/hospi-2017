@@ -18,8 +18,7 @@
                             <div class="panel-body">
                                 <div class="form-group col-md-6">
                                     <label class="title" for="">Họ tên khách <span class="requirement">*</span></label>
-                                    <input type="text" class="form-control" id="firstname" placeholder=""
-                                           name="lastname">
+                                    <input type="text" class="form-control" id="lastname" name="lastname">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <br>
