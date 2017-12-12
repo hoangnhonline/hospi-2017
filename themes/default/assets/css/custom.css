@@ -559,7 +559,7 @@ a:hover.green2 {
 .ftitle,
 .ftitle a {
     font-size: 14px;
-    color: #fff;
+    color: #666;
 }
 h2.ftitle {
     font-size: 16px;
@@ -8907,7 +8907,7 @@ ul.nav .honeymoon .img_list img {
     background-color: #660033;
 }
 .facebook-like {
-    color: #3b5998;
+    color: #3399ff;
 }
 .footer-blog-center {
     text-align: center;
@@ -9232,8 +9232,7 @@ ul.nav .honeymoon .img_list img {
 .footerbg3 {
     display: none;
 }
-#email_footer,
-.phone_footer {
+#email_footer {
     color: #fff;
 }
 ul.footerlist li:before {
@@ -9243,8 +9242,8 @@ ul.footerlist li:before {
     color: #fff;
 }
 .phone_footer {
-    font-size: 19px;
-    margin-bottom: 5px;
+    color: #999999;
+    font-size: 16px;
 }
 .link-ft-bt {
     padding-top: 9px;

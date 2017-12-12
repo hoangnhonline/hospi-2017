@@ -42,7 +42,7 @@
                             <a href="<?php echo base_url(); ?>blog"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->footer_logo_img;?>" class="img-responsive logo"/></a>
                         </div>
                         <div class="col-md-7">
-                            <div class="ftitle"><?php echo '"'.trans('0829').'"';?></div>
+                            <div class="fttle"><?php echo '"'.trans('0829').'"';?></div>
                         </div>
                     </div>
                     <div class="row col-md-5">
