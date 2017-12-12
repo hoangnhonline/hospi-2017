@@ -27,7 +27,6 @@ class Offers extends MX_Controller
         $this->data['contactemail'] = $this->load->get_var('contactemail');
         $this->data['appModule'] = "offers";
 
-
         $languageid = $this->uri->segment(2);
         $this->validlang = pt_isValid_language($languageid);
 

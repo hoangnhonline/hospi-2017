@@ -58,9 +58,7 @@
           <div class="clearfix"></div>
           <hr>
           <?php endforeach; }else { echo '<h1 class="text-center">' . trans("066") . '</h1>'; } ?>
-          <center>
             <?php echo createPagination($info);?>
-          </center>
         
     </div>
         
@@ -127,10 +125,6 @@
           <hr>
             <?php } $i++; endforeach; }else{ echo '<h1 class="text-center">' . trans("066") . '</h1>'; } ?>
           </div>
-          <center>
-            <?php //echo createPagination($info);?>
-          </center>
-            
         </div>
       </div>
         <div class="clearfix">
