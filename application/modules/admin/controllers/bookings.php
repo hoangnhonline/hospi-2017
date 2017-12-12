@@ -62,14 +62,15 @@ class Bookings extends MX_Controller
                 $data = array();
                 $params['booking_type'] = $this->input->get('booking_type') ? $this->input->get('booking_type') : 'hotels';
                 $params['booking_status'] = $this->input->get('booking_status') ? $this->input->get('booking_status') : null;
-                $params['ai_last_name'] = $this->input->get('ai_last_name') ? $this->input->get('ai_last_name') : null;
+                $params['booking_ref_no'] = $this->input->get('booking_ref_no') ? $this->input->get('booking_ref_no') : null;
                 $limit = $this->input->get('limit') ? $this->input->get('limit') : 100;
                 $page = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
                 $offset = ($page - 1) * $limit;
-                $total_records = $this->bookings_model->search($params);
-                $config['base_url'] = base_url() . 'admin/hotels/index' . '?' . http_build_query($params, '', "&amp;");
+                
+                $total_records = $this->bookings_model->search($params);                     
+                $config['base_url'] = base_url() . 'admin/bookings' . '?' . http_build_query($params, '', "&amp;");          
                 $config['total_rows'] = $total_records;
-                $config['per_page'] = 50;
+                $config['per_page'] = 20;
 
                 // integrate bootstrap pagination
 
