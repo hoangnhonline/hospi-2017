@@ -3,7 +3,7 @@
   <div class="panel-heading"><?php echo $header_title; ?></div>
   <div class="clearfix"></div>
   <?php if(@$addpermission && !empty($add_link)){ ?>
-   <a style="margin-left:15px;margin-top:10px;" href="<?php echo $add_link; ?>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Thêm mới</a>
+   <a style="margin-left:15px;margin-top:10px;" href="<?php echo $add_link; ?>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Tạo Booking</a>
   <?php } ?>
   <div style="clear:both"></div>
    <div class="panel-body" style="padding-top:5px;">
@@ -18,39 +18,29 @@
                 <option value="honeymoon" <?php echo isset($params['booking_type']) && 'honeymoon' == $params['booking_type'] ? "selected" : "";  ?>>Honeymoon</option>
               </select>
             </div>
-            <div class="form-group" style="width:100px;">              
-              <select class="form-control" name="hotel_stars" id="hotel_stars">
-                <option value="">Số sao</option>
-                <option value="1" <?php echo isset($params['hotel_stars']) && 1 == $params['hotel_stars'] ? "selected" : "";  ?>>1</option>
-                <option value="2" <?php echo isset($params['hotel_stars']) && 2 == $params['hotel_stars'] ? "selected" : "";  ?>>2</option>
-                <option value="3" <?php echo isset($params['hotel_stars']) && 3 == $params['hotel_stars'] ? "selected" : "";  ?>>3</option>
-                <option value="4" <?php echo isset($params['hotel_stars']) && 4 == $params['hotel_stars'] ? "selected" : "";  ?>>4</option>
-                <option value="5" <?php echo isset($params['hotel_stars']) && 5 == $params['hotel_stars'] ? "selected" : "";  ?>>5</option>
-                <option value="6" <?php echo isset($params['hotel_stars']) && 6 == $params['hotel_stars'] ? "selected" : "";  ?>>6</option>
-                <option value="7" <?php echo isset($params['hotel_stars']) && 7 == $params['hotel_stars'] ? "selected" : "";  ?>>7</option>
-                
-              </select>
-            </div>
+            
             <div class="form-group">              
-              <select class="form-control" name="hotel_status" id="hotel_status">
-                <option value="">Trạng thái</option>
-                <option value="Yes" <?php echo isset($params['hotel_status']) && 'Yes' == $params['hotel_status'] ? "selected" : "";  ?>>Hiển thị</option>
-                <option value="No" <?php echo isset($params['hotel_status']) && 'No' == $params['hotel_status'] ? "selected" : "";  ?>>Ẩn</option>                
+              <select class="form-control" name="booking_status" id="booking_status">
+                <option value="">Tình trạng</option>
+                <option value="unpaid" <?php echo isset($params['booking_status']) && 'unpaid' == $params['booking_status'] ? "selected" : "";  ?>>Chưa thanh toán</option>
+                <option value="paid" <?php echo isset($params['booking_status']) && 'paid' == $params['booking_status'] ? "selected" : "";  ?>>Đã thanh toán</option>
+                <option value="reserved" <?php echo isset($params['booking_status']) && 'reserved' == $params['booking_status'] ? "selected" : "";  ?>>Đã cọc</option>
+                <option value="cancelled" <?php echo isset($params['booking_status']) && 'cancelled' == $params['booking_status'] ? "selected" : "";  ?>>Đã hủy</option>                
               </select>
-            </div>             
+            </div>       
+            <div class="form-group">              
+              <input type="text" class="form-control" placeholder="Mã booking" name="booking_ref_no" value="<?php echo isset($params['booking_ref_no']) ? $params['booking_ref_no'] : ""; ?>">
+            </div>            
             <div class="form-group">              
               <input type="text" class="form-control" placeholder="Tên khách hàng" name="ai_last_name" value="<?php echo isset($params['ai_last_name']) ? $params['ai_last_name'] : ""; ?>">
-            </div> 
-            <div class="form-group">            
-              <label><input type="checkbox" name="hotel_is_featured" id="hotel_is_featured" value="Yes" <?php echo isset($params['hotel_is_featured']) && $params['hotel_is_featured'] == 'Yes' ? "checked=checked" : ""; ?>> Nổi bật</label>              
-            </div>                        
+            </div>                                    
             <button type="submit" class="btn btn-primary btn-sm">Lọc</button>
           </form>         
         </div>
       </div>
      <div class="box">       
      <div class="btn-group pull-right">
-                <a style="margin-bottom: 5px;" href="javascript: multiDelfunc('<?php echo  base_url(); ?>admin/hotelajaxcalls/delMultipleHotels', 'checkboxcls')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Xóa mục đã chọn</a> 
+                <a style="margin-bottom: 5px;" href="javascript: multiDelfunc('<?php echo  base_url(); ?>admin/bookings/delMultipleBookings', 'checkboxcls')" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Xóa mục đã chọn</a> 
                 </div>
                 <div class="clearfix"></div>
         <!-- /.box-header -->
@@ -67,12 +57,13 @@
               <th style="width: 1%">
                 ID
               </th>                          
-              <th>Ref. No</th>      
+              <th>Mã booking</th>      
               <th>Khách hàng</th>                              
-              <th>Người tạo</th>
-              <th>Tỉnh/TP</th>                     
-              <th width="7%">Thứ tự</th>
-              <th style="white-space: nowrap">Trạng thái</th>
+              <th>Loại</th>
+              <th class="text-center">Ngày</th>                     
+              <th class="text-right">Tổng thanh toán</th>
+              <th class="text-right">Đã thanh toán</th>
+              <th>Tình trạng</th>
               <th width="1%"></th>
             </tr>
             <tbody>
@@ -95,57 +86,32 @@
                 <td>
                  <?php echo $item->ai_last_name; ?>
                 </td>
-                <td>                  
-                  <a href="<?php echo base_url() . 'admin/hotels/manage/'.$item->hotel_slug; ?>" target="_self"><?php echo $item->hotel_title; ?></a>
-                
-                </td>
-                <td>
-                  <?php 
-                  $res = "";
-
-              for($stars = 1; $stars <= 5; $stars++){
-
-                if($stars <= $item->hotel_stars){
-                  $res .= PT_STARS_ICON;
-                }else{
-                  $res .= PT_EMPTY_STARS_ICON;
-                }
-
-              }
-              
-
-            echo  $res;
-                  ?>
-                </td>
-                <td style="white-space: nowrap">
-                  <?php 
-                  echo $item->ai_first_name. " ".$item->ai_last_name; 
-                  ?>
-                </td>
-                <td  style="white-space: nowrap">
-                  <?php 
-                  echo isset($locationArr[$item->hotel_city]) ? $locationArr[$item->hotel_city] : "";
-                  ?>
-                </td>
-                          
-                <td>
-                  <?php 
-                    $url = base_url()."admin/hotelajaxcalls/update_hotel_order";
-
-echo '<input class="form-control input-sm" data-url='.$url.' type="number" id="order_'.$item->hotel_id.'" value='.$item->hotel_order.' min="1"  onblur="updateOrder($(this).val(),'.$item->hotel_id.','.$item->hotel_order.')" />';
-                  ?>
-                </td>
+                <td><?php echo $item->booking_type == "hotels" ? "Khách sạn" : $item->booking_type ; ?></td>
                 <td class="text-center">
+                  <?php echo date('d/m/Y', $item->booking_date); ?>
+                </td>
+                <td class="text-right">                  
+                  <?php echo number_format($item->booking_total); ?>                
+                </td>
+                <td class="text-right">                  
+                  <?php echo number_format($item->booking_amount_paid); ?>                
+                </td>
+                <td>
                   <?php 
-                  if($item->hotel_status == "Yes" || $item->hotel_status == "yes"){
-                    echo '<i class="fa fa-check text-success"></i>';
-                  }else{
-                   echo '<i class="fa fa-times text-danger"></i>';
-                  }
+                  if($item->booking_status == "unpaid")
+                    echo "<span style=color:red>Chưa thanh toán</span>";
+                  elseif($item->booking_status == "paid")
+                    echo "<span style=color:green>Đã thanh toán</span>";
+                  elseif($item->booking_status == "reserved")
+                    echo "Đã cọc";
+                  else
+                    echo "Đã hủy";
+
                   ?>
-                </td> 
-                <td style="white-space:nowrap; text-align:right">                                 
-                  <a href="<?php echo base_url() . 'admin/hotels/manage/'.$item->hotel_slug; ?>" class="btn btn-warning btn-sm" target="_self"><i class="fa fa-edit"></i></a>
+                </td>               
+                <td style="white-space:nowrap; text-align:right">                 
+                  <a target="_blank" title="View Invoice" class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>/invoice/?id=<?php echo $item->booking_id; ?>&sessid=<?php echo $item->booking_ref_no; ?>"><i class="fa fa-search-plus"></i></a>                     
+                  <a href="<?php echo base_url() . 'admin/bookings/edit/offers/'.$item->booking_id; ?>" class="btn btn-warning btn-sm" target="_self"><i class="fa fa-edit"></i></a>
                   <?php
                   if($deletepermission){
                     $delurl = base_url().'admin/hotelajaxcalls/delHotel';                
@@ -169,7 +135,7 @@ echo '<input class="form-control input-sm" data-url='.$url.' type="number" id="o
  </div>
  <script type="text/javascript">
    $(document).ready(function(){
-    $('#booking_type, #hotel_stars, #hotel_status').change(function(){
+    $('#booking_type, #hotel_stars, #booking_status').change(function(){
       $(this).parents('form').submit();
     });
     $('#hotel_is_featured').on('ifChanged', function(){
