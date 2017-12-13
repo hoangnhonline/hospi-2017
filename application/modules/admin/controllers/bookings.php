@@ -1,14 +1,12 @@
 <?php
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Bookings extends MX_Controller
 
+class Bookings extends MX_Controller
 {
     private $data = array();
     public $role;
-
     public $editpermission = true;
-
     public $deletepermission = true;
 
     function __construct()
@@ -24,15 +22,13 @@ class Bookings extends MX_Controller
         $checkingadmin = $this->session->userdata('pt_logged_admin');
         if (!empty($checkingadmin)) {
             $this->data['userloggedin'] = $this->session->userdata('pt_logged_admin');
-        }
-        else {
+        } else {
             $this->data['userloggedin'] = $this->session->userdata('pt_logged_supplier');
         }
 
         if (!empty($checkingadmin)) {
             $this->data['adminsegment'] = "admin";
-        }
-        else {
+        } else {
             $this->data['adminsegment'] = "supplier";
         }
 
@@ -52,78 +48,44 @@ class Bookings extends MX_Controller
 
         $this->lang->load("back", "vi");
     }
+
     function index()
     {
         if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
             backError_404($this->data);
-        }
-        else {
+        } else {
             $params = [];
-                $data = array();
-                $params['booking_type'] = $this->input->get('booking_type') ? $this->input->get('booking_type') : 'hotels';
-                $params['booking_status'] = $this->input->get('booking_status') ? $this->input->get('booking_status') : null;
-                $params['ai_last_name'] = $this->input->get('ai_last_name') ? $this->input->get('ai_last_name') : null;
-                $limit = $this->input->get('limit') ? $this->input->get('limit') : 100;
-                $page = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
-                $offset = ($page - 1) * $limit;
-                $total_records = $this->bookings_model->search($params);
-                $config['base_url'] = base_url() . 'admin/hotels/index' . '?' . http_build_query($params, '', "&amp;");
-                $config['total_rows'] = $total_records;
-                $config['per_page'] = 50;
+            $params['booking_type'] = $this->input->get('booking_type') ? $this->input->get('booking_type') : 'hotels';
+            $params['booking_status'] = $this->input->get('booking_status') ? $this->input->get('booking_status') : null;
+            $params['ai_last_name'] = $this->input->get('ai_last_name') ? $this->input->get('ai_last_name') : null;
+            $limit = $this->input->get('limit') ? $this->input->get('limit') : 50;
+            $page = $this->input->get('page') ? $this->input->get('page') : 1;
+            $total_records = $this->bookings_model->search($params);
+            $this->data['info'] = array('base' => base_url() . 'admin/bookings', 'totalrows' => $total_records, 'perpage' => $limit);
+            $data = $this->bookings_model->search($params, $limit, $page);
+            $isadmin = $this->session->userdata('pt_logged_admin');
+            $userid = '';
+            if (empty($isadmin)) {
+                $userid = $this->session->userdata('pt_logged_supplier');
+            }
 
-                // integrate bootstrap pagination
-
-                $config['full_tag_open'] = '<ul class="pagination" style="margin: 0px 0px;margin-bottom:5px;">';
-                $config['full_tag_close'] = '</ul>';
-                $config['first_tag_open'] = '<li>';
-                $config['first_tag_close'] = '</li>';
-                $config['prev_link'] = '«';
-                $config['prev_tag_open'] = '<li class="prev">';
-                $config['prev_tag_close'] = '</li>';
-                $config['next_link'] = '»';
-                $config['next_tag_open'] = '<li>';
-                $config['next_tag_close'] = '</li>';
-                $config['last_tag_open'] = '<li>';
-                $config['last_tag_close'] = '</li>';
-                $config['cur_tag_open'] = '<li class="active"><a href="#">';
-                $config['cur_tag_close'] = '</a></li>';
-                $config['num_tag_open'] = '<li>';
-                $config['num_tag_close'] = '</li>';
-
-                $this->pagination->initialize($config);
-                $this->data['links'] = $this->pagination->create_links();
-                $data = $this->bookings_model->search($params, $limit, $page);
-               
-
-                $isadmin = $this->session->userdata('pt_logged_admin');
-                $userid = '';
-                if (empty($isadmin)) {
-                    $userid = $this->session->userdata('pt_logged_supplier');
-                    $myrooms = pt_my_rooms($userid);
-                    if (!in_array($editroom, $myrooms)) {
-                        redirect('supplier/hotels');
-                    }
-                }
-
-
-
-                $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid);
-                $this->data['content'] = $data;                
-                $this->data['params'] = $params;
-                $this->data['page_title'] = 'Quản lý booking';
-                $this->data['main_content'] = 'modules/bookings/index';
-                $this->data['header_title'] = 'Quản lý booking';
-                $this->data['deletepermission'] = $this->deletepermission;
-                $this->data['add_link'] = base_url() . 'admin/bookings/add';
-                $this->load->view('admin/template', $this->data);
+            $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid);
+            $this->data['content'] = $data;
+            $this->data['params'] = $params;
+            $this->data['page_title'] = 'Quản lý booking';
+            $this->data['main_content'] = 'modules/bookings/index';
+            $this->data['header_title'] = 'Quản lý booking';
+            $this->data['deletepermission'] = $this->deletepermission;
+            $this->data['add_link'] = base_url() . 'admin/bookings/add';
+            $this->load->view('admin/template', $this->data);
         }
     }
+
     function index2()
     {
         if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
             backError_404($this->data);
-        }
-        else {
+        } else {
             $this->load->helper('xcrud');
             $xcrud = xcrud_get_instance();
             $xcrud->table('pt_bookings');
@@ -172,8 +134,7 @@ class Bookings extends MX_Controller
     {
         if (!$this->input->is_ajax_request()) {
             redirect(base_url() . 'admin');
-        }
-        else {
+        } else {
             $id = $this->input->post('id');
             $this->bookings_model->delete_booking($id);
             $this->session->set_flashdata('flashmsgs', "Deleted Successfully");
@@ -186,10 +147,9 @@ class Bookings extends MX_Controller
     {
         if (!$this->input->is_ajax_request()) {
             redirect(base_url() . 'admin');
-        }
-        else {
+        } else {
             $items = $this->input->post('items');
-            foreach($items as $item) {
+            foreach ($items as $item) {
                 $this->bookings_model->delete_booking($item);
             }
         }
@@ -201,10 +161,9 @@ class Bookings extends MX_Controller
     {
         if (!$this->input->is_ajax_request()) {
             redirect(base_url() . 'admin');
-        }
-        else {
+        } else {
             $bookinglist = $this->input->post('booklist');
-            foreach($bookinglist as $id) {
+            foreach ($bookinglist as $id) {
                 $this->bookings_model->booking_status_paid($id);
             }
 
@@ -218,10 +177,9 @@ class Bookings extends MX_Controller
     {
         if (!$this->input->is_ajax_request()) {
             redirect(base_url() . 'admin');
-        }
-        else {
+        } else {
             $bookinglist = $this->input->post('booklist');
-            foreach($bookinglist as $id) {
+            foreach ($bookinglist as $id) {
                 $this->bookings_model->booking_status_unpaid($id);
             }
 
@@ -235,8 +193,7 @@ class Bookings extends MX_Controller
     {
         if (!$this->input->is_ajax_request()) {
             redirect(base_url() . 'admin');
-        }
-        else {
+        } else {
             $id = $this->input->post('id');
             $this->bookings_model->booking_status_paid($id);
         }
@@ -248,8 +205,7 @@ class Bookings extends MX_Controller
     {
         if (!$this->input->is_ajax_request()) {
             redirect(base_url() . 'admin');
-        }
-        else {
+        } else {
             $id = $this->input->post('id');
             $this->bookings_model->booking_status_unpaid($id);
         }
@@ -262,8 +218,7 @@ class Bookings extends MX_Controller
         $id = $this->input->post('id');
         if ($action == 'approve') {
             $this->bookings_model->cancel_booking_approve($id);
-        }
-        else {
+        } else {
             $this->bookings_model->cancel_booking_reject($id);
         }
     }
@@ -285,8 +240,7 @@ class Bookings extends MX_Controller
         if (!$this->editpermission) {
             echo "<center><h1>Access Denied</h1></center>";
             backError_404($this->data);
-        }
-        else {
+        } else {
             $this->load->helper('invoice');
             $this->load->model('payments_model');
             $this->data['paygateways'] = $this->payments_model->getAllPaymentsBack();
@@ -303,7 +257,7 @@ class Bookings extends MX_Controller
                 $this->data['bdetails'] = invoiceDetails($id, $refNo);
                 $this->data['service'] = $this->data['bdetails']->module;
                 $this->data['applytax'] = "yes";
-                foreach($this->data['bdetails']->bookingExtras as $extras) {
+                foreach ($this->data['bdetails']->bookingExtras as $extras) {
                     $bookedextras[] = $extras->id;
                     $extrasprices[] = $extras->price;
                 }
@@ -335,8 +289,7 @@ class Bookings extends MX_Controller
                 $this->data['main_content'] = 'modules/bookings/edit';
                 $this->data['page_title'] = 'Edit Booking';
                 $this->load->view('template', $this->data);
-            }
-            else {
+            } else {
                 redirect(base_url() . 'admin/bookings');
             }
         }
@@ -361,8 +314,7 @@ class Bookings extends MX_Controller
     {
         if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
             backError_404($this->data);
-        }
-        else {
+        } else {
             $this->load->helper('xcrud');
             $xcrud = xcrud_get_instance();
             $xcrud->table('pt_bookings');

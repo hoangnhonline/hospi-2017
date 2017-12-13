@@ -35,22 +35,25 @@ class Special_offers_model extends CI_Model
     }
 
     // Search hotels from home page
-
-    function search($params, $limit = null, $start = null)
+    function search($params, $perpage = null, $page = null)
     {
-        $data = array();
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
+        }
+
         foreach ($params as $key => $value) {
             if ($key == 'offer_title') {
-                $query = $this->db->like('pt_special_offers.offer_title', $value);
+                $this->db->like('pt_special_offers.offer_title', $value);
             } else {
                 if ($value) {
-                    $query = $this->db->where('pt_special_offers.' . $key, $value);
+                    $this->db->where('pt_special_offers.' . $key, $value);
                 }
             }
         }
 
-        if ($limit) {
-            $this->db->limit($limit, $start);
+        if (!empty($perpage)) {
+            $this->db->limit($perpage, $offset);
             $query = $this->db->get('pt_special_offers');
             $data = $query->result();
         } else {
@@ -277,72 +280,7 @@ class Special_offers_model extends CI_Model
         $this->db->delete('pt_extras');
     }
 
-    function get_special_offers_front()
-    {
-        $result = array();
-        $modules = $this->ptmodules->get_enabled_modules();
-        $this->db->where('pt_special_offers.offer_from <=', time());
-        $this->db->where('pt_special_offers.offer_to >=', time());
-        $this->db->where_in('pt_special_offers.offer_module', $modules);
-        $this->db->where('pt_special_offers.offer_status', '1');
-        $this->db->order_by('pt_special_offers.offer_id', 'desc');
-        $resultingquery = $this->db->get('pt_special_offers', $perpage, $offset);
-        $chkinghotels = $this->ptmodules->is_mod_available_enabled("hotels");
-        $chkingtours = $this->ptmodules->is_mod_available_enabled("tours");
-        $chkingcars = $this->ptmodules->is_mod_available_enabled("cars");
-        $chkingcruises = $this->ptmodules->is_mod_available_enabled("cruises");
-        if (!empty($resultingquery)) {
-            foreach ($resultingquery->result() as $r) {
-                if ($r->offer_module == "hotels" && $chkinghotels) {
-
-                    //  $query = $this->db->query("SELECT module as module,hotel_id as id, hotel_title as title,hotel_basic_price as basicprice,hotel_basic_discount as discountprice FROM pt_hotels WHERE hotel_id = $r->offer_item")->result();
-
-                    $this->db->select('pt_hotels.hotel_id as itemid,pt_hotels.module as module,pt_hotels.hotel_slug as slug,pt_hotels.hotel_title as title,pt_hotels.hotel_desc as description,pt_hotels.hotel_basic_price as basicprice,pt_hotels.hotel_basic_discount as discountprice');
-                    $this->db->where_in('pt_hotels.hotel_id', $r->offer_item);
-
-                    // $this->db->where('pt_hotel_images.himg_type','default');
-
-                    $this->db->where('pt_hotels.hotel_status', '1');
-
-                    // $this->db->join('pt_hotel_images','pt_hotels.hotel_id = pt_hotel_images.himg_hotel_id','left');
-
-                    $query = $this->db->get('pt_hotels')->result();
-                } elseif ($r->offer_module == "cruises" && $chkingcruises) {
-                    $this->db->select('pt_cruises.cruise_id as itemid,pt_cruises.module as module,pt_cruises.cruise_slug as slug,pt_cruises.cruise_title as title,pt_cruises.cruise_desc as description,pt_cruises.cruise_basic_price as basicprice,pt_cruises.cruise_basic_discount as discountprice');
-                    $this->db->where_in('pt_cruises.cruise_id', $r->offer_item);
-                    $this->db->where('pt_cruises.cruise_status', '1');
-                    $query = $this->db->get('pt_cruises')->result();
-                } elseif ($r->offer_module == "tours" && $chkingtours) {
-                    $this->db->select('pt_tours.tour_id as itemid,pt_tours.tour_slug as slug, pt_tours.module as module,pt_tours.tour_title as title,pt_tours.tour_desc as description,pt_tours.tour_basic_price as basicprice,pt_tours.tour_basic_discount as discountprice');
-                    $this->db->where_in('pt_tours.tour_id', $r->offer_item);
-
-                    //  $this->db->where('pt_tour_images.timg_type','default');
-
-                    $this->db->where('pt_tours.tour_status', '1');
-
-                    //  $this->db->join('pt_tour_images','pt_tours.tour_id = pt_tour_images.timg_tour_id','left');
-
-                    $query = $this->db->get('pt_tours')->result();
-                } elseif ($r->offer_module == "cars" && $chkingcars) {
-                    $this->db->select('pt_cars.car_id as itemid,pt_cars.car_slug as slug, pt_cars.module as module,pt_cars.car_title as title,pt_cars.car_desc as description,pt_cars.car_basic_price as basicprice,pt_cars.car_basic_discount as discountprice');
-                    $this->db->where_in('pt_cars.car_id', $r->offer_item);
-                    $this->db->where('pt_cars.car_status', '1');
-                    $query = $this->db->get('pt_cars')->result();
-                }
-
-                if (!empty($query)) {
-                    array_push($result, $query);
-                }
-            }
-
-            $result['rows'] = $resultingquery->num_rows();
-        }
-
-        return $result;
-    }
-
     // / List all offers on front listings page
-
     function list_specialOffers_front($perpage = null, $page = null, $loc = null, $type = 1, $hotelid = null)
     {
         $data = array();

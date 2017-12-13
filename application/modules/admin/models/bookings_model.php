@@ -42,11 +42,13 @@ class Bookings_model extends CI_Model
     }
 
     // get all bookings with limit
-    function get_all_bookings_back_limit_admin($perpage = null, $offset = null, $orderby = null)
+    function get_all_bookings_back_limit_admin($perpage = null, $page = null, $orderby = null)
     {
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
+
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
           pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
           booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
@@ -59,11 +61,13 @@ class Bookings_model extends CI_Model
     }
 
     // get all bookings info  by search for admin
-    function search_all_bookings_back_limit_admin($term, $perpage = null, $offset = null, $orderby = null)
+    function search_all_bookings_back_limit_admin($term, $perpage = null, $page = null, $orderby = null)
     {
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
+
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
           pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
           booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
@@ -80,17 +84,19 @@ class Bookings_model extends CI_Model
     }
 
     // get all bookings info  by advance search for admin
-    function adv_search_all_bookings_back_limit_admin($data, $perpage = null, $offset = null, $orderby = null)
+    function adv_search_all_bookings_back_limit_admin($data, $perpage = null, $page = null, $orderby = null)
     {
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
+        }
+
         $invoice = $data["invoiceno"];
         $invoicefromdate = $data["invoicefromdate"];
         $invoicetodate = $data["invoicetodate"];
         $status = $data["status"];
         $customername = $data["customername"];
         $module = $data["module"];
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
-        }
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
           pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
           booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
@@ -139,11 +145,13 @@ class Bookings_model extends CI_Model
     }
 
     // Get supplier's bookings in limit
-    function supplier_get_all_bookings_limit($myitems, $perpage = null, $offset = null, $orderby = null)
+    function supplier_get_all_bookings_limit($myitems, $perpage = null, $page = null, $orderby = null)
     {
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
+
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
         pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
         booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
@@ -161,11 +169,13 @@ class Bookings_model extends CI_Model
     }
 
     // get all bookings info  by search for admin
-    function search_all_bookings_back_limit_supplier($term, $myitems, $perpage = null, $offset = null, $orderby = null)
+    function search_all_bookings_back_limit_supplier($term, $myitems, $perpage = null, $page = null, $orderby = null)
     {
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
         }
+
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
         pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
         booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
@@ -187,17 +197,19 @@ class Bookings_model extends CI_Model
     }
 
     // get all bookings info  by advance search for admin
-    function adv_search_all_bookings_back_limit_supplier($data, $myitems, $perpage = null, $offset = null, $orderby = null)
+    function adv_search_all_bookings_back_limit_supplier($data, $myitems, $perpage = null, $page = null, $orderby = null)
     {
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
+        }
+
         $invoice = $data["invoiceno"];
         $invoicefromdate = $data["invoicefromdate"];
         $invoicetodate = $data["invoicetodate"];
         $status = $data["status"];
         $customername = $data["customername"];
         $module = $data["module"];
-        if ($offset != null) {
-            $offset = ($offset == 1) ? 0 : ($offset * $perpage) - $perpage;
-        }
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
         pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
         booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
@@ -248,35 +260,39 @@ class Bookings_model extends CI_Model
         $userid = $this->accounts_model->signup_account('customers', '1');
         return $this->do_booking($userid);
     }
+
     // Search hotels from home page
-    function search($params, $limit = null, $start = null)
+    function search($params, $perpage = null, $page = null)
     {
-        $data = array();
-        //var_dump($params);die;
+        $offset = null;
+        if ($page != null) {
+            $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
+        }
+
         $this->db->join('pt_accounts', 'pt_accounts.accounts_id = pt_bookings.booking_user');
         foreach ($params as $key => $value) {
             if ($key == 'ai_last_name' && $value) {
-                $query = $this->db->like('pt_accounts.ai_last_name', $value);
+                $this->db->like('pt_accounts.ai_last_name', $value);
             } else {
                 if ($value) {
-                    $query = $this->db->where('pt_bookings.' . $key, $value);
+                    $this->db->where('pt_bookings.' . $key, $value);
                 }
             }
 
         }
-        if ($limit) {
-           
+        if (!empty($perpage)) {
             $this->db->order_by('booking_id', 'desc');
-            $this->db->limit($limit, $start);
+            $this->db->limit($perpage, $offset);
 
             $query = $this->db->get('pt_bookings');
             $data = $query->result();
-        } else {            
-            $query = $this->db->get('pt_bookings');            
+        } else {
+            $query = $this->db->get('pt_bookings');
             $data = $query->num_rows();
         }
         return $data;
     }
+
     function doGuestBooking($bookquick = null)
     {
         $userid = $this->accounts_model->signup_account('guest', '0');
@@ -499,8 +515,6 @@ class Bookings_model extends CI_Model
     //Do quick booking by admin
     function doQuickBooking($userid)
     {
-
-
         $this->load->library('currconverter');
         $itemid = $this->input->post('itemid');
         $subitemid = $this->input->post('subitemid');
@@ -625,8 +639,6 @@ class Bookings_model extends CI_Model
         //$this->emails_model->sendEmail_supplier($invoicedetails,$this->data['app_settings'][0]->site_title);
         $this->emails_model->sendEmail_admin($invoicedetails, $this->data['app_settings'][0]->site_title);
         //$this->emails_model->sendEmail_owner($invoicedetails,$this->data['app_settings'][0]->site_title);
-
-
     }
 
     //Update booking details
@@ -678,8 +690,6 @@ class Bookings_model extends CI_Model
             //$this->emails_model->paid_sendEmail_supplier($invoicedetails,$this->data['app_settings'][0]->site_title);
             $this->emails_model->paid_sendEmail_admin($invoicedetails, $this->data['app_settings'][0]->site_title);
             //$this->emails_model->paid_sendEmail_owner($invoicedetails,$this->data['app_settings'][0]->site_title);
-
-
         }
 
     }

@@ -42,11 +42,7 @@
                 <div class="clearfix"></div>
         <!-- /.box-header -->
         <div class="box-body">
-          <div style="text-align:center">
-           <?php if (isset($links)) { ?>
-                <?php echo $links ?>
-            <?php } ?>
-          </div>  
+            <div class="text-center"><?php echo createPagination($info);?></div>
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">
@@ -147,11 +143,7 @@
             <?php } ?>            
           </tbody>
           </table>
-          <div style="text-align:center">
-           <?php if (isset($links)) { ?>
-                <?php echo $links ?>
-            <?php } ?>
-          </div>  
+            <div class="text-center"><?php echo createPagination($info);?></div>
         </div>     
         </form>   
       </div>

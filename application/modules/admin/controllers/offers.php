@@ -2,7 +2,6 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Offers extends MX_Controller
-
 {
 	private $data = array();
 	public $role;
@@ -150,45 +149,15 @@ class Offers extends MX_Controller
 	}
 	function index()
 	{	
-
 		$params = [];
-		$data = array();
 		$params['offer_city'] = $this->input->get('offer_city') ? $this->input->get('offer_city') : null;
 		$params['offer_status'] = $this->input->get('offer_status') ? $this->input->get('offer_status') : null;			
 		$params['offer_title'] = $this->input->get('offer_title') ? $this->input->get('offer_title') : null;
 		$params['offer_type'] = 1;			
-		$limit = $this->input->get('limit') ? $this->input->get('limit') : 100;
-		$page = $this->input->get('per_page') ? $this->input->get('per_page') : 0;
-		$offset = ($page - 1) * $limit;
+		$limit = $this->input->get('limit') ? $this->input->get('limit') : 50;
+		$page = $this->input->get('page') ? $this->input->get('page') : 1;
 		$total_records = $this->special_offers_model->search($params);
-		$config['base_url'] = base_url() . 'admin/offers' . '?' . http_build_query($params, '', "&amp;");
-		$config['total_rows'] = $total_records;
-		$config['per_page'] = 50;
-
-		// integrate bootstrap pagination
-
-		$config['full_tag_open'] = '<ul class="pagination" style="margin: 0px 0px;margin-bottom:5px;">';
-		$config['full_tag_close'] = '</ul>';
-		$config['first_tag_open'] = '<li>';
-		$config['first_tag_close'] = '</li>';
-		$config['prev_link'] = '«';
-		$config['prev_tag_open'] = '<li class="prev">';
-		$config['prev_tag_close'] = '</li>';
-		$config['next_link'] = '»';
-		$config['next_tag_open'] = '<li>';
-		$config['next_tag_close'] = '</li>';
-		$config['last_tag_open'] = '<li>';
-		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] = '<li class="active"><a href="#">';
-		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
-		$config['num_tag_close'] = '</li>';
-
-		// echo "<pre>";
-		// print_r($config);die;
-
-		$this->pagination->initialize($config);
-		$this->data['links'] = $this->pagination->create_links();
+        $this->data['info'] = array('base' => base_url() . 'admin/offers', 'totalrows' => $total_records, 'perpage' => $limit);
 		$data = $this->special_offers_model->search($params, $limit, $page);
 		$locationArr = $photoArr = [];
 		if (!empty($data)) {

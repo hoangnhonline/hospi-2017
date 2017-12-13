@@ -41,11 +41,7 @@
                 <div class="clearfix"></div>
         <!-- /.box-header -->
         <div class="box-body">
-          <div style="text-align:center">
-           <?php if (isset($links)) { ?>
-                <?php echo $links ?>
-            <?php } ?>
-          </div>  
+            <div class="text-center"><?php echo createPagination($info);?></div>
           <table class="table table-bordered" id="table-list-data">
             <tr>
               <th style="width: 1%">
@@ -123,11 +119,7 @@ echo '<input class="form-control input-sm" data-url='.$url.' type="number" id="o
             <?php } ?>            
           </tbody>
           </table>
-          <div style="text-align:center">
-           <?php if (isset($links)) { ?>
-                <?php echo $links ?>
-            <?php } ?>
-          </div>  
+            <div class="text-center"><?php echo createPagination($info);?></div>
         </div>        
       </div>
    </div>

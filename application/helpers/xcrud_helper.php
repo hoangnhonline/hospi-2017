@@ -7,7 +7,7 @@ if (!function_exists('xcrud_get_instance'))
         $CI = &get_instance();
         $CI->load->library('session');
         $CI->load->helper('url');
-        Xcrud_config::$scripts_url = base_url('');
+        Xcrud_config::$scripts_url = base_url();
         $xcrud = Xcrud::get_instance($name);
         return $xcrud;
     }
