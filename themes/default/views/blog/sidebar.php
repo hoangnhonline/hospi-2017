@@ -1,4 +1,4 @@
-<div class="secondary col-md-5 add_bottom_30 go-left">
+<div class="secondary col-md-5 add_bottom_30 go-left secondary-blog">
     <div class="row">
     <div class="col-md-6 go-left">
         <?php if(!empty($popular_posts)){ ?>

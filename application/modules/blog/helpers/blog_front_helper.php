@@ -57,37 +57,37 @@ if (!function_exists('pt_posts_count')) {
 }
 
 if (!function_exists('pt_blog_category_name')) {
-    function pt_blog_category_name($id)
+    function pt_blog_category_name($id_slug)
     {
         $CI = get_instance();
 
         $CI->load->model('blog_model');
 
-        return $CI->blog_model->category_name($id);
+        return $CI->blog_model->category_name($id_slug);
 
 
     }
 }
 if (!function_exists('pt_blog_category_slug')) {
-    function pt_blog_category_slug($id)
+    function pt_blog_category_slug($id_slug)
     {
         $CI = get_instance();
 
         $CI->load->model('blog_model');
 
-        return $CI->blog_model->category_slug($id);
+        return $CI->blog_model->category_slug($id_slug);
 
 
     }
 }
 if (!function_exists('pt_blog_category_parent')) {
-    function pt_blog_category_parent($id)
+    function pt_blog_category_parent($id_slug)
     {
         $CI = get_instance();
 
         $CI->load->model('blog_model');
 
-        return $CI->blog_model->category_parent($id);
+        return $CI->blog_model->category_parent($id_slug);
 
 
     }

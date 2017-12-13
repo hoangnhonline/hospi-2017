@@ -214,13 +214,13 @@ class Blogback extends MX_Controller
         $updatecat = $this->input->post('updatecat');
         if (!empty($updatecat)) {
             $this->blog_model->updatecategory();
-            redirect('admin/blog/category');
+            redirect(base_url('admin/blog/category'));
         }
 
         $addcat = $this->input->post('addcat');
         if (!empty($addcat)) {
             $this->blog_model->addcategory();
-            redirect('admin/blog/category');
+            redirect(base_url('admin/blog/category'));
         }
         $xcrud = xcrud_get_instance();
 

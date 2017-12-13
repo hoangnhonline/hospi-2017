@@ -16,7 +16,8 @@ class Blog_model extends CI_Model
 // blog category name
     function category_name($id)
     {
-        $this->db->where('cat_slug', $id);
+        $this->db->where('cat_id', $id);
+        $this->db->or_where('cat_slug', $id);
         $res = $this->db->get('pt_blog_categories')->result();
         return $res[0]->cat_name;
     }
@@ -25,6 +26,7 @@ class Blog_model extends CI_Model
     function category_slug($id)
     {
         $this->db->where('cat_id', $id);
+        $this->db->or_where('cat_slug', $id);
         $res = $this->db->get('pt_blog_categories')->result();
         return $res[0]->cat_slug;
     }
@@ -33,24 +35,27 @@ class Blog_model extends CI_Model
     function category_parent($id)
     {
         $this->db->where('cat_id', $id);
+        $this->db->or_where('cat_slug', $id);
         $res = $this->db->get('pt_blog_categories')->result();
         return $res[0]->cat_parent;
     }
 
 // Show posts according to category 
-    function category_posts_front($perpage = null, $page = null, $orderby = null, $cities = null, $cate = null)
+    function category_posts_front($perpage = null, $page = null, $orderby = null, $cate = null)
     {
         $data = array();
         if ($cate != null) {
             $catslug = $cate;
             $data['catslug'] = $cate;
-        } else //$catslug = $this->input->get('cat');
+        } else {
             $catslug = $this->ci->uri->segment(3);
+        }
+
         $this->db->select('cat_id, cat_slug, cat_parent');
         $this->db->where('cat_slug', $catslug);
         $res = $this->db->get('pt_blog_categories')->result();
         $cat = $res[0]->cat_id;
-//$days = pt_count_days($checkin,$checkout);
+
         $offset = null;
         if (!empty($page)) {
             $offset = ($page == 1) ? 0 : ($page * $perpage) - $perpage;
@@ -71,8 +76,12 @@ class Blog_model extends CI_Model
         if ($cate != null) {
             if ($cate == 'cam-nang-du-lich') {
                 $query = $this->db->get('pt_blog', 7);
-            } else $query = $this->db->get('pt_blog', 4);
-        } else $query = $this->db->get('pt_blog', $perpage, $offset);
+            } else {
+                $query = $this->db->get('pt_blog', 4);
+            }
+        } else {
+            $query = $this->db->get('pt_blog', $perpage, $offset);
+        }
         $data['all'] = $query->result();
         $data['rows'] = $query->num_rows();
 
@@ -174,7 +183,7 @@ class Blog_model extends CI_Model
     function list_posts_front($perpage = null, $page = null, $orderby = null)
     {
         $data = array();
-        //$catslug = $this->input->get('cat');
+
         $catslug = $this->ci->uri->segment(3);
         $offset = null;
         if (!empty($page)) {
@@ -195,12 +204,16 @@ class Blog_model extends CI_Model
         $this->db->group_by('pt_blog.post_id');
         $this->db->join('pt_blog_categories', 'pt_blog.post_category = pt_blog_categories.cat_id', 'left');
         $this->db->where('pt_blog.post_status', 'Yes');
-        //$this->db->where('pt_blog_categories.cat_parent', '0');
+
         if ($catslug == '') {
             $query = $this->db->get('pt_blog', 4);
-        } else $query = $this->db->get('pt_blog', $perpage, $offset);
+        } else {
+            $query = $this->db->get('pt_blog', $perpage, $offset);
+        }
+
         $data['all'] = $query->result();
         $data['rows'] = $query->num_rows();
+
         return $data;
     }
 
@@ -406,6 +419,7 @@ class Blog_model extends CI_Model
     // get all parent categories back all count records
     function get_all_categoriesparent_back()
     {
+        $this->db->where('cat_parent IS NULL', null, false);
         $this->db->order_by('cat_id', 'desc');
         $query = $this->db->get('pt_blog_categories');
         $data['all'] = $query->result();
@@ -446,7 +460,7 @@ class Blog_model extends CI_Model
     }
 
 // Get all enalbed categores only
-    function get_enabled_categories()
+    function get_enabled_categories($parent = null)
     {
         $this->db->where('cat_status', 'Yes');
         return $this->db->get('pt_blog_categories')->result();
@@ -472,7 +486,7 @@ class Blog_model extends CI_Model
         } else {
             $slug = create_url_slug($this->input->post('name'));
         }
-        $data = array('cat_name' => $this->input->post('name'), 'cat_slug' => $slug, 'cat_status' => $this->input->post('status'), 'cat_parent' => $this->input->post('parent'));
+        $data = array('cat_name' => $this->input->post('name'), 'cat_slug' => $slug, 'cat_status' => $this->input->post('status'), 'cat_parent' => $this->input->post('parent'), 'cat_layout' => $this->input->post('layout'), 'cat_classname' => $this->input->post('classname'));
         $this->db->insert('pt_blog_categories', $data);
         $catid = $this->db->insert_id();
         $this->updateBlogCategoryTranslation($this->input->post('translated'), $catid);
@@ -499,7 +513,7 @@ class Blog_model extends CI_Model
         } else {
             $slug = create_url_slug($this->input->post('name'));
         }
-        $data = array('cat_name' => $this->input->post('name'), 'cat_slug' => $slug, 'cat_status' => $this->input->post('status'), 'cat_parent' => $this->input->post('parent'));
+        $data = array('cat_name' => $this->input->post('name'), 'cat_slug' => $slug, 'cat_status' => $this->input->post('status'), 'cat_parent' => $this->input->post('parent'), 'cat_layout' => $this->input->post('layout'), 'cat_classname' => $this->input->post('classname'));
         $this->db->where('cat_id', $id);
         $this->db->update('pt_blog_categories', $data);
         $this->updateBlogCategoryTranslation($this->input->post('translated'), $id);

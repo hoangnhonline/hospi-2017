@@ -1,31 +1,38 @@
 <?php  $CI = &get_instance(); $app_settings = $CI->settings_model->get_settings_data(); $lang_set = $CI->theme->_data['lang_set']; $allowsupplierreg = $app_settings[0]->allow_supplier_registration; ?>
 <?php $currenturl = uri_string(); ?>
 <?php $currenturl = base_url(uri_string());?>
-<?php if($app_settings[0]->mobile_pic_status == "Yes"){  ?>
-<div class="hidden-xs" style="position: fixed;width: 99px;height: 171px;right: 0;z-index: 9999;left: 0;top: 50%;margin-top: -85px;">
-    <a href="<?php echo $app_settings[0]->mobile_pic_url; ?>" target="_blank"><img src="<?php echo $theme_url; ?>assets/img/app.png"  alt="phone application" /></a>
-</div>
-<?php } ?>
-<?php if (strpos($currenturl, 'blog') !== false) { ?>
-<?php } else { ?>
-<div class="block-newsletter_footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5 text-center newsletter_footer"> <?php echo trans('0832');?></div>
-            <div class="col-md-5">
-                <div class="relative input">
-                    <input type="email" name="email" class="form-control fccustom2 sub_email" id="exampleInputEmail1" placeholder="<?php echo trans('0403');?>" required>
-                    <div style="color:white" class="subscriberesponse"></div>
-                    <button type="submit" class="btn btn-default btncustom sub_newsletter">Đăng Ký</button>
+<?php
+if ($app_settings[0]->mobile_pic_status == "Yes") {
+    ?>
+    <div class="hidden-xs" style="position: fixed;width: 99px;height: 171px;right: 0;z-index: 9999;left: 0;top: 50%;margin-top: -85px;">
+        <a href="<?php echo $app_settings[0]->mobile_pic_url; ?>" target="_blank"><img src="<?php echo $theme_url; ?>assets/img/app.png"  alt="phone application" /></a>
+    </div>
+    <?php
+}
+?>
+<?php
+if (strpos($currenturl, 'blog') === false) {
+    ?>
+    <div class="block-newsletter_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 text-center newsletter_footer"> <?php echo trans('0832');?></div>
+                <div class="col-md-5">
+                    <div class="relative input">
+                        <input type="email" name="email" class="form-control fccustom2 sub_email" id="exampleInputEmail1" placeholder="<?php echo trans('0403');?>" required>
+                        <div style="color:white" class="subscriberesponse"></div>
+                        <button type="submit" class="btn btn-default btncustom sub_newsletter">Đăng Ký</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div><!-- block-newsletter_footer -->
-<?php } ?>
-
-
-<?php if (strpos($currenturl, 'blog') !== false) { ?>
+    </div><!-- block-newsletter_footer -->
+    <?php
+}
+?>
+<?php
+if (strpos($currenturl, 'blog') !== false) {
+    ?>
     <div id="footer" class="clearfix <?php echo @$hidden; ?> footerbg2" >
         <div class="container">
             <ul class="list-social">
@@ -78,7 +85,9 @@
             </div>
         </div>
     </div>
-<?php } else { ?>
+    <?php
+} else {
+    ?>
     <div id="footer" class="clearfix <?php echo @$hidden; ?> footerbg" >
         <div class="back-ft-po"></div>
         <div class="footer-link not-blog"></div>
@@ -146,7 +155,7 @@
                 <div class="container">
                     <div class="clearfix">
                         <a href="<?php echo base_url()?>" title="Về Trang Chủ" style="  display: block;margin-top: 30px;margin-bottom: 30px;color: #fff;">
-                        <i class="fa fa-angle-double-right"></i> Về Trang Chủ
+                            <i class="fa fa-angle-double-right"></i> Về Trang Chủ
                         </a>
                     </div>
                     <!-- clearfix -->
@@ -187,8 +196,9 @@
             </div>
         </div>
     </div>
-<?php } ?>
-
+    <?php
+}
+?>
 <?php include 'scripts.php'; ?>
 <?php echo $app_settings[0]->google; ?>
 <style type="text/css">

@@ -83,7 +83,7 @@ class Blog_lib
         $rh = $this->ci->blog_model->list_posts_front();
         $data['all_posts'] = $this->ci->blog_model->list_posts_front($perpage, $page, $orderby);
         $data['paginationinfo'] = array('base' => 'blog/listing', 'totalrows' => $rh['rows'], 'perpage' => $perpage);
-        //$data['plinks2'] = $this->ci->bootpagination->dopagination2('blog/listing', $rh['rows'], $perpage);
+
         return $data;
     }
 
@@ -160,10 +160,10 @@ class Blog_lib
         $settings = $this->settings();
         $perpage = $settings[0]->front_listings;
         $orderby = $settings[0]->front_listings_order;
-        $rh = $this->ci->blog_model->category_posts_front();
-        $data['all_posts'] = $this->ci->blog_model->category_posts_front($perpage, $page, $orderby, '', $cat);
+        $rh = $this->ci->blog_model->category_posts_front(null, null, null, $cat);
+        $data['all_posts'] = $this->ci->blog_model->category_posts_front($perpage, $page, $orderby, $cat);
         $data['paginationinfo'] = array('base' => 'blog/category', 'totalrows' => $rh['rows'], 'perpage' => $perpage);
-        //$data['plinks'] = $this->ci->bootpagination->dopagination('blog/category', $rh['rows'], $perpage);
+
         return $data;
     }
 
@@ -205,9 +205,17 @@ class Blog_lib
         foreach ($result as $rs) {
             $title = $this->getCategoryTitle($rs->cat_name, $rs->cat_id);
 
-            $cats[] = (object)array("id" => $rs->cat_id, "name" => $title, "slug" => $rs->cat_slug);
+            $cats[$rs->cat_id] = (object)[
+                'id' => $rs->cat_id,
+                'name' => $title,
+                'slug' => $rs->cat_slug,
+                'class' => $rs->cat_classname,
+                'layout' => $rs->cat_layout,
+                'parent' => empty($rs->cat_parent) ? 0 : $rs->cat_parent
+            ];
 
         }
+
         return $cats;
     }
 
@@ -234,4 +242,17 @@ class Blog_lib
         return $this->db->get('pt_blog_translation')->result();
     }
 
+    function getCategoriesByParent($parent)
+    {
+        $result = $this->getCategories();
+        $cats = [];
+
+        foreach ($result as $rs) {
+            if ($rs->parent == $parent) {
+                $cats[$rs->id] = $rs;
+            }
+        }
+
+        return $cats;
+    }
 }

@@ -84,9 +84,7 @@
               </div></div>
           <?php } $i++; endforeach;  } else { echo '<h1 class="text-center">' . trans("066") . '</h1>'; } ?>
             <div class="clearfix"></div><hr>
-            <center>
             <?php echo createPagination($info);?>
-          </center>
         </div>
         </div>
         <!-- End col-md-9-->

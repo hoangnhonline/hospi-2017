@@ -48,9 +48,10 @@ class Blog extends MX_Controller
 
         $this->lang->load("front", $this->data['lang_set']);
         $this->blog_lib->set_lang($this->data['lang_set']);
+        $this->data['latest_posts'] = $this->blog_lib->latest_posts_homepage();
         $this->data['popular_posts'] = $this->blog_model->get_popular_posts($settings[0]->front_popular);
         $this->data['feature_posts'] = $this->blog_model->get_featured_posts($settings[0]->front_related);
-        $this->data['categories'] = $this->blog_lib->getCategories();
+        $this->data['categories'] = $this->blog_lib->getCategoriesByParent(0);
     }
 
     public function index()
@@ -92,7 +93,7 @@ class Blog extends MX_Controller
             $this->data['metadesc'] = $this->data['details'][0]->post_meta_desc;
             $this->data['langurl'] = base_url() . "blog/{langid}/" . $this->blog_lib->slug;
             $this->data['url'] = base_url() . "blog/" . $this->blog_lib->slug;
-            $camnang = $this->blog_lib->category_posts($offset, 'cam-nang-du-lich');
+            $camnang = $this->blog_lib->category_posts(1, 'cam-nang-du-lich');
             $this->data['camnang'] = $camnang['all_posts'];
 
             $catid = $this->blog_lib->catid;
@@ -100,13 +101,15 @@ class Blog extends MX_Controller
             $catslug = pt_blog_category_slug($catid);
             $catname = pt_blog_category_name($catslug);
             $catparent = pt_blog_category_parent($catid);
+            $this->data['current'] = $catslug;
 
             if ($catparent > 0) {
                 $parentslug = pt_blog_category_slug($catparent);
                 $parentname = pt_blog_category_name($parentslug);
-                $this->breadcrumbcomponent->add($parentname, base_url() . "blog/category?cat=" . $parentslug);
+                $this->data['current'] = $parentslug;
+                $this->breadcrumbcomponent->add($parentname, base_url() . "blog/category/" . $parentslug);
             }
-            $this->breadcrumbcomponent->add($catname, base_url() . "blog/category?cat=" . $catslug);
+            $this->breadcrumbcomponent->add($catname, base_url() . "blog/category/" . $catslug);
             $this->breadcrumbcomponent->add($this->blog_lib->title, base_url() . "blog/" . $this->blog_lib->slug);
             $this->data['breadcrumb'] = $this->breadcrumbcomponent->output();
 
@@ -120,26 +123,22 @@ class Blog extends MX_Controller
     function listing()
     {
         $settings = $this->settings_model->get_front_settings('blog');
+        $this->data['current'] = '';
         $this->data['ptype'] = "index";
         $this->data['categoryname'] = "";
-        $allposts = $this->blog_lib->show_posts();
-        $this->data['allposts'] = $allposts['all_posts'];
-        $this->data['info'] = $allposts['paginationinfo'];
         $this->data['page_title'] = $settings[0]->header_title;
-        $diemden = $this->blog_lib->category_posts(null, 'diem-den');
-        $this->data['diemden'] = $diemden['all_posts'];
-        $amthuc = $this->blog_lib->category_posts(null, 'am-thuc');
-        $this->data['amthuc'] = $amthuc['all_posts'];
-        $kinhnghiem = $this->blog_lib->category_posts(null, 'kinh-nghiem');
-        $this->data['kinhnghiem'] = $kinhnghiem['all_posts'];
-        $khuyenmai = $this->blog_lib->category_posts(null, 'khuyen-mai');
-        $this->data['khuyenmai'] = $khuyenmai['all_posts'];
-        $anhvideo = $this->blog_lib->category_posts(null, 'anh-video');
-        $this->data['anhvideo'] = $anhvideo['all_posts'];
-        $camnang = $this->blog_lib->category_posts(null, 'cam-nang-du-lich');
-        $this->data['camnang'] = $camnang['all_posts'];
-        $khachsan = $this->blog_lib->category_posts(null, 'khach-san-va-resort');
-        $this->data['khachsan'] = $khachsan['all_posts'];
+
+        $this->data['category_post'] = [];
+        foreach ($this->data['categories'] as $category) {
+            $posts = $this->blog_lib->category_posts(null, $category->slug);
+
+            $this->data['category_post'][$category->id] = [
+                'category' => $category,
+                'child' => $this->blog_lib->getCategoriesByParent($category->id),
+                'posts' => $posts['all_posts']['all']
+            ];
+        }
+
         $checkin = date($this->data['app_settings'][0]->date_f, strtotime('+' . CHECKIN_SPAN . ' day', time()));
         $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+' . CHECKOUT_SPAN . ' day', time()));
         $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin, $checkout);
@@ -155,14 +154,14 @@ class Blog extends MX_Controller
             $page = null;
         }
 
+        $this->data['current'] = '';
         $this->data['ptype'] = "search";
         $this->data['categoryname'] = "";
         $settings = $this->settings_model->get_front_settings('blog');
         $allposts = $this->blog_lib->search_posts($page);
         $this->data['allposts'] = $allposts['all_posts'];
         $this->data['info'] = $allposts['paginationinfo'];
-        $this->data['plinks'] = $allposts['plinks'];
-        $this->data['plinks2'] = $allposts['plinks2'];
+        $this->data['info']['base'] = base_url('blog/search');
         $this->data['page_title'] = $settings[0]->header_title;
         $camnang = $this->blog_lib->category_posts(null, 'cam-nang-du-lich');
         $this->data['camnang'] = $camnang['all_posts'];
@@ -170,25 +169,30 @@ class Blog extends MX_Controller
         $this->theme->view('blog/index', $this->data);
     }
 
-    function category($offset = null)
+    function category()
     {
+        $page = $this->input->get('page');
+        if (!$page) {
+            $page = null;
+        }
+
         $settings = $this->settings_model->get_front_settings('blog');
-        //$id = $this->input->get('cat');
-        $id = $this->ci->uri->segment(3);
-        $this->data['current'] = $id;
+        $catslug = $this->ci->uri->segment(3);
+        $catparent = pt_blog_category_parent($catslug);
+        $this->data['current'] = $catslug;
+        if ($catparent > 0) {
+            $parentslug = pt_blog_category_slug($catparent);
+            $this->data['current'] = $parentslug;
+        }
         $this->data['ptype'] = "category";
-        $this->data['categoryname'] = pt_blog_category_name($id);
-        $allposts = $this->blog_lib->category_posts($offset);
+        $this->data['categoryname'] = pt_blog_category_name($catslug);
+        $allposts = $this->blog_lib->category_posts($page, $catslug);
         $this->data['allposts'] = $allposts['all_posts'];
         $this->data['info'] = $allposts['paginationinfo'];
-        $this->data['plinks'] = $allposts['plinks'];
-        $this->data['plinks2'] = $allposts['plinks2'];
+        $this->data['info']['base'] = base_url('blog/category/' . $catslug);
         $this->data['page_title'] = $settings[0]->header_title;
-        $camnang = $this->blog_lib->category_posts($offset, 'cam-nang-du-lich');
+        $camnang = $this->blog_lib->category_posts(1, 'cam-nang-du-lich');
         $this->data['camnang'] = $camnang['all_posts'];
-        $this->data['cinfo'] = $camnang['paginationinfo'];
-        $this->data['cplinks'] = $camnang['plinks'];
-        $this->data['cplinks2'] = $camnang['plinks2'];
         $checkin = date($this->data['app_settings'][0]->date_f, strtotime('+' . CHECKIN_SPAN . ' day', time()));
         $checkout = date($this->data['app_settings'][0]->date_f, strtotime('+' . CHECKOUT_SPAN . ' day', time()));
         $this->data['hotelslocationsList'] = $this->hotels_lib->getLocationsList($checkin, $checkout);
