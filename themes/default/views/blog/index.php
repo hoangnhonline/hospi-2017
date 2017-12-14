@@ -10,7 +10,7 @@
             foreach ($category_post as $item) {
                 $posts = $item['posts'];
                 ?>
-                <div class="block-news-<?php echo $item['category']->slug; ?> clearfix">
+                <div class="block-news-style<?php echo $item['category']->layout; ?> clearfix">
                     <div class="cat-line <?php echo $item['category']->class; ?>">
                         <div class="cate-news"><?php echo $item['category']->name; ?></div>
                         <ul class="catslug">
