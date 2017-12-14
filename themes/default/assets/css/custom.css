@@ -10508,6 +10508,9 @@ h4.hotel-name{
 .categories-blog .cat-blue .catslug li a {
     color: #00cccc;
 }
+.categories-blog .cat-blue .catslug li.icon {
+    background: #00cccc;
+}
 .categories-blog .cat-blue2 .catslug li.icon {
     background: #0066cc;
 }
@@ -10552,6 +10555,9 @@ h4.hotel-name{
 .listinews .list-news {
     width: calc(100% - 245px);
     float: left;
+}
+.block-news-style1 .news-style .info h2 {
+    margin: 10px 0;
 }
 .news-style .info h2 {
     font-size: 14px;
