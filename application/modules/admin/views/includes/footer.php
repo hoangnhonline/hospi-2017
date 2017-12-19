@@ -18,7 +18,7 @@
 <script src="<?php echo base_url(); ?>assets/include/icheck/icheck.min.js"></script>
 <link href="<?php echo base_url(); ?>assets/include/icheck/square/grey.css" rel="stylesheet">
 <script src="<?php echo base_url();?>assets/js/jquery.number.min.js"></script>
-<script>
+<!-- <script>
 var cb, optionSet1;
 
 $(function () {
@@ -52,7 +52,7 @@ $(".radio").iCheck({
 checkboxClass: "icheckbox_square-grey",
 radioClass: "iradio_square-grey"
 });
-</script>
+</script> -->
 
 <!-- datepicker -->
 <script src="<?php echo base_url(); ?>assets/include/datepicker/datepicker.js"></script>
