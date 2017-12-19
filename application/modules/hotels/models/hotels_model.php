@@ -41,11 +41,14 @@ class Hotels_model extends CI_Model
     }
 
     // Get all hotels id and names only
-    function all_hotels_names($id = null)
+    function all_hotels_names($id = null, $status = null)
     {
         $this->db->select('hotel_id,hotel_title,hotel_slug');
         if (!empty($id)) {
             $this->db->where('hotel_owned_by', $id);
+        }
+        if (!empty($status)) {
+            $this->db->where('hotel_status', $status);
         }
         $this->db->order_by('hotel_id', 'desc');
         return $this->db->get('pt_hotels')->result();

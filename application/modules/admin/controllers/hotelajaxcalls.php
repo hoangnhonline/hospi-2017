@@ -462,8 +462,22 @@ class Hotelajaxcalls extends MX_Controller
         $extrabeds = $this->input->post('bedscount');
 
         echo $this->hotels_lib->getUpdatedDataBookResultObject($hotelid, $roomid, $checkin, $checkout, $roomscount, $extras, $extrabeds);
+    }
 
+    function room_by_hotel()
+    {
+        $hotel_id = $this->input->get('hotel_id');
 
+        $data = $this->rooms_model->search([
+            'room_hotel' => $hotel_id,
+            'room_status' => 'Yes'
+        ], 500000, 1);
+        echo '<option value="">Chọn loại phòng</option>';
+        if (!empty($data)) {
+            foreach ($data as $room) {
+                echo '<option value="' . $room->room_id . '" data-room_quantity="' . $room->room_quantity . '" data-extra_bed="' . $room->extra_bed . '">' . $room->room_title . '</option>';
+            }
+        }
     }
 
 }

@@ -297,17 +297,29 @@ class Bookings extends MX_Controller
 
     function add()
     {
-        $this->load->helper('invoice');
-        $this->load->model('payments_model');
-        $this->data['paygateways'] = $this->payments_model->getAllPaymentsBack();
-        $this->data['chklib'] = $this->ptmodules;
-        $this->load->library('hotels/hotels_lib');
-        $this->data['checkinlabel'] = "Check-In";
-        $this->data['checkoutlabel'] = "Check-Out";
-        $this->data['main_content'] = 'modules/bookings/add';
-        $this->data['page_title'] = 'Tạo Booking';
-        $this->data['locations'] = $this->locations_model->getLocationsBackend();
-        $this->load->view('template', $this->data);
+        $isadmin = $this->session->userdata('pt_logged_admin');
+        $userid = '';
+        if (empty($isadmin)) {
+            $userid = $this->session->userdata('pt_logged_supplier');
+        }
+
+        if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
+            backError_404($this->data);
+        } else {
+            $this->load->helper('invoice');
+            $this->load->model('payments_model');
+            $this->load->model('hotels/hotels_model');
+            $this->data['paygateways'] = $this->payments_model->getAllPaymentsBack();
+            $this->data['chklib'] = $this->ptmodules;
+            $this->load->library('hotels/hotels_lib');
+            $this->data['checkinlabel'] = "Check-In";
+            $this->data['checkoutlabel'] = "Check-Out";
+            $this->data['main_content'] = 'modules/bookings/add';
+            $this->data['page_title'] = 'Tạo Booking';
+            $this->data['locations'] = $this->locations_model->getLocationsBackend();
+            $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
+            $this->load->view('template', $this->data);
+        }
     }
 
     function dashboardBookings()
