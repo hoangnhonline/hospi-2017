@@ -8960,3 +8960,75 @@ z-index: 9999 !important;
 	 -webkit-transition: all 0.1s ease-in-out;
 	 -o-transition: all 0.1s ease-in-out;
 }
+
+.no-style li {
+  list-style-type: none;
+}
+.bank-account {
+  border: 1px solid #660033;
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+}
+.bank-account li {
+  margin: 2px 0;
+  display: table;
+  width: 100%;
+}
+.bank-account li strong, .bank-account li span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.bank-account li strong {
+  width: 35%;
+}
+.box {
+  -webkit-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+}
+.box_body {
+  position: relative;
+  /* padding: 10px 0; */
+}
+.order-summary {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: -4px;
+}
+.order-summary li {
+  list-style-type: none;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.order-summary li:before, .order-summary li:after {
+  content: " ";
+  display: table;
+}
+.order-summary li:after {
+  clear: both;
+}
+.order-summary li .k {
+  float: left;
+}
+.order-summary li .v {
+  float: right;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-action {
+  margin-bottom: 10px;
+  background: #660033;
+  background: -webkit-linear-gradient(top, #660033 0%, #751947 100%);
+  background: linear-gradient(to bottom, #660033 0%, #751947 100%);
+  color: #fff;
+  float: right;
+  font-size: 16px;
+  margin-left: 10px;
+  font-weight: 600;
+}
