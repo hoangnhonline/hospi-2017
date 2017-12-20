@@ -8987,11 +8987,18 @@ z-index: 9999 !important;
   -moz-box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   background-color: #f0f0f0;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 .box_body {
   position: relative;
   /* padding: 10px 0; */
+}
+.box_body2 {
+  position: relative;
+  padding: 10px;
+}
+.box_body2 p {
+  margin-bottom: 0;
 }
 .order-summary {
   list-style-type: none;
@@ -9028,7 +9035,14 @@ z-index: 9999 !important;
   background: linear-gradient(to bottom, #660033 0%, #751947 100%);
   color: #fff;
   float: right;
-  font-size: 16px;
+  font-size: 15px;
   margin-left: 10px;
   font-weight: 600;
+  text-transform: uppercase; 
+}
+.btn-action:hover {
+  color: #fff;
+}
+.purple, .purple a {
+  color: #660033;
 }

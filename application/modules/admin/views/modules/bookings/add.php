@@ -151,7 +151,7 @@
         </div>
         <div class="col-md-4 col-xs-12 pull-right">
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Thông tin đơn phòng</strong></div><!-- /.panel-heading -->
+                <div class="panel-heading text-center"><strong>Thông tin đơn phòng</strong></div><!-- /.panel-heading -->
                 <div class="box">
                     <div class="box_body">
                         <ul class="order-summary">
@@ -205,7 +205,7 @@
                                     <i id="result_copoun" style="color: #999999; display:block; font-size: 12px; margin-top: 3px;"></i>
                                 </div>
                                 <div class="v">
-                                    <button style="margin-left:0; margin-bottom: 0; padding: 5px 16px;" type="submit" class="btn btn-action btn-block chk applycoupon">ÁP DỤNG</button>
+                                    <button type="submit" class="btn btn-action btn-block chk applycoupon">ÁP DỤNG</button>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="couponmsg"></div>
@@ -226,6 +226,61 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><strong>Thông tin thanh toán</strong></div><!-- /.panel-heading -->
+                <div class="box">
+                    <div class="box_body">
+                        <ul class="order-summary">
+                            <li style="border: none;">
+                                <span class="k">Tình trạng thanh toán</span>
+                                <div class="v">
+                                    <select class="form-control chosen-select" name="room_id[]">
+                                        <option value=""><span class="purple">Chưa thanh toán</span></option>
+                                        <option value=""><span class="purple">Đã thanh toán</span></option>
+                                        <option value=""><span class="purple">Đã cọc</span></option>
+                                        <option value=""><span class="purple">Đã hủy</span></option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li style="border: none;">
+                                <span class="k">Số tiền</span>
+                                <div class="v">
+                                    <input type="text" name="email" class="form-control">
+                                </div>
+                            </li>
+                            <li style="border: none;">
+                                <span class="k">Ngày thanh toán</span>
+                                <div class="v">
+                                    <input type="text" name="" id="" class="form-control dpd1 fdate">
+                                </div>
+                            </li>
+                            <li style="border: none;">
+                                <div>Ghi chú</div>
+                                <div>
+                                    <textarea class="form-control" placeholder="" rows="5" name=""></textarea>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><strong>Điều kiện hủy phòng</strong></div><!-- /.panel-heading -->
+                <div class="box">
+                    <div class="box_body2">
+                        <p>Giai đoạn 12.01.2017 - 31.10.2017</p>
+                        <p>+ Hủy phòng trước 24 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): không tính phí</p>
+                        <p>+ Hủy phòng trong vòng 23 ngày đến 13 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): tính 50% tổng tiền phòng</p>
+                        <p>+ Hủy phòng trong vòng 12 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ Tết): tính 100% tổng tiền phòng</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-block btn btn-action">Tạo Booking</button>
             </div>
         </div>
     </div>
