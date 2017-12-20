@@ -773,7 +773,6 @@
             $('.showInput').fadeToggle();
         });
         $(".payment_method").click(function () {
-
             $('.completebook').show();
             var gateway = $(this).val();
             $("#response").html("<div id='rotatingDiv'></div>");
@@ -835,7 +834,6 @@
                 },
                 //dataType : 'json',
                 success: function (response) {
-                    console.log(response);
                     var resp = $.parseJSON(response);
                     if (resp.status == "success") {
                         $("#couponid").val(resp.couponid);
@@ -851,22 +849,16 @@
 
                             $('#tong_thanh_toan_span').html(addCommas(tong_chua_giam - giam_gia) + ' VND');
                         }
-
-
                     } else {
                         $("#couponid").val("");
                         $(".couponmsg").html("");
                         if (resp.status == "irrelevant") {
-
                             alert("<?php echo trans('0520'); ?>");
-
                         } else {
-
                             alert("<?php echo trans('0513'); ?>");
                         }
 
                     }
-                    console.log(resp);
                 }
             });
         });

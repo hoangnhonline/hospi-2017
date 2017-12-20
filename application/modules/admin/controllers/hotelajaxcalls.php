@@ -467,17 +467,78 @@ class Hotelajaxcalls extends MX_Controller
     function room_by_hotel()
     {
         $hotel_id = $this->input->get('hotel_id');
+        $checkin = $this->input->get('checkin');
+        $checkout = $this->input->get('checkout');
 
-        $data = $this->rooms_model->search([
-            'room_hotel' => $hotel_id,
-            'room_status' => 'Yes'
-        ], 500000, 1);
-        echo '<option value="">Chọn loại phòng</option>';
+        $this->load->library('hotels/hotels_lib');
+        $data = $this->hotels_lib->hotel_rooms($hotel_id, $checkin, $checkout);
+        $hotel_detail = $this->hotels_lib->hotel_details($hotel_id);
+        
+        $header = '<table class="table table-customize">
+            <thead>
+                <tr>
+                    <th>Loại phòng</th>
+                    <th>Số phòng</th>
+                    <th>Giá phòng</th>
+                </tr>
+          </thead>
+          <tbody>';
+        $footer = '</tbody></table>';
+        $body = '';
+        
         if (!empty($data)) {
-            foreach ($data as $room) {
-                echo '<option value="' . $room->room_id . '" data-room_quantity="' . $room->room_quantity . '" data-extra_bed="' . $room->extra_bed . '">' . $room->room_title . '</option>';
+            foreach ($data as $r) {
+                $body .= '<tr>
+                    <td>
+                        <div class="zoom-gallery">
+                            <div class="zoom-gallery55">
+                                <img class="img-responsive" src="' . $r->thumbnail . '">
+                            </div>
+                        </div>
+                        <div class="info">
+                            <h4 class="RTL go-text-right"><b class="purple">' . $r->title . ' - ' . $r->id . '</b></h4>
+                            <div class="block-people">
+                                <h5>Người lớn: <span>' . $r->room_adults . '</span></h5>
+                                <h5>Trẻ em: <span>' . $r->room_children . '</span></h5>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="item-countroom">
+                            <h5 class="size12">Số phòng</h5>
+                            <select class="form-control" name="room_quantity[' . $r->id . ']">' . $this->loop_option($r->maxQuantity) . '</select>
+                        </div>
+                        <div class="item-countroom">
+                            <h5 class="size12">Giường phụ</h5>
+                            <select name="extra_beds[' . $r->id . ']" class="form-control">' . $this->loop_option($r->extraBeds) . '</select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="block-price">
+                            <p class="purple size18"><b>' . number_format($r->price['total']) . '</b></p>
+                            <div class="size13 grey">
+                                Giá VND/' . $this->hotels_lib->stay . ' đêm
+                            </div>
+                            <p class="block-price-info">
+                                <span>Bao gồm: Ăn sáng.</span>
+                                <span>Phí dịch vụ 5%, VAT 10%.</span>
+                            </p>
+                        </div>
+                    </td>
+              </tr>';
             }
         }
+        
+        echo json_encode(['room_info' => $header . $body . $footer, 'hotel_info' => $hotel_detail]);
     }
 
+    private function loop_option($number)
+    {
+        $str = '';
+        for ($i = 0; $i <= $number; $i++) {
+            $str .= '<option value="' . $i . '">' . $i . '</option>';
+        }
+        
+        return $str;
+    }
 }

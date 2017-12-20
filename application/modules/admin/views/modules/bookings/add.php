@@ -20,7 +20,7 @@
                         </div><!-- /.form-group -->
                         <div class="form-group">
                             <label for="">Tên Khách Sạn</label>
-                            <select class="form-control chosen-select" id="hotel_id">
+                            <select class="form-control chosen-select" id="hotel_id" name="hotel_id">
                                 <option value="">Khách sạn</option>
                                 <?php foreach($hotels as $h){ ?>
                                     <option value="<?php echo $h->hotel_id;?>"> <?php echo $h->hotel_title;?> </option>
@@ -30,41 +30,17 @@
                         <div class="row">
                             <div class="col-md-5 form-group">
                                 <label for="booking_checkin">Ngày nhận phòng<span class="red-star">*</span></label>
-                                <input type="text" name="booking_checkin" id="booking_checkin"  class="form-control dpd1 fdate">
+                                <input type="text" name="checkin" id="checkin"  class="form-control dpd1 fdate">
                             </div>
                             <div class="col-md-5 form-group">
                                 <label for="booking_checkout">Ngày trả phòng<span class="red-star">*</span></label>
-                                <input type="text" name="booking_checkout" id="booking_checkout" class="form-control dpd2 fdate">
+                                <input type="text" name="checkout" id="checkout" class="form-control dpd2 fdate">
                             </div>
                             <div class="col-md-2 form-group">
                                 <strong>Số đêm</strong> : <br><span id="number_night" style="font-weight:bold;margin-top:13px;display:block" ></span>
                             </div>
                         </div><!-- /.row -->
-                        <div class="row rooms">
-                            <div class="col-md-6 form-group">
-                                <label>Loại phòng<span class="red-star">*</span></label>
-                                <select class="form-control room_id chosen-select" name="room_id[]">
-                                    <option value="">Chọn loại phòng</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label>Số phòng<span class="red-star">*</span></label>
-                                <select class="form-control room_quantity" name="room_quantity[]">
-                                    <option value="1">1</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3 form-group">
-                                <label>Giường phụ</label>
-                                <select class="form-control extra_bed" name="extra_bed[]">
-                                    <option value="0">0</option>
-                                </select>
-                            </div>
-                        </div><!-- /.row -->
-                        <div class="form-group">
-                            <a href="#" id="add_room">
-                                <i class="fa fa-plus-square-o"></i> Thêm loại phòng
-                            </a>
-                        </div><!-- /.form-group -->
+                        <div id="room_info"></div>
                         <div class="form-group">            
                             <textarea class="form-control" placeholder="Ghi chú" rows="5" name="additionalnotes"></textarea>
                         </div><!-- /.form-group -->
@@ -149,15 +125,13 @@
                 </div><!-- /.panel-body -->
             </div><!-- /.panel panel-default -->
         </div>
-        <div class="col-md-4 col-xs-12 pull-right">
+        <div class="col-md-4 col-xs-12 pull-right" id="payment_info" style="display: none;">
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><strong>Thông tin đơn phòng</strong></div><!-- /.panel-heading -->
                 <div class="box">
                     <div class="box_body">
                         <ul class="order-summary">
-                            <li>
-                                SIX SENSES CÔN ĐẢO RESORT
-                            </li>
+                            <li id="hotel_name"></li>
                             <li>
                                 <div class="k">
                                     <p><strong>Ocean View Dupxle  Pool Villa</strong></p>
@@ -227,7 +201,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><strong>Thông tin thanh toán</strong></div><!-- /.panel-heading -->
                 <div class="box">
@@ -259,14 +232,13 @@
                             <li style="border: none;">
                                 <div>Ghi chú</div>
                                 <div>
-                                    <textarea class="form-control" placeholder="" rows="5" name=""></textarea>
+                                    <textarea class="form-control" placeholder="" rows="5" id="" name=""></textarea>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><strong>Điều kiện hủy phòng</strong></div><!-- /.panel-heading -->
                 <div class="box">
@@ -278,9 +250,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="form-group">
-                <button type="button" class="btn btn-block btn btn-action">Tạo Booking</button>
+                <button type="button" class="btn btn-block btn btn-action completebook">Tạo Booking</button>
             </div>
         </div>
     </div>
@@ -361,11 +332,11 @@
                 var zero2 = new Padder(2);
                 $('#number_night').html(zero2.pad(number_night));
             }
-
         }).data('datepicker');
         
         $('.payment_method').click(function () {
             var gateway = $(this).val();
+            $('.completebook').show();
             $('#response').html("<div id='rotatingDiv'></div>");
             
             $.ajax({
@@ -396,45 +367,24 @@
         });
         
         $('#hotel_id').change(function () {
+            $('#payment_info').hide();
+            
             $.ajax({
-                url: '<?php echo base_url() . "admin/hotelajaxcalls/room_by_hotel"; ?>?hotel_id=' + $(this).val(),
+                url: '<?php echo base_url() . "admin/hotelajaxcalls/room_by_hotel"; ?>',
                 type: 'GET',
-                dataType: 'html',
+                data: {
+                    hotel_id: $(this).val(),
+                    checkin: $('#checkin').val(),
+                    checkout: $('#checkout').val()
+                },
+                dataType: 'json',
                 success: function (data) {
-                    $('select.room_id').html(data).trigger('chosen:updated');
+                    $('#room_info').html(data.room_info);
+                    $('#hotel_name').html(data.hotel_info.title);
+                    
+                    $('#payment_info').show();
                 }
             });
-        });
-        
-        $(document).on('change', 'select.room_id', function () {
-            if ($(this).val() != '') {
-                var option = $(this).find('option[value="' + $(this).val() + '"]');
-                
-                var room_quantity = parseInt($(option).data('room_quantity'));
-                var sHTML = '';
-                for (var i = 1; i <= room_quantity; i++) {
-                    sHTML += '<option value="' + i + '">' + i + '</option>';
-                }
-                $(this).parents('.row').find('select.room_quantity').html(sHTML);
-
-                var extra_bed = parseInt($(option).data('extra_bed'));
-                var sHTMLE = '';
-                for (var j = 0; j <= extra_bed; j++) {
-                    sHTMLE += '<option value="' + j + '">' + j + '</option>';
-                }
-                $(this).parents('.row').find('select.extra_bed').html(sHTMLE);
-            } else {
-                $(this).parents('.row').find('select.room_quantity').html('<option value="1">1</option>');
-                $(this).parents('.row').find('select.extra_bed').html('<option value="0">0</option>');
-            }
-        });
-        
-        $(document).on('click', '#add_room', function(evt) {
-            evt.preventDefault();
-            
-            var room = $('.rooms:first').clone();
-            $(room).insertBefore($(this).parent());
-            $(room).find('select').trigger('chosen:updated');
         });
 
         $(".applycoupon").on("click", function () {
@@ -452,13 +402,14 @@
                 //dataType : 'json',
                 success: function (response) {
                     var resp = $.parseJSON(response);
-                    if (resp.status == "success") {
+                    
+                    if (resp.status === "success") {
                         $("#couponid").val(resp.couponid);
                         $(".couponmsg").html(" <div class='alert alert-success'><?php echo trans('0512'); ?><strong> " + coupon + " </strong><?php echo trans('0821'); ?> <strong> " + resp.value + resp.type + " </strong><?php echo trans('0822'); ?></div>");
                         $(".coupon").prop("readonly", "readonly");
                         $(".applycoupon").hide();
                         
-                        if (resp.type == '%') {
+                        if (resp.type === '%') {
                             var tong_chua_giam = $('#tong_chua_giam').val();
                             var giam_gia = tong_chua_giam * resp.value / 100;
                             $('#giam_gia').val(giam_gia);
@@ -471,9 +422,9 @@
                         $("#couponid").val("");
                         $(".couponmsg").html("");
                         
-                        if (resp.status == "irrelevant") {
+                        if (resp.status === "irrelevant") {
                             alert("<?php echo trans('0520'); ?>");
-                        } else 
+                        } else {
                             alert("<?php echo trans('0513'); ?>");
                         }
                     }
