@@ -6,7 +6,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
-        <div class="col-md-8">
+        <div class="col-md-8  col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><strong>Thông tin booking</strong></div><!-- /.panel-heading -->
                 <div class="panel-body">
@@ -358,8 +358,8 @@
                         $('#response input').on('change', function () {
                             //alert($('input[name=bank]:checked', '#response').val());
                             var name = $('input[name=bank]:checked', '#response').val();
-                            $("#divBankDetails").children().hide();
-                            $('#span' + name).show();
+                            $("#divBankDetails .bank-account").css({'display':'none'});
+                            $('#span' + name).css({'display':'block'});
                         });
                     }
                 }

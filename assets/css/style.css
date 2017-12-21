@@ -9029,12 +9029,10 @@ z-index: 9999 !important;
   width: 100%;
 }
 .btn-action {
-  margin-bottom: 10px;
   background: #660033;
   background: -webkit-linear-gradient(top, #660033 0%, #751947 100%);
   background: linear-gradient(to bottom, #660033 0%, #751947 100%);
   color: #fff;
-  float: right;
   font-size: 15px;
   margin-left: 10px;
   font-weight: 600;
@@ -9045,4 +9043,17 @@ z-index: 9999 !important;
 }
 .purple, .purple a {
   color: #660033;
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 20px;
+}
+.row-eq-height:last-child {
+  margin-bottom: 0;
+}
+.row-eq-height .panel-default {
+  height: 100%;
 }

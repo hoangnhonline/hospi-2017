@@ -6,7 +6,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
-        <div class="col-md-8">
+        <div class="col-md-8 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><strong>Thông tin booking</strong></div><!-- /.panel-heading -->
                 <div class="panel-body">
@@ -29,11 +29,11 @@
                         </div><!-- /.form-group -->
                         <div class="row">
                             <div class="col-md-5 form-group">
-                                <label for="booking_checkin">Ngày nhận phòng<span class="red-star">*</span></label>
+                                <label for="booking_checkin">Ngày nhận phòng</label>
                                 <input type="text" name="checkin" id="checkin"  class="form-control dpd1 fdate">
                             </div>
                             <div class="col-md-5 form-group">
-                                <label for="booking_checkout">Ngày trả phòng<span class="red-star">*</span></label>
+                                <label for="booking_checkout">Ngày trả phòng</label>
                                 <input type="text" name="checkout" id="checkout" class="form-control dpd2 fdate">
                             </div>
                             <div class="col-md-2 form-group">
@@ -63,17 +63,17 @@
                         </div><!-- /.form-group -->
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="booking_checkin">Số điện thoại<span class="red-star">*</span></label>
+                                <label for="booking_checkin">Số điện thoại</label>
                                 <input type="text" name="phone" class="form-control">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="booking_checkout">Email<span class="red-star">*</span></label>
+                                <label for="booking_checkout">Email</label>
                                 <input type="text" name="email" class="form-control">
                             </div>
                         </div><!-- /.row -->
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="booking_checkin">Người lớn<span class="red-star">*</span></label>
+                                <label for="booking_checkin">Người lớn</label>
                                 <select class="form-control" name="adult">
                                     <?php for ($i = 1; $i <= 10; $i ++) { ?>
                                         <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
@@ -255,10 +255,175 @@
             </div>
         </div>
     </div>
+
+    <div class="panel-body">
+        <div class="col-sm-12 col-xs-12">
+            <div class="form-group">
+                <div class="form-inline">
+                    <input type="text" name="" value="" class="form-control" placeholder="Nhập mã booking">
+                    <button type="button" class="btn btn-action">Lấy Thông Tin</button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row-eq-height">
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Nhập Thông Tin</strong></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="form-inline">
+                                Tên mã e-voucher
+                                <input type="text" name="" value="" class="form-control" placeholder="">
+                                <a href="#" title="" style="text-decoration: underline;">Lấy mã tự động</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tên Khách Sạn</label>
+                            <select class="form-control chosen-select" id="hotel_id" name="hotel_id">
+                                <option value="">Khách sạn</option>
+                            </select>
+                        </div><!-- /.form-group -->
+                        <div class="row">
+                            <div class="col-md-5 col-xs-12 form-group">
+                                <label for="booking_checkin">Ngày nhận phòng</label>
+                                <input type="text" name="checkin" id="checkin"  class="form-control dpd1 fdate">
+                            </div>
+                            <div class="col-md-5 col-xs-12 form-group">
+                                <label for="booking_checkout">Ngày trả phòng</label>
+                                <input type="text" name="checkout" id="checkout" class="form-control dpd2 fdate">
+                            </div>
+                            <div class="col-md-2 col-xs-12 form-group">
+                                <strong>Số đêm</strong> : <br><span id="number_night" style="font-weight:bold;margin-top:13px;display:block" ></span>
+                            </div>
+                        </div><!-- /.row -->
+                        <div class="form-group">
+                            <label for="">Loại phòng</label>
+                            <select class="form-control chosen-select" id="hotel_id" name="hotel_id">
+                                <option value="">Loại Phòng</option>
+                            </select>
+                        </div><!-- /.form-group -->
+                        <div class="row">
+                            <div class="col-md-4 col-xs-12 form-group">
+                                <label for="booking_checkin">Số lượng phòng</label>
+                                <select class="form-control chosen-select" id="hotel_id" name="hotel_id">
+                                    <option value="1">01</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 col-xs-12 form-group">
+                                <label for="booking_checkout">Số lượng giường</label>
+                                <select class="form-control chosen-select" id="hotel_id" name="hotel_id">
+                                    <option value="1gl">1 Giường lớn</option>
+                                </select>
+                            </div>
+                        </div><!-- /.row -->
+                        <div class="form-group">
+                            <a href="#" title="">
+                                <i class="fa fa-plus-square-o"></i> Thêm loại phòng
+                            </a>
+                        </div><!-- /.form-group -->
+                    </div>
+                </div>
+            </div><!-- /.col-sm-6 col-xs-12 -->
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Thông tin cá nhân</strong></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="">Họ tên khách</label>
+                            <div class="form-inline">
+                                <input type="text" name="" value="" class="form-control" placeholder="">
+                                <a href="#" title="">
+                                    <i class="fa fa-plus-square-o"></i> Thêm tên khách
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12 form-group">
+                                <label for="">Só điện thoại</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="">
+                            </div>
+                            <div class="col-md-6 col-xs-12 form-group">
+                                <label for="">Email</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="">
+                            </div>
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12 form-group">
+                                <label for="">Người lớn</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="">
+                            </div>
+                            <div class="col-md-6 col-xs-12 form-group">
+                                <label for="">Trẻ em</label>
+                                <input type="text" name="" id="" class="form-control" placeholder="">
+                            </div>
+                        </div><!-- /.row -->
+                        <div class="form-group">
+                            <label for="">Tình Trạng</label>
+                            <select class="form-control chosen-select" id="" name="">
+                                <option value="dtt">Đã Thanh Toán</option>
+                                <option value="ctt">Chưa Thanh Toán</option>
+                                <option value="dh">Đã hủy</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.col-sm-6 col-xs-12 -->
+        </div>
+        <div class="clearfix"></div>
+        <div class="row-eq-height">
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Điều kiện hủy phòng</strong></div>
+                    <div class="panel-body">
+                        <p>Tự lọc điều kiện khi chọn tên khách sạn</p>
+                    </div>
+                </div>
+            </div><!-- /.col-sm-6 col-xs-12 -->
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Bao gòm</strong></div>
+                    <div class="panel-body">
+                        <textarea class="form-control" placeholder="Nhập thông tin" rows="5" name=""></textarea>
+                    </div>
+                </div>
+            </div><!-- /.col-sm-6 col-xs-12 -->
+        </div>
+        <div class="col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Khác</strong></div>
+                <div class="panel-body">
+                    <textarea class="form-control" placeholder="Nhập thông tin" rows="5" name=""></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Lưu ý</strong>
+                    <span class="pull-right">
+                        Thông tin mặc định
+                        <a href="#" title="">(Chỉnh sửa thông tin)</a>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <span>- Theo quy định của khách sạn giờ nhận phòng: <strong>14:00 PM</strong> và Giờ trả phòng: <strong>12:00 PM</strong></span><br>
+                    <span>- Trong trường hợp đến khách sạn, resort sớm và muốn nhận phòng sớm hơn theo quy định. Vui lòng liên hệ với tiếp tân để được hỗ trợ và việc check-in sớm còn tùy thuộc vào tình trạng phòng trống ngày bạn đến. Không được xác nhận trước. </span><br>
+                    <span>- Quý khách vui lòng mang CMND, Hộ chiếu....(Giấy tờ tùy thân theo luật pháp Việt Nam) và Phiếu xác nhận của HOSPI giao cho tiếp tân khi làm thủ tục nhận phòng.</span><br>
+                    <span>- Nếu Quý khách cần hỗ trợ thông tin về (Vật nuôi, xe lăn, nôi em bé...) Vui lòng gọi: <strong>(028) 3826 8797</strong> hoặc Hotline: <strong>09 6868 0106</strong> để được nhân viên tư vấn</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xs-12">
+            <div class="form-group">
+                <button type="button" class="btn btn-block btn-action">Tạo E-Voucher</button>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/adminbooking.js"></script>
 <script type="text/javascript">
-    function parseDate(str) {
+    function parseDate(str) {   
         var mdy = str.split('/')
         return new Date(mdy[2], mdy[1], mdy[0] - 1);
     }
@@ -358,8 +523,8 @@
                         $('#response input').on('change', function () {
                             //alert($('input[name=bank]:checked', '#response').val());
                             var name = $('input[name=bank]:checked', '#response').val();
-                            $("#divBankDetails").children().hide();
-                            $('#span' + name).show();
+                            $("#divBankDetails .bank-account").css({'display':'none'});
+                            $('#span' + name).css({'display':'block'});
                         });
                     }
                 }
@@ -381,7 +546,6 @@
                 success: function (data) {
                     $('#room_info').html(data.room_info);
                     $('#hotel_name').html(data.hotel_info.title);
-                    
                     $('#payment_info').show();
                 }
             });
