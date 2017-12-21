@@ -1,9 +1,11 @@
 <?php
 
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 class Bookings extends MX_Controller
 {
+
     private $data = array();
     public $role;
     public $editpermission = true;
@@ -306,19 +308,86 @@ class Bookings extends MX_Controller
         if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
             backError_404($this->data);
         } else {
-            $this->load->helper('invoice');
-            $this->load->model('payments_model');
-            $this->load->model('hotels/hotels_model');
-            $this->data['paygateways'] = $this->payments_model->getAllPaymentsBack();
-            $this->data['chklib'] = $this->ptmodules;
-            $this->load->library('hotels/hotels_lib');
-            $this->data['checkinlabel'] = "Check-In";
-            $this->data['checkoutlabel'] = "Check-Out";
             $this->data['main_content'] = 'modules/bookings/add';
             $this->data['page_title'] = 'Tạo Booking';
-            $this->data['locations'] = $this->locations_model->getLocationsBackend();
             $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
             $this->load->view('template', $this->data);
+        }
+    }
+
+    function getInfo()
+    {
+        $isadmin = $this->session->userdata('pt_logged_admin');
+        $userid = '';
+        if (empty($isadmin)) {
+            $userid = $this->session->userdata('pt_logged_supplier');
+        }
+
+        if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
+            backError_404($this->data);
+        } else {
+            $this->load->library('hotels/hotels_lib');
+            
+            $hotel_id = $this->input->get('hotel_id');
+            $checkin = $this->input->get('checkin');
+            $checkout = $this->input->get('checkout');
+            
+            $date1 = new \DateTime(date('Y-m-d', strtotime(str_replace("/", "-", $checkin))));
+            $date2 = new \DateTime(date('Y-m-d', strtotime(str_replace("/", "-", $checkout))));
+
+            // this calculates the diff between two dates, which is the number of nights
+            $stay = $date2->diff($date1)->format("%a");
+            $adults = (int)$this->input->get('adults');
+            $child = (int)$this->input->get('child');
+            $room_quantity = $this->input->get('room_quantity');
+            $extra_beds = $this->input->get('extra_beds');
+            $totalRooms = 0;
+            if (!empty($room_quantity)) {
+                foreach ($room_quantity as $tmp) {
+                    $totalRooms += $tmp;
+                }
+            }
+        
+            $this->load->model('admin/payments_model');
+            $this->data['error'] = "";
+            $detailHotel = $this->hotels_model->getDetail($hotel_id);
+
+            $roomIdArr = $this->input->get('room_id');
+            $roomsCountArr = $this->input->get('room_quantity');
+            $extrabeds = $this->input->get('extrabeds');
+            foreach ($roomIdArr as $roomID) {
+                $roomsCount = $roomsCountArr[$roomID];
+                if ($roomsCount > 0) {
+                    $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotel_id, $roomID, $roomsCount, $extrabeds, '', '');
+                }
+            }
+
+            $this->data['module'] = $detailHotel;
+            $this->data['stay'] = $stay;
+            $this->data['extraChkUrl'] = $bookInfo['hotel']->extraChkUrl;
+            $this->data['room'] = $bookInfo;
+            if ($this->data['room']->price < 1 || $this->data['room']->stay < 1) {
+                $this->data['error'] = "error";
+            }
+            $this->load->helper('invoice');
+            $this->load->model('payments_model');
+            $paygateways = $this->payments_model->getAllPaymentsBack();
+            $this->data['paymentGateways'] = $paygateways['activeGateways'];
+            usort($this->data['paymentGateways'],
+                function ($a, $b) {
+                    return $a['order'] - $b['order'];
+                });
+            $this->data['checkin'] = $checkin;
+            $this->data['checkout'] = $checkout;
+            $this->data['adults'] = $adults;
+            $this->data['child'] = $child;
+            $this->data['totalRooms'] = $totalRooms;
+
+            $this->data['room_id'] = json_encode(array_keys($bookInfo));
+            $this->data['room_quantity'] = json_encode($room_quantity);
+            $this->data['extra_beds'] = json_encode($extra_beds);
+            
+            $this->load->view('modules/bookings/info', $this->data);
         }
     }
 
@@ -374,4 +443,5 @@ class Bookings extends MX_Controller
     {
         return explode("_", $string);
     }
+
 }

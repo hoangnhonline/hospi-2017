@@ -464,7 +464,7 @@ class Hotelajaxcalls extends MX_Controller
         echo $this->hotels_lib->getUpdatedDataBookResultObject($hotelid, $roomid, $checkin, $checkout, $roomscount, $extras, $extrabeds);
     }
 
-    function room_by_hotel()
+    function rooms_by_hotel()
     {
         $hotel_id = $this->input->get('hotel_id');
         $checkin = $this->input->get('checkin');
@@ -472,7 +472,6 @@ class Hotelajaxcalls extends MX_Controller
 
         $this->load->library('hotels/hotels_lib');
         $data = $this->hotels_lib->hotel_rooms($hotel_id, $checkin, $checkout);
-        $hotel_detail = $this->hotels_lib->hotel_details($hotel_id);
         
         $header = '<table class="table table-customize">
             <thead>
@@ -529,7 +528,7 @@ class Hotelajaxcalls extends MX_Controller
             }
         }
         
-        echo json_encode(['room_info' => $header . $body . $footer, 'hotel_info' => $hotel_detail]);
+        echo $header . $body . $footer;
     }
 
     private function loop_option($number)
