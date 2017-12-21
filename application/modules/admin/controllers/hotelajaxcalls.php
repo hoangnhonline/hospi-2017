@@ -489,6 +489,7 @@ class Hotelajaxcalls extends MX_Controller
             foreach ($data as $r) {
                 $body .= '<tr>
                     <td>
+                        <input type="hidden" name="room_id[]" value="' . $r->id . '" />
                         <div class="zoom-gallery">
                             <div class="zoom-gallery55">
                                 <img class="img-responsive" src="' . $r->thumbnail . '">

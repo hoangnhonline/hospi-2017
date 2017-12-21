@@ -536,10 +536,11 @@ class Hotels extends MX_Controller
             $this->hotels_lib->set_hotelid($hotelname);
             $hotelID = $this->hotels_lib->get_id();
             $detailHotel = $this->hotels_model->getDetail($hotelID);
-
+            
             $roomIdArr = $this->input->get('room_id');
             $roomsCountArr = $this->input->get('room_quantity');
             $extrabeds = $this->input->get('extrabeds');
+            $bookInfo = [];
             foreach ($roomIdArr as $roomID) {
                 $roomsCount = $roomsCountArr[$roomID];
                 if ($roomsCount > 0) {
@@ -549,14 +550,12 @@ class Hotels extends MX_Controller
 
             $this->data['module'] = $detailHotel;
             $this->data['stay'] = $stay;
-            //var_dump("<pre>", $detailHotel);die;
+            
             $this->data['extraChkUrl'] = $bookInfo['hotel']->extraChkUrl;
             $this->data['room'] = $bookInfo;
             if ($this->data['room']->price < 1 || $this->data['room']->stay < 1) {
                 $this->data['error'] = "error";
             }
-
-            // $this->data['paymentTypes'] = $this->payments_model->get_all_payments_front();
 
             $this->load->model('admin/accounts_model');
             $loggedin = $this->loggedin = $this->session->userdata('pt_logged_customer');
@@ -582,16 +581,14 @@ class Hotels extends MX_Controller
             $this->data['room_id'] = json_encode(array_keys($bookInfo));
             $this->data['room_quantity'] = json_encode($room_quantity);
             $this->data['extra_beds'] = json_encode($extra_beds);
-
-            // var_dump($detailHotel->hotel_title);die;
-
+            
             $this->breadcrumbcomponent->add('Trang chủ', base_url());
             $this->breadcrumbcomponent->add($detailHotel->hotel_title, base_url() . "hotels/" . $detailHotel->hotel_slug);
             $this->breadcrumbcomponent->add('Thông tin thanh toán', '#');
             $this->data['breadcrumb'] = $this->breadcrumbcomponent->output();
             $this->theme->view('booking', $this->data);
         } else {
-            redirect("hotels");
+            redirect(base_url('hotels'));
         }
     }
 

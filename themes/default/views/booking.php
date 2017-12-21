@@ -215,15 +215,10 @@
                                 </div>
                             </div>
                         </div><!-- row -->
-                        <!--<p class="row" style="padding: 15px 15px 0; border-top: 1px solid #cccccc">Loại phòng: <strong class="purple">01 giường lớn, 02 giường nhỏ</strong></p>-->
                     </div>
                 </div>
                 <div class="box">
                     <div class="box_body">
-                        <!-- <div class="order-items">
-                            <div><strong>Giá trọn gói:</strong> 6,449,000 x 01 = 6,449,000 VND</div>
-                            <div><strong>Trẻ em</strong> (6-8 tuổi): 300,000 x 01 = 1,010,000 VND</div>
-                        </div> -->
                         <ul class="order-summary">
                             <?php
                             $room_quantity = json_decode($room_quantity, true);
@@ -231,7 +226,6 @@
 
                             $priceTotal = $so_giuong_phu = 0;
                             if (!empty($room)) {
-
                                 $priceExtraBedTotal = 0;
                                 foreach ($room as $roomId => $rDetail) {
                                     $priceOne = 0;
@@ -243,7 +237,6 @@
                                     $priceOne = $priceOne / count($rDetail->Info['detail']);
                                     $priceExtraBedTotal += $priceExtraBed * $extra_beds[$roomId];
                                     $so_giuong_phu += $extra_beds[$roomId];
-
 
                                     $quantity = $room_quantity[$roomId];
                                     ?>
@@ -797,14 +790,10 @@
                             var name = $('input[name=bank]:checked', '#response').val();
                             $("#divBankDetails").children().hide();
                             $('#span' + name).show();
-
                         });
-
                     }
                 }
             });
-
-
         });
 
         function addCommas(nStr) {

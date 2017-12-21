@@ -343,7 +343,26 @@ class Bookings_model extends CI_Model
         }
 
         $expiry = $this->data['app_settings'][0]->booking_expiry * 86400;
-
+        
+        $total = $this->input->post('tong_thanh_toan');
+        $status = $this->input->post('status');
+        if (empty($status)) {
+            $status = 'unpaid';
+        }
+        $amount_paid = $this->input->post('amount_paid');
+        if (empty($amount_paid)) {
+            $amount_paid = 0;
+        }
+        $remaining = $total - $amount_paid;
+        $payment_date = $this->input->post('payment_date');
+        if (!empty($payment_date)) {
+            $payment_date = strtotime(str_replace("/", "-", $payment_date));
+        }
+        $cancellation_request = $this->input->post('cancellation_request');
+        if (empty($cancellation_request)) {
+            $cancellation_request = '';
+        }
+        
         try {
             if ($bookingtype != 'offers') {
                 $subitemid = $this->input->post('subitemid');
@@ -367,10 +386,10 @@ class Bookings_model extends CI_Model
                     'booking_date' => time(),
                     'booking_expiry' => time() + $expiry,
                     'booking_user' => $userid,
-                    'booking_status' => 'unpaid',
+                    'booking_status' => $status,
                     'booking_additional_notes' => $this->input->post('additionalnotes'),
-                    'booking_total' => $this->input->post('tong_thanh_toan'),
-                    'booking_remaining' => $this->input->post('tong_chua_giam'),
+                    'booking_total' => $total,
+                    'booking_remaining' => $remaining,
                     'booking_checkin' => $checkin,
                     'booking_checkout' => $checkout,
                     'booking_nights' => $this->input->post('nights'),
@@ -378,6 +397,9 @@ class Bookings_model extends CI_Model
                     'booking_child' => $this->input->post('child'),
                     'booking_payment_type' => $paymethod,
                     'booking_payment_info' => $payinfo,
+                    'booking_amount_paid' => $amount_paid,
+                    'booking_payment_date' => $payment_date,
+                    'booking_cancellation_request' => $cancellation_request,
                     'honeymoon' => $honeymoon,
                     'nguoikhac' => $nguoikhac,
                     'sent_invoice' => $sent_invoice,
@@ -397,6 +419,7 @@ class Bookings_model extends CI_Model
                     'booking_coupon' => $coupon_code,
                     'booking_guest_info' => $passportInfo
                 );
+                //var_dump('<pre>', $data);die;
                 $this->db->insert('pt_bookings', $data);
                 $book_id = $this->db->insert_id();
                 $this->session->set_userdata("BOOKING_ID", $book_id);
@@ -450,15 +473,18 @@ class Bookings_model extends CI_Model
                     'booking_date' => time(),
                     'booking_expiry' => time() + $expiry,
                     'booking_user' => $userid,
-                    'booking_status' => 'unpaid',
+                    'booking_status' => $status,
                     'booking_additional_notes' => $this->input->post('additionalnotes'),
-                    'booking_total' => $this->input->post('tong_thanh_toan'),
-                    'booking_remaining' => $this->input->post('tong_chua_giam'),
+                    'booking_total' => $total,
+                    'booking_remaining' => $remaining,
                     'booking_checkin' => $checkin,
                     'booking_checkout' => $checkin,
                     'booking_nights' => $this->input->post('nights'),
                     'booking_payment_type' => $paymethod,
                     'booking_payment_info' => $payinfo,
+                    'booking_amount_paid' => $amount_paid,
+                    'booking_payment_date' => $payment_date,
+                    'booking_cancellation_request' => $cancellation_request,
                     'nguoikhac' => $nguoikhac,
                     'sent_invoice' => $sent_invoice,
                     'company' => $company,

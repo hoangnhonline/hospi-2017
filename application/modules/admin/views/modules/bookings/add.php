@@ -6,107 +6,19 @@
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
-<<<<<<< HEAD
-        <div class="col-md-8  col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading text-center"><strong>Thông tin booking</strong></div><!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <div class="form-inline">
-                                Tên mã đặt phòng
-                                <input type="text" name="" value="" class="form-control" placeholder="">
-                                <a href="#" title="" style="text-decoration: underline;">Lấy mã tự động</a>
-                            </div>
-                        </div><!-- /.form-group -->
-                        <div class="form-group">
-                            <label for="">Tên Khách Sạn</label>
-                            <select class="form-control chosen-select" id="hotel_id" name="hotel_id">
-                                <option value="">Khách sạn</option>
-                                <?php foreach($hotels as $h){ ?>
-                                    <option value="<?php echo $h->hotel_id;?>"> <?php echo $h->hotel_title;?> </option>
-                                <?php } ?>
-                            </select>
-                        </div><!-- /.form-group -->
-                        <div class="row">
-                            <div class="col-md-5 form-group">
-                                <label for="booking_checkin">Ngày nhận phòng<span class="red-star">*</span></label>
-                                <input type="text" name="checkin" id="checkin"  class="form-control dpd1 fdate">
-                            </div>
-                            <div class="col-md-5 form-group">
-                                <label for="booking_checkout">Ngày trả phòng<span class="red-star">*</span></label>
-                                <input type="text" name="checkout" id="checkout" class="form-control dpd2 fdate">
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <strong>Số đêm</strong> : <br><span id="number_night" style="font-weight:bold;margin-top:13px;display:block" ></span>
-                            </div>
-                        </div><!-- /.row -->
-                        <div id="room_info"></div>
-                        <div class="form-group">            
-                            <textarea class="form-control" placeholder="Ghi chú" rows="5" name="additionalnotes"></textarea>
-                        </div><!-- /.form-group -->
-                    </div>
-                    <!-- col-md-12-->
-                </div><!-- /.panel-body -->
-            </div><!-- /.panel panel-default -->
-            <div class="panel panel-default">
-                <div class="panel-heading text-center"><strong>Thông tin cá nhân</strong></div><!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">Họ tên khách</label>
-                            <div class="form-inline">
-                                <input type="text" name="lastname" class="form-control">
-                                <a href="#" title="">
-                                    <i class="fa fa-plus-square-o"></i> Thêm tên khách
-                                </a>
-                            </div>
-                        </div><!-- /.form-group -->
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="booking_checkin">Số điện thoại<span class="red-star">*</span></label>
-                                <input type="text" name="phone" class="form-control">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="booking_checkout">Email<span class="red-star">*</span></label>
-                                <input type="text" name="email" class="form-control">
-                            </div>
-                        </div><!-- /.row -->
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="booking_checkin">Người lớn<span class="red-star">*</span></label>
-                                <select class="form-control" name="adult">
-                                    <?php for ($i = 1; $i <= 10; $i ++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="booking_checkout">Trẻ em</label>
-                                <select class="form-control" name="child">
-                                    <?php for ($i = 0; $i <= 10; $i ++) { ?>
-                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-=======
-        <div class="col-md-8">
-            <form action="<?php echo base_url('admin/bookings/getInfo'); ?>" method="post">
+        <form id="bookingdetails">
+            <div class="result"></div>
+            <div class="col-md-8 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center"><strong>Thông tin booking</strong></div><!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="form-inline">
-                                    Tên mã đặt phòng
-                                    <input type="text" name="" value="" class="form-control" placeholder="">
-                                    <a href="#" title="" style="text-decoration: underline;">Lấy mã tự động</a>
-                                </div>
-                            </div><!-- /.form-group -->
                             <div class="form-group">
                                 <label for="hotel_id">Tên Khách Sạn <span class="red-star">*</span></label>
                                 <select class="form-control chosen-select" id="hotel_id" name="hotel_id">
                                     <option value="">Khách sạn</option>
                                     <?php foreach($hotels as $h){ ?>
                                         <option value="<?php echo $h->hotel_id;?>"> <?php echo $h->hotel_title;?> </option>
->>>>>>> a19d10c6286d6235dcc16e2a7e45c9981903e9a8
                                     <?php } ?>
                                 </select>
                             </div><!-- /.form-group -->
@@ -175,7 +87,7 @@
                     </div><!-- /.panel-body -->
                 </div><!-- /.panel panel-default -->
                 <div class="panel panel-default">
-                    <div class="panel-heading text-center"><strong>Hình thức thanh toán</strong></div><!-- /.panel-heading -->
+                    <div class="panel-heading text-center"><strong>Hình thức thanh toán <span class="red-star">*</span></strong></div><!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="col-md-12">
                             <div class="row">
@@ -203,12 +115,12 @@
                     </div><!-- /.panel-body -->
                 </div><!-- /.panel panel-default -->
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block btn btn-action" id="createbooking">Tạo Booking</button>
+                    <button type="button" class="btn btn-primary btn-block btn-action" id="createbooking" data-url="<?php echo base_url('admin/bookings/getInfo'); ?>">Tạo Booking</button>
                 </div>
-            </form>
+            </div>
+            <div class="col-md-4 col-xs-12 pull-right" id="payment_info" style="display: none;"></div>
         </div>
-        <div class="col-md-4 col-xs-12 pull-right" id="payment_info" style="display: none;"></div>
-    </div>
+    </form>
 </div>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/adminbooking.js"></script>
 <script type="text/javascript">
@@ -286,6 +198,7 @@
                 var zero2 = new Padder(2);
                 $('#number_night').html(zero2.pad(number_night));
             }
+            $('#hotel_id').trigger('change');
         }).data('datepicker');
         
         $('.payment_method').click(function () {
@@ -321,6 +234,8 @@
         });
         
         $('#hotel_id').change(function () {
+            $('#payment_info').hide().html('');
+            
             $.ajax({
                 url: '<?php echo base_url() . "admin/hotelajaxcalls/rooms_by_hotel"; ?>',
                 type: 'GET',
@@ -330,15 +245,16 @@
                     checkout: $('#checkout').val()
                 },
                 dataType: 'html',
+                beforeSend: function() {
+                    $('.result').html('<div id="rotatingDiv"></div>');
+                },
                 success: function (data) {
                     $('#rooms_info').html(data);
                 }
             });
         });
         
-        $('#createbooking').on('click', function(evt) {
-            evt.preventDefault();
-            
+        $('#createbooking').on('click', function() {
             var isValid = true;
             
             if ($('#hotel_id').val() === '') {
@@ -367,14 +283,21 @@
             
             if (isValid) {
                 //call ajax get information
-                var form = $(this).parents('form');
+                var form = $('#bookingdetails');
+                var url = $(this).data('url');
+                $('#payment_info').html('<div id="rotatingDiv"></div>').show();
+                
+                $('html, body').animate({
+                    scrollTop: $('body').offset().top - 100
+                }, 'slow');
+                
                 $.ajax({
-                    url: $(form).attr('action'),
-                    method: $(form).attr('method'),
+                    url: url,
+                    method: 'post',
                     data: $(form).serialize(),
                     dataType: 'html',
                     beforeSend: function() {
-                        $('#payment_info').html('Loading...').show();
+                        $('.result').html('<div id="rotatingDiv"></div>');
                     },
                     success: function(response) {
                         $('#payment_info').html(response).show();

@@ -328,19 +328,19 @@ class Bookings extends MX_Controller
         } else {
             $this->load->library('hotels/hotels_lib');
             
-            $hotel_id = $this->input->get('hotel_id');
-            $checkin = $this->input->get('checkin');
-            $checkout = $this->input->get('checkout');
+            $hotel_id = $this->input->post('hotel_id');
+            $checkin = $this->input->post('checkin');
+            $checkout = $this->input->post('checkout');
             
             $date1 = new \DateTime(date('Y-m-d', strtotime(str_replace("/", "-", $checkin))));
             $date2 = new \DateTime(date('Y-m-d', strtotime(str_replace("/", "-", $checkout))));
 
             // this calculates the diff between two dates, which is the number of nights
             $stay = $date2->diff($date1)->format("%a");
-            $adults = (int)$this->input->get('adults');
-            $child = (int)$this->input->get('child');
-            $room_quantity = $this->input->get('room_quantity');
-            $extra_beds = $this->input->get('extra_beds');
+            $adults = (int)$this->input->post('adults');
+            $child = (int)$this->input->post('child');
+            $room_quantity = $this->input->post('room_quantity');
+            $extra_beds = $this->input->post('extra_beds');
             $totalRooms = 0;
             if (!empty($room_quantity)) {
                 foreach ($room_quantity as $tmp) {
@@ -351,10 +351,11 @@ class Bookings extends MX_Controller
             $this->load->model('admin/payments_model');
             $this->data['error'] = "";
             $detailHotel = $this->hotels_model->getDetail($hotel_id);
-
-            $roomIdArr = $this->input->get('room_id');
-            $roomsCountArr = $this->input->get('room_quantity');
-            $extrabeds = $this->input->get('extrabeds');
+            
+            $roomIdArr = $this->input->post('room_id');
+            $roomsCountArr = $this->input->post('room_quantity');
+            $extrabeds = $this->input->post('extrabeds');
+            $bookInfo = [];
             foreach ($roomIdArr as $roomID) {
                 $roomsCount = $roomsCountArr[$roomID];
                 if ($roomsCount > 0) {
@@ -382,7 +383,7 @@ class Bookings extends MX_Controller
             $this->data['adults'] = $adults;
             $this->data['child'] = $child;
             $this->data['totalRooms'] = $totalRooms;
-
+            
             $this->data['room_id'] = json_encode(array_keys($bookInfo));
             $this->data['room_quantity'] = json_encode($room_quantity);
             $this->data['extra_beds'] = json_encode($extra_beds);
