@@ -59,6 +59,7 @@ class Bookings extends MX_Controller
             $params = [];
             $params['booking_type'] = $this->input->get('booking_type') ? $this->input->get('booking_type') : 'hotels';
             $params['booking_status'] = $this->input->get('booking_status') ? $this->input->get('booking_status') : null;
+            $params['booking_ref_no'] = $this->input->get('booking_ref_no') ? $this->input->get('booking_ref_no') : null;
             $params['ai_last_name'] = $this->input->get('ai_last_name') ? $this->input->get('ai_last_name') : null;
             $limit = $this->input->get('limit') ? $this->input->get('limit') : 50;
             $page = $this->input->get('page') ? $this->input->get('page') : 1;
@@ -71,7 +72,6 @@ class Bookings extends MX_Controller
                 $userid = $this->session->userdata('pt_logged_supplier');
             }
 
-            $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid);
             $this->data['content'] = $data;
             $this->data['params'] = $params;
             $this->data['page_title'] = 'Quản lý booking';

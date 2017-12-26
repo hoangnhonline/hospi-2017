@@ -311,13 +311,13 @@ class Bookings_model extends CI_Model
 
         $paymethod = $this->input->post('checkout-type');
         $bookingtype = $this->input->post('btype');
-        $sent_invoice = $this->input->post('sent_invoice');
-        $nguoikhac = $this->input->post('nguoikhac');
-        $guest = $this->input->post('guest');
-        $sentto = $this->input->post('sentto');
-        $company = $this->input->post('company');
-        $mst = $this->input->post('mst');
-        $companyadd = $this->input->post('companyadd');
+        $sent_invoice = $this->input->post('sent_invoice') ? $this->input->post('sent_invoice') : 'No';
+        $nguoikhac = $this->input->post('nguoikhac') ? $this->input->post('nguoikhac') : 'No';
+        $guest = $this->input->post('guest') ? $this->input->post('guest') : 'guest';
+        $sentto = $this->input->post('sentto') ? $this->input->post('sentto') : Null;
+        $company = $this->input->post('company') ? $this->input->post('company') : Null;
+        $mst = $this->input->post('mst') ? $this->input->post('mst') : Null;
+        $companyadd = $this->input->post('companyadd') ? $this->input->post('companyadd') : Null;
         $itemid = $this->input->post('itemid');
 
         if ($paymethod == "cod") {
@@ -369,11 +369,10 @@ class Bookings_model extends CI_Model
                 $checkin = $this->input->post('checkin');
                 $checkout = $this->input->post('checkout');
                 $roomscount = $this->input->post('roomscount');
-                $extrabeds = $this->input->post('so_giuong_phu');
-                $extrabedscharges = $this->input->post('phi_giuong_phu');
-                $honeymoon = $this->input->post('honeymoon');
-                $phi_dich_vu = $this->input->post('phi_dich_vu');
-                $phi_vat = $this->input->post('phi_vat');
+                $extrabeds = $this->input->post('so_giuong_phu') ? $this->input->post('so_giuong_phu') : 0;
+                $extrabedscharges = $this->input->post('phi_giuong_phu') ? $this->input->post('phi_giuong_phu') : 0;
+                $phi_dich_vu = $this->input->post('phi_dich_vu') ? $this->input->post('phi_dich_vu') : 0;
+                $phi_vat = $this->input->post('phi_vat') ? $this->input->post('phi_vat') : 0;
 
                 $checkin = databaseDate($checkin);
                 $checkout = databaseDate($checkout);
@@ -400,7 +399,6 @@ class Bookings_model extends CI_Model
                     'booking_amount_paid' => $amount_paid,
                     'booking_payment_date' => $payment_date,
                     'booking_cancellation_request' => $cancellation_request,
-                    'honeymoon' => $honeymoon,
                     'nguoikhac' => $nguoikhac,
                     'sent_invoice' => $sent_invoice,
                     'company' => $company,
@@ -430,16 +428,14 @@ class Bookings_model extends CI_Model
                     $roomscounts = json_decode($roomscount, true);
 
                     foreach ($room_ids as $room_id) {
-                        $rdata = array(
+                        $this->db->insert('pt_booked_rooms', [
                             'booked_booking_id' => $book_id,
                             'booked_room_id' => $room_id,
                             'booked_room_count' => $roomscounts[$room_id],
                             'booked_checkin' => $checkin,
                             'booked_checkout' => $checkout,
-                            'booked_booking_status' => 'unpaid'
-                        );
-
-                        $this->db->insert('pt_booked_rooms', $rdata);
+                            'booked_booking_status' => $status
+                        ]);
                     }
                 } elseif ($bookingtype == "cars") {
                     /*$cdata = array(
@@ -509,16 +505,14 @@ class Bookings_model extends CI_Model
                 $surcharge_info = json_decode($surcharge, true);
 
                 foreach ($surcharge_info as $id => $value) {
-                    $rdata = array(
+                    $this->db->insert('pt_booked_rooms', [
                         'booked_booking_id' => $book_id,
                         'booked_room_id' => $id,
                         'booked_room_count' => $value,
                         'booked_checkin' => $checkin,
                         'booking_checkout' => $checkin,
-                        'booked_booking_status' => 'unpaid'
-                    );
-
-                    $this->db->insert('pt_booked_rooms', $rdata);
+                        'booked_booking_status' => $status
+                    ]);
                 }
             }
 

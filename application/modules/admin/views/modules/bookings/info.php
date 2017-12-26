@@ -91,10 +91,8 @@
                 $room_quantity = json_decode($room_quantity, true);
                 $extra_beds = json_decode($extra_beds, true);
 
-                $priceTotal = $so_giuong_phu = 0;
+                $priceTotal = $so_giuong_phu = $priceExtraBedTotal = 0;
                 if (!empty($room)) {
-
-                    $priceExtraBedTotal = 0;
                     foreach ($room as $roomId => $rDetail) {
                         $priceOne = 0;
                         $priceExtraBed = 0;
@@ -105,7 +103,6 @@
                         $priceOne = $priceOne / count($rDetail->Info['detail']);
                         $priceExtraBedTotal += $priceExtraBed * $extra_beds[$roomId];
                         $so_giuong_phu += $extra_beds[$roomId];
-
 
                         $quantity = $room_quantity[$roomId];
                         ?>
@@ -120,7 +117,8 @@
                         <?php
                         $priceTotal += $rDetail->Info['total'] * $quantity;
                     }
-                } ?>
+                }
+                ?>
 
                 <li>
                     <span class="k">Thành tiền:</span>
@@ -254,17 +252,14 @@
 </div>
 <div class="form-group">
     <input type="hidden" name="country" value="VN" id="country"/>
-    <input type="hidden" id="itemid" name="itemid" value="<?php echo $module->hotel_id; ?>"/>
-    <input type="hidden" name="checkout" value="<?php echo $checkout; ?>"/>
-    <input type="hidden" name="adults" value="<?php echo $adults; ?>"/>
-    <input type="hidden" name="child" value="<?php echo $child; ?>"/>
+    <input type="hidden" name="itemid" value="<?php echo $module->hotel_id; ?>"/>
+    <input type="hidden" name="nguoikhac" value="No"/>
     <input type="hidden" name="nights" value="<?php echo $stay; ?>"/>
     <input type="hidden" id="couponid" name="couponid" value=""/>
-    <input type="hidden" id="btype" name="btype" value="hotels"/>
+    <input type="hidden" name="btype" value="hotels"/>
     <input type="hidden" name="subitemid" value="<?php echo $room_id; ?>"/>
     <input type="hidden" name="roomscount" value='<?php echo json_encode($room_quantity); ?>'/>
     <input type="hidden" name="bedscount" value='<?php echo json_encode($extra_beds); ?>'/>
-    <input type="hidden" name="checkin" value="<?php echo $checkin; ?>"/>
     <button type="submit" name="guest" class="btn btn-block btn btn-action completebook" onclick="return completebook('<?php echo base_url(); ?>','Select Payment Method');" style="display: none;">Lưu Booking</button>
 </div>
 <script type="text/javascript">

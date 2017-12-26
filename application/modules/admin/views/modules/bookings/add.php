@@ -63,8 +63,8 @@
                             </div><!-- /.row -->
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <label for="adult">Người lớn <span class="red-star">*</span></label>
-                                    <select class="form-control" id="adult" name="adult">
+                                    <label for="adults">Người lớn <span class="red-star">*</span></label>
+                                    <select class="form-control" id="adults" name="adults">
                                         <?php for ($i = 1; $i <= 10; $i ++) { ?>
                                             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                         <?php } ?>
@@ -301,6 +301,11 @@
                     },
                     success: function(response) {
                         $('#payment_info').html(response).show();
+                        if ($('input[name="checkout-type"]:checked').size() > 0) {
+                            $('.completebook').show();
+                        } else {
+                            $('.completebook').hide();
+                        }
                     }
                 });
             } else {
