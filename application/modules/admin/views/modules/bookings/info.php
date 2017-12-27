@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading text-center"><strong>Thông tin đơn phòng</strong></div><!-- /.panel-heading -->
+    <div class="panel-heading text-center"><strong>Thông tin phòng</strong></div><!-- /.panel-heading -->
     <div class="panel-body">
         <dl class="cb-img-name">
             <dt>
@@ -119,7 +119,6 @@
                     }
                 }
                 ?>
-
                 <li>
                     <span class="k">Thành tiền:</span>
                     <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>
@@ -232,7 +231,7 @@
                 <li style="border: none;">
                     <div>Ghi chú</div>
                     <div>
-                        <textarea class="form-control" rows="5" name="cancellation_request"></textarea>
+                        <textarea class="form-control" rows="5" name="payment_info"></textarea>
                     </div>
                 </li>
             </ul>
@@ -243,10 +242,10 @@
     <div class="panel-heading text-center"><strong>Điều kiện hủy phòng</strong></div><!-- /.panel-heading -->
     <div class="box">
         <div class="box_body2">
-            <p>Giai đoạn 12.01.2017 - 31.10.2017</p>
-            <p>+ Hủy phòng trước 24 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): không tính phí</p>
-            <p>+ Hủy phòng trong vòng 23 ngày đến 13 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): tính 50% tổng tiền phòng</p>
-            <p>+ Hủy phòng trong vòng 12 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ Tết): tính 100% tổng tiền phòng</p>
+            <p>Giai đoạn 12.01.2017 - 31.10.2017:</p>
+            <p>+ Hủy phòng trước 24 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): không tính phí.</p>
+            <p>+ Hủy phòng trong vòng 23 ngày đến 13 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): tính 50% tổng tiền phòng.</p>
+            <p>+ Hủy phòng trong vòng 12 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ Tết): tính 100% tổng tiền phòng.</p>
         </div>
     </div>
 </div>

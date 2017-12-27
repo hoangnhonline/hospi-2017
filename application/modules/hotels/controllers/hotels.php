@@ -544,7 +544,7 @@ class Hotels extends MX_Controller
             foreach ($roomIdArr as $roomID) {
                 $roomsCount = $roomsCountArr[$roomID];
                 if ($roomsCount > 0) {
-                    $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotelID, $roomID, $roomsCount, $extrabeds, '', '');
+                    $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotelID, $roomID, $roomsCount, $extrabeds, $checkin, $checkout);
                 }
             }
 

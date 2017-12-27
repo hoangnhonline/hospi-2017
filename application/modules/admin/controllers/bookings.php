@@ -237,7 +237,25 @@ class Bookings extends MX_Controller
         $this->emails_model->resend_invoice($invoicedetails);
     }
 
-    function edit($module, $id)
+    function add()
+    {
+        $isadmin = $this->session->userdata('pt_logged_admin');
+        $userid = '';
+        if (empty($isadmin)) {
+            $userid = $this->session->userdata('pt_logged_supplier');
+        }
+
+        if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
+            backError_404($this->data);
+        } else {
+            $this->data['main_content'] = 'modules/bookings/add';
+            $this->data['page_title'] = 'Tạo Booking';
+            $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
+            $this->load->view('template', $this->data);
+        }
+    }
+
+    /*function edit($module, $id)
     {
         if (!$this->editpermission) {
             echo "<center><h1>Access Denied</h1></center>";
@@ -295,9 +313,9 @@ class Bookings extends MX_Controller
                 redirect(base_url() . 'admin/bookings');
             }
         }
-    }
+    }*/
 
-    function add()
+    function edit($id)
     {
         $isadmin = $this->session->userdata('pt_logged_admin');
         $userid = '';
@@ -308,10 +326,32 @@ class Bookings extends MX_Controller
         if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
             backError_404($this->data);
         } else {
-            $this->data['main_content'] = 'modules/bookings/add';
-            $this->data['page_title'] = 'Tạo Booking';
+            $this->load->library('hotels/hotels_lib');
+            
+            $refNo = $this->bookings_model->getBookingRefNo($id);
+            $booking_detail = $this->bookings_model->getBookinginfo($refNo);
+            $hotel_detail = $this->hotels_model->getDetail($booking_detail->booking_item);
+            $rooms_data = $this->bookings_model->getBookingRooms($id, date('d/m/Y', strtotime($booking_detail->booking_checkin)), date('d/m/Y', strtotime($booking_detail->booking_checkout)));
+            //var_dump('<pre>', $rooms_data);die;
+            $this->data['booking'] = $booking_detail;
+            $this->data['hotel'] = $hotel_detail;
+            $this->data['rooms'] = $rooms_data;
             $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
+            $this->data['main_content'] = 'modules/bookings/edit';
+            $this->data['page_title'] = 'Chỉnh sửa Booking';
             $this->load->view('template', $this->data);
+        }
+    }
+
+    function update($id)
+    {
+        if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
+            backError_404($this->data);
+        } else {
+            $this->bookings_model->update_booking();
+            $this->session->set_flashdata('flashmsgs', 'Booking Updated Successfully!');
+            
+            redirect(base_url('admin/bookings'));
         }
     }
 
@@ -359,10 +399,10 @@ class Bookings extends MX_Controller
             foreach ($roomIdArr as $roomID) {
                 $roomsCount = $roomsCountArr[$roomID];
                 if ($roomsCount > 0) {
-                    $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotel_id, $roomID, $roomsCount, $extrabeds, '', '');
+                    $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotel_id, $roomID, $roomsCount, $extrabeds, $checkin, $checkout);
                 }
             }
-
+            
             $this->data['module'] = $detailHotel;
             $this->data['stay'] = $stay;
             $this->data['extraChkUrl'] = $bookInfo['hotel']->extraChkUrl;
