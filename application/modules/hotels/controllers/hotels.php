@@ -410,7 +410,7 @@ class Hotels extends MX_Controller
         if (!$page) {
             $page = null;
         }
-
+        
         if (empty($country)) {
             $surl = http_build_query($_GET);
             $locationInfo = pt_LocationsInfo($cityid);
@@ -426,7 +426,7 @@ class Hotels extends MX_Controller
                     $title = $this->hotels_lib->title;
                     $slug = $this->hotels_lib->slug;
                     if (!empty($title)) {
-                        redirect('hotels/' . $slug);
+                        redirect(base_url() . 'hotels/' . $slug);
                     }
                 }
         } else {

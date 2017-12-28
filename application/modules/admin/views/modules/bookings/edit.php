@@ -120,17 +120,13 @@
                                 <div class="col-md-6 form-group">
                                     <label for="adults">Người lớn <span class="red-star">*</span></label>
                                     <select class="form-control" disabled="disabled">
-                                        <?php for ($i = 1; $i <= 10; $i ++) { ?>
-                                            <option value="<?php echo $i; ?>"<?php echo $booking->booking_adults == $i ? ' selected="selected"' : ''; ?>><?php echo $i; ?></option>
-                                        <?php } ?>
+                                        <option value="<?php echo $booking->booking_adults; ?>"><?php echo $booking->booking_adults; ?></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="child">Trẻ em</label>
                                     <select class="form-control" disabled="disabled">
-                                        <?php for ($i = 0; $i <= 10; $i ++) { ?>
-                                            <option value="<?php echo $i; ?>"<?php echo $booking->booking_child == $i ? ' selected="selected"' : ''; ?>><?php echo $i; ?></option>
-                                        <?php } ?>
+                                        <option value="<?php echo $booking->booking_child; ?>"><?php echo $booking->booking_child; ?></option>
                                     </select>
                                 </div>
                             </div><!-- /.row -->
