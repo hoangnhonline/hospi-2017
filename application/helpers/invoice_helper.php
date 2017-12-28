@@ -1,6 +1,10 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
 
 if (!function_exists('invoiceDetails')) {
+
     function invoiceDetails($id, $ref, $reviewData = null)
     {
         $CI = get_instance();
@@ -9,36 +13,36 @@ if (!function_exists('invoiceDetails')) {
         $CI->db->where('pt_bookings.booking_ref_no', $ref);
         $CI->db->join('pt_accounts', 'pt_bookings.booking_user = pt_accounts.accounts_id', 'left');
         $invoiceData = $CI->db->get('pt_bookings')->result();
-        $bookingsubitem = json_decode($invoiceData[0]->booking_subitem);
-        $bookingExtras = json_decode($invoiceData[0]->booking_extras);
+        $invoiceData = $invoiceData[0];
+        $bookingsubitem = json_decode($invoiceData->booking_subitem);
+        $bookingExtras = json_decode($invoiceData->booking_extras);
         $bookingExtrasInfo = array();
         $subItemData = "";
         $itemData = "";
-        $fullExpiry = date('F j Y', $invoiceData[0]->booking_expiry);
+        $fullExpiry = date('F j Y', $invoiceData->booking_expiry);
         $bookedItemInfo = "";
 
         $imgPathExtras = "";
-        if ($invoiceData[0]->booking_type == 'hotels') {
+        if ($invoiceData->booking_type == 'hotels') {
             $imgPathExtras = PT_EXTRAS_IMAGES;
-        } else if ($invoiceData[0]->booking_type == 'tours') {
+        } else if ($invoiceData->booking_type == 'tours') {
             $imgPathExtras = PT_TOURS_EXTRAS_IMAGES;
-        } else if ($invoiceData[0]->booking_type == 'cars') {
+        } else if ($invoiceData->booking_type == 'cars') {
             $imgPathExtras = PT_CARS_EXTRAS_IMAGES;
         }
 
         if (!empty($bookingExtras)) {
-
             foreach ($bookingExtras as $bext) {
                 $extTitle = getExtraTitleImg($bext->id);
 
-                $bookingExtrasInfo[] = (object)array("id" => $bext->id, "title" => $extTitle->title, "price" => $bext->price, "thumbnail" => $imgPathExtras . $extTitle->image);
+                $bookingExtrasInfo[] = (object) array("id" => $bext->id, "title" => $extTitle->title, "price" => $bext->price, "thumbnail" => $imgPathExtras . $extTitle->image);
             }
-
         }
 
-        if ($invoiceData[0]->booking_type == 'hotels') {
+        if ($invoiceData->booking_type == 'hotels') {
             $CI->load->library('hotels/hotels_lib');
-            $CI->hotels_lib->set_id($invoiceData[0]->booking_item);
+            $CI->load->model('admin/bookings_model');
+            $CI->hotels_lib->set_id($invoiceData->booking_item);
             $CI->hotels_lib->hotel_short_details();
             $itemData = array(
                 "title" => $CI->hotels_lib->title,
@@ -48,19 +52,10 @@ if (!function_exists('invoiceDetails')) {
                 'address' => $CI->hotels_lib->mapAddress,
                 'hotel_policy' => $CI->hotels_lib->hotel_policy,
             );
-            $roomTitle = $CI->hotels_lib->getRoomTitleOnly($bookingsubitem->id);
-            $subItemData = (object)array(
-                'id' => $bookingsubitem->id,
-                'title' => $roomTitle,
-                'price' => $bookingsubitem->price,
-                'quantity' => $bookingsubitem->count,
-                'totalNightsPrice' => $bookingsubitem->price * $bookingsubitem->count * $invoiceData[0]->booking_nights,
-                'total' => $bookingsubitem->price * $bookingsubitem->count);
-
-
-        } elseif ($invoiceData[0]->booking_type == 'tours') {
+            $subItemData = $CI->bookings_model->getBookingRooms($invoiceData->booking_id, date('d/m/Y', strtotime($invoiceData->booking_checkin)), date('d/m/Y', strtotime($invoiceData->booking_checkout)));
+        } elseif ($invoiceData->booking_type == 'tours') {
             $CI->load->library('tours/tours_lib');
-            $CI->tours_lib->set_id($invoiceData[0]->booking_item);
+            $CI->tours_lib->set_id($invoiceData->booking_item);
             $CI->tours_lib->tour_short_details();
             $itemData = array(
                 "title" => $CI->tours_lib->title,
@@ -73,16 +68,16 @@ if (!function_exists('invoiceDetails')) {
             );
             $subItemData = $bookingsubitem;
             /*
-            $subItemData = (object)array(
+              $subItemData = (object)array(
               'id' => $bookingsubitem->id,
               'title' => $roomTitle,
               'price' => $bookingsubitem->price,
               'quantity' => $bookingsubitem->count,
-              'totalNightsPrice' => $bookingsubitem->price * $bookingsubitem->count * $invoiceData[0]->booking_nights,
-              'total' => $bookingsubitem->price * $bookingsubitem->count);*/
-        } elseif ($invoiceData[0]->booking_type == 'cars') {
+              'totalNightsPrice' => $bookingsubitem->price * $bookingsubitem->count * $invoiceData->booking_nights,
+              'total' => $bookingsubitem->price * $bookingsubitem->count); */
+        } elseif ($invoiceData->booking_type == 'cars') {
             $CI->load->library('cars/cars_lib');
-            $CI->cars_lib->set_id($invoiceData[0]->booking_item);
+            $CI->cars_lib->set_id($invoiceData->booking_item);
             $CI->cars_lib->car_short_details();
             $itemData = array(
                 "title" => $CI->cars_lib->title,
@@ -92,84 +87,85 @@ if (!function_exists('invoiceDetails')) {
             );
             $subItemData = $bookingsubitem;
             $bookedItemInfo = $CI->cars_lib->bookedInvoiceInfo($id);
-
         }
 
-        $currencySymbol = $invoiceData[0]->booking_curr_symbol;
+        $currencySymbol = $invoiceData->booking_curr_symbol;
         if (empty($currencySymbol)) {
             $currencySymbol = "";
         }
 
-        $returnData = (object)array("id" => $invoiceData[0]->booking_id,
-            "module" => $invoiceData[0]->booking_type,
-            "itemid" => $invoiceData[0]->booking_item,
-            "paymethod" => $invoiceData[0]->booking_payment_type,
-            "code" => $invoiceData[0]->booking_ref_no,
-            "nights" => $invoiceData[0]->booking_nights,
-            "checkin" => fromDbToAppFormatDate($invoiceData[0]->booking_checkin),
-            "checkout" => fromDbToAppFormatDate($invoiceData[0]->booking_checkout),
-            "date" => pt_show_date_php($invoiceData[0]->booking_date),
-            "currCode" => $invoiceData[0]->booking_curr_code,
-            "currSymbol" => $currencySymbol,
-            "checkoutAmount" => $invoiceData[0]->booking_deposit,
-            "checkoutTotal" => $invoiceData[0]->booking_total,
-            "status" => $invoiceData[0]->booking_status,
-            "accountEmail" => $invoiceData[0]->accounts_email,
-            "bookingID" => $invoiceData[0]->booking_id,
-            "expiry" => pt_show_date_php($invoiceData[0]->booking_expiry),
-            "expiryUnixtime" => $invoiceData[0]->booking_expiry,
-            "bookingDate" => pt_show_date_php($invoiceData[0]->booking_date),
-            "title" => $itemData['title'],
-            "thumbnail" => $itemData['thumbnail'],
-            "stars" => $itemData['stars'],
-            "location" => $itemData['location'],
-            "address" => $itemData['address'],
-            "nights" => $invoiceData[0]->booking_nights,
-            "tax" => $invoiceData[0]->booking_tax,
-            "subItem" => $subItemData,
-            "extraBeds" => $invoiceData[0]->booking_extra_beds,
-            "extraBedsCharges" => $invoiceData[0]->booking_extra_beds_charges,
-            "cancelRequest" => $invoiceData[0]->booking_cancellation_request,
-            "expiryFullDate" => $fullExpiry,
-            "reviewsData" => $reviewData,
-            "bookingExtras" => $bookingExtrasInfo,
-            "amountPaid" => $invoiceData[0]->booking_amount_paid,
-            "bookingUser" => $invoiceData[0]->booking_user,
-            "userCountry" => $invoiceData[0]->ai_country,
-            "userFullName" => $invoiceData[0]->ai_first_name . " " . $invoiceData[0]->ai_last_name,
-            "userMobile" => $invoiceData[0]->ai_mobile,
-            "userEmail" => $invoiceData[0]->accounts_email,
-            "userAddress" => $invoiceData[0]->ai_address_1 . " " . $invoiceData[0]->ai_address_2,
-            "nguoikhac" => $invoiceData[0]->nguoikhac,
-            "sent_invoice" => $invoiceData[0]->sent_invoice,
-            "company" => $invoiceData[0]->company,
-            "mst" => $invoiceData[0]->mst,
-            "companyadd" => $invoiceData[0]->companyadd,
-            "sentto" => $invoiceData[0]->sentto,
-            "guest" => $invoiceData[0]->guest,
-            "additionaNotes" => $invoiceData[0]->booking_additional_notes,
-            "couponCode" => $invoiceData[0]->booking_coupon,
-            "couponRate" => $invoiceData[0]->booking_coupon_rate,
-            "remainingAmount" => $invoiceData[0]->booking_remaining,
-            "guestInfo" => json_decode($invoiceData[0]->booking_guest_info),
-            "bookedItemInfo" => $bookedItemInfo,
-            "honeymoon" => $invoiceData[0]->honeymoon,
-            "paymentInfo" => $invoiceData[0]->booking_payment_info,
-            "paymentmethod" => getPayment($invoiceData[0]->booking_payment_type),
-            'hotel_policy' => $itemData['hotel_policy'],
-            'tourDays' => $itemData['tourDays'],
-            'tourNights' => $itemData['tourNights'],
-            'tour_transportation' => $itemData['tour_transportation']
-
+        $returnData = (object) array(
+                    "id" => $invoiceData->booking_id,
+                    "module" => $invoiceData->booking_type,
+                    "itemid" => $invoiceData->booking_item,
+                    "paymethod" => $invoiceData->booking_payment_type,
+                    "code" => $invoiceData->booking_ref_no,
+                    "checkin" => fromDbToAppFormatDate($invoiceData->booking_checkin),
+                    "checkout" => fromDbToAppFormatDate($invoiceData->booking_checkout),
+                    "date" => pt_show_date_php($invoiceData->booking_date),
+                    "currCode" => $invoiceData->booking_curr_code,
+                    "currSymbol" => $currencySymbol,
+                    "checkoutAmount" => $invoiceData->booking_deposit,
+                    "checkoutTotal" => $invoiceData->booking_total,
+                    "status" => $invoiceData->booking_status,
+                    "accountEmail" => $invoiceData->accounts_email,
+                    "bookingID" => $invoiceData->booking_id,
+                    "expiry" => pt_show_date_php($invoiceData->booking_expiry),
+                    "expiryUnixtime" => $invoiceData->booking_expiry,
+                    "bookingDate" => pt_show_date_php($invoiceData->booking_date),
+                    "title" => $itemData['title'],
+                    "thumbnail" => $itemData['thumbnail'],
+                    "stars" => $itemData['stars'],
+                    "location" => $itemData['location'],
+                    "address" => $itemData['address'],
+                    "tax" => $invoiceData->booking_tax,
+                    "paymethodTax" => $invoiceData->booking_paymethod_tax,
+                    "subItem" => $subItemData,
+                    "extraBeds" => $invoiceData->booking_extra_beds,
+                    "extraBedsCharges" => $invoiceData->booking_extra_beds_charges,
+                    "cancelRequest" => $invoiceData->booking_cancellation_request,
+                    "expiryFullDate" => $fullExpiry,
+                    "reviewsData" => $reviewData,
+                    "bookingExtras" => $bookingExtrasInfo,
+                    "nights" => $invoiceData->booking_nights > 9 ? $invoiceData->booking_nights : '0' . $invoiceData->booking_nights,
+                    "adults" => $invoiceData->booking_adults > 9 ? $invoiceData->booking_adults : '0' . $invoiceData->booking_adults,
+                    "child" => $invoiceData->booking_child > 9 ? $invoiceData->booking_child : '0' . $invoiceData->booking_child,
+                    "amountPaid" => $invoiceData->booking_amount_paid,
+                    "bookingUser" => $invoiceData->booking_user,
+                    "userCountry" => $invoiceData->ai_country,
+                    "userFullName" => $invoiceData->ai_first_name . " " . $invoiceData->ai_last_name,
+                    "userMobile" => $invoiceData->ai_mobile,
+                    "userEmail" => $invoiceData->accounts_email,
+                    "userAddress" => $invoiceData->ai_address_1 . " " . $invoiceData->ai_address_2,
+                    "nguoikhac" => $invoiceData->nguoikhac,
+                    "sent_invoice" => $invoiceData->sent_invoice,
+                    "company" => $invoiceData->company,
+                    "mst" => $invoiceData->mst,
+                    "companyadd" => $invoiceData->companyadd,
+                    "sentto" => $invoiceData->sentto,
+                    "guest" => $invoiceData->guest,
+                    "additionaNotes" => $invoiceData->booking_additional_notes,
+                    "couponCode" => $invoiceData->booking_coupon,
+                    "couponRate" => $invoiceData->booking_coupon_rate,
+                    "remainingAmount" => $invoiceData->booking_remaining,
+                    "guestInfo" => json_decode($invoiceData->booking_guest_info),
+                    "bookedItemInfo" => $bookedItemInfo,
+                    "honeymoon" => $invoiceData->honeymoon,
+                    "paymentInfo" => $invoiceData->booking_payment_info,
+                    "paymentmethod" => getPayment($invoiceData->booking_payment_type),
+                    'hotel_policy' => $itemData['hotel_policy'],
+                    'tourDays' => $itemData['tourDays'],
+                    'tourNights' => $itemData['tourNights'],
+                    'tour_transportation' => $itemData['tour_transportation']
         );
 
         return $returnData;
-
-
     }
+
 }
 
 if (!function_exists('pt_get_einvoice_details')) {
+
     function pt_get_einvoice_details($id, $itid)
     {
         $CI = get_instance();
@@ -180,59 +176,59 @@ if (!function_exists('pt_get_einvoice_details')) {
         $invoiceData = $CI->db->get('pt_ean_booking')->result();
 
         /* $returnData = (object)array("id" => $invoiceData[0]->book_id,
-               "module" => "ean",
-               "itemid" => $invoiceData[0]->book_hotelid,
-               "paymethod" => "",
-               "code" => "",
-               "nights" => $invoiceData[0]->book_nights,
-               "checkin" => date("M j, Y", strtotime($invoiceData[0]->book_checkin)),
-               "checkout" => date("M j, Y", strtotime($invoiceData[0]->book_checkout)),
-               "date" => pt_show_date_php($invoiceData[0]->book_date),
-               "currCode" => $invoiceData[0]->book_currency,
-               "currSymbol" => "",
-               "checkoutAmount" => $invoiceData[0]->book_total,
-               "checkoutTotal" => $invoiceData[0]->book_total,
-               "status" => "paid",
-               "accountEmail" => "",
-               "bookingID" => $invoiceData[0]->book_id,
-               "expiry" => "",
-               "expiryUnixtime" => "",
-               "bookingDate" => pt_show_date_php($invoiceData[0]->book_date),
-               "title" => $invoiceData[0]->book_hotel,
-               "thumbnail" => "",
-               "stars" => "",
-               "location" => "",
-               "nights" => $invoiceData[0]->book_nights,
-               "tax" => "",
-               "subItem" => "",
-               "extraBeds" => "",
-               "extraBedsCharges" => "",
-               "cancelRequest" => "",
-               "expiryFullDate" => "",
-               "reviewsData" => "",
-               "bookingExtras" => "",
-               "amountPaid" => "",
-               "bookingUser" => $invoiceData[0]->book_user,
-               "userCountry" => $invoiceData[0]->ai_country,
-               "userFullName" => $invoiceData[0]->ai_first_name . " " . $invoiceData[0]->ai_last_name,
-               "userMobile" => $invoiceData[0]->ai_mobile,
-               "userAddress" => $invoiceData[0]->ai_address_1. " " . $invoiceData[0]->ai_address_2,
-               "additionaNotes" => "",
-               "couponCode" => "",
-               "couponRate" => "",
-               "remainingAmount" => "",
-               "guestInfo" => "",
-               "book_response" => $invoiceData[0]->book_response
+          "module" => "ean",
+          "itemid" => $invoiceData[0]->book_hotelid,
+          "paymethod" => "",
+          "code" => "",
+          "nights" => $invoiceData[0]->book_nights,
+          "checkin" => date("M j, Y", strtotime($invoiceData[0]->book_checkin)),
+          "checkout" => date("M j, Y", strtotime($invoiceData[0]->book_checkout)),
+          "date" => pt_show_date_php($invoiceData[0]->book_date),
+          "currCode" => $invoiceData[0]->book_currency,
+          "currSymbol" => "",
+          "checkoutAmount" => $invoiceData[0]->book_total,
+          "checkoutTotal" => $invoiceData[0]->book_total,
+          "status" => "paid",
+          "accountEmail" => "",
+          "bookingID" => $invoiceData[0]->book_id,
+          "expiry" => "",
+          "expiryUnixtime" => "",
+          "bookingDate" => pt_show_date_php($invoiceData[0]->book_date),
+          "title" => $invoiceData[0]->book_hotel,
+          "thumbnail" => "",
+          "stars" => "",
+          "location" => "",
+          "nights" => $invoiceData[0]->book_nights,
+          "tax" => "",
+          "subItem" => "",
+          "extraBeds" => "",
+          "extraBedsCharges" => "",
+          "cancelRequest" => "",
+          "expiryFullDate" => "",
+          "reviewsData" => "",
+          "bookingExtras" => "",
+          "amountPaid" => "",
+          "bookingUser" => $invoiceData[0]->book_user,
+          "userCountry" => $invoiceData[0]->ai_country,
+          "userFullName" => $invoiceData[0]->ai_first_name . " " . $invoiceData[0]->ai_last_name,
+          "userMobile" => $invoiceData[0]->ai_mobile,
+          "userAddress" => $invoiceData[0]->ai_address_1. " " . $invoiceData[0]->ai_address_2,
+          "additionaNotes" => "",
+          "couponCode" => "",
+          "couponRate" => "",
+          "remainingAmount" => "",
+          "guestInfo" => "",
+          "book_response" => $invoiceData[0]->book_response
 
-               );*/
+          ); */
 
         return $invoiceData;
-
-
     }
+
 }
 
 if (!function_exists('updateInvoiceStatus')) {
+
     function updateInvoiceStatus($invoiceid, $amount, $txnid, $paymethod, $status, $module, $totalamount)
     {
         $CI = get_instance();
@@ -258,12 +254,12 @@ if (!function_exists('updateInvoiceStatus')) {
             $CI->db->where('booked_booking_id', $invoiceid);
             $CI->db->update('pt_booked_cars', $carbookingdata);
         }
-
-
     }
+
 }
 
 if (!function_exists('updateInvoiceLogs')) {
+
     function updateInvoiceLogs($invoiceid, $logs = "")
     {
         $CI = get_instance();
@@ -275,14 +271,13 @@ if (!function_exists('updateInvoiceLogs')) {
 
             $CI->db->where('booking_id', $invoiceid);
             $CI->db->update('pt_bookings', $logData);
-
         }
-
-
     }
+
 }
 
 if (!function_exists('pt_get_selected_rooms')) {
+
     function pt_get_selected_rooms($roomstring)
     {
         $CI = get_instance();
@@ -291,16 +286,16 @@ if (!function_exists('pt_get_selected_rooms')) {
         foreach ($eachroom as $er) {
 
             $detail[] = explode("_", $er);
-
         }
 
         return $detail;
-
     }
+
 }
 
 
 if (!function_exists('pt_get_room_title')) {
+
     function pt_get_room_title($id)
     {
         $CI = get_instance();
@@ -309,12 +304,13 @@ if (!function_exists('pt_get_room_title')) {
         $CI->db->where('room_id', $id);
         $res = $CI->db->get('pt_rooms')->result();
         return $res[0]->room_title;
-
     }
+
 }
 
 
 if (!function_exists('pt_booked_extras')) {
+
     function pt_booked_extras($id)
     {
         $CI = get_instance();
@@ -328,23 +324,19 @@ if (!function_exists('pt_booked_extras')) {
             if ($res[0]->extras_discount > 0) {
 
                 $result['price'] = $res[0]->extras_discount;
-
-
             } else {
 
                 $result['price'] = $res[0]->extras_basic_price;
-
-
             }
-
         }
         return $result;
-
     }
+
 }
 
 
 if (!function_exists('pt_tax_details')) {
+
     function pt_tax_details($type, $id)
     {
         $deftax = 0;
@@ -359,12 +351,10 @@ if (!function_exists('pt_tax_details')) {
         if ($defaultsettings[0]->front_tax_fixed > 0) {
             $deftax = $defaultsettings[0]->front_tax_fixed;
             $deftype = 'fixed';
-
         } elseif ($defaultsettings[0]->front_tax_percentage > 0) {
 
             $deftax = $defaultsettings[0]->front_tax_percentage;
             $deftype = 'percentage';
-
         }
 
 
@@ -378,21 +368,15 @@ if (!function_exists('pt_tax_details')) {
             if ($hotel[0]->hotel_tax_fixed > 0) {
                 $result['tax'] = $hotel[0]->hotel_tax_fixed;
                 $result['tax_type'] = 'fixed';
-
             } elseif ($hotel[0]->hotel_tax_percentage > 0) {
 
                 $result['tax'] = $hotel[0]->hotel_tax_percentage;
                 $result['tax_type'] = 'percentage';
-
             } else {
 
                 $result['tax'] = $deftax;
                 $result['tax_type'] = $deftype;
-
-
             }
-
-
         } elseif ($type == "tours") {
             $CI->db->select('tour_title,tour_tax_fixed,tour_tax_percentage');
             $CI->db->where('tour_id', $id);
@@ -402,21 +386,15 @@ if (!function_exists('pt_tax_details')) {
             if ($tour[0]->tour_tax_fixed > 0) {
                 $result['tax'] = $tour[0]->tour_tax_fixed;
                 $result['tax_type'] = 'fixed';
-
             } elseif ($tour[0]->tour_tax_percentage > 0) {
 
                 $result['tax'] = $tour[0]->tour_tax_percentage;
                 $result['tax_type'] = 'percentage';
-
             } else {
 
                 $result['tax'] = $deftax;
                 $result['tax_type'] = $deftype;
-
-
             }
-
-
         } elseif ($type == "cars") {
             $CI->db->select('car_title,car_tax_fixed,car_tax_percentage');
             $CI->db->where('car_id', $id);
@@ -426,21 +404,15 @@ if (!function_exists('pt_tax_details')) {
             if ($car[0]->tour_tax_fixed > 0) {
                 $result['tax'] = $car[0]->car_tax_fixed;
                 $result['tax_type'] = 'fixed';
-
             } elseif ($car[0]->car_tax_percentage > 0) {
 
                 $result['tax'] = $car[0]->car_tax_percentage;
                 $result['tax_type'] = 'percentage';
-
             } else {
 
                 $result['tax'] = $deftax;
                 $result['tax_type'] = $deftype;
-
-
             }
-
-
         } elseif ($type == "cruises") {
             $CI->db->select('cruise_title,cruise_tax_fixed,cruise_tax_percentage');
             $CI->db->where('cruise_id', $id);
@@ -450,31 +422,25 @@ if (!function_exists('pt_tax_details')) {
             if ($cruise[0]->cruise_tax_fixed > 0) {
                 $result['tax'] = $cruise[0]->cruise_tax_fixed;
                 $result['tax_type'] = 'fixed';
-
             } elseif ($cruise[0]->cruise_tax_percentage > 0) {
 
                 $result['tax'] = $cruise[0]->cruise_tax_percentage;
                 $result['tax_type'] = 'percentage';
-
             } else {
 
                 $result['tax'] = $deftax;
                 $result['tax_type'] = $deftype;
-
-
             }
-
-
         }
 
         return $result;
-
     }
 
 }
 
 
 if (!function_exists('pt_total_accomodates')) {
+
     function pt_total_accomodates($array)
     {
 
@@ -483,9 +449,8 @@ if (!function_exists('pt_total_accomodates')) {
         foreach ($comsep as $com) {
             $items = explode("_", $com);
             $result[$items[0]] = $items[2];
-
         }
         return $result;
-
     }
+
 }

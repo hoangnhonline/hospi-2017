@@ -245,7 +245,7 @@
                                                 Số lượng phòng:
                                             </td>
                                             <td>
-                                                <strong></strong>
+                                                <strong id="total_room"></strong>
                                             </td>
                                         </tr>
                                     </table>
@@ -257,6 +257,7 @@
                         <ul class="order-summary">
                             <?php
                             $priceTotal = 0;
+                            $totalRoom = 0;
                             foreach ($rooms as $r) {
                                 $priceOne = 0;
                                 $priceExtraBed = 0;
@@ -275,9 +276,13 @@
                                     </div>
                                 </li>
                                 <?php
+                                $totalRoom += $r->room_count;
                                 $priceTotal += $r->Info['total'] * $r->room_count;
                             }
                             ?>
+                            <script type="text/javascript">
+                                $('#total_room').html('<?php echo $totalRoom > 9 ? $totalRoom : '0' . $totalRoom; ?>');
+                            </script>
                             <li>
                                 <span class="k">Thành tiền:</span>
                                 <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>
