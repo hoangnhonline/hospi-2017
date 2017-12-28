@@ -59,6 +59,7 @@ class Bookings extends MX_Controller
             $params = [];
             $params['booking_type'] = $this->input->get('booking_type') ? $this->input->get('booking_type') : 'hotels';
             $params['booking_status'] = $this->input->get('booking_status') ? $this->input->get('booking_status') : null;
+            $params['booking_ref_no'] = $this->input->get('booking_ref_no') ? $this->input->get('booking_ref_no') : null;
             $params['ai_last_name'] = $this->input->get('ai_last_name') ? $this->input->get('ai_last_name') : null;
             $limit = $this->input->get('limit') ? $this->input->get('limit') : 50;
             $page = $this->input->get('page') ? $this->input->get('page') : 1;
@@ -71,7 +72,6 @@ class Bookings extends MX_Controller
                 $userid = $this->session->userdata('pt_logged_supplier');
             }
 
-            $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid);
             $this->data['content'] = $data;
             $this->data['params'] = $params;
             $this->data['page_title'] = 'Quản lý booking';
@@ -237,7 +237,25 @@ class Bookings extends MX_Controller
         $this->emails_model->resend_invoice($invoicedetails);
     }
 
-    function edit($module, $id)
+    function add()
+    {
+        $isadmin = $this->session->userdata('pt_logged_admin');
+        $userid = '';
+        if (empty($isadmin)) {
+            $userid = $this->session->userdata('pt_logged_supplier');
+        }
+
+        if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
+            backError_404($this->data);
+        } else {
+            $this->data['main_content'] = 'modules/bookings/add';
+            $this->data['page_title'] = 'Tạo Booking';
+            $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
+            $this->load->view('template', $this->data);
+        }
+    }
+
+    /*function edit($module, $id)
     {
         if (!$this->editpermission) {
             echo "<center><h1>Access Denied</h1></center>";
@@ -295,9 +313,9 @@ class Bookings extends MX_Controller
                 redirect(base_url() . 'admin/bookings');
             }
         }
-    }
+    }*/
 
-    function add()
+    function edit($id)
     {
         $isadmin = $this->session->userdata('pt_logged_admin');
         $userid = '';
@@ -308,10 +326,32 @@ class Bookings extends MX_Controller
         if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
             backError_404($this->data);
         } else {
-            $this->data['main_content'] = 'modules/bookings/add';
-            $this->data['page_title'] = 'Tạo Booking';
+            $this->load->library('hotels/hotels_lib');
+            
+            $refNo = $this->bookings_model->getBookingRefNo($id);
+            $booking_detail = $this->bookings_model->getBookinginfo($refNo);
+            $hotel_detail = $this->hotels_model->getDetail($booking_detail->booking_item);
+            $rooms_data = $this->bookings_model->getBookingRooms($id, date('d/m/Y', strtotime($booking_detail->booking_checkin)), date('d/m/Y', strtotime($booking_detail->booking_checkout)));
+            //var_dump('<pre>', $rooms_data);die;
+            $this->data['booking'] = $booking_detail;
+            $this->data['hotel'] = $hotel_detail;
+            $this->data['rooms'] = $rooms_data;
             $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
+            $this->data['main_content'] = 'modules/bookings/edit';
+            $this->data['page_title'] = 'Chỉnh sửa Booking';
             $this->load->view('template', $this->data);
+        }
+    }
+
+    function update($id)
+    {
+        if (!$this->data['addpermission'] && !$this->editpermission && !$this->deletepermission) {
+            backError_404($this->data);
+        } else {
+            $this->bookings_model->update_booking();
+            $this->session->set_flashdata('flashmsgs', 'Booking Updated Successfully!');
+            
+            redirect(base_url('admin/bookings'));
         }
     }
 
@@ -328,19 +368,19 @@ class Bookings extends MX_Controller
         } else {
             $this->load->library('hotels/hotels_lib');
             
-            $hotel_id = $this->input->get('hotel_id');
-            $checkin = $this->input->get('checkin');
-            $checkout = $this->input->get('checkout');
+            $hotel_id = $this->input->post('hotel_id');
+            $checkin = $this->input->post('checkin');
+            $checkout = $this->input->post('checkout');
             
             $date1 = new \DateTime(date('Y-m-d', strtotime(str_replace("/", "-", $checkin))));
             $date2 = new \DateTime(date('Y-m-d', strtotime(str_replace("/", "-", $checkout))));
 
             // this calculates the diff between two dates, which is the number of nights
             $stay = $date2->diff($date1)->format("%a");
-            $adults = (int)$this->input->get('adults');
-            $child = (int)$this->input->get('child');
-            $room_quantity = $this->input->get('room_quantity');
-            $extra_beds = $this->input->get('extra_beds');
+            $adults = (int)$this->input->post('adults');
+            $child = (int)$this->input->post('child');
+            $room_quantity = $this->input->post('room_quantity');
+            $extra_beds = $this->input->post('extra_beds');
             $totalRooms = 0;
             if (!empty($room_quantity)) {
                 foreach ($room_quantity as $tmp) {
@@ -351,17 +391,18 @@ class Bookings extends MX_Controller
             $this->load->model('admin/payments_model');
             $this->data['error'] = "";
             $detailHotel = $this->hotels_model->getDetail($hotel_id);
-
-            $roomIdArr = $this->input->get('room_id');
-            $roomsCountArr = $this->input->get('room_quantity');
-            $extrabeds = $this->input->get('extrabeds');
+            
+            $roomIdArr = $this->input->post('room_id');
+            $roomsCountArr = $this->input->post('room_quantity');
+            $extrabeds = $this->input->post('extrabeds');
+            $bookInfo = [];
             foreach ($roomIdArr as $roomID) {
                 $roomsCount = $roomsCountArr[$roomID];
                 if ($roomsCount > 0) {
-                    $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotel_id, $roomID, $roomsCount, $extrabeds, '', '');
+                    $bookInfo[$roomID] = $this->hotels_lib->getBookResultObject($hotel_id, $roomID, $roomsCount, $extrabeds, $checkin, $checkout);
                 }
             }
-
+            
             $this->data['module'] = $detailHotel;
             $this->data['stay'] = $stay;
             $this->data['extraChkUrl'] = $bookInfo['hotel']->extraChkUrl;
@@ -382,7 +423,7 @@ class Bookings extends MX_Controller
             $this->data['adults'] = $adults;
             $this->data['child'] = $child;
             $this->data['totalRooms'] = $totalRooms;
-
+            
             $this->data['room_id'] = json_encode(array_keys($bookInfo));
             $this->data['room_quantity'] = json_encode($room_quantity);
             $this->data['extra_beds'] = json_encode($extra_beds);
