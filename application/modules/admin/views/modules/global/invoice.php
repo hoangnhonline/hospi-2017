@@ -1,356 +1,362 @@
-<style>
-  tr { -webkit-transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; transition: all 0.3s ease-out;  }
-  #rotatingImg{display: none;}
-  .modal-content{box-shadow: none !important;}
-  .modal-footer{background-color: #E3E3E3;}
-  .btn-circle{border-radius: 50%;font-size: 54px;padding: 0px 12px;}
-  .panel-body{padding: 15px;}
-  .paybtn { display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.428571429; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 2px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; color: #222222; background-color: #EEEEEE; border-color: #DDDDDD; }
-  .paybtn:hover { background-color: #DDDDDD;border-color: #AAAAAA;}
-  .table-bordered { width: 100%; margin-top: -20px; }
-</style>
-<div class="modal-dialog modal-lg" style="z-index: 10">
-  <div class="modal-content" style="z-index: 1025">
-      <div class="header-invoice"><div class="col-md-4">
-          <div class="opensans">
-              <?php echo trans('0647');?>
-          </div>
-          </div>
-        <div class="col-md-4 text-center"><img src="<?php echo base_url();?>uploads/global/hospi_sm.png" class="logo" data-pin-nopin="true"></div>
-        <div class="col-md-4">
-            <div class="opensans">www.hospi.vn</div>
-            <div class="opensans"><?php echo $contactemail;?></div>
-        </div>
-        
-        </div>
-    <div class="clearfix"></div>
-    <hr>
-    <?php if($invoice->status == "unpaid"){ if(time() < $invoice->expiryUnixtime){  ?>
-    <h1 class="text-center">
-          <?php echo trans('0643');?><?php echo trans($invoice->module.'hd');?><?php echo trans('0646');?>
-      </h1>
-    <div class="text-center purple">
-      <?php echo trans('0644');?>
-    </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-10" style="margin-top:10px;">
-    <div class="text-justify opensans">
-    <?php echo trans('0648');?>
-        </div>
-    <div class="text-justify opensans">
-    <?php echo trans('0649');?>
-    </div>
-        </div>
-    <div class="col-md-1"></div>
-    <!--<div class="text-center">
-      <div data-wow-delay="2s" class="wow fadeIn animated form-group" id="countdown"></div>
-    </div>-->
-    <!--<div class="form-group">
-      <center>
-        <?php if($payOnArrival){ ?>
-        <button class="btn btn-default arrivalpay" data-module="<?php echo $invoice->module; ?>" id="<?php echo $invoice->id;?>"><?php echo trans('0345');?></button>
-        <?php } if($singleGateway != "payonarrival"){ ?>
-        <button data-toggle="modal" data-target="#paynow" type="submit" class="btn btn-primary"><?php echo trans('0117');?></button>
-        <?php } ?>
-        <?php echo getPayment($invoice->paymethod);?>
-        
-      </center>
-    </div>-->
-    <?php } } ?>
-    <div class="clearfix"></div>
-        <div class="opensans" style="padding:10px 20px;"><i>
-    <?php echo trans('0650');?>
-        </div></i>        
-        
-   
-  
-    <div class="modal-body">
-      <?php require $themeurl . 'views/invoice.php';?>
-        <div class="footer-invoice"><div class="col-md-6">
-              <img style="float:right;" src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->header_logo_img;?>" class="img-responsive logo"/>
-            </div>
-            <div class="col-md-6">
-                <div><?php echo trans('Company');?></div>
-                <div class="ftitle go-text-right opensans"><?php echo $contactaddress;?></div>
-              <div class="ftitle go-text-right opensans">Tel: 08 3920 1111 - Fax: 08 3920 1112</div>
-            </div>
-            </div>
-    </div>
-  </div>
-  <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
-<!-- PHPtravels Bank Transfer Modal Starting-->
-<div class="modal fade" id="banktrans" tabindex="-1" role="dialog" aria-labelledby="banktrans" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="margin-bottom: 0px;">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"><?php echo trans('0355');?></h4>
-      </div>
-      <div class="modal-body">
-        <?php echo "banktransfer"; ?>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- PHPtravels Bank Transfer Modal Ending-->
-<!-- Modal -->
-<div class="modal fade" id="paynow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="margin-bottom: 0px;">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><?php echo trans('0377');?></h4>
-      </div>
-      <div class="modal-body">
-        <div role="form">
-          <div class="form-group">
-            <label for="form-input" class="hidden-xs col-sm-2 control-label text-left" style="padding: 10px;font-size: 18px;"><?php echo trans('0154');?></label>
-            <div class="col-sm-10 col-md-10 col-xs-12">
-              <select class="form-control form selectx" name="gateway" id="gateway">
-                <option value=""><?php echo trans('0159');?></option>
-                <?php foreach ($paymentGateways as $pay) { if($pay['name'] != "payonarrival"){ ?>
-                <option value="<?php echo $pay['name']; ?>" <?php makeSelected($invoice->paymethod, $pay['name']); ?> ><?php echo $pay['gatewayValues'][$pay['name']]['name']; ?></option>
-                <?php } } ?>
-              </select>
-              <div class="clearfix"></div>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <div class="col-sm-12">
-            <hr>
-            <center>
-              <div  id="response"></div>
-            </center>
-          </div>
-          <div class="clearfix"></div>
-          <div class="col-sm-12 creditcardform" style="display:none;">
-            <form  role="form" action="<?php echo base_url();?>creditcard" method="POST">
-              <fieldset>
-                <div class="row">
-                  <div class="col-md-6  go-right">
-                    <div class="form-group ">
-                      <label class="required go-right"><?php echo trans('0171');?></label>
-                      <input type="text" class="form-control" name="firstname" id="card-holder-firstname" placeholder="<?php echo trans('0171');?>">
+<!DOCTYPE html>
+<?php
+$CI = &get_instance(); 
+$app_settings = $CI->settings_model->get_settings_data();
+$theme_url = base_url('themes/default/');
+?>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Invoice</title>
+        <link rel="shortcut icon" href="<?php echo PT_GLOBAL_IMAGES_FOLDER . $app_settings[0]->favicon_img; ?>">
+        <link href="<?php echo $theme_url; ?>assets/css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="<?php echo $theme_url; ?>assets/css/custom.css" rel="stylesheet" media="screen">
+        <link href="<?php echo $theme_url; ?>assets/css/style.css" rel="stylesheet">
+        <script type="text/javascript" src="<?php echo $theme_url; ?>assets/js/jquery-1.11.2.min.js"></script>
+    </head>
+    <body class="blog">
+        <div class="container pagecontainer offset-0">
+            <div class="offer-page rightcontent col-md-12 offset-0">
+                <div class="itemscontainer offset-1">
+                    <div class="box-invoice">
+                        <div class="box-invoice-head">
+                            <div class="box-invoice-head01">
+                                <div class="table-cell">
+                                    <div class="cell">
+                                        <a href="<?php echo base_url(); ?>" title="Logo">
+                                            <img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->header_logo_img;?>" alt="Logo">
+                                        </a>
+                                    </div>
+                                    <div class="cell text-center">
+                                        <a href="<?php echo base_url(); ?>" title="Đi tới trang website chúng tôi" class="text-link2">Đi tới trang website chúng tôi</a>
+                                    </div>
+                                    <div class="cell text-right">
+                                        <img src="<?php echo $theme_url; ?>assets/img/hotel-invoice.png" alt="">
+                                    </div>
+                                </div>
+                            </div><!-- box-invoice-head01 -->
+                            <div class="box-invoice-head02">
+                                <ul class="list-inline">
+                                    <li class="purple"><strong>Ngày: <?php echo $invoice->bookingDate; ?></strong></li>
+                                    <li>
+                                        <a href="#" title="In invoice" class="text-link2">In invoice</a>
+                                        <a href="#" title="Tải File PDF" class="text-link2">Tải File PDF</a>
+                                    </li>
+                                </ul>
+                            </div><!-- box-invoice-head02 -->
+                            <div class="box-invoice-head01 box-invoice-head03">
+                                <div class="table-cell">
+                                    <div class="cell">
+                                        Mã invoice: <span class="purple"><?php echo $invoice->code; ?></span>
+                                    </div>
+                                    <div class="cell text-center">
+                                        <a href="<?php echo base_url(); ?>" title="hospi.vn">www.hospi.vn</a>
+                                    </div>
+                                    <div class="cell text-right">
+                                        <div class="unpaid">
+                                            Tình trạng:
+                                            <strong>
+                                                <?php
+                                                if ($invoice->status == "unpaid") {
+                                                    echo trans('082');
+                                                } elseif ($invoice->status == "reserved") {
+                                                    echo trans('0445'); 
+                                                    if ($invoice->paymethod == "payonarrival") { 
+                                                        echo trans("0474");
+                                                    }
+                                                } elseif ($invoice->status == "cancelled") {
+                                                    echo trans('0347');
+                                                } else {
+                                                    echo trans('081') . '<br />'; 
+                                                    echo trans('0410') . ': ' . $invoice->userEmail;
+                                                }
+                                                ?>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- box-invoice-head03 -->
+                        </div><!-- block-inv-infomation -->
+                        <div class="box-invoice-body">
+                            <div class="block-inv-infomation">
+                                <div class="row row-eq-height">
+                                    <div class="col-sm-6">
+                                        <div class="panel panel-default panel-infomation">
+                                            <div class="panel-heading text-center">
+                                                Thông tin khách hàng
+                                            </div>
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li>Họ tên khách: <strong class="purple"><?php echo $invoice->userFullName; ?></strong></li>
+                                                    <li>Email: <strong><?php echo $invoice->userEmail; ?></strong></li>
+                                                    <li>Điện thoại: <strong> <?php echo $invoice->userMobile; ?></strong></li>
+                                                    <li>Địa chỉ: <strong> <?php echo $invoice->userAddress; ?></strong></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading text-center">
+                                                Thông tin khách sạn
+                                            </div>
+                                            <div class="panel-body">
+                                                <dl class="cb-img-name">
+                                                    <dt>
+                                                        <img src="<?php echo $invoice->thumbnail; ?>" alt="<?php echo $invoice->title; ?>">
+                                                    </dt>
+                                                    <dd>
+                                                        <h1><?php echo $invoice->title; ?></h1>
+                                                        <div class="clearfix">
+                                                            <span class="go-right RTL">
+                                                                <i style="margin-left:-5px" class="icon-location-6"></i> 
+                                                                <small class="adddress"><?php echo $invoice->address; ?></small>
+                                                            </span>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                            <small class="go-right">
+                                                                <?php
+                                                                $res = "";
+                                                                for ($stars = 1; $stars <= 5; $stars++) {
+                                                                    if ($stars <= $invoice->stars) {
+                                                                        $res .= PT_STARS_ICON;
+                                                                    } else {
+                                                                        $res .= PT_EMPTY_STARS_ICON;
+                                                                    }
+                                                                }
+                                                                echo $res;
+                                                                ?>
+                                                            </small>
+                                                        </div>
+                                                    </dd>
+                                                </dl>
+                                                <div class="row">
+                                                    <div class="col-sm-5 col-xs-12">
+                                                        <div class="table table-responsive">
+                                                            <table class="table table-no-border mb0">
+                                                                <tr>
+                                                                    <td>
+                                                                        Ngày nhận phòng:
+                                                                    </td>
+                                                                    <td class="w40">
+                                                                        <strong class="purple"><?php echo $invoice->checkin; ?></strong>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Ngày trả phòng:
+                                                                    </td>
+                                                                    <td><strong class="purple"><?php echo $invoice->checkout; ?></strong></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Số đêm:
+                                                                    </td>
+                                                                    <td><strong><?php echo $invoice->nights; ?></strong></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-7 col-xs-12">
+                                                        <div class="table table-responsive row">
+                                                            <table class="table table-no-border mb0">
+                                                                <tr>
+                                                                    <td class="w40">
+                                                                        Người lớn:
+                                                                    </td>
+                                                                    <td>
+                                                                        <strong><?php echo $invoice->adults; ?></strong>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Trẻ em:
+                                                                    </td>
+                                                                    <td>
+                                                                        <strong><?php echo $invoice->child; ?></strong>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Số lượng phòng:
+                                                                    </td>
+                                                                    <td>
+                                                                        <strong id="total_room"></strong>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- row -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- block-inv-infomation -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            Điều kiện hủy
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php echo nl2br($invoice->hotel_policy); ?>
+                                        </div>
+                                    </div><!-- panel -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            Điều kiện sử dụng
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>Giai đoạn 12.01.2017 - 31.10.2017</p>
+                                            <p>......</p>
+                                        </div>
+                                    </div><!-- panel -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            Hinh thức thanh toán
+                                        </div>
+                                        <div class="panel-body">
+                                            <div>Hinh thức thanh toán</div>
+                                            <p><strong><?php echo getPayment($invoice->paymethod);?></strong></p>
+                                            <div class="clearfix">
+                                                <?php
+                                                if(getPayment($invoice->paymethod) == "Thanh toán tại nhà") {
+                                                    echo nl2br(getBookingPaymentinfo($invoice->id)); 
+                                                } else {
+                                                    echo getBookingPaymentinfo($invoice->id);
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div><!-- panel -->
+                                </div><!-- col-sm-6 -->
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading text-center">
+                                            Thông tin đơn phòng
+                                        </div>
+                                        <div class="box">
+                                            <div class="box_body">
+                                                <ul class="order-summary">
+                                                    <?php
+                                                    $priceTotal = 0;
+                                                    $totalRoom = 0;
+                                                    foreach ($invoice->subItem as $r) {
+                                                        $priceOne = 0;
+                                                        $priceExtraBed = 0;
+                                                        foreach ($r->Info['detail'] as $tmp) {
+                                                            $priceOne += $tmp->total;
+                                                        }
+                                                        $priceOne = $priceOne / count($r->Info['detail']);
+                                                        ?>
+                                                        <li>
+                                                            <div class="k">
+                                                                <p><strong><?php echo $r->title; ?></strong></p>
+                                                                <?php echo number_format($priceOne); ?>
+                                                                x <?php echo $invoice->nights; ?> (đêm)
+                                                                x <?php echo $r->room_count; ?> (phòng)
+                                                                = <?php echo number_format($r->Info['total'] * $r->room_count); ?> VND
+                                                            </div>
+                                                        </li>
+                                                        <?php
+                                                        $totalRoom += $r->room_count;
+                                                        $priceTotal += $r->Info['total'] * $r->room_count;
+                                                    }
+                                                    ?>
+                                                    <script type="text/javascript">
+                                                        $('#total_room').html('<?php echo $totalRoom > 9 ? $totalRoom : '0' . $totalRoom; ?>');
+                                                    </script>
+                                                    <li>
+                                                        <span class="k">Thành tiền:</span>
+                                                        <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>
+                                                    </li>
+                                                    <li>
+                                                        <span class="k">Giường phụ:</span>
+                                                        <span class="v"><?php echo number_format($invoice->extraBedsCharges); ?> VND</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="k">Chi phí khác:</span>
+                                                        <span class="v">0 VND</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="k">Phí VAT:</span>
+                                                        <span class="v"><?php echo number_format($invoice->tax); ?> VND</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="k">Phí dịch vụ:</span>
+                                                        <span class="v"><?php echo number_format($invoice->paymethodTax); ?> VND</span>
+                                                    </li>
+                                                    <li>
+                                                        <strong class="k">Thanh toán</strong>
+                                                        <strong class="v"><?php echo number_format($invoice->checkoutAmount); ?> VND</strong>
+                                                    </li>
+                                                    <li style="border: none;">
+                                                        <span class="k">Giảm giá: </span>
+                                                        <span class="v purple"><?php echo number_format($invoice->couponRate); ?> VND</span>
+                                                    </li>
+                                                    <li style="border: none;">
+                                                        <strong class="k">Tổng thanh toán</strong>
+                                                        <strong class="v"><?php echo number_format($invoice->checkoutTotal); ?> VND</strong>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div><!-- panel -->
+                                </div><!-- col-sm-6 -->
+                            </div><!-- row -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Ghi chú
+                                        </div>
+                                        <div class="panel-body"><?php echo $invoice->additionaNotes; ?></div>
+                                    </div><!-- panel -->
+                                </div>
+                            </div><!-- row -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Lưu ý
+                                        </div>
+                                        <div class="panel-body">
+                                            <p>- Quý khách chỉ thanh toán khi được xác nhận bởi nhân viên HOSPI qua email hoặc điện thoại</p>
+                                            <p>- Khi thanh toán chuyển khoản vui lòng nghi rõ, họ tên khách hàng hoặc thanh toán cho mã booking() ở trên phiếu xác nhận.</p>
+                                            <p>- Nếu quý khách  chon phương thức thanh toán chuyển khoản, Quý khách chỉ chuyển khoản theo số tài khoản được tạo trên booking này.</p>
+                                            <p>- Nếu quý khách các phương thức còn lại thì phải có phiếu thu, giấy giới thiệu thu tiền (nếu có) và các giấy tờ có chữ ký và con dấu của công ty HOSPI thì mới hợp lệ.</p>
+                                            <p>- Quý khách có thể từ chối thanh toán nếu nhân viên không cung cấp đủ các thông tin trên hoặc liên hệ hotline: <strong>090 345 5152</strong> để được xác nhận</p>
+                                        </div>
+                                    </div><!-- panel -->
+                                </div>
+                            </div><!-- row -->
+                        </div><!-- box-invoice-body -->
+                        <div class="box-invoice-footer">
+                            <div class="table-cell">
+                                <div class="cell">
+                                    <strong class="purple">HOSPI - Đặt phòng khách sạn</strong>
+                                </div>
+                                <div class="cell text-center">
+                                    <ul class="list-inline no-style">
+                                        <li class="purple">(028) 3826 8797</li>
+                                        <li class="purple">booking@hospi.vn</li>
+                                        <li class="purple">096868 0106</li>
+                                    </ul>
+                                </div>
+                                <div class="cell text-right">
+                                    <address>
+                                        <strong class="purple">HOSPI TRAVEL CO., LTD</strong><br>
+                                        Lầu 1, Số 124 Khánh Hội,<br>
+                                        Phường 6, Quận 4, Tp.HCM<br>
+                                    </address>
+                                </div>
+                            </div>
+                        </div><!-- box-invoice-footer -->
                     </div>
-                  </div>
-                  <div class="col-md-6  go-left">
-                    <div class="form-group ">
-                      <label class="required go-right"><?php echo trans('0172');?></label>
-                      <input type="text" class="form-control" name="lastname" id="card-holder-lastname" placeholder="<?php echo trans('0172');?>">
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="col-md-12  go-right">
-                    <div class="form-group ">
-                      <label class="required go-right"><?php echo trans('0316');?></label>
-                      <input type="text" class="form-control" name="cardnum" id="card-number" placeholder="<?php echo trans('0316');?>" onkeypress="return isNumeric(event)" >
-                    </div>
-                  </div>
-                  <div class="clearfix"></div>
-                  <div class="col-md-3 go-right">
-                    <div class="form-group ">
-                      <label style="font-size:13px"class="required  go-right"><?php echo trans('0329');?></label>
-                      <select class="form-control col-sm-2" name="expMonth" id="expiry-month">
-                        <option value="01"><?php echo trans('0317');?> (01)</option>
-                        <option value="02"><?php echo trans('0318');?> (02)</option>
-                        <option value="03"><?php echo trans('0319');?> (03)</option>
-                        <option value="04"><?php echo trans('0320');?> (04)</option>
-                        <option value="05"><?php echo trans('0321');?> (05)</option>
-                        <option value="06"><?php echo trans('0322');?> (06)</option>
-                        <option value="07"><?php echo trans('0323');?> (07)</option>
-                        <option value="08"><?php echo trans('0324');?> (08)</option>
-                        <option value="09"><?php echo trans('0325');?> (09)</option>
-                        <option value="10"><?php echo trans('0326');?> (10)</option>
-                        <option value="11"><?php echo trans('0327');?> (11)</option>
-                        <option value="12"><?php echo trans('0328');?> (12)</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3 go-left">
-                    <div class="form-group">
-                      <label class="required go-right">&nbsp;</label>
-                      <select class="form-control" name="expYear" id="expiry-year">
-                        <?php for($y = date("Y");$y <= date("Y") + 10;$y++){?>
-                        <option value="<?php echo $y?>"><?php echo $y; ?></option>
-                        <?php } ?>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3 go-left">
-                    <div class="form-group">
-                      <label class="required go-right">&nbsp;</label>
-                      <input type="text" class="form-control" name="cvv" id="cvv" placeholder="<?php echo trans('0331');?>">
-                    </div>
-                  </div>
-                  <div class="col-md-3 go-left">
-                    <label class="required go-right">&nbsp;</label>
-                    <img src="<?php echo base_url(); ?>assets/img/cc.png" class="img-responsive">
-                  </div>
                 </div>
-                <div class="clearfix"></div>
-                <br>
-                <div class="form-group">
-                  <div class="alert alert-danger submitresult"></div>
-                  <input type="hidden" name="paymethod" id="creditcardgateway" value="" />
-                  <input type="hidden" name="bookingid" id="bookingid" value="<?php echo $invoice->bookingID;?>" />
-                  <input type="hidden" name="refno" id="bookingid" value="<?php echo $invoice->code;?>" />
-                  <button type="submit" class="btn btn-success btn-lg paynowbtn pull-left" onclick="return expcheck();"><?php echo trans('0117');?></button>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-          <div class="clearfix"></div>
+            </div>
         </div>
-        <div class="clearfix"></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo trans('0234');?></button>
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript">
-  // set the date we're counting down to
-  // var target_date = new Date('<?php echo $invoice->expiryFullDate; ?>').getTime();
-  var target_date = <?php echo $invoice->expiryUnixtime * 1000; ?>;
-  var invoiceStatus = "<?php echo $invoice->status; ?>";
-
-  // variables for time units
-  var days, hours, minutes, seconds;
-
-  // get tag element
-  //var countdown = document.getElementById('countdown');
-  var ccc = new Date().getTime();
-
-  /*if(invoiceStatus == "unpaid"){
-
-      // update the tag with id "countdown" every 1 second
-  setInterval(function () {
-
-  // find the amount of "seconds" between now and target
-  var current_date = new Date().getTime();
-
-  var seconds_left = (target_date - current_date) / 1000;
-
-  // do some time calculations
-  days = parseInt(seconds_left / 86400);
-  seconds_left = seconds_left % 86400;
-
-  hours = parseInt(seconds_left / 3600);
-  seconds_left = seconds_left % 3600;
-
-  minutes = parseInt(seconds_left / 60);
-  seconds = parseInt(seconds_left % 60);
-
-  // format countdown string + set tag value
-  countdown.innerHTML = '<span class="days">' + days +  ' <b><?php echo trans("0440");?></b></span> <span class="hours">' + hours + ' <b><?php echo trans("0441");?></b></span> <span class="minutes">'
-  + minutes + ' <b><?php echo trans("0442");?></b></span> <span class="seconds">' + seconds + ' <b><?php echo trans("0443");?></b></span>';
-
-  }, 1000);
-
-  }*/
-
-
-  $(function(){
-      $(".submitresult").hide();
-      loadPaymethodData();
-
-    $(".arrivalpay").on("click",function(){
-      var id = $(this).prop("id");
-      var module = $(this).data("module");
-      var check = confirm("<?php echo trans('0483')?>");
-      if(check){
-      $.post("<?php echo base_url();?>invoice/updatePayOnArrival", {id: id,module: module}, function(resp){
-        location.reload();
-      });
-
-      }
-
-    });
-
-    $('#response').on('click','input[type="image"],input[type="submit"]',function(){
-      setTimeout(function(){
-      $("#response").html("<div id='rotatingDiv'></div>");
-      }, 500)
-
-
-    });
-
-    $("#gateway").on("change",function(){
-      var gateway = $(this).val();
-      $("#response").html("<div id='rotatingDiv'></div>");
-      $.post("<?php echo base_url();?>invoice/getGatewaylink/<?php echo $invoice->id?>/<?php echo $invoice->code;?>", {gateway: gateway}, function(resp){
-       var response = $.parseJSON(resp);
-       console.log(response);
-       if(response.iscreditcard == "1"){
-        $(".creditcardform").fadeIn("slow");
-        $("#creditcardgateway").val(response.gateway);
-        $("#response").html("");
-       }else{
-       $(".creditcardform").hide();
-       $("#response").html(response.htmldata);
-       }
-
-
-      });
-    })
-  });
-
-  function expcheck(){
-          $(".submitresult").html("").fadeOut("fast");
-       var cardno = $("#card-number").val();
-       var firstname = $("#card-holder-firstname").val();
-       var lastname = $("#card-holder-lastname").val();
-      var minMonth = new Date().getMonth() + 1;
-      var minYear = new Date().getFullYear();
-      var month = parseInt($("#expiry-month").val(), 10);
-      var year = parseInt($("#expiry-year").val(), 10);
-
-       if($.trim(firstname) == ""){
-       $(".submitresult").html("Enter Tên").fadeIn("slow");
-       return false;
-       }else if($.trim(lastname) == ""){
-      $(".submitresult").html("Enter Họ").fadeIn("slow");
-       return false;
-       }else if($.trim(cardno) == ""){
-      $(".submitresult").html("Enter Card number").fadeIn("slow");
-       return false;
-       }else if(month <= minMonth && year <= minYear){
-        $(".submitresult").html("Invalid Expiration Date").fadeIn("slow");
-       return false;
-
-       }else{
-         $(".paynowbtn").hide();
-        $(".submitresult").removeClass("alert-danger");
-        $(".submitresult").html("<div id='rotatingDiv'></div>").fadeIn("slow");
-       }
-
-       }
-
-       function loadPaymethodData(){
-
-      var gateway = $("#gateway").val();
-      var invoiceStatus = "<?php echo $invoice->status; ?>";
-
-      if(invoiceStatus == "unpaid"){
-
-        if(gateway != ""){
-
-       $.post("<?php echo base_url();?>invoice/getGatewaylink/<?php echo $invoice->id?>/<?php echo $invoice->code;?>", {gateway: gateway}, function(resp){
-       var response = $.parseJSON(resp);
-       console.log(response);
-       if(response.iscreditcard == "1"){
-        $(".creditcardform").fadeIn("slow");
-        $("#creditcardgateway").val(response.gateway);
-        $("#response").html("");
-       }else{
-       $(".creditcardform").hide();
-       $("#response").html(response.htmldata);
-       }
-      });
-      }
-      }
-      }
-</script>
+    </body>
+</html>

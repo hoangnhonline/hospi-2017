@@ -10,7 +10,7 @@
     <meta name="author" content="HOSPI">
     <meta property="fb:app_id" content="159189514584032" />
     <title><?php if(empty($ishome)){ echo $app_settings[0]->home_title; }else{ echo $CI->theme->_data['page_title']; } ?></title>
-    <link rel="shortcut icon" href="<?php echo PT_GLOBAL_IMAGES_FOLDER.'favicon.png';?>">
+    <link rel="shortcut icon" href="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->favicon_img;?>">
     <link href="<?php echo $theme_url; ?>assets/css/bootstrap-modal.css" rel="stylesheet" media="screen">
     <link href="<?php echo $theme_url; ?>assets/css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="<?php echo $theme_url; ?>assets/css/bootstrap-slider.css" rel="stylesheet" media="screen">
@@ -110,9 +110,13 @@
                 <span class="icon-bar"></span>
                 </button>
                 <?php if (strpos($currenturl, 'blog') !== false) { ?>
-                <a href="<?php echo base_url(); ?>blog" class="navbar-brand"><img src="assets/img/logo.png" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
+                <a href="<?php echo base_url(); ?>blog" class="navbar-brand"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->header_logo_img;?>" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
                 <?php } else { ?>
+<<<<<<< HEAD
                 <a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="assets/img/logo_christmas.png" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
+=======
+                <a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->header_logo_img;?>" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
+>>>>>>> 67dc092dfde8744560af2e513e376ca3998fbb82
                 <?php } ?>
               </div>
             </div>

@@ -345,6 +345,7 @@ class Bookings_model extends CI_Model
         $expiry = $this->data['app_settings'][0]->booking_expiry * 86400;
 
         $total = $this->input->post('tong_thanh_toan');
+        $tong_chua_giam = $this->input->post('tong_chua_giam');
         $giamgia = $this->input->post('giam_gia');
         $status = $this->input->post('status');
         if (empty($status)) {
@@ -389,6 +390,7 @@ class Bookings_model extends CI_Model
                     'booking_status' => $status,
                     'booking_additional_notes' => $this->input->post('additionalnotes'),
                     'booking_total' => $total,
+                    'booking_deposit' => $tong_chua_giam,
                     'booking_remaining' => $remaining,
                     'booking_checkin' => $checkin,
                     'booking_checkout' => $checkout,
@@ -409,7 +411,6 @@ class Bookings_model extends CI_Model
                     'sentto' => $sentto,
                     'booking_extra_beds' => $extrabeds,
                     'booking_extra_beds_charges' => $extrabedscharges,
-                    'booking_deposit' => 0,
                     'booking_tax' => empty($phi_vat) ? 0 : $phi_vat,
                     'booking_paymethod_tax' => empty($phi_dich_vu) ? 0 : $phi_dich_vu,
                     'booking_curr_code' => 'VND',
@@ -473,6 +474,7 @@ class Bookings_model extends CI_Model
                     'booking_status' => $status,
                     'booking_additional_notes' => $this->input->post('additionalnotes'),
                     'booking_total' => $total,
+                    'booking_deposit' => $tong_chua_giam,
                     'booking_remaining' => $remaining,
                     'booking_checkin' => $checkin,
                     'booking_checkout' => $checkin,
@@ -489,7 +491,6 @@ class Bookings_model extends CI_Model
                     'companyadd' => $companyadd,
                     'guest' => $guest,
                     'sentto' => $sentto,
-                    'booking_deposit' => 0,
                     'booking_tax' => 0,
                     'booking_paymethod_tax' => 0,
                     'booking_curr_code' => 'VND',

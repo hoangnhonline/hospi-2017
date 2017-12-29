@@ -120,17 +120,13 @@
                                 <div class="col-md-6 form-group">
                                     <label for="adults">Người lớn <span class="red-star">*</span></label>
                                     <select class="form-control" disabled="disabled">
-                                        <?php for ($i = 1; $i <= 10; $i ++) { ?>
-                                            <option value="<?php echo $i; ?>"<?php echo $booking->booking_adults == $i ? ' selected="selected"' : ''; ?>><?php echo $i; ?></option>
-                                        <?php } ?>
+                                        <option value="<?php echo $booking->booking_adults; ?>"><?php echo $booking->booking_adults; ?></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label for="child">Trẻ em</label>
                                     <select class="form-control" disabled="disabled">
-                                        <?php for ($i = 0; $i <= 10; $i ++) { ?>
-                                            <option value="<?php echo $i; ?>"<?php echo $booking->booking_child == $i ? ' selected="selected"' : ''; ?>><?php echo $i; ?></option>
-                                        <?php } ?>
+                                        <option value="<?php echo $booking->booking_child; ?>"><?php echo $booking->booking_child; ?></option>
                                     </select>
                                 </div>
                             </div><!-- /.row -->
@@ -249,7 +245,7 @@
                                                 Số lượng phòng:
                                             </td>
                                             <td>
-                                                <strong></strong>
+                                                <strong id="total_room"></strong>
                                             </td>
                                         </tr>
                                     </table>
@@ -261,6 +257,7 @@
                         <ul class="order-summary">
                             <?php
                             $priceTotal = 0;
+                            $totalRoom = 0;
                             foreach ($rooms as $r) {
                                 $priceOne = 0;
                                 $priceExtraBed = 0;
@@ -279,9 +276,13 @@
                                     </div>
                                 </li>
                                 <?php
+                                $totalRoom += $r->room_count;
                                 $priceTotal += $r->Info['total'] * $r->room_count;
                             }
                             ?>
+                            <script type="text/javascript">
+                                $('#total_room').html('<?php echo $totalRoom > 9 ? $totalRoom : '0' . $totalRoom; ?>');
+                            </script>
                             <li>
                                 <span class="k">Thành tiền:</span>
                                 <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>

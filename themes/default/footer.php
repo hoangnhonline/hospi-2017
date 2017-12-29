@@ -92,7 +92,7 @@ if (strpos($currenturl, 'blog') !== false) {
         <div class="back-ft-po"></div>
         <div class="footer-link not-blog"></div>
         <div class="container">
-            <a href="<?php echo base_url(); ?>" style="display: block;margin-bottom: 5px;"><img src="assets/img/logo-ft.png" class="img-responsive logo"/></a>
+            <a href="<?php echo base_url(); ?>" style="display: block;margin-bottom: 5px;"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->footer_logo_img;?>" class="img-responsive logo"/></a>
             <div class="row">
                 <!-- Hotels -->
                 <div class="col-md-4 go-right col-xs-12" id="contact">
