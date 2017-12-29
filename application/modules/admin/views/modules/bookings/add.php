@@ -249,6 +249,7 @@
                     $('.result').html('<div id="rotatingDiv"></div>');
                 },
                 success: function (data) {
+                    $('.result').html('');
                     $('#rooms_info').html(data);
                 }
             });

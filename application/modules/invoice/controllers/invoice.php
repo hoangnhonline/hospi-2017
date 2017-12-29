@@ -131,7 +131,11 @@ class Invoice extends MX_Controller
                     $this->data['contactaddress'] = $contact[0]->contact_address;
                     $this->data['page_title'] = 'Invoice';
                     
-                    $this->load->view('admin/modules/global/invoice', $this->data);
+                    if (!in_array($this->data['invoice']->module,  ['combo', 'honeymoon'])) {
+                        $this->load->view('admin/modules/global/invoice', $this->data);
+                    } else {
+                        $this->load->view('admin/modules/global/invoice_offers', $this->data);
+                    }
                 }
             }
         }

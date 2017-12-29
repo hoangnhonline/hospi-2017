@@ -330,14 +330,25 @@ class Bookings extends MX_Controller
             
             $refNo = $this->bookings_model->getBookingRefNo($id);
             $booking_detail = $this->bookings_model->getBookinginfo($refNo);
-            $hotel_detail = $this->hotels_model->getDetail($booking_detail->booking_item);
-            $rooms_data = $this->bookings_model->getBookingRooms($id, date('d/m/Y', strtotime($booking_detail->booking_checkin)), date('d/m/Y', strtotime($booking_detail->booking_checkout)));
-            //var_dump('<pre>', $rooms_data);die;
-            $this->data['booking'] = $booking_detail;
-            $this->data['hotel'] = $hotel_detail;
-            $this->data['rooms'] = $rooms_data;
-            $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
-            $this->data['main_content'] = 'modules/bookings/edit';
+            
+            if ($booking_detail->booking_status == 'paid') {
+                redirect(base_url() . 'admin/bookings');
+            }
+            
+            if (!in_array($booking_detail->booking_type, ['combo', 'honeymoon'])) {
+                $hotel_detail = $this->hotels_model->getDetail($booking_detail->booking_item);
+                $rooms_data = $this->bookings_model->getBookingRooms($id, date('d/m/Y', strtotime($booking_detail->booking_checkin)), date('d/m/Y', strtotime($booking_detail->booking_checkout)));
+                
+                $this->data['booking'] = $booking_detail;
+                $this->data['hotel'] = $hotel_detail;
+                $this->data['rooms'] = $rooms_data;
+                $this->data['hotels'] = $this->hotels_model->all_hotels_names($userid, 'Yes');
+                $this->data['main_content'] = 'modules/bookings/edit';
+            } else {
+                $this->data['booking'] = $booking_detail;
+                $this->data['main_content'] = 'modules/bookings/edit_offers';
+            }
+            
             $this->data['page_title'] = 'Chỉnh sửa Booking';
             $this->load->view('template', $this->data);
         }

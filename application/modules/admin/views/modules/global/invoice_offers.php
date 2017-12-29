@@ -8,7 +8,7 @@ $theme_url = base_url('themes/default/');
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Hotel Invoice</title>
+        <title>Combo Invoice</title>
         <link rel="shortcut icon" href="<?php echo PT_GLOBAL_IMAGES_FOLDER . $app_settings[0]->favicon_img; ?>">
         <link href="<?php echo $theme_url; ?>assets/css/bootstrap.css" rel="stylesheet" media="screen">
         <link href="<?php echo $theme_url; ?>assets/css/custom.css" rel="stylesheet" media="screen">

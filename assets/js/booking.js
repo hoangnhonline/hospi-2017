@@ -100,7 +100,7 @@ function completebook(url, msg) {
                 $(".completebook").fadeIn("fast");
                 $('.container').css('opacity', '1');
             } else {
-                window.location.replace(resp.url);
+                //window.location.replace(resp.url);
             }
         }
     });

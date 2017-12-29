@@ -242,7 +242,6 @@ class Admin extends MX_Controller
 
     function login()
     {
-
         $username = $this->input->post('email');
         $password = $this->input->post('password');
         if ($this->input->is_ajax_request()) {
@@ -251,7 +250,6 @@ class Admin extends MX_Controller
             $this->form_validation->set_rules('password', 'Password', 'required');
 
             if ($this->form_validation->run() == FALSE) {
-
                 $result = array("status" => false, "msg" => validation_errors(), "url" => "");
             } else {
 
@@ -259,7 +257,7 @@ class Admin extends MX_Controller
                 if ($login) {
                     $prevurl = $this->session->userdata('prevURL');
                     if (!empty($prevurl)) {
-                        $url = base_url($prevurl);
+                        $url = $prevurl;
                     } else {
                         $url = base_url('admin');
                     }
