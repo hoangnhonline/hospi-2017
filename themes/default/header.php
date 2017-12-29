@@ -112,11 +112,7 @@
                 <?php if (strpos($currenturl, 'blog') !== false) { ?>
                 <a href="<?php echo base_url(); ?>blog" class="navbar-brand"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->header_logo_img;?>" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
                 <?php } else { ?>
-<<<<<<< HEAD
-                <a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="assets/img/logo_christmas.png" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
-=======
                 <a href="<?php echo base_url(); ?>" class="navbar-brand"><img src="<?php echo PT_GLOBAL_IMAGES_FOLDER.$app_settings[0]->header_logo_img;?>" alt="<?php echo $app_settings[0]->site_title;?>" class="logo"/></a>
->>>>>>> 67dc092dfde8744560af2e513e376ca3998fbb82
                 <?php } ?>
               </div>
             </div>
