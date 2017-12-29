@@ -61,6 +61,7 @@
             "ip": []
         },
         {
+<<<<<<< HEAD
             "unique": 1,
             "hits": 4,
             "ip": [
@@ -107,6 +108,8 @@
             "ip": []
         },
         {
+=======
+>>>>>>> 4420a7e03f34078bf6f93b1b4fada3a69b136635
             "unique": 0,
             "hits": 0,
             "ip": []
@@ -172,6 +175,7 @@
             "ip": []
         },
         {
+<<<<<<< HEAD
             "unique": 1,
             "hits": 1,
             "ip": [
@@ -1182,12 +1186,17 @@
         {
             "unique": 1,
             "hits": 1,
+=======
+            "unique": 1,
+            "hits": 16,
+>>>>>>> 4420a7e03f34078bf6f93b1b4fada3a69b136635
             "ip": [
                 "127.0.0.1"
             ]
         },
         {
             "unique": 1,
+<<<<<<< HEAD
             "hits": 1,
             "ip": [
                 "::1"
@@ -1283,6 +1292,102 @@
             "ip": [
                 "::1"
             ]
+=======
+            "hits": 27,
+            "ip": [
+                "127.0.0.1"
+            ]
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+        },
+        {
+            "unique": 0,
+            "hits": 0,
+            "ip": []
+>>>>>>> 4420a7e03f34078bf6f93b1b4fada3a69b136635
         },
         {
             "unique": 1,

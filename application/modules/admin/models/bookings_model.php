@@ -2,6 +2,7 @@
 
 class Bookings_model extends CI_Model
 {
+
     private $data = array();
 
     function __construct()
@@ -19,7 +20,7 @@ class Bookings_model extends CI_Model
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
             pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
             booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
-        if (!empty ($type)) {
+        if (!empty($type)) {
             $this->db->where('pt_bookings.booking_type', $type);
         }
         $this->db->join('pt_accounts', 'pt_bookings.booking_user = pt_accounts.accounts_id', 'left');
@@ -100,20 +101,20 @@ class Bookings_model extends CI_Model
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
           pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
           booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
-        if (!empty ($invoice)) {
+        if (!empty($invoice)) {
             $this->db->where('pt_bookings.booking_id', $invoice);
         }
-        if (!empty ($module)) {
+        if (!empty($module)) {
             $this->db->where('pt_bookings.booking_type', $module);
         }
-        if (!empty ($status)) {
+        if (!empty($status)) {
             $this->db->where('pt_bookings.booking_status', $status);
         }
-        if (!empty ($customername)) {
+        if (!empty($customername)) {
             $this->db->like('pt_accounts.ai_first_name', $customername);
             $this->db->or_like('pt_accounts.ai_last_name', $customername);
         }
-        if (!empty ($invoicefromdate)) {
+        if (!empty($invoicefromdate)) {
             $this->db->where('pt_bookings.booking_date >=', $invoicefromdate);
             $this->db->where('pt_bookings.booking_date <=', $invoicetodate);
         }
@@ -131,7 +132,7 @@ class Bookings_model extends CI_Model
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
           pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
           booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
-        if (!empty ($myitems)) {
+        if (!empty($myitems)) {
             $this->db->where_in('pt_bookings.booking_item', $myitems);
         } else {
             $this->db->where('pt_bookings.booking_item', 0);
@@ -155,7 +156,7 @@ class Bookings_model extends CI_Model
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
         pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
         booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
-        if (!empty ($myitems)) {
+        if (!empty($myitems)) {
             $this->db->where_in('pt_bookings.booking_item', $myitems);
         } else {
             $this->db->where('pt_bookings.booking_item', 0);
@@ -183,7 +184,7 @@ class Bookings_model extends CI_Model
         $this->db->or_like('pt_bookings.booking_id', $term);
         $this->db->or_like('pt_accounts.ai_first_name', $term);
         $this->db->or_like('pt_accounts.ai_last_name', $term);
-        if (!empty ($myitems)) {
+        if (!empty($myitems)) {
             $this->db->where_in('pt_bookings.booking_item', $myitems);
         } else {
             $this->db->where('pt_bookings.booking_item', 0);
@@ -213,24 +214,24 @@ class Bookings_model extends CI_Model
         $this->db->select('pt_bookings.booking_user,pt_bookings.booking_cancellation_request,pt_bookings.booking_id,pt_bookings.booking_type,pt_bookings.booking_expiry,pt_bookings.booking_ref_no,
         pt_bookings.booking_status,pt_bookings.booking_item,pt_bookings.booking_item_title,
         booking_total,pt_bookings.booking_deposit,pt_bookings.booking_date,pt_accounts.ai_first_name,pt_accounts.ai_last_name,pt_accounts.accounts_email');
-        if (!empty ($invoice)) {
+        if (!empty($invoice)) {
             $this->db->where('pt_bookings.booking_id', $invoice);
         }
-        if (!empty ($module)) {
+        if (!empty($module)) {
             $this->db->where('pt_bookings.booking_type', $module);
         }
-        if (!empty ($status)) {
+        if (!empty($status)) {
             $this->db->where('pt_bookings.booking_status', $status);
         }
-        if (!empty ($customername)) {
+        if (!empty($customername)) {
             $this->db->like('pt_accounts.ai_first_name', $customername);
             $this->db->or_like('pt_accounts.ai_last_name', $customername);
         }
-        if (!empty ($invoicefromdate)) {
+        if (!empty($invoicefromdate)) {
             $this->db->where('pt_bookings.booking_date >=', $invoicefromdate);
             $this->db->where('pt_bookings.booking_date <=', $invoicetodate);
         }
-        if (!empty ($myitems)) {
+        if (!empty($myitems)) {
             $this->db->where_in('pt_bookings.booking_item', $myitems);
         } else {
             $this->db->where('pt_bookings.booking_item', 0);
@@ -271,14 +272,13 @@ class Bookings_model extends CI_Model
 
         $this->db->join('pt_accounts', 'pt_accounts.accounts_id = pt_bookings.booking_user');
         foreach ($params as $key => $value) {
-            if ($key == 'ai_last_name' && $value) {
+            if ($key == 'ai_last_name' && !empty($value)) {
                 $this->db->like('pt_accounts.ai_last_name', $value);
             } else {
-                if ($value) {
+                if (!empty($value)) {
                     $this->db->where('pt_bookings.' . $key, $value);
                 }
             }
-
         }
         if (!empty($perpage)) {
             $this->db->order_by('booking_id', 'desc');
@@ -290,6 +290,7 @@ class Bookings_model extends CI_Model
             $query = $this->db->get('pt_bookings');
             $data = $query->num_rows();
         }
+
         return $data;
     }
 
@@ -302,7 +303,6 @@ class Bookings_model extends CI_Model
         } else {
             return $this->doQuickBooking($userid);
         }
-
     }
 
     function do_booking($userid)
@@ -311,22 +311,22 @@ class Bookings_model extends CI_Model
 
         $paymethod = $this->input->post('checkout-type');
         $bookingtype = $this->input->post('btype');
-        $sent_invoice = $this->input->post('sent_invoice');
-        $nguoikhac = $this->input->post('nguoikhac');
-        $guest = $this->input->post('guest');
-        $sentto = $this->input->post('sentto');
-        $company = $this->input->post('company');
-        $mst = $this->input->post('mst');
-        $companyadd = $this->input->post('companyadd');
+        $sent_invoice = $this->input->post('sent_invoice') ? $this->input->post('sent_invoice') : 'No';
+        $nguoikhac = $this->input->post('nguoikhac') ? $this->input->post('nguoikhac') : 'No';
+        $guest = $this->input->post('guest') ? $this->input->post('guest') : 'guest';
+        $sentto = $this->input->post('sentto') ? $this->input->post('sentto') : Null;
+        $company = $this->input->post('company') ? $this->input->post('company') : Null;
+        $mst = $this->input->post('mst') ? $this->input->post('mst') : Null;
+        $companyadd = $this->input->post('companyadd') ? $this->input->post('companyadd') : Null;
         $itemid = $this->input->post('itemid');
 
         if ($paymethod == "cod") {
-            $payinfo = $this->input->post('txtAddress');
+            $guest_info = $this->input->post('txtAddress');
         } elseif ($paymethod == "banktransfer") {
             $bank = $this->input->post('bank');
-            $payinfo = $this->input->post($bank);
+            $guest_info = $this->input->post($bank);
         } else {
-            $payinfo = "Địa chỉ: Lầu 1, Số 124 Khánh Hội, P.6, Quận 4, Tp. Hồ Chí Minh - Tel: 028 3826 8797 - Fax: (08) 3826 8798";
+            $guest_info = "Địa chỉ: Lầu 1, Số 124 Khánh Hội, P.6, Quận 4, Tp. Hồ Chí Minh - Tel: 028 3826 8797 - Fax: (08) 3826 8798";
         }
         $passportInfo = "";
         $refno = random_string('numeric', 7);
@@ -343,8 +343,10 @@ class Bookings_model extends CI_Model
         }
 
         $expiry = $this->data['app_settings'][0]->booking_expiry * 86400;
-        
+
         $total = $this->input->post('tong_thanh_toan');
+        $tong_chua_giam = $this->input->post('tong_chua_giam');
+        $giamgia = $this->input->post('giam_gia');
         $status = $this->input->post('status');
         if (empty($status)) {
             $status = 'unpaid';
@@ -358,22 +360,21 @@ class Bookings_model extends CI_Model
         if (!empty($payment_date)) {
             $payment_date = strtotime(str_replace("/", "-", $payment_date));
         }
-        $cancellation_request = $this->input->post('cancellation_request');
-        if (empty($cancellation_request)) {
-            $cancellation_request = '';
+        $payment_info = $this->input->post('payment_info');
+        if (empty($payment_info)) {
+            $payment_info = '';
         }
-        
+
         try {
             if ($bookingtype != 'offers') {
                 $subitemid = $this->input->post('subitemid');
                 $checkin = $this->input->post('checkin');
                 $checkout = $this->input->post('checkout');
                 $roomscount = $this->input->post('roomscount');
-                $extrabeds = $this->input->post('so_giuong_phu');
-                $extrabedscharges = $this->input->post('phi_giuong_phu');
-                $honeymoon = $this->input->post('honeymoon');
-                $phi_dich_vu = $this->input->post('phi_dich_vu');
-                $phi_vat = $this->input->post('phi_vat');
+                $extrabeds = $this->input->post('so_giuong_phu') ? $this->input->post('so_giuong_phu') : 0;
+                $extrabedscharges = $this->input->post('phi_giuong_phu') ? $this->input->post('phi_giuong_phu') : 0;
+                $phi_dich_vu = $this->input->post('phi_dich_vu') ? $this->input->post('phi_dich_vu') : 0;
+                $phi_vat = $this->input->post('phi_vat') ? $this->input->post('phi_vat') : 0;
 
                 $checkin = databaseDate($checkin);
                 $checkout = databaseDate($checkout);
@@ -389,6 +390,7 @@ class Bookings_model extends CI_Model
                     'booking_status' => $status,
                     'booking_additional_notes' => $this->input->post('additionalnotes'),
                     'booking_total' => $total,
+                    'booking_deposit' => $tong_chua_giam,
                     'booking_remaining' => $remaining,
                     'booking_checkin' => $checkin,
                     'booking_checkout' => $checkout,
@@ -396,11 +398,10 @@ class Bookings_model extends CI_Model
                     'booking_adults' => $this->input->post('adults'),
                     'booking_child' => $this->input->post('child'),
                     'booking_payment_type' => $paymethod,
-                    'booking_payment_info' => $payinfo,
+                    'booking_guest_info' => $guest_info,
                     'booking_amount_paid' => $amount_paid,
                     'booking_payment_date' => $payment_date,
-                    'booking_cancellation_request' => $cancellation_request,
-                    'honeymoon' => $honeymoon,
+                    'booking_payment_info' => $payment_info,
                     'nguoikhac' => $nguoikhac,
                     'sent_invoice' => $sent_invoice,
                     'company' => $company,
@@ -410,12 +411,11 @@ class Bookings_model extends CI_Model
                     'sentto' => $sentto,
                     'booking_extra_beds' => $extrabeds,
                     'booking_extra_beds_charges' => $extrabedscharges,
-                    'booking_deposit' => 0,
                     'booking_tax' => empty($phi_vat) ? 0 : $phi_vat,
                     'booking_paymethod_tax' => empty($phi_dich_vu) ? 0 : $phi_dich_vu,
                     'booking_curr_code' => 'VND',
                     'booking_curr_symbol' => 'vnd',
-                    'booking_coupon_rate' => 0,
+                    'booking_coupon_rate' => $giamgia,
                     'booking_coupon' => $coupon_code,
                     'booking_guest_info' => $passportInfo
                 );
@@ -430,30 +430,28 @@ class Bookings_model extends CI_Model
                     $roomscounts = json_decode($roomscount, true);
 
                     foreach ($room_ids as $room_id) {
-                        $rdata = array(
+                        $this->db->insert('pt_booked_rooms', [
                             'booked_booking_id' => $book_id,
                             'booked_room_id' => $room_id,
                             'booked_room_count' => $roomscounts[$room_id],
                             'booked_checkin' => $checkin,
                             'booked_checkout' => $checkout,
-                            'booked_booking_status' => 'unpaid'
-                        );
-
-                        $this->db->insert('pt_booked_rooms', $rdata);
+                            'booked_booking_status' => $status
+                        ]);
                     }
                 } elseif ($bookingtype == "cars") {
-                    /*$cdata = array(
-                        'booked_booking_id' => $bookid,
-                        'booked_car_id' => $itemid,
-                        'booked_pickupdate' => $checkin,
-                        'booked_pickuptime' => $pickuptime,
-                        'booked_pickuplocation' => $pickup,
-                        'booked_dropofflocation' => $drop,
-                        'booked_dropoffDate' => databaseDate($dropdate),
-                        'booked_dropoffTime' => $droptime,
-                        'booked_booking_status' => 'unpaid'
-                    );
-                    $this->db->insert('pt_booked_cars', $cdata);*/
+                    /* $cdata = array(
+                      'booked_booking_id' => $bookid,
+                      'booked_car_id' => $itemid,
+                      'booked_pickupdate' => $checkin,
+                      'booked_pickuptime' => $pickuptime,
+                      'booked_pickuplocation' => $pickup,
+                      'booked_dropofflocation' => $drop,
+                      'booked_dropoffDate' => databaseDate($dropdate),
+                      'booked_dropoffTime' => $droptime,
+                      'booked_booking_status' => 'unpaid'
+                      );
+                      $this->db->insert('pt_booked_cars', $cdata); */
                 }
             } else {
                 $checkin = $this->input->post('checkin');
@@ -476,15 +474,16 @@ class Bookings_model extends CI_Model
                     'booking_status' => $status,
                     'booking_additional_notes' => $this->input->post('additionalnotes'),
                     'booking_total' => $total,
+                    'booking_deposit' => $tong_chua_giam,
                     'booking_remaining' => $remaining,
                     'booking_checkin' => $checkin,
                     'booking_checkout' => $checkin,
                     'booking_nights' => $this->input->post('nights'),
                     'booking_payment_type' => $paymethod,
-                    'booking_payment_info' => $payinfo,
+                    'booking_guest_info' => $guest_info,
                     'booking_amount_paid' => $amount_paid,
                     'booking_payment_date' => $payment_date,
-                    'booking_cancellation_request' => $cancellation_request,
+                    'booking_payment_info' => $payment_info,
                     'nguoikhac' => $nguoikhac,
                     'sent_invoice' => $sent_invoice,
                     'company' => $company,
@@ -492,7 +491,6 @@ class Bookings_model extends CI_Model
                     'companyadd' => $companyadd,
                     'guest' => $guest,
                     'sentto' => $sentto,
-                    'booking_deposit' => 0,
                     'booking_tax' => 0,
                     'booking_paymethod_tax' => 0,
                     'booking_curr_code' => 'VND',
@@ -509,16 +507,14 @@ class Bookings_model extends CI_Model
                 $surcharge_info = json_decode($surcharge, true);
 
                 foreach ($surcharge_info as $id => $value) {
-                    $rdata = array(
+                    $this->db->insert('pt_booked_rooms', [
                         'booked_booking_id' => $book_id,
                         'booked_room_id' => $id,
                         'booked_room_count' => $value,
                         'booked_checkin' => $checkin,
                         'booking_checkout' => $checkin,
-                        'booked_booking_status' => 'unpaid'
-                    );
-
-                    $this->db->insert('pt_booked_rooms', $rdata);
+                        'booked_booking_status' => $status
+                    ]);
                 }
             }
 
@@ -536,7 +532,6 @@ class Bookings_model extends CI_Model
 
         return $bookingResult;
     }
-
 
     //Do quick booking by admin
     function doQuickBooking($userid)
@@ -574,14 +569,13 @@ class Bookings_model extends CI_Model
         $paymethodfee = 0;
 
 
-        $extrabeds = 0;//$this->input->post('bedscount');
+        $extrabeds = 0; //$this->input->post('bedscount');
 
         if ($bookingtype == "hotels") {
             $this->load->library('hotels/hotels_lib');
             $extrasInfo = $this->hotels_lib->extrasFee($extras);
             $extrasData = json_encode($extrasInfo['extrasIndividualFee']);
             $subitemData = json_encode(array("id" => $subitemid, "price" => $perNight, "count" => $roomscount));
-
         } elseif ($bookingtype == "tours") {
             $adults = $this->input->post('adults');
             $child = $this->input->post('children');
@@ -589,8 +583,8 @@ class Bookings_model extends CI_Model
 
 
             /* $checkin = $this->input->post('checkin');
-             $checkout = $this->input->post('checkin');
-                  */
+              $checkout = $this->input->post('checkin');
+             */
 
 
             $this->load->library('tours/tours_lib');
@@ -617,7 +611,7 @@ class Bookings_model extends CI_Model
         $currCode = $this->input->post('currencycode');
         $currSymbol = $this->input->post('currencysign');
 
-        $extrabedscharges = 0;//$this->currconverter->convertPriceFloat($bookingData->extraBedCharges);
+        $extrabedscharges = 0; //$this->currconverter->convertPriceFloat($bookingData->extraBedCharges);
         $refno = random_string('numeric', 4);
 
         $data = array('booking_ref_no' => $refno, 'booking_type' => $bookingtype,
@@ -668,40 +662,39 @@ class Bookings_model extends CI_Model
     }
 
     //Update booking details
-    function update_booking($id)
+    function update_booking()
     {
+        $bookid = $this->input->post('booking_id');
         $status = $this->input->post('status');
-        $deposit = $this->input->post('totaltopay');
-        $total = $this->input->post('grandtotal');
-        $bookingtype = $this->input->post('btype');
-        $bookid = $this->input->post('bookingid');
+        $amount_paid = $this->input->post('amount_paid');
+        $total = $this->input->post('total');
+        $booking_type = $this->input->post('btype');
+        $payment_info = $this->input->post('payment_info');
+        
         if ($status == "paid") {
-            $remaining = $total - $deposit;
-            $paid = $deposit;
+            $remaining = $total - $amount_paid;
             $paytime = time();
         } else {
             $remaining = $total;
-            $paid = 0;
+            $amount_paid = 0;
+            $paytime = null;
         }
 
         $data = array(
             'booking_status' => $status,
-            'booking_deposit' => $deposit,
-            'booking_payment_type' => $this->input->post('paymethod'),
             'booking_remaining' => $remaining,
-            'booking_amount_paid' => $paid,
-            'booking_payment_date' => $paytime
+            'booking_amount_paid' => $amount_paid,
+            'booking_payment_date' => $paytime,
+            'booking_payment_info' => $payment_info
         );
         $this->db->where('booking_id', $bookid);
         $this->db->update('pt_bookings', $data);
 
-        if ($bookingtype == "hotels") {
-
+        if ($booking_type != "cars") {
             $rdata = array('booked_booking_status' => $status);
             $this->db->where('booked_booking_id', $bookid);
             $this->db->update('pt_booked_rooms', $rdata);
-
-        } elseif ($bookingtype == "cars") {
+        } else {
             $cdata = array('booked_booking_status' => $status);
             $this->db->where('booked_booking_id', $bookid);
             $this->db->update('pt_booked_cars', $cdata);
@@ -717,7 +710,6 @@ class Bookings_model extends CI_Model
             $this->emails_model->paid_sendEmail_admin($invoicedetails, $this->data['app_settings'][0]->site_title);
             //$this->emails_model->paid_sendEmail_owner($invoicedetails,$this->data['app_settings'][0]->site_title);
         }
-
     }
 
     function delete_booking($id)
@@ -861,7 +853,6 @@ class Bookings_model extends CI_Model
         $this->db->where('id', $couponid);
 
         $this->db->update('pt_coupons', $data);
-
     }
 
     public function getBookingIdNo($bookingref)
@@ -874,7 +865,6 @@ class Bookings_model extends CI_Model
 
     public function getBookinginfo($bookingref)
     {
-
         $this->load->library('form_validation');
         $validation_status = 1; // by default validation is ok
         $fields_failed = array();
@@ -886,12 +876,12 @@ class Bookings_model extends CI_Model
         }
 
         if ($validation_status) {//no error in data, continue
-            $this->db->select('booking_user, booking_nights, booking_checkin, ai_first_name, ai_last_name, accounts_email');
+            $this->db->select('pt_bookings.*, ai_first_name, ai_last_name, ai_mobile, ai_address_1, accounts_email');
             $this->db->join('pt_accounts', 'pt_bookings.booking_user = pt_accounts.accounts_id', 'left');
             $this->db->where('accounts_email', $bookingref);
             $this->db->order_by('pt_bookings.booking_id', 'desc');
         } else {
-            $this->db->select('booking_user, booking_nights, booking_checkin, ai_first_name, ai_last_name, accounts_email');
+            $this->db->select('pt_bookings.*, ai_first_name, ai_last_name, ai_mobile, ai_address_1, accounts_email');
             $this->db->join('pt_accounts', 'pt_bookings.booking_user = pt_accounts.accounts_id', 'left');
             $this->db->where('booking_ref_no', $bookingref);
             $this->db->order_by('pt_bookings.booking_id', 'desc');
@@ -899,20 +889,33 @@ class Bookings_model extends CI_Model
 
         $res = $this->db->get('pt_bookings')->result();
         if ($res[0]->booking_user > 0) {
-            $originalDate = $res[0]->booking_checkin;
-            $newDate = date("d/m/Y", strtotime($originalDate));
-
-            $result[] = (object)[
-                'booking_user' => $res[0]->booking_user,
-                'ai_first_name' => $res[0]->ai_first_name,
-                'ai_last_name' => $res[0]->ai_last_name,
-                'accounts_email' => $res[0]->accounts_email,
-                'booking_nights' => $res[0]->booking_nights,
-                'booking_checkin' => $newDate
-            ];
+            $result = (object) $res[0];
         } else {
             $result = "";
         }
+
         return $result;
     }
+
+    function getBookingRooms($id, $checkin = null, $checkout = null)
+    {
+        $this->load->library('hotels_lib');
+        
+        $this->db->select('pt_booked_rooms.booked_room_id, pt_booked_rooms.booked_room_count, pt_booked_rooms.booked_extra_bed');
+        $this->db->join('pt_booked_rooms', 'pt_bookings.booking_id = pt_booked_rooms.booked_booking_id', 'left');
+        $this->db->where('booking_id', $id);
+        
+        $result = $this->db->get('pt_bookings')->result();
+        
+        $return = [];
+        foreach ($result as $data) {
+            $info = $this->hotels_lib->getRoomsResultObject([(object) ['id' => $data->booked_room_id]], $checkin, $checkout);
+            $info = $info[0];
+            $info->room_count = $data->booked_room_count;
+            $info->extra_bed = $data->booked_extra_bed;
+            $return[] = $info;
+        }
+        return $return;
+    }
+
 }

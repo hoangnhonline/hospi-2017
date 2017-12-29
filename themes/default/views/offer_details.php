@@ -44,14 +44,16 @@
                         <div class="block-tabs-2">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#Combo_detail" aria-controls="Combo_detail" role="tab" data-toggle="tab">Combo chi tiết</a></li>
-                                <li role="presentation"><a href="#Rule_cancel" aria-controls="Rule_cancel" role="tab" data-toggle="tab">Điều kiện</a></li>
+                                <li role="presentation" class="active"><a href="#Combo_detail" aria-controls="Combo_detail" role="tab" data-toggle="tab"><?php $module->type == 2 ? 'Combo' : 'Ưu đãi'; ?> chi tiết</a></li>
+                                <?php if ($module->type == 2) { ?>
+                                    <li role="presentation"><a href="#Rule_cancel" aria-controls="Rule_cancel" role="tab" data-toggle="tab">Điều kiện</a></li>
+                                <?php } ?>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="Combo_detail">
                                     <div class="wysiwyg">
-                                        <p><strong class="purple"><?php echo trans('0836'); ?></strong></p>
+                                        <!--<p><strong class="purple"><?php echo trans('0836'); ?></strong></p>-->
                                         <?php echo $module->desc; ?>
                                         <?php if ($module->type == 2 && !empty($module->phu_thu)) { ?>
                                         <p><?php echo trans('0839'); ?>:</p>
@@ -59,28 +61,30 @@
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="Rule_cancel">
-                                    <div class="wysiwyg">
-                                        <?php if ($module->type == 2) { ?>
-                                        <div class="block-dk-cancel">
-                                            <div class="form-group">
-                                                <p><strong class="purple"><?php echo trans('0837'); ?></strong></p>
-                                                <p>
-                                                    <?php echo nl2br($module->cancel_condition); ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="block-dk-cancel">
-                                            <div class="form-group">
-                                                <p><strong class="purple"><?php echo trans('0838'); ?></strong></p>
-                                                <p>
-                                                    <?php echo nl2br($module->use_condition); ?>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <?php } ?>
-                                    </div>
-                                </div>
+                                <?php if ($module->type == 2) { ?>
+                                    <div role="tabpanel" class="tab-pane" id="Rule_cancel">
+                                       <div class="wysiwyg">
+                                           <?php if ($module->type == 2) { ?>
+                                           <div class="block-dk-cancel">
+                                               <div class="form-group">
+                                                   <p><strong class="purple"><?php echo trans('0837'); ?></strong></p>
+                                                   <p>
+                                                       <?php echo nl2br($module->cancel_condition); ?>
+                                                   </p>
+                                               </div>
+                                           </div>
+                                           <div class="block-dk-cancel">
+                                               <div class="form-group">
+                                                   <p><strong class="purple"><?php echo trans('0838'); ?></strong></p>
+                                                   <p>
+                                                       <?php echo nl2br($module->use_condition); ?>
+                                                   </p>
+                                               </div>
+                                           </div>
+                                           <?php } ?>
+                                       </div>
+                                   </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <!-- /.block-tab-2 -->

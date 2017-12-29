@@ -1,285 +1,394 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-      <span class="panel-title pull-left">Edit Booking</span>
-      <input type="hidden" id="currenturl" value="<?php echo current_url();?>" />
-      <input type="hidden" id="baseurl" value="<?php echo base_url().$this->uri->segment(1);?>" />
-      <div class="clearfix"></div>
+        <span class="panel-title pull-left">Chỉnh sửa Booking</span>
+        <input type="hidden" id="currenturl" value="<?php echo current_url(); ?>" />
+        <input type="hidden" id="baseurl" value="<?php echo base_url() . $this->uri->segment(1); ?>" />
+        <div class="clearfix"></div>
     </div>
-    <div class="panel-body">     
-    <div class="col-md-8">
-      <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data" >
-               <input type="hidden" name="bookingid" id="bookingid" value="<?php echo $bdetails->id;?>" />
-               <input type="hidden" name="refcode" id="refcode" value="<?php echo $bdetails->code;?>" />
-               <input type="hidden" name="itemid" id="itemid" value="<?php echo $bdetails->itemid;?>" />
-               <input type="hidden" name="subitem" id="subitem" value="<?php echo $bdetails->subItem->id;?>" />
-               <input type="hidden" name="btype" id="btype" value="<?php echo $bdetails->module;?>" />
-               <input type="hidden" name="currencysign" id="currencysign" value="<?php echo $app_settings[0]->currency_sign;?>" />
-               <input type="hidden" name="commission" id="commission" class="<?php echo $commtype;?>" value="<?php echo $commvalue;?>" />
-               <input type="hidden" id="tax" class="<?php echo $tax_type; ?>" value="<?php echo $tax_val; ?>" />
-               <input type="hidden" name="totalsupamount" id="totalsupamount" value="<?php echo $supptotal;?>" />
-               <?php if($service == "hotels"){ ?>
-                  <input type="hidden" name="totalamount" id="totalroomamount" value="<?php echo $rtotal;?>" />
-              <?php  } ?>
+    <div class="panel-body">
+        <form id="bookingdetails" action="<?php echo base_url('admin/bookings/update'); ?>" method="post">
+            <div class="result"></div>
+            <div class="col-md-8 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Thông tin booking</strong></div><!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="hotel_id">Tên Khách Sạn <span class="red-star">*</span></label>
+                                <select class="form-control chosen-select" disabled="disabled">
+                                    <?php foreach($hotels as $h){ ?>
+                                        <option value="<?php echo $h->hotel_id; ?>"<?php echo $booking->booking_item == $h->hotel_id ? ' selected="selected"' : ''; ?>><?php echo $h->hotel_title; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div><!-- /.form-group -->
+                            <div class="row">
+                                <div class="col-md-5 form-group">
+                                    <label for="checkin">Ngày nhận phòng <span class="red-star">*</span></label>
+                                    <input type="text" class="form-control dpd1 fdate" value="<?php echo date('d/m/Y', strtotime($booking->booking_checkin)); ?>" disabled="disabled">
+                                </div>
+                                <div class="col-md-5 form-group">
+                                    <label for="checkout">Ngày trả phòng <span class="red-star">*</span></label>
+                                    <input type="text" class="form-control dpd2 fdate" value="<?php echo date('d/m/Y', strtotime($booking->booking_checkout)); ?>" disabled="disabled">
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <strong>Số đêm</strong> : <br><span style="font-weight:bold;margin-top:13px;display:block"><?php echo $booking->booking_nights; ?></span>
+                                </div>
+                            </div><!-- /.row -->
+                            <div>
+                                <table class="table table-customize">
+                                    <thead>
+                                        <tr>
+                                            <th>Loại phòng</th>
+                                            <th>Số phòng</th>
+                                            <th>Giá phòng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($rooms as $r) { ?>
+                                        <tr>
+                                            <td>
+                                                <div class="zoom-gallery">
+                                                    <div class="zoom-gallery55">
+                                                        <img class="img-responsive" src="<?php echo $r->thumbnail; ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <h4 class="RTL go-text-right"><b class="purple"><?php echo $r->title; ?> - <?php echo $r->id; ?></b></h4>
+                                                    <div class="block-people">
+                                                        <h5>Người lớn: <span><?php echo $r->room_adults; ?></span></h5>
+                                                        <h5>Trẻ em: <span><?php echo $r->room_children; ?></span></h5>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="item-countroom">
+                                                    <h5 class="size12">Số phòng</h5>
+                                                    <select class="form-control" disabled="disabled">
+                                                        <option value="<?php echo $r->room_count; ?>"><?php echo $r->room_count; ?></option>
+                                                    </select>
+                                                </div>
+                                                <div class="item-countroom">
+                                                    <h5 class="size12">Giường phụ</h5>
+                                                    <select class="form-control" disabled="disabled">
+                                                        <option value="<?php echo $r->extra_bed; ?>"><?php echo $r->extra_bed; ?></option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="block-price">
+                                                    <p class="purple size18"><b><?php echo number_format($r->price['total']); ?></b></p>
+                                                    <div class="size13 grey">
+                                                        Giá VND/<?php echo $booking->booking_nights; ?> đêm
+                                                    </div>
+                                                    <p class="block-price-info">
+                                                        <span>Bao gồm: Ăn sáng.</span>
+                                                        <span>Phí dịch vụ 5%, VAT 10%.</span>
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">            
+                                <textarea class="form-control" placeholder="Ghi chú" rows="5" disabled="disabled"><?php echo $booking->booking_additional_notes; ?></textarea>
+                            </div><!-- /.form-group -->
+                        </div>
+                        <!-- col-md-12-->
+                    </div><!-- /.panel-body -->
+                </div><!-- /.panel panel-default -->
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Thông tin cá nhân</strong></div><!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="lsatname">Họ tên khách <span class="red-star">*</span></label>
+                                <input type="text" class="form-control" value="<?php echo $booking->ai_last_name; ?>" disabled="disabled">
+                            </div><!-- /.form-group -->
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="phone">Số điện thoại <span class="red-star">*</span></label>
+                                    <input type="text" class="form-control" value="<?php echo $booking->ai_mobile; ?>" disabled="disabled">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="email">Email <span class="red-star">*</span></label>
+                                    <input type="text" class="form-control" value="<?php echo $booking->accounts_email; ?>" disabled="disabled">
+                                </div>
+                            </div><!-- /.row -->
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="adults">Người lớn <span class="red-star">*</span></label>
+                                    <select class="form-control" disabled="disabled">
+                                        <option value="<?php echo $booking->booking_adults; ?>"><?php echo $booking->booking_adults; ?></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="child">Trẻ em</label>
+                                    <select class="form-control" disabled="disabled">
+                                        <option value="<?php echo $booking->booking_child; ?>"><?php echo $booking->booking_child; ?></option>
+                                    </select>
+                                </div>
+                            </div><!-- /.row -->
+                            <div class="form-group">
+                                <label for="address">Địa Chỉ</label>
+                                <input type="text" class="form-control" value="<?php echo $booking->ai_address_1; ?>" disabled="disabled">
+                            </div><!-- /.form-group -->
+                        </div>
+                    </div><!-- /.panel-body -->
+                </div><!-- /.panel panel-default -->
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Hình thức thanh toán <span class="red-star">*</span></strong></div><!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="banktransfer" class="payment_method"<?php echo $booking->booking_payment_type == 'banktransfer' ? ' checked="checked"' : ''; ?> disabled="disabled">
+                                        <strong>Chuyển khoản ngân hàng</strong>
+                                    </label>
+                                </div><!-- /.col-md-4 form-group -->
+                                <div class="col-md-3 form-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="payatoffice" class="payment_method"<?php echo $booking->booking_payment_type == 'payatoffice' ? ' checked="checked"' : ''; ?> disabled="disabled">
+                                        <strong>Thanh toán tại Vp HOSPI</strong>
+                                    </label>
+                                </div><!-- /.col-md-4 form-group -->
+                                <div class="col-md-3 form-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" value="cod" class="payment_method"<?php echo $booking->booking_payment_type == 'cod' ? ' checked="checked"' : ''; ?> disabled="disabled">
+                                        <strong>Thanh toán tại nhà</strong>
+                                    </label>
+                                </div><!-- /.col-md-4 form-group -->
+                            </div><!-- /.row -->
+                            <div id="response"></div>
+                        </div><!-- /.col-md-12 -->
+                    </div><!-- /.panel-body -->
+                </div><!-- /.panel panel-default -->
+            </div>
+            <div class="col-md-4 col-xs-12 pull-right">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Thông tin phòng</strong></div><!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <dl class="cb-img-name">
+                            <dt>
+                                <img src="<?php echo base_url(PT_HOTELS_SLIDER_THUMBS_UPLOAD . $hotel->thumbnail_image); ?>" alt="<?php echo $hotel->hotel_title; ?>" width="98">
+                            </dt>
+                            <dd>
+                                <h1><?php echo $hotel->hotel_title; ?></h1>
+                                <div class="clearfix">
+                                    <small class="go-right">
+                                        <?php
+                                        $res = "";
+                                        for ($stars = 1; $stars <= 5; $stars++) {
+                                            if ($stars <= $hotel->hotel_stars) {
+                                                $res .= PT_STARS_ICON;
+                                            } else {
+                                                $res .= PT_EMPTY_STARS_ICON;
+                                            }
+                                        }
 
-<input type="hidden" name="grandtotal" id="alltotals"  value="<?php echo $bdetails->checkoutTotal;?>" />
-<input type="hidden" name="paymethod" id="methodname"  value="<?php echo $bdetails->paymethod;?>" />
-<input type="hidden" name="paymethodfee" id="paymethodfee"  value="0" />
-<input type="hidden" name="checkin" id="cin"  value="<?php echo $bdetails->checkin;?>" />
-<input type="hidden" name="checkout" id="cout"  value="<?php echo $bdetails->checkout;?>" />
-<input type="hidden" name="commissiontype" id="comtype" value="<?php echo $commtype;?>" />
-<input type="hidden" id="apptax" value="<?php echo $applytax;?>" />
-              
-<input type="hidden" name="paidamount" value="<?php echo $invoice->amountPaid;?>" />
-
-    <?php if(!empty($service)){  ?>
-
-      <div class="panel panel-default">
-      <div class="panel-heading"><strong>Item</strong></div>
-      <div class="panel-body">
-        <div class="form-group">
-        <label class="col-md-3 control-label"><?php echo $checkinlabel;?> </label>
-        <div class="col-md-3">
-        <input class="form-control dpd1" id="<?php echo $service;?>" type="text" placeholder="Date" name=""  value="<?php echo $bdetails->checkin;?>" readonly="true" />
+                                        echo $res;
+                                        ?>
+                                    </small>
+                                </div>
+                            </dd>
+                        </dl>
+                        <div class="row">
+                            <div class="col-sm-7 col-xs-12">
+                                <div class="table table-responsive">
+                                    <table class="table table-no-border mb0">
+                                        <tr>
+                                            <td>
+                                                Ngày nhận phòng:
+                                            </td>
+                                            <td>
+                                                <strong class="purple"><?php echo date('d/m/Y', strtotime($booking->booking_checkin)); ?></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Ngày trả phòng:
+                                            </td>
+                                            <td><strong class="purple"><?php echo date('d/m/Y', strtotime($booking->booking_checkout)); ?></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Số đêm:
+                                            </td>
+                                            <td><strong><?php echo $booking->booking_nights; ?></strong></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 col-xs-12">
+                                <div class="table table-responsive row">
+                                    <table class="table table-no-border mb0">
+                                        <tr>
+                                            <td>
+                                                Người lớn:
+                                            </td>
+                                            <td>
+                                                <strong><?php echo $booking->booking_adults; ?></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Trẻ em:
+                                            </td>
+                                            <td>
+                                                <strong><?php echo $booking->booking_child; ?></strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Số lượng phòng:
+                                            </td>
+                                            <td>
+                                                <strong id="total_room"></strong>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!-- row -->
+                    </div>
+                    <div class="box">
+                        <ul class="order-summary">
+                            <?php
+                            $priceTotal = 0;
+                            $totalRoom = 0;
+                            foreach ($rooms as $r) {
+                                $priceOne = 0;
+                                $priceExtraBed = 0;
+                                foreach ($r->Info['detail'] as $tmp) {
+                                    $priceOne += $tmp->total;
+                                }
+                                $priceOne = $priceOne / count($r->Info['detail']);
+                                ?>
+                                <li>
+                                    <div class="k">
+                                        <p><strong><?php echo $r->title; ?></strong></p>
+                                        <?php echo number_format($priceOne); ?>
+                                        x <?php echo $booking->booking_nights; ?> (đêm)
+                                        x <?php echo $r->room_count; ?> (phòng)
+                                        = <?php echo number_format($r->Info['total'] * $r->room_count); ?> VND
+                                    </div>
+                                </li>
+                                <?php
+                                $totalRoom += $r->room_count;
+                                $priceTotal += $r->Info['total'] * $r->room_count;
+                            }
+                            ?>
+                            <script type="text/javascript">
+                                $('#total_room').html('<?php echo $totalRoom > 9 ? $totalRoom : '0' . $totalRoom; ?>');
+                            </script>
+                            <li>
+                                <span class="k">Thành tiền:</span>
+                                <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>
+                            </li>
+                            <li>
+                                <span class="k">Giường phụ:</span>
+                                <span class="v"><?php echo number_format($booking->booking_extra_beds_charges); ?> VND</span>
+                            </li>
+                            <li>
+                                <span class="k">Chi phí khác:</span>
+                                <span class="v">0 VND</span>
+                            </li>
+                            <li>
+                                <span class="k">Phí VAT:</span>
+                                <span class="v"><?php echo number_format($booking->booking_tax); ?> VND</span>
+                            </li>
+                            <li>
+                                <span class="k">Phí dịch vụ:</span>
+                                <span class="v"><?php echo number_format($booking->booking_paymethod_tax); ?> VND</span>
+                            </li>
+                            <li>
+                                <strong class="k">Thanh toán</strong>
+                                <strong class="v"><?php echo number_format($booking->booking_paymethod_tax); ?> VND</strong>
+                            </li>
+                            <li style="border: none;">
+                                <strong class="clearfix" style="margin-bottom: 3px; display: block;">Mã giảm giá</strong>
+                                <div class="k">
+                                    <input type="input" class="form-control coupon" value="<?php echo $booking->booking_coupon; ?>" disabled="disabled">
+                                </div>
+                            </li>
+                            <li style="border: none;">
+                                <span class="k">Giảm giá: </span>
+                                <span class="v purple"><?php echo number_format($booking->booking_coupon_rate); ?> VND</span>
+                            </li>
+                            <li style="border: none;">
+                                <strong class="k">
+                                    Tổng thanh toán
+                                    <span style="color: #999999; display:block; font-size: 12px;">(Giá đã bao gồm VAT và phí dịch vụ)</span>
+                                </strong>
+                                <strong class="v"><?php echo number_format($booking->booking_total); ?> VND</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Thông tin thanh toán</strong></div><!-- /.panel-heading -->
+                    <div class="box">
+                        <div class="box_body">
+                            <ul class="order-summary">
+                                <li style="border: none;">
+                                    <span class="k">Tình trạng thanh toán</span>
+                                    <div class="v">
+                                        <select class="form-control chosen-select" name="status">
+                                            <option value="unpaid"<?php echo $booking->booking_status == 'unpaid' ? ' selected="selected"' : ''; ?>><span class="purple">Chưa thanh toán</span></option>
+                                            <option value="paid"<?php echo $booking->booking_status == 'paid' ? ' selected="selected"' : ''; ?>><span class="purple">Đã thanh toán</span></option>
+                                            <option value="reserved"<?php echo $booking->booking_status == 'reservedvv' ? ' selected="selected"' : ''; ?>><span class="purple">Đã cọc</span></option>
+                                            <option value="cancelled"<?php echo $booking->booking_status == 'cancelled' ? ' selected="selected"' : ''; ?>><span class="purple">Đã hủy</span></option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li style="border: none;">
+                                    <span class="k">Số tiền</span>
+                                    <div class="v">
+                                        <input type="text" class="form-control" name="amount_paid" value="<?php echo $booking->booking_amount_paid; ?>">
+                                    </div>
+                                </li>
+                                <li style="border: none;">
+                                    <span class="k">Ngày thanh toán</span>
+                                    <div class="v">
+                                        <input type="text" class="form-control dpd1 fdate" name="payment_date"value="<?php echo !empty($booking->booking_payment_date) ? date('d/m/Y', $booking->booking_payment_date) : ''; ?>">
+                                    </div>
+                                </li>
+                                <li style="border: none;">
+                                    <div>Ghi chú</div>
+                                    <div>
+                                        <textarea class="form-control" rows="5" name="payment_info"><?php echo $booking->booking_payment_info; ?></textarea>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>Điều kiện hủy phòng</strong></div><!-- /.panel-heading -->
+                    <div class="box">
+                        <div class="box_body2">
+                            <p>Giai đoạn 12.01.2017 - 31.10.2017:</p>
+                            <p>+ Hủy phòng trước 24 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): không tính phí.</p>
+                            <p>+ Hủy phòng trong vòng 23 ngày đến 13 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): tính 50% tổng tiền phòng.</p>
+                            <p>+ Hủy phòng trong vòng 12 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ Tết): tính 100% tổng tiền phòng.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="btype" value="<?php echo $booking->booking_type; ?>"/>
+                    <input type="hidden" name="booking_id" value="<?php echo $booking->booking_id; ?>"/>
+                    <input type="hidden" name="refcode" value="<?php echo $booking->booking_ref_no; ?>"/>
+                    <input type="hidden" name="refcode" value="<?php echo $booking->booking_total; ?>"/>
+                    <button type="submit" name="guest" class="btn btn-block btn btn-action completebook">Cập nhật Booking</button>
+                </div>
+            </div>
         </div>
-        </div>
- <?php if($service == "hotels"){ ?>
-        <div class="form-group">
-        <label class="col-md-3 control-label"><?php echo $checkoutlabel;?> </label>
-        <div class="col-md-3">
-        <input class="form-control dpd2" id="<?php echo $service;?>" type="text" placeholder="Date" name=""  value="<?php echo $bdetails->checkout;?>" readonly="true" />
-        </div>
-        </div>
-
-
-        <div>
-        <div class="form-group">
-        <label class="col-md-3 control-label">Total ( Nights )</label>
-        <div class="col-md-3">
-        <input class="form-control" id="stay" type="text" name="stay"  value="<?php echo $bdetails->nights;?>" readonly="true">
-        </div>
-        </div>
-        </div>
-<?php } ?>
-
-      <!--Hotels-->
-      <?php
-       $histrue = $chklib->is_mod_available_enabled("hotels");
-      if($service == "hotels" && $histrue){ ?>
-        <div class="form-group">
-        <label class="col-md-3 control-label">Hotel Name</label>
-        <div class="col-md-8">
-        <?php echo $bdetails->title;?>
-        </div>
-        </div>
-
-        <div class="form-group">
-        <label class="col-md-3 control-label">Room Name </label>
-        <div class="col-md-8">
-        <select data-placeholder="Select" id="poprooms" class="chosen-select hrooms" disabled="true" >
-        <?php foreach($hrooms as $hr){ ?>
-        <option value="<?php echo $hr->room_id;?>" <?php if($selectedroom == $hr->room_id){ echo "selected";}?> > <?php echo $hr->room_title;?> </option>
-        <?php } ?>
-        </select>
-         <span class="btn bookrslt" style="display:none"></span>
-        </div>
-        </div>
-
-
-        <div class="form-group">
-        <label class="col-md-3 control-label">Room Quantity</label>
-        <div class="col-md-3">
-        <select name="title" data-placeholder="Select" class="form-control roomquantity" disabled="true">
-      <?php for($i =1; $i <= $totalrooms;$i++ ){ ?>
-       <option value="<?php echo $i;?>" <?php if($rquantity == $i){ echo "selected";} ?> ><?php echo $i;?></option>
-       <?php } ?>
-        </select>
-        </div>
-        </div>
-
-        <div class="form-group">
-        <label class="col-md-3 control-label">Total Room Price</label>
-        <div class="col-md-3">
-        <input class="form-control" id="totalroomprice" type="text" name="totalroomprice"  value="<?php echo $rtotal;?>" readonly="true">
-         </div>
-        </div>
-
-        <div class="form-group">
-        <label class="col-md-3 control-label">Per Night Price</label>
-        <div class="col-md-3">
-        <input class="form-control" id="roomtotal" type="text" placeholder="Price" name="roomtotal" value="<?php echo $subitemprice;?>" readonly="true">
-        </div>
-        </div>
-
-
-         <?php if($applytax == "yes"){ ?>
-          <div class="form-group">
-        <label class="col-md-3 control-label">Total Tax</label>
-        <div class="col-md-3">
-        <input class="form-control" id="taxamount" type="text" name="taxamount"  value="<?php echo $bdetails->tax;?>" readonly="true">
-         </div>
-
-        </div>
-        <?php }else{ ?><input id="taxamount" type="hidden" name="taxamount"  value="0"><?php } } ?>
-
-         <!-- Hotels-->
-
-      <!-- Cars-->
-      <?php
-       $cartrue = $chklib->is_mod_available_enabled("cars");
-      if($service == "cars" && $cartrue){ ?>
-        <input type="hidden" name="totalamount" id="totalcaramount" value="0" />
-        <div class="form-group">
-        <label class="col-md-3 control-label">Car Name</label>
-        <div class="col-md-8">
-         <?php echo $bdetails->title;?>
-        </div>
-        </div>
-         <?php } ?>
-
-
-      <!--Cars-->
-     <div class="form-group">
-        <label class="col-md-3 control-label">Total Deposit</label>
-        <div class="col-md-3">
-
-        <input class="form-control editdeposit" type="text" id="totaltopay"  name="totaltopay"  value="<?php echo $bdetails->checkoutAmount;?>">
-         </div>
-
-        </div>
-
-        <div class="form-group">
-        <label class="col-md-3 control-label">Booking Status</label>
-        <div class="col-md-3">
-        <?php if($adminsegment == "admin"){ ?>
-        <select class="form-control" name="status">
-          <option value="unpaid"  <?php if($bdetails->status == "unpaid"){ echo "selected"; }?>>Unpaid</option>
-          <option value="paid" <?php if($bdetails->status == "paid"){ echo "selected"; }?>>Paid</option>
-          <option value="reserved" <?php if($bdetails->status == "reserved"){ echo "selected"; }?>>Reserved</option>
-          <option value="cancelled" <?php if($bdetails->status == "cancelled"){ echo "selected"; }?>>Cancelled</option>
-        </select>
-        <?php }else{ ?> 
-        <input type="text" name="status" class="form-control" value="<?php echo ucfirst($bdetails->status); ?>" readonly>
-        <?php } ?>
-         </div>
-
-        </div>
-      </div>
-
-    </div>
-
-    <!-- extras section  <div class="panel panel-default rprice supdiv" <?php if(empty($sups)){ ?>  style="display:none;" <?php } ?>>
-          <div class="panel-heading"><strong>extras</strong></div>
-          <div class="panel-body suppcontent">
-         <?php if(!empty($sups)){ ?>
-          <table class='table table-srtiped'>
-          <thead>
-          <tr>
-          <td><b>Name</b></td>
-          <td><b>Price</b></td>
-          <td><b>Order</b></td>
-          </tr>
-          </thead><tbody>
-        <?php
-
-          foreach($sups as $sup){ ?>
-        <tr><td><?php echo $sup->extraTitle;?></td>
-        <td><?php echo $app_settings[0]->currency_sign.$sup->extraPrice; ?> </td>
-        <td><input type='checkbox' class='extras'  id="extras_<?php echo $sup->id; ?>" data-title="<?php echo str_replace(" ","&nbsp;",$sup->extraTitle);?>" data-price="<?php echo $sup->extraPrice;?>" onclick="select_sup($(this).data('price'),$(this).data('title'),'<?php echo $sup->id;?>','<?php echo $app_settings[0]->currency_sign;?>');"  <?php if(in_array($sup->id,$bookedsups)){ echo "checked";} ?>    name='extras[]'  value="<?php echo $sup->id;?>" ></td></tr>
-
-       <?php   } ?>
-          </tbody></table> <?php } ?>
-          </div>
-        </div>-->
-
-        <?php if($adminsegment == "admin"){ ?>
-        <div class="panel panel-default rprice paytype">
-          <div class="panel-heading"><strong>Payment Method</strong></div>
-          <div class="panel-body">
-          <label class="col-md-3 control-label" id="" >Payment Type</label>
-				 <div class="col-md-4">
-				    <select  class="form-control" name="paymethod" data-placeholder="Select" required>
-                 <option value="">Select</option>
-                    <?php foreach($paygateways['activeGateways'] as $payt){ ?>
-                    <option value="<?php echo $payt['name'];?>" <?php if($payt['name'] == $bdetails->paymethod){ echo "selected"; } ?> ><?php echo  $payt['displayName'];?></option>
-                    <?php } ?>
-                  </select>
-				  </div>
-          </div>
-        </div>
-        <?php }else{ ?>
-        <input type="hidden" name="paymethod" value="<?php echo $bdetails->paymethod;?>">
-        <?php } ?>
-
-
-     <div class="form-group">
-      <div class="col-md-2">
-      <input type="hidden" name="updatebooking" value="1" />
-      <input type="submit" class="btn btn-primary btn-lg" value="Update Booking">
-      </div>
-      </div>
-
-    <?php } ?>
-
-   	</form>
-
-    </div>
-   <?php if(!empty($service)){  ?>
-    <div class="col-md-4 pull-right">
-    <div class="panel panel-default" >
-      <div style="font-size:16px" class="panel-heading"><strong>Tóm lược booking</strong></div>
-
-      <table class="table summary">
-       <tr style="background-color:#ffffdf">
-
-       <td><b><span id="itemtitlesum"><?php echo $bdetails->title;?></span></b></td>
-       <td><span id="itempricesum"><?php if(!empty($itemprice)){ echo $app_settings[0]->currency_sign.$itemprice; } ?></span></td>
-
-       </tr>
-<?php 
-if(!empty($bdetails->bookingExtras)){
-foreach($bdetails->bookingExtras as $bextra){ ?>
- <tr style='background-color:#ffffdf' class='sidesups' id="extras_<?php echo $bextra->id;?>"><td><b><?php echo $bextra->title; ?></b></td> <td> <strong><?php echo $app_settings[0]->currency_sign.$bextra->price; ?></strong> </td></tr>
-   <?php  } } ?>
-      </table>
-      <table class="table table-bordered">
-
-     <?php if($service == "hotels"){ ?>
-     <?php if($bdetails->extraBeds > 0){  ?>  
-    <tr>
-      <td><b>Extra Bed (<?php echo $bdetails->extraBeds;?>)</b></td>
-      <td style="font-size:14px"><?php echo $app_settings[0]->currency_sign;?><?php echo $bdetails->extraBedsCharges;?></td>
-    </tr>
-    <?php } ?>
-      <tr style="background-color:#e7ffda" style="display:none;" id="tr_roomamount">
-       <td style="font-size:14px"><b>Total Room Amount</b></td>
-       <td style="font-size:14px"><?php echo $app_settings[0]->currency_sign;?><span id="summaryroomtotal"><?php echo $rtotal;?></span></td>
-      
-      </tr>
-    
-      <?php } ?>
-        <tr style="background-color:#e7ffda" class="taxesvat">
-       <td style="font-size:14px"><b>Tax & VAT </b></td>
-       <td style="font-size:14px" id="displaytax"><?php echo $app_settings[0]->currency_sign.$bdetails->tax;?></td>
-
-       </tr>
-      <tr style="background-color:#ffffdf">
-       <td style="font-size:14px"><b>Deposit </b></td>
-       <td style="font-size:14px" id="topaytotal"><?php echo $app_settings[0]->currency_sign.$bdetails->checkoutAmount;?></td>
-
-       </tr>
-
-       <tr style="background-color:#e7ffda">
-       <td style="font-size:18px"><b>GRAND TOTAL</b></td>
-       <td style="font-size:18px" id="grandtotal"><?php echo $app_settings[0]->currency_sign;  echo $bdetails->checkoutTotal;?></td>
-       </tr>
-
-      </table>
-    </div>
-    </div>
-    <?php } ?>
-    </div>
-
-
-  </div>
-
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/adminbooking.js"></script>
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+    });
+</script>

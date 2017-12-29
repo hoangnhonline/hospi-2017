@@ -1780,14 +1780,12 @@ class Hotels_lib
         $Roomresult = array();
         $curr = $this->ci->currconverter;
         $this->ci->load->model('hotels/rooms_model');
-
+        
         foreach ($rooms as $room) {
             $details = $this->room_short_details($room->id);
-            //var_dump("<pre>", $details);die;           
 
             $images = $this->roomImages($room->id, 4);
             $roomprice = $this->ci->rooms_model->getRoomPriceNew($room->id, $checkin, $checkout);
-
 
             $breakfast = $details[0]->breakfast;
 

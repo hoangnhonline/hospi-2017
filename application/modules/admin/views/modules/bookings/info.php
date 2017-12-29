@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading text-center"><strong>Thông tin đơn phòng</strong></div><!-- /.panel-heading -->
+    <div class="panel-heading text-center"><strong>Thông tin phòng</strong></div><!-- /.panel-heading -->
     <div class="panel-body">
         <dl class="cb-img-name">
             <dt>
@@ -91,10 +91,8 @@
                 $room_quantity = json_decode($room_quantity, true);
                 $extra_beds = json_decode($extra_beds, true);
 
-                $priceTotal = $so_giuong_phu = 0;
+                $priceTotal = $so_giuong_phu = $priceExtraBedTotal = 0;
                 if (!empty($room)) {
-
-                    $priceExtraBedTotal = 0;
                     foreach ($room as $roomId => $rDetail) {
                         $priceOne = 0;
                         $priceExtraBed = 0;
@@ -105,7 +103,6 @@
                         $priceOne = $priceOne / count($rDetail->Info['detail']);
                         $priceExtraBedTotal += $priceExtraBed * $extra_beds[$roomId];
                         $so_giuong_phu += $extra_beds[$roomId];
-
 
                         $quantity = $room_quantity[$roomId];
                         ?>
@@ -120,8 +117,8 @@
                         <?php
                         $priceTotal += $rDetail->Info['total'] * $quantity;
                     }
-                } ?>
-
+                }
+                ?>
                 <li>
                     <span class="k">Thành tiền:</span>
                     <strong class="v"><?php echo number_format($priceTotal); ?> VND</strong>
@@ -234,7 +231,7 @@
                 <li style="border: none;">
                     <div>Ghi chú</div>
                     <div>
-                        <textarea class="form-control" rows="5" name="cancellation_request"></textarea>
+                        <textarea class="form-control" rows="5" name="payment_info"></textarea>
                     </div>
                 </li>
             </ul>
@@ -245,26 +242,23 @@
     <div class="panel-heading text-center"><strong>Điều kiện hủy phòng</strong></div><!-- /.panel-heading -->
     <div class="box">
         <div class="box_body2">
-            <p>Giai đoạn 12.01.2017 - 31.10.2017</p>
-            <p>+ Hủy phòng trước 24 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): không tính phí</p>
-            <p>+ Hủy phòng trong vòng 23 ngày đến 13 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): tính 50% tổng tiền phòng</p>
-            <p>+ Hủy phòng trong vòng 12 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ Tết): tính 100% tổng tiền phòng</p>
+            <p>Giai đoạn 12.01.2017 - 31.10.2017:</p>
+            <p>+ Hủy phòng trước 24 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): không tính phí.</p>
+            <p>+ Hủy phòng trong vòng 23 ngày đến 13 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ, Tết): tính 50% tổng tiền phòng.</p>
+            <p>+ Hủy phòng trong vòng 12 ngày trước ngày khách đến (trừ thứ 7, chủ nhật và Lễ Tết): tính 100% tổng tiền phòng.</p>
         </div>
     </div>
 </div>
 <div class="form-group">
     <input type="hidden" name="country" value="VN" id="country"/>
-    <input type="hidden" id="itemid" name="itemid" value="<?php echo $module->hotel_id; ?>"/>
-    <input type="hidden" name="checkout" value="<?php echo $checkout; ?>"/>
-    <input type="hidden" name="adults" value="<?php echo $adults; ?>"/>
-    <input type="hidden" name="child" value="<?php echo $child; ?>"/>
+    <input type="hidden" name="itemid" value="<?php echo $module->hotel_id; ?>"/>
+    <input type="hidden" name="nguoikhac" value="No"/>
     <input type="hidden" name="nights" value="<?php echo $stay; ?>"/>
     <input type="hidden" id="couponid" name="couponid" value=""/>
-    <input type="hidden" id="btype" name="btype" value="hotels"/>
+    <input type="hidden" name="btype" value="hotels"/>
     <input type="hidden" name="subitemid" value="<?php echo $room_id; ?>"/>
     <input type="hidden" name="roomscount" value='<?php echo json_encode($room_quantity); ?>'/>
     <input type="hidden" name="bedscount" value='<?php echo json_encode($extra_beds); ?>'/>
-    <input type="hidden" name="checkin" value="<?php echo $checkin; ?>"/>
     <button type="submit" name="guest" class="btn btn-block btn btn-action completebook" onclick="return completebook('<?php echo base_url(); ?>','Select Payment Method');" style="display: none;">Lưu Booking</button>
 </div>
 <script type="text/javascript">
