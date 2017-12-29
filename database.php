@@ -13,9 +13,4 @@ $db['default']['cachedir'] = "";
 $db['default']['char_set'] = "utf8";
 $db['default']['dbcollat'] = "utf8_general_ci";
 $active_group = "default";
-<<<<<<< HEAD
 $active_record = TRUE;
-	
-=======
-$active_record = TRUE;
->>>>>>> 4420a7e03f34078bf6f93b1b4fada3a69b136635
