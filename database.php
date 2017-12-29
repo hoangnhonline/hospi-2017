@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $db['default']['username'] = "root";
-$db['default']['password'] = "thenext867";
+$db['default']['password'] = "";
 $db['default']['database'] = "matsunoi_xy_762e";
 
 $db['default']['hostname'] = "localhost";
@@ -14,3 +14,4 @@ $db['default']['char_set'] = "utf8";
 $db['default']['dbcollat'] = "utf8_general_ci";
 $active_group = "default";
 $active_record = TRUE;
+	
