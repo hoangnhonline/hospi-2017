@@ -103,13 +103,13 @@
           </li>
           <?php if($isSuperAdmin){ ?>
           <li>
-            <a href="#menu-ui" data-toggle="collapse" data-parent="#social-sidebar-menu">
+            <a href="#general" data-toggle="collapse" data-parent="#social-sidebar-menu">
               <!-- icon--><i class="fa fa-cogs"></i>
               <span>Thông tin chung</span>
               <!-- arrow--><i class="fa arrow"></i>
             </a>
             <!-- BEGIN SUB-ELEMENT MENU-->
-            <ul id="menu-ui" class="collapse wow fadeIn animated">
+            <ul id="general" class="collapse wow fadeIn animated">
               <li> <a href="<?php echo base_url();?>admin/settings/">Cài đặt</a> </li>             
               <li>
                 <a href="<?php echo base_url();?>admin/settings/modules/">Cấu trúc</a>
@@ -198,8 +198,10 @@
           </li>
           <?php } } ?>
           <li>
-            <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#COMBO"><i class="fa fa-gift"></i>
-            <span>Combo</span><i class="fa arrow"></i>
+            <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#COMBO">
+                <i class="fa fa-gift"></i>
+                <span>Combo</span>
+                <i class="fa arrow"></i>
             </a>
             <ul id="COMBO" class="collapse  wow fadeIn animated">
               <li><a href="<?php echo base_url();?>admin/combo/">Quản lý Combo</a></li>
@@ -207,8 +209,10 @@
             </ul>
           </li>
           <li>
-            <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#HONEYMOON"><i class="fa fa-gift"></i>
-            <span>Honeymoon</span><i class="fa arrow"></i>
+            <a data-toggle="collapse" data-parent="#social-sidebar-menu" href="#HONEYMOON">
+                <i class="fa fa-gift"></i>
+                <span>Honeymoon</span>
+                <i class="fa arrow"></i>
             </a>
             <ul id="HONEYMOON" class="collapse  wow fadeIn animated">
               <li><a href="<?php echo base_url();?>admin/honeymoon/">Quản lý honeymoon</a></li>
@@ -218,23 +222,34 @@
 
           <?php if(pt_permissions('locations',@$userloggedin)){ ?>
           <li>
-          <a href="<?php echo base_url().$this->uri->segment(1);?>/locations"><i class="fa fa-map-marker"></i>
-          <span>Vị trí</span><span class="pull-right label label-danger" id=""></span>
+          <a href="<?php echo base_url().$this->uri->segment(1);?>/locations">
+              <i class="fa fa-map-marker"></i>
+                <span>Vị trí</span>
           </a>
           </li>
           <?php } ?>
           <?php if($isadmin){  if(pt_is_module_enabled('newsletter')){  ?>
            <?php if(pt_permissions('newsletter',@$userloggedin)){ ?>
           <li>
-            <a href="<?php echo base_url();?>admin/newsletter/"><i class="fa fa-envelope"></i>
-            <span>Thư</span><span class="pull-right label label-danger" id=""></span>
+            <a href="<?php echo base_url();?>admin/newsletter/">
+                <i class="fa fa-envelope"></i>
+                <span>Thư</span>
             </a>
           </li>
           <?php } } } ?>
           <?php if(pt_permissions('booking',@$userloggedin)){ ?>
            <li>
-            <a href="<?php echo base_url().$this->uri->segment(1);?>/bookings/"><i class="fa fa-list"></i>
-            <span><?php echo trans('034');?></span><span class="pull-right label label-danger" id=""></span>
+            <a href="<?php echo base_url().$this->uri->segment(1);?>/bookings/">
+                <i class="fa fa-list"></i>
+                <span><?php echo trans('034');?></span>
+            </a>
+          </li>
+          <?php } ?>
+          <?php if(pt_permissions('evoucher',@$userloggedin)){ ?>
+           <li>
+            <a href="<?php echo base_url().$this->uri->segment(1);?>/evoucher/">
+                <i class="fa fa-list"></i>
+                <span>Evoucher</span>
             </a>
           </li>
           <?php } ?>
