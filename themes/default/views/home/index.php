@@ -184,19 +184,17 @@
           <h2 class="main-title go-right andes-bold"><?php echo trans('0737'); ?></h2>
           <div class="clearfix"></div>
         </div>
-        <div class="row col-md-12 col-sm-12 col-xs-12">
-          <div class="row">
-            <?php foreach($hotelslocationsList as $loc){
-              $city_slug = create_slug($loc->name);
-              $country_slug = create_slug($loc->country);
-              echo '<div class="col-md-6 col-sm-6 col-xs-12">';
-              echo '<p class="where-location"><span class="hotel-location link-color"><a href="'.base_url().'hotels/search/'.$country_slug.'/'.$city_slug.'/'.$loc->id.'?txtSearch='.$loc->name.'&searching='.$loc->id.'&modType=location&checkin=&checkout=&adults=&child=">'.$loc->name.'</a></span>';
-              echo '<span class="pricetxt-location">'.trans('0566').' '.$item->currSymbol.'</span>';
-              echo '</p><p><span class="count-location">'.$loc->total.' ';echo trans('Hotels').'</span>';
-              echo '<span class="price-location link-color">'.$loc->bestprices.'</span>';
-              echo '</p></div>';
-              } ?>
-          </div>
+        <div class="row">
+          <?php foreach($hotelslocationsList as $loc){
+            $city_slug = create_slug($loc->name);
+            $country_slug = create_slug($loc->country);
+            echo '<div class="col-md-6 col-sm-6 col-xs-12">';
+            echo '<p class="where-location"><span class="hotel-location link-color"><a href="'.base_url().'hotels/search/'.$country_slug.'/'.$city_slug.'/'.$loc->id.'?txtSearch='.$loc->name.'&searching='.$loc->id.'&modType=location&checkin=&checkout=&adults=&child=">'.$loc->name.'</a></span>';
+            echo '<span class="pricetxt-location">'.trans('0566').' '.$item->currSymbol.'</span>';
+            echo '</p><p><span class="count-location">'.$loc->total.' ';echo trans('Hotels').'</span>';
+            echo '<span class="price-location link-color">'.$loc->bestprices.'</span>';
+            echo '</p></div>';
+            } ?>
         </div>
       </div>
     </div>

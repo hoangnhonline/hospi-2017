@@ -87,7 +87,7 @@
                 <div class="col-sm-2 col-xs-6 go-right num-night">
                   <div class="form-group">
                     <div class="clearfix"></div>
-                    <div class="content">
+                    <div class="content" style="margin-top: 15px;">
                       <strong><i class="fa fa-clock-o"></i></strong>
                       <strong><span id="number_night">01</span> đêm</strong>
                     </div>

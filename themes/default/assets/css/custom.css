@@ -564,9 +564,13 @@ a:hover.green2 {
 h2.ftitle {
     font-size: 16px;
     color: #fff;
+    margin-bottom: 10px;
 }
 #contact img.logo {
     margin-bottom: 20px;
+}
+#contact a {
+    color: #fff;
 }
 /*.ftitle:hover {
     color: #DBF3FF;
@@ -4765,6 +4769,16 @@ ul.div-sub-menu li a:hover {
     width: 30px;
     color: #fff
 }
+
+@media (min-width: 1200px) {
+    .featuredCampaigns .nav-featured li {
+        max-height: 34.5px
+    }
+    .featuredCampaigns .nav-featured li a {
+        line-height: 34.5px;
+    }
+}
+
 .popluar .title-popluar {
     color: #666;
     font-family: Arial;
@@ -9221,11 +9235,11 @@ ul.nav .honeymoon .img_list img {
 }
 .footerbg .back-ft-po {
   background: url(../../assets/img/bg-footer.png) no-repeat;
-  // background-size: 100%;
+  /*// background-size: 100%;*/
   width: 100%;
   height: 107px;
   position: absolute;
-  top: -105px;
+  top: -107px;
   right: 0;
   left: 0;
 }
@@ -9242,7 +9256,7 @@ ul.footerlist li:before {
     color: #fff;
 }
 .phone_footer {
-    color: #999999;
+    color: #fff;
     font-size: 16px;
 }
 .link-ft-bt {

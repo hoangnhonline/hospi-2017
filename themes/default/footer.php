@@ -96,11 +96,11 @@ if (strpos($currenturl, 'blog') !== false) {
             <div class="row">
                 <!-- Hotels -->
                 <div class="col-md-4 go-right col-xs-12" id="contact">
-                    <div class="footer-brand">
+                    <div class="footer-brand" style="color: #fff;">
                         <div style="color: #fff;"><?php echo $app_settings[0]->home_title;?></div>
-                        <div class="ftitle go-text-right"><?php if(!empty($address)){ echo $address; } else { echo trans('Address'); } ?></div>
-                        <div class="ftitle go-text-right">Tel: <?php if(!empty($phone)){ echo $phone; } else { echo "08 3826 8797"; } ?><?php //echo $tel; ?> - Fax: <?php if(!empty($fax)){ echo $fax; } else { echo "(08) 3826 8798"; } ?><?php //echo $fax; ?></div>
-                        <div class="ftitle go-text-right"><a class="purple" target="_blank" href="https://www.google.com/maps/place/124+Kh%C3%A1nh+H%E1%BB%99i,+ph%C6%B0%E1%BB%9Dng+6,+Qu%E1%BA%ADn+4,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam/@10.7572978,106.6982959,17z/data=!3m1!4b1!4m5!3m4!1s0x31752f6d4faf461f:0xcf0c2485be1d0fdc!8m2!3d10.7572925!4d106.7004846"><i style="margin-left: -3px;" class="icon-location-6 go-right"></i><?php echo trans('0707');?></a></div>
+                        <div class="go-text-right"><?php if(!empty($address)){ echo $address; } else { echo trans('Address'); } ?></div>
+                        <div class="go-text-right">Tel: <?php if(!empty($phone)){ echo $phone; } else { echo "08 3826 8797"; } ?><?php //echo $tel; ?> - Fax: <?php if(!empty($fax)){ echo $fax; } else { echo "(08) 3826 8798"; } ?><?php //echo $fax; ?></div>
+                        <div class="go-text-right"><a class="purple" target="_blank" href="https://www.google.com/maps/place/124+Kh%C3%A1nh+H%E1%BB%99i,+ph%C6%B0%E1%BB%9Dng+6,+Qu%E1%BA%ADn+4,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam/@10.7572978,106.6982959,17z/data=!3m1!4b1!4m5!3m4!1s0x31752f6d4faf461f:0xcf0c2485be1d0fdc!8m2!3d10.7572925!4d106.7004846"><i style="margin-left: -3px;" class="icon-location-6 go-right"></i><?php echo trans('0707');?></a></div>
                         <p style="color: #fff;">&copy; <?php echo $app_settings[0]->copyright;?></p>
                     </div>
                     <div class="scont">
