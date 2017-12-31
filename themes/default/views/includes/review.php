@@ -7,7 +7,7 @@
         <div class="panel-body">
             <span class="RTL">
                 <p>Chào bạn!</p>
-                <p>Cảm ơn bạn đã dành một chút thời gian để đánh giá về khách sạn Novotel Phú Quốc. Đánh giá của bạn là thước đo để khách sạn chúng tôi có thể cải thiện chất lượng hàng ngày  nhằm mang đến cho khách hàng sự trải nghiệm tốt nhất.</p>
+                <p>Cảm ơn bạn đã dành một chút thời gian để đánh giá về khách sạn <?php echo $module->title; ?>. Đánh giá của bạn là thước đo để khách sạn chúng tôi có thể cải thiện chất lượng hàng ngày  nhằm mang đến cho khách hàng sự trải nghiệm tốt nhất.</p>
                 <br>
                 <p>Và để đánh giá một khách sạn chân thực hơn. Quý khách vui lòng nhập email hoặc mã đặt phòng để đánh giá. Quý khách chỉ có thể đánh giá khi đã sử dụng dịch vụ của khách sạn thông qua hệ thống đặt phòng của www.hospi.vn</p>
             </span>
@@ -36,6 +36,7 @@
                                   name="reviews_comments" id="reviews_comments" cols="30" rows="10"
                                   style="border-radius: 10px; margin-bottom: 10px;"></textarea>
                         <div class="form-group"></div>
+                        <input type="hidden" id="hotel_id" value="<?php echo $module->id; ?>"/>
                         <input type="hidden" name="addreview" value="1"/>
                         <input type="hidden" name="overall" id="overall"/>
                         <input type="hidden" name="reviewmodule" value="<?php echo $appModule; ?>"/>
@@ -193,7 +194,8 @@
             var input = $("#bookingcode").val();
             $("#info").html("<div id='rotatingDiv'></div>");
             $.post("<?php echo base_url();?>home/ajax_getCustominfo", {
-                    bookingcode: input
+                    bookingcode: input,
+                    hotelid: $('#hotel_id').val()
                 },
                 function (response) {
                     if (response.length == 0) {

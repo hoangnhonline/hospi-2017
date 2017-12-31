@@ -94,11 +94,9 @@
                                     </td>               
                                     <td style="white-space:nowrap; text-align:right">                 
                                         <a target="_blank" title="View Invoice" class="btn btn-primary btn-sm" href="<?php echo base_url(); ?>invoice/?id=<?php echo $item->booking_id; ?>&sessid=<?php echo $item->booking_ref_no; ?>"><i class="fa fa-search-plus"></i></a>                     
-                                        <?php if ($item->booking_type == 'hotels') { ?>
+                                        <?php if ($item->booking_status != 'paid') { ?>
                                             <a href="<?php echo base_url() . 'admin/bookings/edit/' . $item->booking_id; ?>" class="btn btn-warning btn-sm" target="_self"><i class="fa fa-edit"></i></a>
-                                        <?php } else { ?>
-                                            <a href="<?php echo base_url() . 'admin/bookings/offers/' . $item->booking_id; ?>" class="btn btn-warning btn-sm" target="_self"><i class="fa fa-edit"></i></a>
-                                        <?php } ?>
+                                        <?php }?>
                                         <?php
                                         if ($deletepermission) {
                                             $delurl = base_url() . 'admin/hotelajaxcalls/delHotel';

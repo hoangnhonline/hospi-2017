@@ -44,7 +44,7 @@
                         <div class="block-tabs-2">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#Combo_detail" aria-controls="Combo_detail" role="tab" data-toggle="tab"><?php $module->type == 2 ? 'Combo' : 'Ưu đãi'; ?> chi tiết</a></li>
+                                <li role="presentation" class="active"><a href="#Combo_detail" aria-controls="Combo_detail" role="tab" data-toggle="tab"><?php echo $module->type == 2 ? 'Combo' : 'Ưu đãi'; ?> chi tiết</a></li>
                                 <?php if ($module->type == 2) { ?>
                                     <li role="presentation"><a href="#Rule_cancel" aria-controls="Rule_cancel" role="tab" data-toggle="tab">Điều kiện</a></li>
                                 <?php } ?>

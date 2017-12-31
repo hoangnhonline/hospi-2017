@@ -3,21 +3,14 @@
   <div class="panel-heading"><?php echo $header_title; ?></div>
   <div class="clearfix"></div>
   <?php if(@$addpermission && !empty($add_link)){ ?>
-   <a style="margin-left:15px;margin-top:10px;" href="<?php echo $add_link; ?>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Tạo Booking</a>
+   <a style="margin-left:15px;margin-top:10px;" href="<?php echo $add_link; ?>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i> Tạo Evoucher</a>
   <?php } ?>
   <div style="clear:both"></div>
    <div class="panel-body" style="padding-top:5px;">
    	<div class="panel panel-default" style="margin-bottom:5px !important">
        
         <div class="panel-body">
-          <form class="form-inline" id="searchForm" role="form" method="GET" action="<?php echo base_url() .'admin/bookings'; ?>">
-            <div class="form-group" style="width:200px;">              
-              <select class="form-control chosen-select" name="booking_type" id="booking_type">                
-                <option value="hotels" <?php echo isset($params['booking_type']) && 'hotels' == $params['booking_type'] ? "selected" : "";  ?>>Khách sạn</option>
-                <option value="combo" <?php echo isset($params['booking_type']) && 'combo' == $params['booking_type'] ? "selected" : "";  ?>>Combo</option>
-                <option value="honeymoon" <?php echo isset($params['booking_type']) && 'honeymoon' == $params['booking_type'] ? "selected" : "";  ?>>Honeymoon</option>
-              </select>
-            </div>
+          <form class="form-inline" id="searchForm" role="form" method="GET" action="<?php echo base_url() .'admin/evoucher'; ?>">
             
             <div class="form-group">              
               <select class="form-control" name="booking_status" id="booking_status">
@@ -30,10 +23,7 @@
             </div>       
             <div class="form-group">              
               <input type="text" class="form-control" placeholder="Mã booking" name="booking_ref_no" value="<?php echo isset($params['booking_ref_no']) ? $params['booking_ref_no'] : ""; ?>">
-            </div>            
-            <div class="form-group">              
-              <input type="text" class="form-control" placeholder="Tên khách hàng" name="ai_last_name" value="<?php echo isset($params['ai_last_name']) ? $params['ai_last_name'] : ""; ?>">
-            </div>                                    
+            </div>                               
             <button type="submit" class="btn btn-primary btn-sm">Lọc</button>
           </form>         
         </div>

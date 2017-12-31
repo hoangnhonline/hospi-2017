@@ -201,26 +201,10 @@ $(function () {
 
             $("#commission").val(response.depositAmount);
             if (apptax == "yes") {
-
                 $("#tax").val(response.taxAmount);
-                //  $("#tax").removeClass();
-                // $("#tax").addClass(response.tax_type);
-
             }
-            console.log(response);
-
-
-
-
-
         });
-
-
-
     });
-
-
-
 });
 
 //tour sub items
@@ -299,17 +283,9 @@ function hroomprice(item) {
                 $(".paytype").fadeIn("slow");
 
                 roomcalculations();
-
             }
-
-
         });
-
-
-
     }
-
-
 }
 
 function roomcalculations() {
@@ -852,7 +828,7 @@ function completebook(url, msg) {
         url: url + "admin/ajaxcalls/processBooking" + formname,
         type: 'POST',
         data: $("#bookingdetails").serialize(),
-        beforeSend: function() {
+        beforeSend: function () {
             $('.result').html('<div id="rotatingDiv"></div>');
         },
         success: function (response) {
@@ -867,7 +843,7 @@ function completebook(url, msg) {
             }
         }
     });
-    
+
     return false;
 }
 
