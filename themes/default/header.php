@@ -16,9 +16,6 @@
     <link href="<?php echo $theme_url; ?>assets/css/bootstrap-slider.css" rel="stylesheet" media="screen">
     <link href="<?php echo $theme_url; ?>assets/css/custom.css" rel="stylesheet" media="screen">
 
-    <!-- Duc add css file -->
-    <link href="<?php echo $theme_url; ?>assets/css/style.css" rel="stylesheet" media="screen">
-
     <!-- facebook --------> 
     <meta property="og:title" content="<?php if(empty($ishome)){ echo $app_settings[0]->home_title; }else{ echo $CI->theme->_data['page_title']; } ?>"/>
     <meta property="og:site_name" content="<?php echo $app_settings[0]->site_title;?>"/>

@@ -38,7 +38,7 @@
                 <div>
                     <div class="col-md-9 go-right">
                         <div style="margin-top: 6px">
-                            <h1 class="go-right" style="font-size: 16px;margin-top: 10px;margin-bottom: 0px; text-transform: uppercase;"><?php echo $module->title;?></h1>
+                            <h1 class="go-right" style="font-size: 16px;margin-top: 10px;margin-bottom: 0px; text-transform: uppercase;"><?php echo $module->title; ?></h1>
                             <small class="go-right"><?php echo $module->stars;?></small> <span class="pull-right go-left"><?php if($hasRooms){ ?><?php //echo trans('0141');?><?php } ?> </span>
                             <div class="clearfix"></div>
                             <span class="go-right RTL"><i style="margin-left:-5px" class="icon-location-6"></i><?php //echo $module->location; ?> <?php if(!empty($module->mapAddress)){ ?><small class="adddress"><?php echo $module->mapAddress;?></small></span> <?php } ?>
@@ -134,13 +134,7 @@
                                 <div class="row">
                                     <div class="col-sm-7">
                                         <h4 class="package-name purple andes-bold"><?php echo $offer->type == 1 ? 'Deals - Giảm giá' : ($offer->type == 2 ? 'Combo' : 'Gói honeymoon'); ?></h4>
-                                        <span class="package-des">
-                                            <?php if (!$offer->offerForever) { ?>
-                                                Áp dụng từ ngày: <?php echo date('d/m/Y', $offer->from) ?> đến hết ngày: <?php echo date('d/m/Y', $offer->to) ?>
-                                            <?php } else { ?>
-                                                Không có thời hạn.
-                                            <?php } ?>
-                                        </span>
+                                        <span class="package-des"><?php echo $offer->title; ?></span>
                                     </div>
                                     <div class="col-sm-5">
                                         <div class="row">

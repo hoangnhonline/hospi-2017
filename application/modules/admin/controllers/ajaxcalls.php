@@ -696,14 +696,13 @@ class Ajaxcalls extends MX_Controller
         //$this->form_validation->set_rules('email', trans("094"), 'required|valid_email|matches[confirmemail]');
         $this->form_validation->set_rules('email', trans("094"), 'required|valid_email');
         $this->form_validation->set_rules('lastname', "Họ tên", 'trim|required');
+        
         if ($this->form_validation->run() == FALSE) {
-
             $bookingResult = array("error" => "yes", 'msg' => validation_errors());
         } else {
-
             $bookingResult = $this->bookings_model->doGuestBooking();
         }
-
+        var_dump('<pre>', $bookingResult);die;
         //$bookingResult = array("error" => "yes", 'msg' => $this->input->post('passport'));
         echo json_encode($bookingResult);
 

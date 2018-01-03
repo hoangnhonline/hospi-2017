@@ -133,7 +133,7 @@
                         <?php
                     }
                     $line++;
-                    if($line%4==0) echo "<div style='margin-bottom:10px;'></div>";
+                    if($line%4==0) echo "<div class='clearfix' style='margin-bottom:10px;'></div>";
                 }
                 ?>
                 <div class="clearfix"></div>

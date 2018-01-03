@@ -1,9 +1,11 @@
 <?php
+
 if (!defined('BASEPATH'))
-    exit ('No direct script access allowed');
+    exit('No direct script access allowed');
 
 class Home extends MX_Controller
 {
+
     private $data = array();
     private $validlang;
 
@@ -30,20 +32,18 @@ class Home extends MX_Controller
 
         $defaultlang = pt_get_default_language();
 
-        if (empty ($this->data['lang_set'])) {
+        if (empty($this->data['lang_set'])) {
             $this->data['lang_set'] = $defaultlang;
         }
 
         $this->data['eancheckin'] = date("m/d/Y", strtotime("+1 days"));
         $this->data['eancheckout'] = date("m/d/Y", strtotime("+2 days"));
-
-
     }
 
     public function microtime_float()
     {
         list($usec, $sec) = explode(" ", microtime());
-        return ((float)$usec + (float)$sec);
+        return ((float) $usec + (float) $sec);
     }
 
     public function index()
@@ -57,7 +57,7 @@ class Home extends MX_Controller
 
         $langid = $this->session->userdata('set_lang');
         $defaultlang = pt_get_default_language();
-        if (empty ($langid)) {
+        if (empty($langid)) {
             $langid = $defaultlang;
         }
         if ($this->validlang) {
@@ -88,7 +88,7 @@ class Home extends MX_Controller
                 $this->data['popularHotels'] = $this->hotels_lib->getTopRatedHotels();
                 //	$this->data['hero_hotels'] = $this->hotels_lib->hero_hotels_list();
                 //	$this->data['mini_hero_hotels'] = $this->hotels_lib->mini_hero_hotels_list();
-                $this->data['featuredSection']['modules']["hotels"] = (object)array("featured" => $this->hotels_lib->getFeaturedHotels(), 'moduleTitle' => trans('Hotels'), 'bgImg' => 'featured-hotels.jpg', 'booknowClass' => 'primary', 'featuredText' => trans('056'), 'featuredPrice' => 75, 'currCode' => 'USD');
+                $this->data['featuredSection']['modules']["hotels"] = (object) array("featured" => $this->hotels_lib->getFeaturedHotels(), 'moduleTitle' => trans('Hotels'), 'bgImg' => 'featured-hotels.jpg', 'booknowClass' => 'primary', 'featuredText' => trans('056'), 'featuredPrice' => 75, 'currCode' => 'USD');
             }
 
             if (pt_main_module_available('tours')) {
@@ -99,7 +99,7 @@ class Home extends MX_Controller
                 $this->data['featuredTours'] = $this->tours_lib->getFeaturedTours();
                 $this->data['popularTours'] = $this->tours_lib->getTopRatedTours();
                 $this->data['tourTypes'] = $this->tours_lib->tourTypes();
-                $this->data['featuredSection']['modules']["tours"] = (object)array("featured" => $this->tours_lib->getFeaturedTours(), 'moduleTitle' => trans('Tours'), 'bgImg' => 'featured-tours.jpg', 'booknowClass' => 'warning', 'featuredText' => trans('0451'), 'featuredPrice' => 200, 'currCode' => 'USD');
+                $this->data['featuredSection']['modules']["tours"] = (object) array("featured" => $this->tours_lib->getFeaturedTours(), 'moduleTitle' => trans('Tours'), 'bgImg' => 'featured-tours.jpg', 'booknowClass' => 'warning', 'featuredText' => trans('0451'), 'featuredPrice' => 200, 'currCode' => 'USD');
                 $this->data['tourLocations'] = $this->tours_lib->toursByLocations();
 
                 $this->load->helper("tours/tours_front");
@@ -118,12 +118,11 @@ class Home extends MX_Controller
                 $this->data['cartypes'] = $this->cars_lib->carTypes();
 
                 $this->data['carModTiming'] = $this->cars_lib->timingList();
-                $this->data['featuredSection']['modules']["cars"] = (object)array("featured" => $this->cars_lib->getFeaturedCars(), 'moduleTitle' => trans('Cars'), 'bgImg' => 'featured-cars.jpg', 'booknowClass' => 'success', 'featuredText' => trans('0142'), 'featuredPrice' => 125, 'currCode' => 'USD');
+                $this->data['featuredSection']['modules']["cars"] = (object) array("featured" => $this->cars_lib->getFeaturedCars(), 'moduleTitle' => trans('Cars'), 'bgImg' => 'featured-cars.jpg', 'booknowClass' => 'success', 'featuredText' => trans('0142'), 'featuredPrice' => 125, 'currCode' => 'USD');
 
 
                 $this->load->helper("cars/cars_front");
                 $this->load->model('cars/cars_model');
-
             }
             $totalFeatured = count($this->data['featuredSection']['modules']);
             if ($totalFeatured == 1) {
@@ -134,10 +133,10 @@ class Home extends MX_Controller
                 $this->data['featuredSection']['divClass'] = "";
             }
 
-            /*	$this->data['featuredSection']['modules'] = array(
-                    "tours" => (object)array("featured" => $this->tours_lib->getFeaturedTours(),'moduleTitle' => trans('Tours'), 'bgImg' => 'featured-tours.jpg', 'booknowClass' => 'warning','featuredText' => trans('0451'), 'featuredPrice' => 200,'currCode' => 'USD'),
-                    "cars" => (object)array("featured" => $this->cars_lib->getFeaturedCars(),'moduleTitle' => trans('Cars'), 'bgImg' => 'featured-cars.jpg', 'booknowClass' => 'success','featuredText' => trans('0142'), 'featuredPrice' => 125,'currCode' => 'USD'),
-                    );*/
+            /* 	$this->data['featuredSection']['modules'] = array(
+              "tours" => (object)array("featured" => $this->tours_lib->getFeaturedTours(),'moduleTitle' => trans('Tours'), 'bgImg' => 'featured-tours.jpg', 'booknowClass' => 'warning','featuredText' => trans('0451'), 'featuredPrice' => 200,'currCode' => 'USD'),
+              "cars" => (object)array("featured" => $this->cars_lib->getFeaturedCars(),'moduleTitle' => trans('Cars'), 'bgImg' => 'featured-cars.jpg', 'booknowClass' => 'success','featuredText' => trans('0142'), 'featuredPrice' => 125,'currCode' => 'USD'),
+              ); */
 
 
             if (pt_main_module_available('ean')) {
@@ -148,7 +147,6 @@ class Home extends MX_Controller
 
                 $this->data['popularHotelsEan'] = $this->ean_lib->getHomePagePopularHotels();
                 $this->data['featuredHotelsEan'] = $this->ean_lib->getHomePageFeaturedHotels();
-
             }
 
             if (pt_main_module_available('cruises')) {
@@ -167,7 +165,6 @@ class Home extends MX_Controller
             if (pt_main_module_available('cartrawler')) {
                 $this->load->library('cartrawler/cartrawler_lib');
                 $this->data['timing'] = $this->cartrawler_lib->timingList();
-
             }
             $dohopsettings = $this->settings_model->get_front_settings("flightsdohop");
             $cartrawlersettings = $this->settings_model->get_front_settings("cartrawler");
@@ -210,12 +207,12 @@ class Home extends MX_Controller
         } elseif ($check) {
 
             $content = $this->cms_model->get_page_content($pageslug, $langid);
-            if (empty ($content)) {
+            if (empty($content)) {
                 $content = $this->cms_model->get_page_content($pageslug, '1');
             }
             $submitcontactform = $this->input->post('submit_contact');
             $this->data['res2'] = $this->settings_model->get_contact_page_details();
-            if (!empty ($submitcontactform)) {
+            if (!empty($submitcontactform)) {
                 $this->form_validation->set_rules('contact_email', 'Email', 'trim|required|valid_email');
                 $this->form_validation->set_rules('contact_message', 'Message', 'trim|required');
                 if ($this->form_validation->run() == FALSE) {
@@ -241,14 +238,12 @@ class Home extends MX_Controller
                 if (strtolower($pageslug) == "contact-us") {
 
                     $this->theme->view('contact', $this->data);
-
                 } else {
                     $this->theme->view('cms/page-data', $this->data);
                 }
             }
         } elseif ($this->validlang && $pageslug == "supplier-register") {
             $this->supplier_register();
-
         } else {
 
             Error_404($this->data);
@@ -272,7 +267,7 @@ class Home extends MX_Controller
         $this->data['success'] = $this->session->flashdata('success');
         $addaccount = $this->input->post('addaccount');
         $url = http_build_query($_GET);
-        if (!empty ($addaccount)) {
+        if (!empty($addaccount)) {
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[pt_accounts.accounts_email]');
             $this->form_validation->set_message('valid_email', 'Kindly Enter a Valid Email Address.');
             $this->form_validation->set_message('is_unique', 'Email Address is Already in Use.');
@@ -292,39 +287,39 @@ class Home extends MX_Controller
 
 
 
-                $result = $this->uploads_model->__profileimg();
+                  $result = $this->uploads_model->__profileimg();
 
-                if($result == '1'){
+                  if($result == '1'){
 
-                $this->data['errormsg'] = "Invalid file type kindly select only jpg/jpeg, png, gif file types";
-
-
-
-                }elseif($result == '2'){
+                  $this->data['errormsg'] = "Invalid file type kindly select only jpg/jpeg, png, gif file types";
 
 
 
-                $this->data['errormsg'] = "Only upto 2MB size photos allowed";
+                  }elseif($result == '2'){
 
 
 
-                }elseif($result == '3'){
+                  $this->data['errormsg'] = "Only upto 2MB size photos allowed";
+
+
+
+                  }elseif($result == '3'){
 
 
 
 
 
-                $this->session->set_flashdata('flashmsgs', "Customer Account Added Successfully");
+                  $this->session->set_flashdata('flashmsgs', "Customer Account Added Successfully");
 
 
 
-                redirect('admin/accounts/customers/');
+                  redirect('admin/accounts/customers/');
 
 
 
-                }
+                  }
 
-                }else{*/
+                  }else{ */
 
                 $this->accounts_model->register_supplier();
                 //$this->session->set_flashdata('success', trans('0244'));
@@ -402,7 +397,7 @@ class Home extends MX_Controller
 
     function txtsearch()
     {
-
+        
     }
 
     function trackorder()
@@ -411,7 +406,7 @@ class Home extends MX_Controller
             $this->db->select('booking_status,booking_expiry,booking_deposit,booking_total');
             $this->db->where('booking_id', $this->input->post('code'));
             $rs = $this->db->get('pt_bookings')->result();
-            if (!empty ($rs)) {
+            if (!empty($rs)) {
                 $html = "<p>Invoice Status : " . $rs[0]->booking_status . "</p>";
                 $html .= "<p>Total : " . $this->data['app_settings'][0]->currency_code . " " . $this->data['app_settings'][0]->currency_sign . $rs[0]->booking_total . "</p>";
                 if ($rs[0]->booking_status == "unpaid") {
@@ -428,7 +423,7 @@ class Home extends MX_Controller
 
     function maps($lat = null, $long = null, $type, $id)
     {
-        if (empty ($lat) || empty ($long)) {
+        if (empty($lat) || empty($long)) {
             Error_404();
         } else {
             if ($type == "hotels") {
@@ -436,7 +431,7 @@ class Home extends MX_Controller
                 $hoteldata = $this->hotels_model->hotel_data_for_map($id);
                 $img = pt_default_hotel_image($id);
                 $img = PT_HOTELS_SLIDER_THUMBS . $img;
-                if (!empty ($hoteldata)) {
+                if (!empty($hoteldata)) {
                     $title = character_limiter($hoteldata[0]->hotel_title, 15);
                     $slug = $hoteldata[0]->hotel_slug;
                 } else {
@@ -477,7 +472,6 @@ class Home extends MX_Controller
 
         $this->data['page_title'] = trans("0268");
         $this->theme->view('404', $this->data);
-
     }
 
     function cmsupload()
@@ -487,11 +481,11 @@ class Home extends MX_Controller
         $functionNum = $_GET['CKEditorFuncNum'];
 
 
-        if (($_FILES['upload'] == "none") OR (empty($_FILES['upload']['name']))) {
+        if (($_FILES['upload'] == "none") OR ( empty($_FILES['upload']['name']))) {
             $message = "No file uploaded.";
         } else if ($_FILES['upload']["size"] == 0) {
             $message = "The file is of zero length.";
-        } else if (($_FILES['upload']["type"] != "image/pjpeg") AND ($_FILES['upload']["type"] != "image/jpeg") AND ($_FILES['upload']["type"] != "image/png")) {
+        } else if (($_FILES['upload']["type"] != "image/pjpeg") AND ( $_FILES['upload']["type"] != "image/jpeg") AND ( $_FILES['upload']["type"] != "image/png")) {
             $message = "Invalid Image.";
         } else if (!is_uploaded_file($_FILES['upload']["tmp_name"])) {
             $message = "Hacking attempt Denied, don't try this here.";
@@ -507,10 +501,7 @@ class Home extends MX_Controller
         }
 
         echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($functionNum, '$url', '$message');</script>";
-
-
     }
-
 
     function suggestions($module)
     {
@@ -522,7 +513,6 @@ class Home extends MX_Controller
             if ($module == "hotels") {
                 $this->load->library("hotels/hotels_lib");
                 $result = $this->hotels_lib->suggestionResults($query);
-
             } elseif ($module == "tours") {
                 $this->load->library("tours/tours_lib");
                 $result = $this->tours_lib->suggestionResults($query);
@@ -530,11 +520,7 @@ class Home extends MX_Controller
 
             //echo "<p>This is html</p>";
             echo json_encode($result);
-
-
         }
-
-
     }
 
     function ajax_getFeaturedHotels()
@@ -549,11 +535,11 @@ class Home extends MX_Controller
                 $ajaxfeaturedHotels = $this->hotels_lib->getFeaturedHotels($loc, $limit);
                 if ($ajaxfeaturedHotels)
                     echo json_encode($ajaxfeaturedHotels);
-                else "";
+                else
+                    "";
                 //$this->data['salesoffHotels'] = $this->hotels_lib->getSalesoffHotels();
                 //$this->data['popularHotels'] = $this->hotels_lib->getTopRatedHotels();
             }
-
         }
     }
 
@@ -568,32 +554,35 @@ class Home extends MX_Controller
                 $ajaxsaleoffHotels = $this->hotels_lib->getSalesoffHotels($loc);
                 if ($ajaxsaleoffHotels)
                     echo json_encode($ajaxsaleoffHotels);
-                else "";
+                else
+                    "";
                 //$this->data['salesoffHotels'] = $this->hotels_lib->getSalesoffHotels();
                 //$this->data['popularHotels'] = $this->hotels_lib->getTopRatedHotels();
             }
-
         }
     }
 
     function ajax_getCustominfo()
     {
-
         if ($this->input->is_ajax_request()) {
             if (!empty($_POST)) {
-
                 $code = $this->input->post('bookingcode');
-
+                $id = $this->input->post('hotelid');
+                
                 $this->load->model('admin/bookings_model');
-
                 $ajaxcode = $this->bookings_model->getBookinginfo($code);
-                if ($ajaxcode)
-                    echo json_encode($ajaxcode[0]);
-                else echo "";
-
+                
+                if ($ajaxcode) {
+                    $data = json_encode($ajaxcode);
+                    
+                    if ($data['booking_type'] == 'hotels' && $data['booking_item'] == $id) {
+                        echo $data;
+                    }
+                }
+                
+                echo '';
             }
         }
     }
-
 
 }

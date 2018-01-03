@@ -154,16 +154,14 @@ class Hotels extends MX_Controller
             $honeymoons = $this->offers_lib->showOffers(null, null, $type = 3, 1, $this->data['module']->id);
             $this->data['offers'] = [];
             if ($offers['allOffers']['count'] > 0) {
-                $this->data['offers'][] = $offers['allOffers']['offers'][0];
+                $this->data['offers'] = array_merge($offers['allOffers']['offers'], $this->data['offers']);
             }
             if ($combos['allOffers']['count'] > 0) {
-                $this->data['offers'][] = $combos['allOffers']['offers'][0];
+                $this->data['offers'] = array_merge($combos['allOffers']['offers'], $this->data['offers']);
             }
             if ($honeymoons['allOffers']['count'] > 0) {
-                $this->data['offers'][] = $honeymoons['allOffers']['offers'][0];
+                $this->data['offers'] = array_merge($honeymoons['allOffers']['offers'], $this->data['offers']);
             }
-
-            //var_dump('<pre>',  $this->data['offers']);die;
 
             $this->data['recents'] = $recentlyViewed;
             /* Bread crum */
